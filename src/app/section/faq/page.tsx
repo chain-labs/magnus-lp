@@ -69,7 +69,7 @@ export default function FAQ() {
 				</div>
 
 				<div className="mx-auto mt-12 w-full">
-					<div className="flex gap-4">
+					<div className="flex flex-col lg:flex-row gap-4">
 						<Accordion
 							type="single"
 							collapsible
