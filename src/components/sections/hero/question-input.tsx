@@ -154,7 +154,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 							id="ai-input-04"
 							value={value}
 							placeholder="Ask anything..."
-							className="w-full rounded-xl rounded-b-[0] px-4 py-3 bg-black/5 dark:bg-white/5 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 leading-[1.2]"
+							className="w-full rounded-xl rounded-b-[0] px-4 py-3 backdrop-blur-md bg-black/5 dark:bg-white/5 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 leading-[1.2]"
 							ref={textareaRef}
 							onFocus={handleFocus}
 							onBlur={handleBlur}

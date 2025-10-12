@@ -1,6 +1,11 @@
 "use client";
 
+import Prism from "@/components/manually-addded/prism";
+import DarkVeil from "@/components/sections/hero/dark-veil";
+import LightRays from "@/components/sections/hero/light-rays";
 import MarqueeBackground from "@/components/sections/hero/marquee-background";
+import Orb from "@/components/sections/hero/orb";
+import PrismaticBurst from "@/components/sections/hero/prismatic-burst";
 import QuestionInput from "@/components/sections/hero/question-input";
 import { useState } from "react";
 
@@ -59,12 +64,10 @@ export default function Hero() {
 		setQuestions([newQuestion, ...questions]);
 	};
 	return (
-		<div className="min-h-screen">
+		<div className="min-h-screen z-0 relative">
 			<div className="relative min-h-screen overflow-hidden pt-16">
-				<MarqueeBackground />
-
-				<div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-20">
-					<div className="text-center mb-12 space-y-4">
+				<div className="relative z-10 md:min-h-screen flex flex-col items-center justify-center px-4 py-4 md:py-20">
+					<div className="text-center mb-12 md:space-y-4">
 						<h1 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5 max-w-3xl">
 							Ask Your Financial Questions
 						</h1>
@@ -78,6 +81,51 @@ export default function Hero() {
 						<QuestionInput onSubmit={handleQuestionSubmit} />
 					</div>
 				</div>
+				<MarqueeBackground />
+			</div>
+			<div className="pointer-events-none w-full h-full absolute inset-0 z-[-1] mix-blend-color bg-white">
+				{/* <Prism
+					animationType="rotate"
+					timeScale={0.5}
+					height={3.5}
+					baseWidth={5.5}
+					scale={3.6}
+					hueShift={0}
+					colorFrequency={1}
+					noise={0}
+					glow={1}
+				/> */}
+				{/* <DarkVeil hueShift={190} /> */}
+				{/* <LightRays
+					raysOrigin="top-center"
+					raysColor="#407BFF"
+					raysSpeed={1.5}
+					lightSpread={1}
+					rayLength={1.2}
+					followMouse={true}
+					mouseInfluence={0.1}
+					noiseAmount={0}
+					distortion={0.05}
+					className="custom-rays"
+				/> */}
+				{/* <PrismaticBurst
+					animationType="rotate3d"
+					intensity={2}
+					speed={0.5}
+					distort={1.0}
+					paused={false}
+					offset={{ x: 0, y: 0 }}
+					hoverDampness={0.25}
+					rayCount={24}
+					mixBlendMode="multiply"
+					colors={["#ff007a", "#4d3dff", "#ffffff"]}
+				/> */}
+				<Orb
+					hoverIntensity={0.5}
+					rotateOnHover={true}
+					hue={0}
+					forceHoverState={false}
+				/>
 			</div>
 		</div>
 	);

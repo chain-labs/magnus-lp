@@ -35,7 +35,7 @@ export default function MarqueeBackground() {
 	const items = [...sampleQuestions, ...sampleQuestions, ...sampleQuestions];
 
 	return (
-		<div className="absolute bottom-0 left-0 right-0 h-[260px] overflow-hidden pointer-events-none z-0">
+		<div className="relative md:absolute bottom-0 left-0 right-0 h-[260px] overflow-hidden pointer-events-none z-0">
 			{/* Infinite marquee using provided InfiniteSlider */}
 			<InfiniteSlider
 				className="absolute inset-x-0 bottom-4"

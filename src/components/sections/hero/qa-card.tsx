@@ -38,7 +38,7 @@ export default function QaCard({
 			className={`group rounded-xl p-6 transition-all duration-300 my-2 h-[calc(100%-16px)] shadow-sm ${
 				variant === "default"
 					? "hover:shadow-lg hover:border-primary/50"
-					: "bg-card/30 backdrop-blur-sm"
+					: "bg-card/30 backdrop-blur-md"
 			}`}
 		>
 			<div className="flex items-start gap-3 mb-3">
