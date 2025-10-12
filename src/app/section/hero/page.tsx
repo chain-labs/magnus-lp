@@ -57,6 +57,20 @@ const initialQuestions = [
 
 const Bgs = [
 	<></>,
+	<picture className="w-full h-full inset-0">
+		<source media="(min-width: 768px)" srcSet="/assets/branding/Horizontal.png" />
+		<source media="(max-width: 767px)" srcSet="/assets/branding/Vertical mobile.png" />
+		<img
+			src="/assets/branding/Horizontal.png"
+			alt="Background"
+			className="w-full h-full inset-0 object-cover transition-all duration-300 ease-in-out"
+			style={{
+				width: "100%",
+				height: "auto",
+				objectFit: "cover",
+			}}
+		/>
+	</picture>,
 	<Prism
 		animationType="rotate"
 		timeScale={0.5}
@@ -117,7 +131,14 @@ export default function Hero() {
 	return (
 		<div className="min-h-screen z-0 relative">
 			<div className="relative min-h-screen flex flex-col justify-between items-center">
-				<div className="text-center"></div>
+				<div className="text-center flex justify-center items-center font-bold text-[32px] mt-4">
+					<img
+						src="/assets/branding/logo.svg"
+						alt="logo"
+						className="w-[100px] aspect-square"
+					/>
+					Magnus Hathaway
+				</div>
 				<div className="relative z-10 flex flex-col items-center justify-center px-4">
 					<div className="text-center mb-12 md:space-y-4">
 						<h1 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5 max-w-3xl">
