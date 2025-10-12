@@ -65,10 +65,10 @@ export default function Hero() {
 
 				<div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-20">
 					<div className="text-center mb-12 space-y-4">
-						<h1 className="text-h-lg !text-[64px]">
+						<h1 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5 max-w-3xl">
 							Ask Your Financial Questions
 						</h1>
-						<p className="text-muted-foreground max-w-2xl mx-auto text-body-md">
+						<p className="text-muted-foreground mt-5">
 							Get expert answers to your financial planning
 							questions from our advisors
 						</p>
