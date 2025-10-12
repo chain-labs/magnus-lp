@@ -1,7 +1,7 @@
 export default function Footer() {
 	const footer = {
 		brand: "Magnus Hathaway",
-		logo: "/assets/logo.png",
+		logo: "/assets/branding/logo.svg",
 		nav: [
 			{ label: "Disclaimer", href: "#" },
 			{ label: "T&C Magnus Hathaway", href: "#" },
@@ -35,7 +35,7 @@ export default function Footer() {
 						<img
 							src={footer.logo}
 							alt="AlphaQuark Logo"
-							className="mr-4 w-8 h-8 md:w-10 md:h-auto rounded-md"
+							className="mr-4 w-8 h-8 md:w-16 md:h-auto rounded-md"
 						/>
 						<span className="text-2xl md:text-4xl font-semibold leading-[30px] text-center font-montserrat">
 							{footer.brand}
