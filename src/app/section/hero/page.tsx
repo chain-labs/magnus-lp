@@ -84,7 +84,7 @@ export default function Hero() {
 				<MarqueeBackground />
 			</div>
 			<div className="pointer-events-none w-full h-full absolute inset-0 z-[-1] mix-blend-color bg-white">
-				{/* <Prism
+				<Prism
 					animationType="rotate"
 					timeScale={0.5}
 					height={3.5}
@@ -94,7 +94,7 @@ export default function Hero() {
 					colorFrequency={1}
 					noise={0}
 					glow={1}
-				/> */}
+				/>
 				{/* <DarkVeil hueShift={190} /> */}
 				{/* <LightRays
 					raysOrigin="top-center"
@@ -120,12 +120,12 @@ export default function Hero() {
 					mixBlendMode="multiply"
 					colors={["#ff007a", "#4d3dff", "#ffffff"]}
 				/> */}
-				<Orb
+				{/* <Orb
 					hoverIntensity={0.5}
 					rotateOnHover={true}
 					hue={0}
 					forceHoverState={false}
-				/>
+				/> */}
 			</div>
 		</div>
 	);

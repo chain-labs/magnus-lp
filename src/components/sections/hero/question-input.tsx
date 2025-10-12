@@ -1,10 +1,52 @@
-﻿"use client";
+"use client";
 
 import { Send, Mic, MicOff } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useAutoResizeTextarea } from "@/hooks/use-auto-resize-textarea";
+
+
+type SpeechRecognitionCallback<TEvent extends Event> =
+	((this: SpeechRecognition, event: TEvent) => void) | null;
+
+interface SpeechRecognitionAlternative {
+	transcript: string;
+	confidence: number;
+}
+
+interface SpeechRecognitionResult {
+	readonly length: number;
+	readonly isFinal: boolean;
+	[index: number]: SpeechRecognitionAlternative;
+}
+
+interface SpeechRecognitionResultList {
+	readonly length: number;
+	[index: number]: SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionEvent extends Event {
+	readonly resultIndex: number;
+	readonly results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+	readonly error: string;
+	readonly message?: string;
+}
+
+interface SpeechRecognition {
+	continuous: boolean;
+	interimResults: boolean;
+	lang: string;
+	start: () => void;
+	stop: () => void;
+	abort?: () => void;
+	onresult: SpeechRecognitionCallback<SpeechRecognitionEvent>;
+	onerror: SpeechRecognitionCallback<SpeechRecognitionErrorEvent>;
+	onend: SpeechRecognitionCallback<Event>;
+}
 
 type SpeechRecognitionConstructor = new () => SpeechRecognition;
 
@@ -138,7 +180,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 					tabIndex={0}
 					aria-label="Search input container"
 					className={cn(
-						"relative flex flex-col rounded-xl transition-all duration-200 w-full text-left cursor-text",
+						"relative flex flex-col rounded-xl transition-all duration-200 w-full text-left cursor-text backdrop-blur-md bg-white/5",
 						"ring-1 ring-black/10 dark:ring-white/10",
 						isFocused && "ring-black/20 dark:ring-white/20"
 					)}
@@ -154,7 +196,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 							id="ai-input-04"
 							value={value}
 							placeholder="Ask anything..."
-							className="w-full rounded-xl rounded-b-[0] px-4 py-3 backdrop-blur-md bg-black/5 dark:bg-white/5 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 leading-[1.2]"
+							className="w-full rounded-xl rounded-b-[0] px-4 py-3 bg-white/5 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 leading-[1.2]"
 							ref={textareaRef}
 							onFocus={handleFocus}
 							onBlur={handleBlur}
@@ -173,7 +215,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 
 					{showEmailCapture && (
 						<div
-							className="px-4 py-3 bg-black/5 dark:bg-white/5 border-t border-black/10 dark:border-white/10"
+							className="px-4 py-3 bg-white/5 border-t border-black/10 dark:border-white/10"
 							onClick={(e) => e.stopPropagation()}
 						>
 							<p className="text-body-sm text-muted-foreground mb-2">
@@ -190,7 +232,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 						</div>
 					)}
 
-					<div className="h-12 bg-black/5 dark:bg-white/5 rounded-b-xl flex items-center justify-end px-3">
+					<div className="h-12 bg-white/5 rounded-b-xl flex items-center justify-end px-3">
 						{recognition && (
 							<button
 								type="button"
