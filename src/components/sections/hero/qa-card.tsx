@@ -35,19 +35,15 @@ export default function QaCard({
 }: QaCardProps) {
 	return (
 		<div
-			className={`group rounded-xl p-6 transition-all duration-300 my-2 h-[calc(100%-16px)] shadow-sm ${
-				variant === "default"
-					? "hover:shadow-lg hover:border-primary/50"
-					: "bg-card/30 backdrop-blur-md"
-			}`}
+			className={`group rounded-xl p-6 transition-all duration-300 my-2 h-[calc(100%-16px)] shadow-sm bg-white/70 backdrop-blur-md hover:shadow-lg hover:border-primary/50`}
 		>
 			<div className="flex items-start gap-3 mb-3">
-				<MessageCircle className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-				<h3 className="text-foreground text-lg !leading-normal">
+				<MessageCircle className="w-[20px] h-[20px] text-primary flex-shrink-0" />
+				<h3 className="text-foreground text-[16px] leading-[20px] font-medium">
 					{question}
 				</h3>
 			</div>
-			<p className="text-muted-foreground text-sm leading-relaxed mb-4">
+			<p className="text-muted-foreground text-[12px] leading-[18px] mb-4">
 				{answer}
 			</p>
 			{/* <div className="inline-flex items-center gap-1.5 rounded-full bg-black/5 dark:bg-white/5 px-3 py-1.5">

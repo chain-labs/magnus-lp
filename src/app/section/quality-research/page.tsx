@@ -137,7 +137,8 @@ function ActionBadge({ action }: { action: ResearchSignal["actionzone"] }) {
 		<span
 			className={cn(
 				"inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-medium uppercase",
-				actionTone[action] ?? "border-border/60 bg-card text-muted-foreground"
+				actionTone[action] ??
+					"border-border/60 bg-card text-muted-foreground"
 			)}
 		>
 			{action}
@@ -151,13 +152,14 @@ export default function QualityResearchPage() {
 	const firstLockedIndex = Math.min(lockedStartIndex, totalSignals);
 	const lockedCount = Math.max(totalSignals - firstLockedIndex, 0);
 	const hasLockedRows = lockedCount > 0;
-	const overlayTop = hasLockedRows && totalSignals > 0
-		? ((firstLockedIndex + lockedCount / 2) / totalSignals) * 100
-		: 50;
+	const overlayTop =
+		hasLockedRows && totalSignals > 0
+			? ((firstLockedIndex + lockedCount / 2) / totalSignals) * 100
+			: 50;
 	const overlayTopClamped = Math.min(Math.max(overlayTop, 55), 95);
 
 	return (
-		<section className="relative bg-background py-16 sm:py-20">
+		<section className="relative py-16 sm:py-20">
 			<div className="container mx-auto px-4">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -166,43 +168,66 @@ export default function QualityResearchPage() {
 					viewport={{ once: true }}
 					className="mx-auto max-w-4xl text-center"
 				>
-					<div className="inline-flex items-center rounded-full border border-border/60 px-4 py-1 text-[11px] font-semibold uppercase text-muted-foreground">
-						Research Intelligence
-					</div>
 					<h2 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5">
 						Highest quality research, ready before the market opens
 					</h2>
 					<p className="text-muted-foreground mt-5">
-						Curated calls across overnight, intraday, and positional strategies. Unlock deeper analytics, price targets, and premium playbooks tailored to your desk without the noise.
+						Curated calls across overnight, intraday, and positional
+						strategies. Unlock deeper analytics, price targets, and
+						premium playbooks tailored to your desk without the
+						noise.
 					</p>
 				</motion.div>
 
 				<motion.div
 					initial={{ opacity: 0, y: 24 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+					transition={{
+						duration: 0.75,
+						delay: 0.1,
+						ease: [0.16, 1, 0.3, 1],
+					}}
 					viewport={{ once: true }}
 					className="mt-12"
 				>
 					<div className="overflow-hidden rounded-3xl border border-border/40 bg-card/60 shadow-[0_30px_110px_-70px_rgba(15,23,42,0.6)]">
 						<div className="relative overflow-x-auto px-2">
 							<table className="mx-auto w-full min-w-[600px] border-collapse">
-								<thead className="bg-card/70">
+								<thead>
 									<tr className="text-left text-[11px] uppercase text-muted-foreground sm:text-[12px]">
-										<th className="px-4 py-4 sm:px-5">Ticker</th>
-										<th className="px-4 py-4 sm:px-5">Price Zone</th>
-										<th className="px-4 py-4 text-center sm:px-5">Action</th>
-										<th className="px-4 py-4 text-right sm:px-5">Target</th>
-										<th className="px-4 py-4 text-right sm:px-5">Stop Loss</th>
-										<th className="px-4 py-4 text-right sm:px-5">Potential</th>
-										<th className="px-4 py-4 text-right sm:px-5">Duration</th>
-										<th className="px-4 py-4 text-right sm:px-5">Published</th>
+										<th className="px-4 py-4 sm:px-5">
+											Ticker
+										</th>
+										<th className="px-4 py-4 sm:px-5">
+											Price Zone
+										</th>
+										<th className="px-4 py-4 text-center sm:px-5">
+											Action
+										</th>
+										<th className="px-4 py-4 text-right sm:px-5">
+											Target
+										</th>
+										<th className="px-4 py-4 text-right sm:px-5">
+											Stop Loss
+										</th>
+										<th className="px-4 py-4 text-right sm:px-5">
+											Potential
+										</th>
+										<th className="px-4 py-4 text-right sm:px-5">
+											Duration
+										</th>
+										<th className="px-4 py-4 text-right sm:px-5">
+											Published
+										</th>
 									</tr>
 								</thead>
 								<tbody className="divide-y divide-border/50 text-xs text-foreground sm:text-sm">
 									{researchSignals.map((signal, index) => {
 										const reveal = index < 2;
-										const isPositivePotential = !signal.percentage.trim().startsWith("-");
+										const isPositivePotential =
+											!signal.percentage
+												.trim()
+												.startsWith("-");
 
 										return (
 											<tr
@@ -214,15 +239,24 @@ export default function QualityResearchPage() {
 														<span
 															className={cn(
 																"inline-flex h-9 w-9 items-center justify-center rounded-2xl text-[11px] font-semibold uppercase ring-1",
-																tickerTone[signal.actionzone],
-																!reveal && "ring-border/50 text-foreground/80"
+																tickerTone[
+																	signal
+																		.actionzone
+																],
+																!reveal &&
+																	"ring-border/50 text-foreground/80"
 															)}
 														>
-															{signal.stockname.slice(0, 3)}
+															{signal.stockname.slice(
+																0,
+																3
+															)}
 														</span>
 														<div>
 															<div className="text-sm font-semibold text-foreground sm:text-base">
-																{signal.stockname}
+																{
+																	signal.stockname
+																}
 															</div>
 														</div>
 													</div>
@@ -230,24 +264,48 @@ export default function QualityResearchPage() {
 												<td className="px-4 py-4 text-muted-foreground sm:px-5">
 													<span
 														aria-hidden={!reveal}
-														className={cn("inline-block text-sm", !reveal && "blur-sm select-none")}
+														className={cn(
+															"inline-block text-sm",
+															!reveal &&
+																"blur-sm select-none"
+														)}
 													>
 														{signal.pricerange}
 													</span>
 													{!reveal && (
 														<span className="sr-only">
-															Premium research — log in to view price zone for {signal.stockname}
+															Premium research —
+															log in to view price
+															zone for{" "}
+															{signal.stockname}
 														</span>
 													)}
 												</td>
 												<td className="px-4 py-4 text-center sm:px-5">
 													<div className="flex justify-center">
-														<div aria-hidden={!reveal} className={cn(!reveal && "blur-sm select-none")}>
-															<ActionBadge action={signal.actionzone} />
+														<div
+															aria-hidden={
+																!reveal
+															}
+															className={cn(
+																!reveal &&
+																	"blur-sm select-none"
+															)}
+														>
+															<ActionBadge
+																action={
+																	signal.actionzone
+																}
+															/>
 														</div>
 														{!reveal && (
 															<span className="sr-only">
-																Premium research — log in to view action for {signal.stockname}
+																Premium research
+																— log in to view
+																action for{" "}
+																{
+																	signal.stockname
+																}
 															</span>
 														)}
 													</div>
@@ -257,14 +315,20 @@ export default function QualityResearchPage() {
 														aria-hidden={!reveal}
 														className={cn(
 															"font-mono text-sm text-foreground",
-															!reveal && "blur-sm select-none text-muted-foreground"
+															!reveal &&
+																"blur-sm select-none text-muted-foreground"
 														)}
 													>
-														{formatPrice(signal.targetprice)}
+														{formatPrice(
+															signal.targetprice
+														)}
 													</span>
 													{!reveal && (
 														<span className="sr-only">
-															Premium research — log in to view target for {signal.stockname}
+															Premium research —
+															log in to view
+															target for{" "}
+															{signal.stockname}
 														</span>
 													)}
 												</td>
@@ -273,14 +337,20 @@ export default function QualityResearchPage() {
 														aria-hidden={!reveal}
 														className={cn(
 															"font-mono text-sm text-foreground",
-															!reveal && "blur-sm select-none text-muted-foreground"
+															!reveal &&
+																"blur-sm select-none text-muted-foreground"
 														)}
 													>
-														{formatPrice(signal.stoploss)}
+														{formatPrice(
+															signal.stoploss
+														)}
 													</span>
 													{!reveal && (
 														<span className="sr-only">
-															Premium research — log in to view stop loss for {signal.stockname}
+															Premium research —
+															log in to view stop
+															loss for{" "}
+															{signal.stockname}
 														</span>
 													)}
 												</td>
@@ -289,41 +359,67 @@ export default function QualityResearchPage() {
 														aria-hidden={!reveal}
 														className={cn(
 															"font-mono text-sm font-semibold",
-															isPositivePotential ? "text-emerald-500" : "text-rose-500",
-															!reveal && "blur-sm select-none text-muted-foreground"
+															isPositivePotential
+																? "text-emerald-500"
+																: "text-rose-500",
+															!reveal &&
+																"blur-sm select-none text-muted-foreground"
 														)}
 													>
 														{signal.percentage}
 													</span>
 													{!reveal && (
 														<span className="sr-only">
-															Premium research — log in to view potential return for {signal.stockname}
+															Premium research —
+															log in to view
+															potential return for{" "}
+															{signal.stockname}
 														</span>
 													)}
 												</td>
 												<td className="px-4 py-4 text-right text-muted-foreground sm:px-5">
-													<span aria-hidden={!reveal} className={cn(!reveal && "blur-sm select-none")}>
+													<span
+														aria-hidden={!reveal}
+														className={cn(
+															!reveal &&
+																"blur-sm select-none"
+														)}
+													>
 														{signal.duration}
 													</span>
 													{!reveal && (
 														<span className="sr-only">
-															Premium research — log in to view duration for {signal.stockname}
+															Premium research —
+															log in to view
+															duration for{" "}
+															{signal.stockname}
 														</span>
 													)}
 												</td>
 												<td className="px-4 py-4 text-right text-muted-foreground sm:px-5">
-													<span aria-hidden={!reveal} className={cn(!reveal && "blur-sm select-none")}>
-														{formatPublished(signal.date)}
+													<span
+														aria-hidden={!reveal}
+														className={cn(
+															!reveal &&
+																"blur-sm select-none"
+														)}
+													>
+														{formatPublished(
+															signal.date
+														)}
 													</span>
 													{!reveal && (
 														<span className="sr-only">
-															Premium research — log in to view published date for {signal.stockname}
+															Premium research —
+															log in to view
+															published date for{" "}
+															{signal.stockname}
 														</span>
 													)}
 												</td>
 											</tr>
-									);
-								})}
+										);
+									})}
 								</tbody>
 							</table>
 							{hasLockedRows && (
@@ -332,7 +428,10 @@ export default function QualityResearchPage() {
 									style={{ top: `${overlayTopClamped}%` }}
 								>
 									<div className="flex items-center gap-2 rounded-full border border-border/60 bg-background/95 px-3 py-1.5 text-[11px] font-semibold uppercase text-muted-foreground shadow-sm backdrop-blur">
-										<Lock className="h-3.5 w-3.5" aria-hidden="true" />
+										<Lock
+											className="h-3.5 w-3.5"
+											aria-hidden="true"
+										/>
 										<span>Premium Research Locked</span>
 									</div>
 								</div>
@@ -341,7 +440,9 @@ export default function QualityResearchPage() {
 
 						<div className="flex flex-col gap-3 border-t border-border/40 bg-card/70 px-5 py-5 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
 							<span className="text-xs text-muted-foreground sm:text-sm">
-								Access premium notes, intraday alerts, and disciplined entry plans built by the Magnus desk.
+								Access premium notes, intraday alerts, and
+								disciplined entry plans built by the Magnus
+								desk.
 							</span>
 							<Button className="rounded-full bg-foreground px-6 py-2 text-xs font-semibold uppercase text-background hover:bg-foreground/90 sm:px-7 sm:py-2.5">
 								View more research

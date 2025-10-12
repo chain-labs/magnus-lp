@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 
 import { HoverVideoPlayer } from "@/components/manually-addded/hover-video-player";
+import { TextureOverlay } from "@/components/manually-addded/texture-overlay";
 
 type DiyVideo = {
 	id: string;
@@ -34,32 +35,11 @@ const diyVideos: DiyVideo[] = [
 		subtitle:
 			"Understand how to balance risk and reward across equities, fixed income, and alternatives.",
 	},
-	{
-		id: "dollar-cost-averaging",
-		videoSrc: "https://www.youtube.com/watch?v=wOG63bu5B3U",
-		title: "Dollar-Cost Averaging in Practice",
-		subtitle:
-			"See how consistent contributions beat market timing using real-world portfolio scenarios.",
-	},
-	{
-		id: "behavioral-biases",
-		videoSrc: "https://www.youtube.com/watch?v=FEDfX2lH5G8",
-		title: "Avoiding Behavioral Investing Mistakes",
-		subtitle:
-			"Identify the cognitive traps that derail DIY investors and learn frameworks to stay disciplined.",
-	},
-	{
-		id: "tax-efficient-investing",
-		videoSrc: "https://www.youtube.com/watch?v=4z0u0WMsGAs",
-		title: "Tax-Efficient Investing Playbook",
-		subtitle:
-			"Optimize accounts, harvest losses, and choose tax-smart instruments to keep more of your returns.",
-	},
 ];
 
 export default function DiyVideosSection() {
 	return (
-		<section className="bg-background py-16 sm:py-24">
+		<section className="py-16 sm:py-24">
 			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -72,7 +52,8 @@ export default function DiyVideosSection() {
 						DIY Videos
 					</h2>
 					<p className="text-muted-foreground mt-5">
-						Explore our collection of expert videos designed to help you make informed investment decisions.
+						Explore our collection of expert videos designed to help
+						you make informed investment decisions.
 					</p>
 				</motion.div>
 
@@ -88,19 +69,21 @@ export default function DiyVideosSection() {
 								ease: [0.16, 1, 0.3, 1],
 							}}
 							viewport={{ once: true, amount: 0.2 }}
-							className="flex h-full flex-col rounded-3xl border border-border/40 bg-card/60 p-4 shadow-[0_20px_70px_-50px_rgba(15,23,42,0.64)] backdrop-blur"
+							className="flex h-full flex-col p-2 rounded-3xl border shadow-[0_20px_70px_-50px_rgba(15,23,42,0.64)] backdrop-blur bg-background overflow-hidden"
 						>
+							{/* <TextureOverlay texture="dots" opacity={.15} className="text-white" /> */}
+							<div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,.4)1px,rgba(255,255,255,0)0)]"></div>
 							<HoverVideoPlayer
 								title={video.title}
 								videoSrc={video.videoSrc}
 								thumbnailSrc={video.thumbnailSrc}
 								className="rounded-2xl"
 							/>
-							<div className="mt-4 space-y-2">
-								<h3 className="text-lg font-semibold text-foreground leading-[1.15]">
+							<div className="space-y-2 p-2 pt-4">
+								<h3 className="text-[16px] font-medium leading-[20px]">
 									{video.title}
 								</h3>
-								<p className="text-sm text-muted-foreground line-clamp-2 leading-[1.15]">
+								<p className="text-[12px] text-muted-foreground line-clamp-2 text-ellipsis leading-[18px]">
 									{video.subtitle}
 								</p>
 							</div>
@@ -111,4 +94,3 @@ export default function DiyVideosSection() {
 		</section>
 	);
 }
-

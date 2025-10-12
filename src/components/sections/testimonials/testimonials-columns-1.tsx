@@ -38,13 +38,13 @@ export function TestimonialsColumn({
           ease: "linear",
           repeatType: "loop",
         }}
-        className="flex flex-col gap-6 pb-6 bg-background"
+        className="flex flex-col gap-6 pb-6"
       >
         {Array.from({ length: 2 }).map((_, loopIndex) => (
           <React.Fragment key={loopIndex}>
             {testimonials.map(({ text, image, name, role }, testimonialIndex) => (
               <div
-                className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-xs w-full"
+                className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-xs w-full bg-background"
                 key={`${loopIndex}-${testimonialIndex}`}
               >
                 <div className="leading-relaxed text-sm sm:text-base">{text}</div>

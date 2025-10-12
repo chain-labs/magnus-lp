@@ -55,6 +55,21 @@ const plans = [
 		cta: "Learn More",
 		popular: false,
 	},
+	{
+		name: "Specialized Services",
+		price: "Custom",
+		description: "Tailored solutions for specific financial needs",
+		features: [
+			"Business owner planning",
+			"Executive compensation",
+			"Equity compensation planning",
+			"Charitable giving strategies",
+			"Risk management",
+			"Insurance planning",
+		],
+		cta: "Learn More",
+		popular: false,
+	},
 ] as const;
 
 type Plan = (typeof plans)[number];
@@ -88,7 +103,10 @@ const featureRows: FeatureRow[] = (() => {
 	});
 })();
 
-const primaryFeatureRows = featureRows.slice(0, Math.min(4, featureRows.length));
+const primaryFeatureRows = featureRows.slice(
+	0,
+	Math.min(4, featureRows.length)
+);
 const secondaryFeatureRows = featureRows.slice(Math.min(4, featureRows.length));
 
 const priceLabel = (price: string) => {
@@ -108,135 +126,125 @@ const priceLabel = (price: string) => {
 
 const defaultPlan = plans.find((plan) => plan.popular) ?? plans[0];
 
-export function Pricing1({ initialPlanName }: { initialPlanName?: PlanName } = {}) {
-	const [selectedPlanName, setSelectedPlanName] = useState<PlanName>(initialPlanName ?? defaultPlan.name);
+export function Pricing1({
+	initialPlanName,
+}: { initialPlanName?: PlanName } = {}) {
+	const [selectedPlanName, setSelectedPlanName] = useState<PlanName>(
+		initialPlanName ?? defaultPlan.name
+	);
 	const selectedPlan =
 		plans.find((plan) => plan.name === selectedPlanName) ?? defaultPlan;
 	const otherPlans = plans.filter((plan) => plan.name !== selectedPlan.name);
 
 	return (
-		<div className="relative py-16 md:py-32">
-			<div className="mx-auto max-w-5xl px-6">
-				<div className="mx-auto max-w-2xl text-center">
-					<h2 className="text-balance text-3xl font-bold md:text-4xl lg:text-5xl">
-						Start managing your company smarter today
-					</h2>
-				</div>
-				<div className="mt-8 md:mt-20">
-					<div className="bg-card relative rounded-3xl border shadow-2xl shadow-zinc-950/5">
-						<div className="grid gap-12 divide-y p-12 md:grid-cols-2 md:divide-x md:divide-y-0">
-							<AnimatePresence mode="wait">
-								{selectedPlan && (
-									<motion.div
-										key={`details-${selectedPlan.name}`}
-										className="pb-12 text-center md:pb-0 md:pr-12"
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										exit={{ opacity: 0, y: -20 }}
-										transition={{ duration: 0.3 }}
-									>
-										<h3 className="text-2xl font-semibold">
-											{selectedPlan.name}
-										</h3>
-										<p className="mt-2 text-lg">
-											{selectedPlan.description}
-										</p>
-										<span className="mb-6 mt-12 inline-block text-6xl font-bold">
-											{priceLabel(selectedPlan.price)}
-										</span>
+		<div className="mt-8 md:mt-20">
+			<div className="bg-card relative rounded-3xl border shadow-xl">
+				<div className="grid gap-12 divide-y p-12 items-center md:grid-cols-2 md:divide-x md:divide-y-0">
+					<AnimatePresence mode="wait">
+						{selectedPlan && (
+							<motion.div
+								key={`details-${selectedPlan.name}`}
+								className="pb-12 text-center md:pb-0 md:pr-12"
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: -20 }}
+								transition={{ duration: 0.3 }}
+							>
+								<h3 className="text-2xl font-medium">
+									{selectedPlan.name}
+								</h3>
+								<p className="mt-2 text-[14px]">
+									{selectedPlan.description}
+								</p>
+								<span className="mb-6 mt-12 inline-block text-6xl font-bold">
+									{priceLabel(selectedPlan.price)}
+								</span>
 
-										<div className="flex justify-center">
-											<Button asChild size="lg">
-												<Link href="#contact">
-													{selectedPlan.cta}
-												</Link>
-											</Button>
+								<div className="flex justify-center">
+									<Button asChild size="lg">
+										<Link href="#contact">
+											{selectedPlan.cta}
+										</Link>
+									</Button>
+								</div>
+
+								<p className="text-muted-foreground mt-12 text-[12px]">
+									Includes:{" "}
+									{selectedPlan.features
+										.slice(0, 3)
+										.join(", ")}
+								</p>
+							</motion.div>
+						)}
+					</AnimatePresence>
+
+					<AnimatePresence mode="wait">
+						{selectedPlan && (
+							<motion.div
+								key={`features-${selectedPlan.name}`}
+								className="relative"
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: -20 }}
+								transition={{ duration: 0.3 }}
+							>
+								<ul role="list" className="space-y-4">
+									{selectedPlan.features.map((feature) => (
+										<li
+											key={feature}
+											className="flex items-center gap-2"
+										>
+											<Check className="size-3" />
+											<span>{feature}</span>
+										</li>
+									))}
+								</ul>
+								{otherPlans.length > 0 && (
+									<motion.div
+										layout
+										className="mt-12 rounded-2xl border border-dashed border-primary/10 bg-primary/5 p-6"
+									>
+										<p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+											Additional Options
+										</p>
+										<div className="mt-4 grid gap-4 sm:grid-cols-2">
+											{otherPlans.map((plan) => (
+												<motion.button
+													key={plan.name}
+													type="button"
+													onClick={() =>
+														setSelectedPlanName(
+															plan.name
+														)
+													}
+													className="flex h-full flex-col rounded-xl bg-background p-4 text-left shadow-sm transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+													whileHover={{
+														y: -4,
+													}}
+													whileTap={{ y: 0 }}
+												>
+													<span className="text-base font-semibold">
+														{plan.name}
+													</span>
+													<span className="mt-1 text-sm text-muted-foreground">
+														{plan.description}
+													</span>
+													<span className="pt-4 text-sm font-medium text-primary mt-auto">
+														{plan.price}
+													</span>
+												</motion.button>
+											))}
 										</div>
-
-										<p className="text-muted-foreground mt-12 text-sm">
-											Includes:{" "}
-											{selectedPlan.features
-												.slice(0, 3)
-												.join(", ")}
-										</p>
 									</motion.div>
 								)}
-							</AnimatePresence>
-
-							<AnimatePresence mode="wait">
-								{selectedPlan && (
-									<motion.div
-										key={`features-${selectedPlan.name}`}
-										className="relative"
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										exit={{ opacity: 0, y: -20 }}
-										transition={{ duration: 0.3 }}
-									>
-										<ul role="list" className="space-y-4">
-											{selectedPlan.features.map(
-												(feature) => (
-													<li
-														key={feature}
-														className="flex items-center gap-2"
-													>
-														<Check className="size-3" />
-														<span>{feature}</span>
-													</li>
-												)
-											)}
-										</ul>
-										{otherPlans.length > 0 && (
-											<motion.div
-												layout
-												className="mt-12 rounded-2xl border border-dashed border-foreground/10 bg-muted/20 p-6"
-											>
-												<p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-													Additional Options
-												</p>
-												<div className="mt-4 grid gap-4 sm:grid-cols-2">
-													{otherPlans.map((plan) => (
-														<motion.button
-															key={plan.name}
-															type="button"
-															onClick={() =>
-																setSelectedPlanName(
-																	plan.name
-																)
-															}
-															className="flex h-full flex-col rounded-xl bg-background p-4 text-left shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-															whileHover={{
-																y: -4,
-															}}
-															whileTap={{ y: 0 }}
-														>
-															<span className="text-base font-semibold">
-																{plan.name}
-															</span>
-															<span className="mt-1 text-sm text-muted-foreground">
-																{
-																	plan.description
-																}
-															</span>
-															<span className="mt-3 text-sm font-medium text-primary">
-																{plan.price}
-															</span>
-														</motion.button>
-													))}
-												</div>
-											</motion.div>
-										)}
-									</motion.div>
-								)}
-							</AnimatePresence>
-						</div>
-					</div>
+							</motion.div>
+						)}
+					</AnimatePresence>
 				</div>
 			</div>
 		</div>
 	);
 }
-
 
 export function Pricing2() {
 	const planColumns = plans;
@@ -261,25 +269,42 @@ export function Pricing2() {
 		);
 
 	return (
-		<section className="py-16 md:py-32">
+		<section className="py-16 md:py-32 z-10">
 			<div className="mx-auto max-w-5xl px-6">
 				<div className="w-full overflow-auto lg:overflow-visible">
 					<table className="w-[200vw] border-separate border-spacing-x-3 md:w-full dark:[--color-muted:var(--color-zinc-900)]">
-						<thead className="bg-background sticky top-0">
+						<thead className="sticky top-0">
 							<tr className="*:py-4 *:text-left *:font-medium">
 								<th className="lg:w-2/5"></th>
 								{planColumns.map((plan) => {
-									const isHighlighted = plan.name === highlightedPlanName;
+									const isHighlighted =
+										plan.name === highlightedPlanName;
 
 									return (
 										<th
 											key={plan.name}
-											className={isHighlighted ? "bg-muted rounded-t-(--radius) space-y-3 px-4" : "space-y-3"}
+											className={
+												isHighlighted
+													? "bg-background rounded-t-(--radius) space-y-3 px-4"
+													: "space-y-3"
+											}
 										>
-											<span className="block">{plan.name}</span>
+											<span className="block">
+												{plan.name}
+											</span>
 
-											<Button asChild size="sm" variant={isHighlighted ? "default" : "outline"}>
-												<Link href="#contact">{plan.cta}</Link>
+											<Button
+												asChild
+												size="sm"
+												variant={
+													isHighlighted
+														? "default"
+														: "outline"
+												}
+											>
+												<Link href="#contact">
+													{plan.cta}
+												</Link>
 											</Button>
 										</th>
 									);
@@ -295,21 +320,46 @@ export function Pricing2() {
 								{planColumns.map((plan) => (
 									<td
 										key={plan.name}
-										className={plan.name === highlightedPlanName ? "bg-muted border-none px-4" : undefined}
+										className={
+											plan.name === highlightedPlanName
+												? "bg-background border-none px-4"
+												: undefined
+										}
 									/>
 								))}
 							</tr>
 
 							{primaryFeatureRows.map((row) => (
-								<tr key={row.feature} className="*:border-b *:py-3">
-									<td className="text-muted-foreground">{row.feature}</td>
+								<tr
+									key={row.feature}
+									className="*:border-b *:py-3"
+								>
+									<td className="text-muted-foreground">
+										{row.feature}
+									</td>
 									{planColumns.map((plan) => {
-										const isHighlighted = plan.name === highlightedPlanName;
-										const content = renderAvailability(row.availability[plan.name]);
+										const isHighlighted =
+											plan.name === highlightedPlanName;
+										const content = renderAvailability(
+											row.availability[plan.name]
+										);
 
 										return (
-											<td key={`${row.feature}-${plan.name}`} className={isHighlighted ? "bg-muted border-none px-4" : undefined}>
-												{isHighlighted ? <div className="-mb-3 border-b py-3">{content}</div> : content}
+											<td
+												key={`${row.feature}-${plan.name}`}
+												className={
+													isHighlighted
+														? "bg-background border-none px-4"
+														: undefined
+												}
+											>
+												{isHighlighted ? (
+													<div className="-mb-3 border-b py-3">
+														{content}
+													</div>
+												) : (
+													content
+												)}
 											</td>
 										);
 									})}
@@ -326,21 +376,51 @@ export function Pricing2() {
 										{planColumns.map((plan) => (
 											<td
 												key={`secondary-heading-${plan.name}`}
-												className={plan.name === highlightedPlanName ? "bg-muted border-none px-4" : undefined}
+												className={
+													plan.name ===
+													highlightedPlanName
+														? "bg-background border-none px-4"
+														: undefined
+												}
 											/>
 										))}
 									</tr>
 
 									{secondaryFeatureRows.map((row) => (
-										<tr key={row.feature} className="*:border-b *:py-3">
-											<td className="text-muted-foreground">{row.feature}</td>
+										<tr
+											key={row.feature}
+											className="*:border-b *:py-3"
+										>
+											<td className="text-muted-foreground">
+												{row.feature}
+											</td>
 											{planColumns.map((plan) => {
-												const isHighlighted = plan.name === highlightedPlanName;
-												const content = renderAvailability(row.availability[plan.name]);
+												const isHighlighted =
+													plan.name ===
+													highlightedPlanName;
+												const content =
+													renderAvailability(
+														row.availability[
+															plan.name
+														]
+													);
 
 												return (
-													<td key={`${row.feature}-${plan.name}`} className={isHighlighted ? "bg-muted border-none px-4" : undefined}>
-														{isHighlighted ? <div className="-mb-3 border-b py-3">{content}</div> : content}
+													<td
+														key={`${row.feature}-${plan.name}`}
+														className={
+															isHighlighted
+																? "bg-background border-none px-4"
+																: undefined
+														}
+													>
+														{isHighlighted ? (
+															<div className="-mb-3 border-b py-3">
+																{content}
+															</div>
+														) : (
+															content
+														)}
 													</td>
 												);
 											})}
@@ -354,7 +434,11 @@ export function Pricing2() {
 								{planColumns.map((plan) => (
 									<td
 										key={`footer-${plan.name}`}
-										className={plan.name === highlightedPlanName ? "bg-muted rounded-b-(--radius) border-none px-4" : undefined}
+										className={
+											plan.name === highlightedPlanName
+												? "bg-background rounded-b-(--radius) border-none px-4"
+												: undefined
+										}
 									/>
 								))}
 							</tr>
@@ -366,22 +450,32 @@ export function Pricing2() {
 	);
 }
 
+const pricings = [<Pricing1 />, <Pricing2 />];
+
 export default function Pricing() {
+	const [switcher, setSwitcher] = useState(0);
+	function handleSwitch() {
+		setSwitcher((prev) => (prev + 1) % pricings.length);
+	}
 	return (
-		<>
-			<Pricing1 />
-			<Pricing2 />
-		</>
+		<div className="min-h-screen w-full relative">
+			<Button
+				variant="secondary"
+				className="absolute m-4 z-10"
+				onClick={handleSwitch}
+			>
+				Switch
+			</Button>
+			<div className="relative py-16 md:py-32">
+				<div className="mx-auto max-w-5xl px-6">
+					<div className="mx-auto max-w-2xl text-center">
+						<h2 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5">
+							Start managing your company smarter today
+						</h2>
+					</div>
+					{pricings[switcher]}
+				</div>
+			</div>
+		</div>
 	);
 }
-
-
-
-
-
-
-
-
-
-
-

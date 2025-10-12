@@ -180,8 +180,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 					tabIndex={0}
 					aria-label="Search input container"
 					className={cn(
-						"relative flex flex-col rounded-xl transition-all duration-200 w-full text-left cursor-text backdrop-blur-md bg-white/5",
-						"ring-1 ring-black/10 dark:ring-white/10",
+						"relative flex flex-col rounded-xl transition-all duration-200 w-full text-left cursor-text backdrop-blur-md bg-white/50 shadow-md",
 						isFocused && "ring-black/20 dark:ring-white/20"
 					)}
 					onClick={handleContainerClick}
@@ -196,7 +195,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 							id="ai-input-04"
 							value={value}
 							placeholder="Ask anything..."
-							className="w-full rounded-xl rounded-b-[0] px-4 py-3 bg-white/5 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 leading-[1.2]"
+							className="w-full rounded-xl rounded-b-[0] px-4 py-3 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 leading-[1.2]"
 							ref={textareaRef}
 							onFocus={handleFocus}
 							onBlur={handleBlur}
@@ -227,7 +226,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								placeholder="your@email.com"
-								className="w-full px-3 py-2 rounded-lg bg-background border border-black/10 dark:border-white/10 text-body-md focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+								className="w-full px-3 py-2 rounded-lg shadow-sm text-body-md focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
 							/>
 						</div>
 					)}
@@ -268,15 +267,6 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 					Post Question
 					<Send />
 				</button>
-
-				<div className="text-center mt-4">
-					<a
-						href="/landing"
-						className="text-body-sm text-muted-foreground hover:text-foreground underline transition-colors"
-					>
-						Continue to site
-					</a>
-				</div>
 			</div>
 		</div>
 	);

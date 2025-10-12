@@ -7,6 +7,7 @@ import MarqueeBackground from "@/components/sections/hero/marquee-background";
 import Orb from "@/components/sections/hero/orb";
 import PrismaticBurst from "@/components/sections/hero/prismatic-burst";
 import QuestionInput from "@/components/sections/hero/question-input";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const initialQuestions = [
@@ -53,6 +54,52 @@ const initialQuestions = [
 		postedAt: Date.now() - 12 * 60 * 60 * 1000, // 12 hours ago
 	},
 ];
+
+const Bgs = [
+	<></>,
+	<Prism
+		animationType="rotate"
+		timeScale={0.5}
+		height={3.5}
+		baseWidth={5.5}
+		scale={3.6}
+		hueShift={0}
+		colorFrequency={1}
+		noise={0}
+		glow={1}
+	/>,
+	<DarkVeil hueShift={190} />,
+	<LightRays
+		raysOrigin="top-center"
+		raysColor="#407BFF"
+		raysSpeed={1.5}
+		lightSpread={1}
+		rayLength={1.2}
+		followMouse={true}
+		mouseInfluence={0.1}
+		noiseAmount={0}
+		distortion={0.05}
+		className="custom-rays"
+	/>,
+	<PrismaticBurst
+		animationType="rotate3d"
+		intensity={2}
+		speed={0.5}
+		distort={1.0}
+		paused={false}
+		offset={{ x: 0, y: 0 }}
+		hoverDampness={0.25}
+		rayCount={24}
+		mixBlendMode="multiply"
+		colors={["#ff007a", "#4d3dff", "#ffffff"]}
+	/>,
+	<Orb
+		hoverIntensity={0.5}
+		rotateOnHover={true}
+		hue={0}
+		forceHoverState={false}
+	/>,
+];
 export default function Hero() {
 	const [questions, setQuestions] = useState(initialQuestions);
 	const handleQuestionSubmit = (question: string, email?: string) => {
@@ -63,10 +110,15 @@ export default function Hero() {
 		};
 		setQuestions([newQuestion, ...questions]);
 	};
+	const [switcher, setSwitcher] = useState(0);
+	function handleSwitch() {
+		setSwitcher((prev) => (prev + 1) % Bgs.length);
+	}
 	return (
 		<div className="min-h-screen z-0 relative">
-			<div className="relative min-h-screen overflow-hidden pt-16">
-				<div className="relative z-10 md:min-h-screen flex flex-col items-center justify-center px-4 py-4 md:py-20">
+			<div className="relative min-h-screen flex flex-col justify-between items-center">
+				<div className="text-center"></div>
+				<div className="relative z-10 flex flex-col items-center justify-center px-4">
 					<div className="text-center mb-12 md:space-y-4">
 						<h1 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5 max-w-3xl">
 							Ask Your Financial Questions
@@ -83,49 +135,17 @@ export default function Hero() {
 				</div>
 				<MarqueeBackground />
 			</div>
-			<div className="pointer-events-none w-full h-full absolute inset-0 z-[-1] mix-blend-color bg-white">
-				<Prism
-					animationType="rotate"
-					timeScale={0.5}
-					height={3.5}
-					baseWidth={5.5}
-					scale={3.6}
-					hueShift={0}
-					colorFrequency={1}
-					noise={0}
-					glow={1}
-				/>
-				{/* <DarkVeil hueShift={190} /> */}
-				{/* <LightRays
-					raysOrigin="top-center"
-					raysColor="#407BFF"
-					raysSpeed={1.5}
-					lightSpread={1}
-					rayLength={1.2}
-					followMouse={true}
-					mouseInfluence={0.1}
-					noiseAmount={0}
-					distortion={0.05}
-					className="custom-rays"
-				/> */}
-				{/* <PrismaticBurst
-					animationType="rotate3d"
-					intensity={2}
-					speed={0.5}
-					distort={1.0}
-					paused={false}
-					offset={{ x: 0, y: 0 }}
-					hoverDampness={0.25}
-					rayCount={24}
-					mixBlendMode="multiply"
-					colors={["#ff007a", "#4d3dff", "#ffffff"]}
-				/> */}
-				{/* <Orb
-					hoverIntensity={0.5}
-					rotateOnHover={true}
-					hue={0}
-					forceHoverState={false}
-				/> */}
+			<div className="w-full h-full absolute inset-0">
+				<div className="pointer-events-none w-full h-full absolute inset-0 z-[-1] mix-blend-color">
+					{Bgs[switcher]}
+				</div>
+				<Button
+					variant="secondary"
+					className="abolute m-4 cursor-pointer"
+					onClick={handleSwitch}
+				>
+					Switch Background
+				</Button>
 			</div>
 		</div>
 	);

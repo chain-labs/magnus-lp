@@ -73,7 +73,7 @@ export default function FAQ() {
 						<Accordion
 							type="single"
 							collapsible
-							className="bg-card ring-muted w-full rounded-2xl border px-8 py-3 shadow-sm ring-4 dark:ring-0"
+							className="bg-card shadow-md w-full rounded-2xl border px-8 py-3"
 						>
 							{faqItems
 								.slice(0, faqItems.length / 2)
@@ -83,11 +83,11 @@ export default function FAQ() {
 										value={item.answer}
 										className="border-dashed"
 									>
-										<AccordionTrigger className="cursor-pointer text-base hover:no-underline">
+										<AccordionTrigger className="cursor-pointer text-base font-medium hover:no-underline">
 											{item.question}
 										</AccordionTrigger>
 										<AccordionContent>
-											<p className="text-base">
+											<p className="text-[14px] leading-[18px]">
 												{item.answer}
 											</p>
 										</AccordionContent>
@@ -97,7 +97,7 @@ export default function FAQ() {
 						<Accordion
 							type="single"
 							collapsible
-							className="bg-card ring-muted w-full rounded-2xl border px-8 py-3 shadow-sm ring-4 dark:ring-0"
+							className="bg-card shadow-md w-full rounded-2xl border px-8 py-3"
 						>
 							{faqItems
 								.slice(faqItems.length / 2, faqItems.length)
@@ -107,11 +107,11 @@ export default function FAQ() {
 										value={item.answer}
 										className="border-dashed"
 									>
-										<AccordionTrigger className="cursor-pointer text-base hover:no-underline">
+										<AccordionTrigger className="cursor-pointer text-base font-medium hover:no-underline">
 											{item.question}
 										</AccordionTrigger>
 										<AccordionContent>
-											<p className="text-base">
+											<p className="text-[14px] leading-[18px]">
 												{item.answer}
 											</p>
 										</AccordionContent>

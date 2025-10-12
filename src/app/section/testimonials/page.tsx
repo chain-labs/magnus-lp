@@ -3,6 +3,8 @@
 import { motion } from "motion/react";
 
 import { TestimonialsColumn } from "@/components/sections/testimonials/testimonials-columns-1";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const testimonials = [
 	{
@@ -65,9 +67,56 @@ const firstColumn = testimonials.slice(0, 3);
 const secondColumn = testimonials.slice(3, 6);
 const thirdColumn = testimonials.slice(6, 9);
 
+const testimonialsComponents = [
+	<div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
+		<TestimonialsColumn testimonials={firstColumn} duration={15} />
+		<TestimonialsColumn
+			testimonials={secondColumn}
+			className="hidden md:block"
+			duration={19}
+		/>
+		<TestimonialsColumn
+			testimonials={thirdColumn}
+			className="hidden lg:block"
+			duration={17}
+		/>
+	</div>,
+	<div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+		{testimonials.map((testimonial) => (
+			<div
+				key={testimonial.name}
+				className="flex h-full bg-background flex-col justify-between rounded-2xl border p-6 text-left shadow-sm shadow-black/5"
+			>
+				<p className="text-muted-foreground text-base leading-relaxed">
+					“{testimonial.text}”
+				</p>
+				<div className="mt-6">
+					<p className="text-sm font-semibold text-foreground">
+						{testimonial.name}
+					</p>
+					<p className="text-muted-foreground text-xs">
+						{testimonial.role}
+					</p>
+				</div>
+			</div>
+		))}
+	</div>,
+];
+
 export default function TestimonialsPage() {
+	const [switcher, setSwitcher] = useState(0);
+	function handleSwitch() {
+		setSwitcher((prev) => (prev + 1) % testimonialsComponents.length);
+	}
 	return (
-		<section className="bg-background my-20 relative">
+		<section className="my-20 relative min-h-screen">
+			<Button
+				variant="secondary"
+				className="absolute m-4 z-10"
+				onClick={handleSwitch}
+			>
+				Switch
+			</Button>
 			<div className="container z-10 mx-auto px-4">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -80,10 +129,6 @@ export default function TestimonialsPage() {
 					viewport={{ once: true }}
 					className="flex flex-col items-center justify-center max-w-[540px] mx-auto text-center"
 				>
-					<div className="border py-1 px-4 rounded-lg text-sm tracking-tight uppercase">
-						Testimonials
-					</div>
-
 					<h2 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5 max-w-3xl">
 						Teams trust Magnus to orchestrate their operations
 					</h2>
@@ -92,60 +137,7 @@ export default function TestimonialsPage() {
 						managers who switched to the Magnus operating layer.
 					</p>
 				</motion.div>
-
-				<div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
-					<TestimonialsColumn
-						testimonials={firstColumn}
-						duration={15}
-					/>
-					<TestimonialsColumn
-						testimonials={secondColumn}
-						className="hidden md:block"
-						duration={19}
-					/>
-					<TestimonialsColumn
-						testimonials={thirdColumn}
-						className="hidden lg:block"
-						duration={17}
-					/>
-				</div>
-			</div>
-
-			<div className="container mx-auto mt-24 px-4">
-				<div className="flex flex-col items-center text-center">
-					<div className="border py-1 px-4 rounded-lg text-sm tracking-tight uppercase">
-						Testimonials
-					</div>
-					<h2 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5 max-w-3xl">
-						Trusted voices from the Magnus community
-					</h2>
-					<p className="text-muted-foreground mt-5 max-w-2xl">
-						Stories from investors and analysts who rely on our
-						playbooks, strategy sessions, and market calls to stay
-						ahead.
-					</p>
-				</div>
-
-				<div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-					{testimonials.map((testimonial) => (
-						<div
-							key={testimonial.name}
-							className="flex h-full flex-col justify-between rounded-2xl border p-6 text-left shadow-sm shadow-black/5"
-						>
-							<p className="text-muted-foreground text-base leading-relaxed">
-								“{testimonial.text}”
-							</p>
-							<div className="mt-6">
-								<p className="text-sm font-semibold text-foreground">
-									{testimonial.name}
-								</p>
-								<p className="text-muted-foreground text-xs">
-									{testimonial.role}
-								</p>
-							</div>
-						</div>
-					))}
-				</div>
+				{testimonialsComponents[switcher]}
 			</div>
 		</section>
 	);
