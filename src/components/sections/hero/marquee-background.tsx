@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { MessageCircle, X } from "lucide-react";
+
 import { InfiniteSlider } from "@/components/manually-addded/infinite-slider";
 import QaCard from "./qa-card";
 import { useAnsweredQuestion } from "@/hooks/useAnsweredQuestions";
@@ -32,28 +35,131 @@ const sampleQuestions = [
 	},
 ];
 
+type ActiveQuestion = {
+	questionText: string;
+	answerText: string;
+};
+
+type DisplayQuestion = ActiveQuestion & {
+	id: string;
+};
+
 export default function MarqueeBackground() {
 	const { questions } = useAnsweredQuestion();
+	const [activeQuestion, setActiveQuestion] = useState<ActiveQuestion | null>(
+		null
+	);
+
+	const fallbackQuestions: DisplayQuestion[] = sampleQuestions.map(
+		(item, index) => ({
+			questionText: item.question,
+			answerText: item.answer,
+			id: `sample-${index}`,
+		})
+	);
+
+	const normalizedQuestions: DisplayQuestion[] =
+		questions.length > 0
+			? questions.map((question, index) => ({
+					id: question.id ?? `question-${index}`,
+					questionText: question.questionText,
+					answerText: question.answerText,
+			  }))
+			: fallbackQuestions;
+
+	useEffect(() => {
+		if (typeof document === "undefined") {
+			return;
+		}
+
+		if (!activeQuestion) {
+			document.body.style.removeProperty("overflow");
+			return;
+		}
+
+		const previousOverflow = document.body.style.overflow;
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				setActiveQuestion(null);
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+		document.body.style.overflow = "hidden";
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+			document.body.style.overflow = previousOverflow;
+		};
+	}, [activeQuestion]);
 
 	return (
-		<div className="relative w-full h-[260px]  z-10">
-			{/* Infinite marquee using provided InfiniteSlider */}
+		<div className="relative z-10 h-[260px] w-full">
 			<InfiniteSlider
 				className="absolute inset-x-0 bottom-4 max-h-full"
 				gap={24}
 				speed={90}
 				speedOnHover={0}
 				direction="horizontal"
+				paused={Boolean(activeQuestion)}
 			>
-				{[...questions].map((qa, idx) => (
+				{normalizedQuestions.map((qa) => (
 					<div
-						key={`marquee-${idx}`}
+						key={qa.id}
 						className="min-w-[300px] max-w-[300px] h-[260px] max-h-full"
 					>
-						<QaCard variant="subtle" question={qa.questionText} answer={qa.answerText} />
+						<QaCard
+							variant="subtle"
+							question={qa.questionText}
+							answer={qa.answerText}
+							onClick={() =>
+								setActiveQuestion({
+									questionText: qa.questionText,
+									answerText: qa.answerText,
+								})
+							}
+						/>
 					</div>
 				))}
 			</InfiniteSlider>
+
+			{activeQuestion ? (
+				<div
+					onClick={() => setActiveQuestion(null)}
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby="qa-dialog-title"
+					className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8"
+				>
+					<div
+						onClick={(event) => event.stopPropagation()}
+						className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl"
+					>
+						<button
+							type="button"
+							onClick={() => setActiveQuestion(null)}
+							className="absolute right-4 top-4 rounded-full p-1 text-muted-foreground transition hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+							aria-label="Close question details"
+						>
+							<X className="h-4 w-4" />
+						</button>
+						<div className="flex items-start gap-3 pr-8">
+							<MessageCircle className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+							<h3
+								id="qa-dialog-title"
+								className="text-lg font-semibold text-foreground"
+							>
+								{activeQuestion.questionText}
+							</h3>
+						</div>
+						<div className="mt-4 max-h-[60vh] overflow-y-auto pr-1">
+							<p className="whitespace-pre-wrap text-sm leading-6 text-muted-foreground">
+								{activeQuestion.answerText}
+							</p>
+						</div>
+					</div>
+				</div>
+			) : null}
 		</div>
 	);
 }
