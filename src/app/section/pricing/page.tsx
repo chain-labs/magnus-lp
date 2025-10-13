@@ -55,21 +55,6 @@ const plans = [
 		cta: "Learn More",
 		popular: false,
 	},
-	{
-		name: "Specialized Services",
-		price: "Custom",
-		description: "Tailored solutions for specific financial needs",
-		features: [
-			"Business owner planning",
-			"Executive compensation",
-			"Equity compensation planning",
-			"Charitable giving strategies",
-			"Risk management",
-			"Insurance planning",
-		],
-		cta: "Learn More",
-		popular: false,
-	},
 ] as const;
 
 type Plan = (typeof plans)[number];
