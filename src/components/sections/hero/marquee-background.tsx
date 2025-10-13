@@ -2,6 +2,7 @@
 
 import { InfiniteSlider } from "@/components/manually-addded/infinite-slider";
 import QaCard from "./qa-card";
+import { useAnsweredQuestion } from "@/hooks/useAnsweredQuestions";
 
 const sampleQuestions = [
 	{
@@ -32,7 +33,7 @@ const sampleQuestions = [
 ];
 
 export default function MarqueeBackground() {
-	const items = [...sampleQuestions, ...sampleQuestions, ...sampleQuestions];
+	const { questions } = useAnsweredQuestion();
 
 	return (
 		<div className="relative w-full h-[260px] overflow-hidden z-10">
@@ -44,12 +45,12 @@ export default function MarqueeBackground() {
 				speedOnHover={0}
 				direction="horizontal"
 			>
-				{items.map((qa, idx) => (
+				{questions.map((qa, idx) => (
 					<div
 						key={`marquee-${idx}`}
 						className="min-w-[300px] max-w-[300px]"
 					>
-						<QaCard {...qa} variant="subtle" />
+						<QaCard variant="subtle" question={qa.questionText} answer={qa.answerText} />
 					</div>
 				))}
 			</InfiniteSlider>
