@@ -45,7 +45,7 @@ export default function MarqueeBackground() {
 				speedOnHover={0}
 				direction="horizontal"
 			>
-				{questions.map((qa, idx) => (
+				{[...questions, ...questions, ...questions, ...questions].map((qa, idx) => (
 					<div
 						key={`marquee-${idx}`}
 						className="min-w-[300px] max-w-[300px]"
