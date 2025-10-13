@@ -11,7 +11,7 @@ export default function Home() {
 	return (
 		<div className="flex min-h-screen flex-col  text-foreground z-0">
 			<div className="fixed inset-0 h-full w-full bg-[linear-gradient(to_bottom,#C7D2FE,#F1F5F9_25%)]"></div>
-			<div id="hero" className="z-10">
+			<div id="hero" className="z-20">
 				<HeroSection />
 			</div>
 
