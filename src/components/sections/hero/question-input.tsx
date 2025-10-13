@@ -1,7 +1,7 @@
 "use client";
 
 import { Send, Mic, MicOff } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useAutoResizeTextarea } from "@/hooks/use-auto-resize-textarea";
@@ -59,6 +59,8 @@ interface QuestionInputProps {
 	onSubmit: (question: string, email?: string) => void;
 }
 
+const CHARACTER_LIMIT = 180;
+
 export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 	const [value, setValue] = useState("");
 	const [email, setEmail] = useState("");
@@ -71,6 +73,33 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 	const [isListening, setIsListening] = useState(false);
 	const [recognition, setRecognition] = useState<SpeechRecognition | null>(
 		null
+	);
+
+	const applyValueUpdate = useCallback(
+		(input: string, resetHeight = false) => {
+			const sanitized = input.slice(0, CHARACTER_LIMIT);
+			setValue(sanitized);
+			adjustHeight(resetHeight);
+			return sanitized;
+		},
+		[adjustHeight]
+	);
+
+	const charCount = value.length;
+	const progress = Math.min(charCount / CHARACTER_LIMIT, 1);
+	const size = 24;
+	const strokeWidth = 2.5;
+	const radius = (size - strokeWidth) / 2;
+	const circumference = 2 * Math.PI * radius;
+	const dashOffset = circumference * (1 - progress);
+	const remainingChars = Math.max(CHARACTER_LIMIT - charCount, 0);
+	const showRemainingCount = remainingChars <= 3;
+	const progressColorClass = cn(
+		"text-black/40 dark:text-white/40",
+		charCount === 0 && "text-black/20 dark:text-white/20",
+		progress >= 0.9 && progress < 1 && "text-yellow-500 dark:text-yellow-400",
+		progress >= 1 && "text-red-500 dark:text-red-400",
+		progress < 0.9 && charCount > 0 && "text-primary"
 	);
 
 	useEffect(() => {
@@ -100,8 +129,10 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 			for (let i = event.resultIndex; i < event.results.length; i += 1) {
 				transcript += event.results[i][0].transcript;
 			}
-			setValue(transcript);
-			adjustHeight();
+			const sanitizedTranscript = applyValueUpdate(transcript);
+			if (sanitizedTranscript.length >= CHARACTER_LIMIT) {
+				recognitionInstance.stop();
+			}
 		};
 
 		recognitionInstance.onerror = (event: SpeechRecognitionErrorEvent) => {
@@ -122,7 +153,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 			recognitionInstance.onend = null;
 			setRecognition(null);
 		};
-	}, [adjustHeight]);
+	}, [applyValueUpdate]);
 
 	const toggleListening = () => {
 		if (!recognition) return;
@@ -131,13 +162,13 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 			recognition.stop();
 			setIsListening(false);
 		} else {
-			setValue("");
+			applyValueUpdate("", true);
 			recognition.start();
 			setIsListening(true);
 		}
 	};
 
-	const handleSubmit = async() => {
+	const handleSubmit = async () => {
 		if (!value.trim()) return;
 
 		if (isListening && recognition) {
@@ -152,10 +183,9 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 
 		// Second click or email provided: Submit the question
 		onSubmit(value, email.trim() || undefined);
-		setValue("");
+		applyValueUpdate("", true);
 		setEmail("");
 		setShowEmailCapture(false);
-		adjustHeight(true);
 	};
 
 	const handleFocus = () => {
@@ -195,6 +225,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 							id="ai-input-04"
 							value={value}
 							placeholder="Ask anything..."
+							maxLength={CHARACTER_LIMIT}
 							className="w-full rounded-xl rounded-b-[0] px-4 py-3 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 leading-[1.2]"
 							ref={textareaRef}
 							onFocus={handleFocus}
@@ -206,8 +237,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 								}
 							}}
 							onChange={(e) => {
-								setValue(e.target.value);
-								adjustHeight();
+								applyValueUpdate(e.target.value);
 							}}
 						/>
 					</div>
@@ -232,29 +262,75 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 					)}
 
 					<div className="h-12 bg-white/5 rounded-b-xl flex items-center justify-end px-3">
-						{recognition && (
-							<button
-								type="button"
-								onClick={toggleListening}
+						<div className="flex items-center gap-2">
+							<div
 								className={cn(
-									"rounded-lg p-2 transition-colors",
-									isListening
-										? "bg-red-500/15 text-red-500 animate-pulse"
-										: "bg-black/5 dark:bg-white/5 text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white cursor-pointer"
+									"relative flex h-8 w-8 items-center justify-center",
+									progressColorClass
 								)}
-								title={
-									isListening
-										? "Stop recording"
-										: "Start voice input"
-								}
+								aria-hidden="true"
 							>
-								{isListening ? (
-									<MicOff className="w-4 h-4" />
-								) : (
-									<Mic className="w-4 h-4" />
+								<svg
+									className="h-full w-full -rotate-90"
+									width={size}
+									height={size}
+									viewBox={`0 0 ${size} ${size}`}
+								>
+									<circle
+										className="text-black/10 dark:text-white/10"
+										stroke="currentColor"
+										strokeWidth={strokeWidth}
+										fill="none"
+										cx={size / 2}
+										cy={size / 2}
+										r={radius}
+									/>
+									<circle
+										className="transition-[stroke-dashoffset]"
+										stroke="currentColor"
+										strokeWidth={strokeWidth}
+										strokeLinecap="round"
+										fill="none"
+										cx={size / 2}
+										cy={size / 2}
+										r={radius}
+										strokeDasharray={`${circumference} ${circumference}`}
+										strokeDashoffset={dashOffset}
+									/>
+								</svg>
+								{showRemainingCount && (
+									<span className="absolute text-[10px] font-medium text-black dark:text-white">
+										{remainingChars}
+									</span>
 								)}
-							</button>
-						)}
+							</div>
+							<span className="sr-only" aria-live="polite">
+								{remainingChars} characters remaining
+							</span>
+							{recognition && (
+								<button
+									type="button"
+									onClick={toggleListening}
+									className={cn(
+										"rounded-lg p-2 transition-colors",
+										isListening
+											? "bg-red-500/15 text-red-500 animate-pulse"
+											: "bg-black/5 dark:bg-white/5 text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white cursor-pointer"
+									)}
+									title={
+										isListening
+											? "Stop recording"
+											: "Start voice input"
+									}
+								>
+									{isListening ? (
+										<MicOff className="w-4 h-4" />
+									) : (
+										<Mic className="w-4 h-4" />
+									)}
+								</button>
+							)}
+						</div>
 					</div>
 				</div>
 
