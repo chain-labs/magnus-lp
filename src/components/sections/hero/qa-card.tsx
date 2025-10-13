@@ -51,7 +51,7 @@ export default function QaCard({
 				</span>
 			) : null}
 			<div className="mb-3 flex items-start gap-3">
-				<h3 className="inline text-[16px] font-medium leading-[20px] text-foreground line-clamp-3">
+				<h3 className="inline text-[16px] font-medium leading-[20px] text-foreground line-clamp-2">
 					<span className="inline">
 						<MessageCircle className="mr-2 inline-block h-[20px] w-[20px] flex-shrink-0 text-primary" />
 					</span>

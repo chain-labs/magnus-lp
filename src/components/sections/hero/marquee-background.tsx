@@ -94,11 +94,11 @@ export default function MarqueeBackground() {
 	}, [activeQuestion]);
 
 	return (
-		<div className="relative z-10 h-[260px] w-full">
+		<div className="relative z-10 h-[160px] w-full">
 			<InfiniteSlider
 				className="absolute inset-x-0 bottom-4 max-h-full"
 				gap={24}
-				speed={90}
+				speed={50}
 				speedOnHover={0}
 				direction="horizontal"
 				paused={Boolean(activeQuestion)}
@@ -106,7 +106,7 @@ export default function MarqueeBackground() {
 				{normalizedQuestions.map((qa) => (
 					<div
 						key={qa.id}
-						className="min-w-[300px] max-w-[300px] h-[260px] max-h-full"
+						className="min-w-[300px] max-w-[300px] h-[160px] max-h-full"
 					>
 						<QaCard
 							variant="subtle"

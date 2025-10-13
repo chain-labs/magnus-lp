@@ -210,7 +210,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 					tabIndex={0}
 					aria-label="Search input container"
 					className={cn(
-						"relative flex flex-col rounded-xl transition-all duration-200 w-full text-left cursor-text backdrop-blur-md bg-white/50 shadow-md",
+						"relative flex flex-col rounded-xl transition-all duration-200 w-full text-left cursor-text bg-white/90 backdrop-blur-md drop-shadow-2xl",
 						isFocused && "ring-black/20 dark:ring-white/20"
 					)}
 					onClick={handleContainerClick}
@@ -224,7 +224,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 						<Textarea
 							id="ai-input-04"
 							value={value}
-							placeholder="Ask anything..."
+							placeholder="Ask Your Stock Market Queries..."
 							maxLength={CHARACTER_LIMIT}
 							className="w-full rounded-xl rounded-b-[0] px-4 py-3 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 leading-[1.2]"
 							ref={textareaRef}
