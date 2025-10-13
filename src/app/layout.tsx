@@ -1,5 +1,8 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import "./globals.css";
+import PlausibleProvider from "next-plausible";
+import Script from "next/script";
 
 import { helveticaNeue } from "@/lib/fonts";
 
@@ -13,14 +16,33 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return (
-		<html
-			lang="en"
-			suppressHydrationWarning
+  return (
+    <html lang="en"suppressHydrationWarning
 			suppressContentEditableWarning
-			className={helveticaNeue.variable}
-		>
-			<body className="antialiased font-sans">{children}</body>
-		</html>
-	);
+			className={helveticaNeue.variable}>
+      <head>
+        {/* Clarity tracking code */}
+        <Script
+          id="clarity-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_ID}");
+            `,
+          }}
+        />
+      </head>
+      <body
+        className={`antialiased`}
+      >
+        <PlausibleProvider domain="magnus-lp-git-dev-chainlabs.vercel.app">
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </PlausibleProvider>
+      </body>
+    </html>
+  );
 }
