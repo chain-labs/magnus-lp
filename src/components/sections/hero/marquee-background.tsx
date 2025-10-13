@@ -36,19 +36,19 @@ export default function MarqueeBackground() {
 	const { questions } = useAnsweredQuestion();
 
 	return (
-		<div className="relative w-full h-[260px] overflow-hidden z-10">
+		<div className="relative w-full h-[260px]  z-10">
 			{/* Infinite marquee using provided InfiniteSlider */}
 			<InfiniteSlider
-				className="absolute inset-x-0 bottom-4"
+				className="absolute inset-x-0 bottom-4 max-h-full"
 				gap={24}
 				speed={90}
 				speedOnHover={0}
 				direction="horizontal"
 			>
-				{[...questions, ...questions, ...questions, ...questions].map((qa, idx) => (
+				{[...questions].map((qa, idx) => (
 					<div
 						key={`marquee-${idx}`}
-						className="min-w-[300px] max-w-[300px]"
+						className="min-w-[300px] max-w-[300px] h-[260px] max-h-full"
 					>
 						<QaCard variant="subtle" question={qa.questionText} answer={qa.answerText} />
 					</div>
