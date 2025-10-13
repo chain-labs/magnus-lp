@@ -10,56 +10,17 @@ import QuestionInput from "@/components/sections/hero/question-input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-const initialQuestions = [
-	{
-		question: "What's the best strategy for retirement planning in my 40s?",
-		answer: "Focus on maximizing retirement contributions, diversifying investments, and setting clear retirement goals. Consider catch-up contributions as you approach 50.",
-		postedAt: Date.now() - 2 * 60 * 60 * 1000, // 2 hours ago
-	},
-	{
-		question:
-			"Should I pay off my mortgage early or invest the extra money?",
-		answer: "It depends on your mortgage rate vs. potential investment returns. Generally, if your mortgage rate is below 4%, investing may provide better long-term growth.",
-		postedAt: Date.now() - 5 * 60 * 60 * 1000, // 5 hours ago
-	},
-	{
-		question: "How much should I have in my emergency fund?",
-		answer: "Aim for 3-6 months of living expenses in a high-yield savings account. If you're self-employed or have variable income, consider 6-12 months.",
-		postedAt: Date.now() - 1 * 24 * 60 * 60 * 1000, // 1 day ago
-	},
-	{
-		question: "Is now a good time to invest in the stock market?",
-		answer: "Time in the market beats timing the market. Focus on consistent investing through dollar-cost averaging rather than trying to predict market movements.",
-		postedAt: Date.now() - 3 * 60 * 60 * 1000, // 3 hours ago
-	},
-	{
-		question:
-			"What's the difference between a Roth IRA and Traditional IRA?",
-		answer: "Roth IRA contributions are after-tax with tax-free withdrawals in retirement. Traditional IRA offers tax deductions now but taxed withdrawals later. Choice depends on current vs. future tax bracket.",
-		postedAt: Date.now() - 2 * 24 * 60 * 60 * 1000, // 2 days ago
-	},
-	{
-		question: "How can I reduce my tax liability legally?",
-		answer: "Maximize retirement contributions, utilize HSAs, consider tax-loss harvesting, donate to charity, and explore business deductions if self-employed. Always consult with a tax professional.",
-		postedAt: Date.now() - 6 * 60 * 60 * 1000, // 6 hours ago
-	},
-	{
-		question: "Should I invest in real estate or stocks?",
-		answer: "Both have merits. Stocks offer liquidity and diversification. Real estate provides tangible assets and potential rental income. A balanced approach often works best based on your goals and risk tolerance.",
-		postedAt: Date.now() - 4 * 24 * 60 * 60 * 1000, // 4 days ago
-	},
-	{
-		question: "How do I start investing with a small amount of money?",
-		answer: "Start with low-cost index funds or ETFs through apps like Vanguard or Fidelity. Many platforms now allow fractional shares. Focus on consistent contributions over time.",
-		postedAt: Date.now() - 12 * 60 * 60 * 1000, // 12 hours ago
-	},
-];
-
 const Bgs = [
 	<></>,
 	<picture className="w-full h-full inset-0">
-		<source media="(min-width: 768px)" srcSet="/assets/branding/Horizontal.png" />
-		<source media="(max-width: 767px)" srcSet="/assets/branding/Vertical mobile.png" />
+		<source
+			media="(min-width: 768px)"
+			srcSet="/assets/branding/Horizontal.png"
+		/>
+		<source
+			media="(max-width: 767px)"
+			srcSet="/assets/branding/Vertical mobile.png"
+		/>
 		<img
 			src="/assets/branding/Horizontal.png"
 			alt="Background"
@@ -115,14 +76,17 @@ const Bgs = [
 	/>,
 ];
 export default function Hero() {
-	const [questions, setQuestions] = useState(initialQuestions);
-	const handleQuestionSubmit = (question: string, email?: string) => {
-		const newQuestion = {
-			question,
-			answer: "Thank you for your question! Our financial advisors will answer it soon.",
-			postedAt: Date.now(),
-		};
-		setQuestions([newQuestion, ...questions]);
+	const handleQuestionSubmit = async (question: string, email?: string) => {
+		const response = await fetch("/api/questions/submit", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				questionText: question,
+				userName: "Test User",
+				userEmail: email || undefined,
+			}),
+		});
+		console.log('response', response);
 	};
 	const [switcher, setSwitcher] = useState(0);
 	function handleSwitch() {

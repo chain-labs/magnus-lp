@@ -6,9 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useAutoResizeTextarea } from "@/hooks/use-auto-resize-textarea";
 
-
 type SpeechRecognitionCallback<TEvent extends Event> =
-	((this: SpeechRecognition, event: TEvent) => void) | null;
+	| ((this: SpeechRecognition, event: TEvent) => void)
+	| null;
 
 interface SpeechRecognitionAlternative {
 	transcript: string;
@@ -137,7 +137,7 @@ export default function QuestionInput({ onSubmit }: QuestionInputProps) {
 		}
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async() => {
 		if (!value.trim()) return;
 
 		if (isListening && recognition) {
