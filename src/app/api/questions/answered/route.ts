@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import * as Sentry from "@sentry/nextjs";
 import { questionsTable } from "@/lib/airtable";
 
 export async function GET() {
@@ -19,12 +20,24 @@ export async function GET() {
       answerText: record.fields["Answer Text"],
       answeredBy: record.fields["Answered By"],
       answerDate: record.fields["Answer Timestamp"],
-      display: record.fields["Display"],
+      display: record.fields["Show on Website"],
     }));
 
     return NextResponse.json({ questions }, { status: 200 });
   } catch (error) {
     console.error("Error fetching questions:", error);
+
+    // Capture error with Sentry
+    Sentry.captureException(error, {
+      tags: {
+        section: "api",
+        endpoint: "questions/answered",
+      },
+      extra: {
+        operation: "fetch_answered_questions",
+      },
+    });
+
     return NextResponse.json(
       { error: "Failed to fetch questions" },
       { status: 500 }
