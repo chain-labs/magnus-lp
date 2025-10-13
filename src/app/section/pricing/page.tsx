@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -93,6 +93,120 @@ const primaryFeatureRows = featureRows.slice(
 	Math.min(4, featureRows.length)
 );
 const secondaryFeatureRows = featureRows.slice(Math.min(4, featureRows.length));
+
+const pricingCategories = [
+	{
+		id: "advisory-foundations",
+		title: "Advisory Foundations",
+		description:
+			"Structured planning support for households building long-term momentum.",
+		plans: [
+			{
+				id: "foundations-core",
+				name: "Core",
+				price: "$149/mo",
+				tagline: "Quarterly reviews and guided implementation",
+				features: [
+					"90-day onboarding roadmap",
+					"Quarterly advisor reviews",
+					"Secure plan workspace",
+				],
+			},
+			{
+				id: "foundations-plus",
+				name: "Momentum",
+				price: "$219/mo",
+				tagline: "Monthly touchpoints with guided accountability",
+				features: [
+					"Monthly advisor syncs",
+					"Investment policy updates",
+					"Priority email support",
+				],
+			},
+		],
+		benefits: [
+			"Dedicated financial strategist matched to your goals",
+			"Coordinated cash-flow and savings automations",
+			"Stress-tested roadmap for the next 3-5 years",
+			"Secure hub for documents, tasks, and progress tracking",
+		],
+	},
+	{
+		id: "growth-strategies",
+		title: "Growth Strategies",
+		description:
+			"Built for emerging leaders balancing equity, compensation, and rapid growth.",
+		plans: [
+			{
+				id: "growth-equity",
+				name: "Equity Focus",
+				price: "$329/mo",
+				tagline: "Scenario modeling for stock and incentive plans",
+				features: [
+					"Quarterly equity liquidation modeling",
+					"Tax-efficient exercise strategies",
+					"Employer benefit optimization",
+				],
+			},
+			{
+				id: "growth-accelerate",
+				name: "Accelerate",
+				price: "$459/mo",
+				tagline: "Deep coordination with tax and legal partners",
+				features: [
+					"Integrated tax advisory touchpoints",
+					"Real-time cash management dashboards",
+					"Annual multi-scenario simulations",
+				],
+			},
+		],
+		benefits: [
+			"Equity windfall planning with proactive guidance",
+			"On-demand advisor support within 1 business day",
+			"Access to curated partner network (tax, legal, lending)",
+			"Structured liquidity and diversification playbooks",
+		],
+	},
+	{
+		id: "enterprise-stewardship",
+		title: "Enterprise Stewardship",
+		description:
+			"White-glove coordination for complex household balance sheets and entities.",
+		plans: [
+			{
+				id: "enterprise-family",
+				name: "Family Office",
+				price: "$689/mo",
+				tagline: "Multi-entity tracking and governance",
+				features: [
+					"Consolidated reporting across entities",
+					"Estate workflows with legal partners",
+					"Quarterly risk management council",
+				],
+			},
+			{
+				id: "enterprise-bespoke",
+				name: "Bespoke",
+				price: "Custom",
+				tagline: "Engagements tailored to unique complexity",
+				features: [
+					"Dedicated virtual CFO team",
+					"Capital event readiness planning",
+					"Custom performance analytics",
+				],
+			},
+		],
+		benefits: [
+			"Executive dashboard with live balance sheet reconciliation",
+			"Proactive coordination across tax, legal, and banking teams",
+			"Annual family summit with guided facilitation",
+			"Scenario planning for acquisitions, liquidity, and succession",
+		],
+	},
+] as const;
+
+type PricingCategory = (typeof pricingCategories)[number];
+type PricingCategoryPlan = PricingCategory["plans"][number];
 
 const priceLabel = (price: string) => {
 	const isNumeric = /^\d+(\.\d+)?$/.test(price);
@@ -435,7 +549,214 @@ export function Pricing2() {
 	);
 }
 
-const pricings = [<Pricing1 />, <Pricing2 />];
+export function Pricing3() {
+	const [activeCategoryId, setActiveCategoryId] = useState<PricingCategory["id"] | null>(null);
+	const activeCategory =
+		activeCategoryId
+			? pricingCategories.find((category) => category.id === activeCategoryId) ?? null
+			: null;
+	const [activePlanId, setActivePlanId] = useState<PricingCategoryPlan["id"] | null>(null);
+
+	useEffect(() => {
+		if (!activeCategory) {
+			setActivePlanId(null);
+			return;
+		}
+
+		setActivePlanId((current) => {
+			if (
+				current &&
+				activeCategory.plans.some((plan) => plan.id === current)
+			) {
+				return current;
+			}
+
+			return activeCategory.plans[0]?.id ?? null;
+		});
+	}, [activeCategory]);
+
+	const activePlan = activeCategory
+		? activeCategory.plans.find((plan) => plan.id === activePlanId) ??
+		  activeCategory.plans[0]
+		: null;
+	const showIntro = !activeCategory;
+
+	return (
+		<div className="mt-8 md:mt-20">
+			<motion.div
+				layout
+				className="relative overflow-hidden"
+			>
+				<motion.div
+					layout
+					className={
+						showIntro
+							? "space-y-6 p-6 md:p-10"
+							: "grid gap-10 p-6 md:grid-cols-[minmax(0,260px)_1fr] md:p-10"
+					}
+				>
+					<motion.div
+						layout
+						className={showIntro ? "space-y-4 max-w-xl mx-auto" : "space-y-3 md:sticky md:top-10"}
+					>
+						{pricingCategories.map((category) => {
+							const isActive = category.id === activeCategoryId;
+
+							return (
+								<motion.button
+									layout
+									key={category.id}
+									type="button"
+									onClick={() => setActiveCategoryId(category.id)}
+									className={`w-full rounded-2xl border px-5 py-4 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+										isActive
+											? "border-primary bg-primary/10 shadow-md"
+											: "border-border/60 bg-background/60 hover:border-primary/50"
+									}`}
+									whileHover={{ y: -2 }}
+									whileTap={{ y: 0 }}
+								>
+									<div className="flex items-center justify-between gap-4">
+										<div>
+											<h3 className="text-base font-semibold">
+												{category.title}
+											</h3>
+											<p className="mt-2 text-sm text-muted-foreground">
+												{category.description}
+											</p>
+										</div>
+										<span className="shrink-0 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+											{isActive ? "Selected" : showIntro ? "Explore" : "View"}
+										</span>
+									</div>
+								</motion.button>
+							);
+						})}
+					</motion.div>
+
+					<AnimatePresence mode="wait">
+						{activeCategory ? (
+							<motion.div
+								key={activeCategory.id}
+								layout
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: 12 }}
+								transition={{ duration: 0.3 }}
+								className="grid gap-8 lg:grid-cols-[minmax(0,320px)_1fr]"
+							>
+								<motion.div layout className="space-y-6">
+									<div>
+										<p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+											Monthly plans
+										</p>
+										<h3 className="mt-2 text-2xl font-semibold">
+											{activeCategory.title}
+										</h3>
+										<p className="mt-2 text-sm text-muted-foreground">
+											{activeCategory.description}
+										</p>
+									</div>
+
+									<div className="space-y-4">
+										{activeCategory.plans.map((plan) => {
+											const isSelected = plan.id === activePlanId;
+
+											return (
+												<motion.button
+													layout
+													key={plan.id}
+													type="button"
+													onClick={() => setActivePlanId(plan.id)}
+													className={`w-full rounded-2xl border px-5 py-4 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+														isSelected
+															? "border-primary bg-primary/10 shadow-sm"
+															: "border-border/60 bg-background hover:border-primary/40"
+														}`}
+													whileHover={{ y: -2 }}
+													whileTap={{ y: 0 }}
+												>
+													<div className="flex items-start justify-between gap-4">
+														<div>
+															<p className="text-base font-semibold">
+																{plan.name}
+															</p>
+															<p className="mt-2 text-sm text-muted-foreground">
+																{plan.tagline}
+															</p>
+														</div>
+														<span className="shrink-0 text-sm font-medium text-primary">
+															{plan.price}
+														</span>
+													</div>
+
+													<AnimatePresence initial={false}>
+														{isSelected ? (
+															<motion.ul
+																layout
+																initial={{ opacity: 0, height: 0 }}
+																animate={{ opacity: 1, height: "auto" }}
+																exit={{ opacity: 0, height: 0 }}
+																transition={{ duration: 0.2 }}
+																className="mt-4 space-y-2 text-sm text-muted-foreground"
+															>
+																{plan.features.map((feature) => (
+																	<li key={feature} className="flex items-start gap-2">
+																		<Check className="mt-0.5 size-4 text-primary" />
+																		<span>{feature}</span>
+																	</li>
+																))}
+															</motion.ul>
+														) : null}
+													</AnimatePresence>
+												</motion.button>
+											);
+										})}
+								</div>
+
+								<div className="pt-2">
+									<Button asChild size="lg">
+										<Link href="#contact">Talk with an advisor</Link>
+									</Button>
+									<p className="mt-2 text-xs text-muted-foreground">
+										We tailor the {activePlan?.name ?? "plan"} to your household goals.
+									</p>
+								</div>
+							</motion.div>
+
+							<motion.div
+								layout
+								className="rounded-3xl border border-dashed border-primary/20 bg-primary/5 p-6 lg:p-8"
+							>
+								<p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+									Core benefits
+								</p>
+								<h4 className="mt-3 text-xl font-semibold">
+									Included with {activeCategory.title}
+								</h4>
+								<ul className="mt-6 space-y-4">
+									{activeCategory.benefits.map((benefit) => (
+										<motion.li
+											layout
+											key={benefit}
+											className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground"
+										>
+											<Check className="mt-0.5 size-4 text-primary" />
+											<span>{benefit}</span>
+										</motion.li>
+									))}
+								</ul>
+							</motion.div>
+						</motion.div>
+					) : null}
+				</AnimatePresence>
+			</motion.div>
+		</motion.div>
+	</div>
+	);
+}
+
+const pricings = [<Pricing1 />, <Pricing2 />, <Pricing3 />];
 
 export default function Pricing() {
 	const [switcher, setSwitcher] = useState(0);
@@ -452,7 +773,7 @@ export default function Pricing() {
 				Switch
 			</Button>
 			<div className="relative py-16 md:py-32">
-				<div className="mx-auto max-w-5xl px-6">
+				<div className="mx-auto max-w-7xl px-6">
 					<div className="mx-auto max-w-2xl text-center">
 						<h2 className="text-foreground text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mt-5">
 							Start managing your company smarter today
