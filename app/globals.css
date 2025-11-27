@@ -85,7 +85,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
+  --primary: #0e2b7f;
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -110,6 +110,29 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* Company Colors */
+  --primary-dark-10: #0d2772;
+  --primary-dark-20: #0b2266;
+  --primary-dark-30: #0a1e59;
+  --primary-dark-40: #081a4c;
+  --primary-dark-50: #071640;
+  --primary-dark-60: #061133;
+  --primary-dark-70: #040d26;
+  --primary-dark-80: #030919;
+  --primary-dark-90: #01040d;
+  --primary-dark-100: #000;
+
+  --primary-light-10: #26408c;
+  --primary-light-20: #3e5599;
+  --primary-light-30: #566ba5;
+  --primary-light-40: #6e80b2;
+  --primary-light-50: #8795bf;
+  --primary-light-60: #9faacc;
+  --primary-light-70: #b7bfd9;
+  --primary-light-80: #cfd5e5;
+  --primary-light-90: #e7eaf2;
+  --primary-light-100: #fff;
 }
 
 @layer base {
