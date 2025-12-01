@@ -41,7 +41,7 @@ const investmentPhilosophyData = [
 
 export default function InvestmentPhilosophy() {
 	return (
-		<section className="w-full py-[120px] px-[80px] bg-[#000728]">
+		<section className="w-full py-[120px] px-[80px]">
 			<div className="max-w-7xl mx-auto grid grid-cols-3 gap-[80px]">
 				<div className="flex flex-col gap-[16px] col-span-1">
 					<h6 className="text-[20px] leading-[32px] text-white">

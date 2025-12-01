@@ -10,7 +10,7 @@ const founderDetails = {
 };
 export default function MeetTheFounder() {
 	return (
-		<section className="w-full bg-[#000728] py-[112px] px-[80px]">
+		<section className="w-full py-[112px] px-[80px]">
 			<div className="max-w-[848px] mx-auto flex flex-col gap-[80px]">
 				<div className="flex flex-col gap-[16px]">
 					<h2 className="text-[40px] leading-[48px] text-white">
@@ -69,7 +69,6 @@ export default function MeetTheFounder() {
 							{founderDetails.credentials.map(
 								(credential, index) => (
 									<li>
-                                        
 										<p
 											key={index}
 											className="text-[16px] leading-[24px] text-white"

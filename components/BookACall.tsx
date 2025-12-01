@@ -9,7 +9,7 @@ const bookACallData = {
 
 export default function BookACall() {
 	return (
-		<section className="w-full bg-[#000728] py-[112px] px-[80px]">
+		<section className="w-full py-[112px] px-[80px]">
 			<div className="max-w-2xl mx-auto flex flex-col gap-[32px]">
 				<div className="flex flex-col justify-center items-center text-center gap-[24px]">
 					<h2 className="text-[40px] leading-[48px] text-white">
