@@ -34,7 +34,7 @@ export default function HowMagnusHathawayChangesThis() {
 	return (
 		<section className="w-full py-[120px] px-[80px] bg-[#000728]">
 			<div className="max-w-7xl mx-auto flex flex-col gap-[80px]">
-				<h2 className="text-[40px] leading-[48px] text-white text-center max-w-2xl mx-auto">
+				<h2 className="text-[48px] leading-[64px] text-white text-center max-w-xl mx-auto">
 					How Magnus Hathaway Changes This
 				</h2>
 
