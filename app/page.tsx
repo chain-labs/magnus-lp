@@ -1,6 +1,7 @@
 import BookACall from "@/components/BookACall";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import HighestQualityResearchReadyBeforeTheMarketOpens from "@/components/HighestQualityResearchReadyBeforeTheMarketOpens";
 import InvestmentPhilosophy from "@/components/InvestmentPhilosophy";
 import MeetTheFounder from "@/components/MeetTheFounder";
 import OurTrackRecord from "@/components/OurTrackRecord";
@@ -12,6 +13,7 @@ export default function Home() {
 		<>
 			<YoureStuckInAsystemDesignedToWorkAgainstYou />
 			<InvestmentPhilosophy />
+			<HighestQualityResearchReadyBeforeTheMarketOpens />
 			<OurTrackRecord />
 			<WhatOurClientsSay />
 			<FAQ />
