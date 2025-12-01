@@ -2,6 +2,7 @@ import BookACall from "@/components/BookACall";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import HighestQualityResearchReadyBeforeTheMarketOpens from "@/components/HighestQualityResearchReadyBeforeTheMarketOpens";
+import HowMagnusHathawayChangesThis from "@/components/HowMagnusHathawayChangesThis";
 import InvestmentPhilosophy from "@/components/InvestmentPhilosophy";
 import MeetTheFounder from "@/components/MeetTheFounder";
 import OurTrackRecord from "@/components/OurTrackRecord";
@@ -11,6 +12,7 @@ import YoureStuckInAsystemDesignedToWorkAgainstYou from "@/components/YoureStuck
 export default function Home() {
 	return (
 		<>
+			<HowMagnusHathawayChangesThis />
 			<YoureStuckInAsystemDesignedToWorkAgainstYou />
 			<InvestmentPhilosophy />
 			<HighestQualityResearchReadyBeforeTheMarketOpens />
