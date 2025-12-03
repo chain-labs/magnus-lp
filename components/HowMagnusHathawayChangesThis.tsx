@@ -7,8 +7,8 @@ const howMagnusHathawayChangesThisData = [
 		title: "You get expert research. Clearly explained.",
 		description:
 			"Every stock recommendation comes with a detailed research report. Not a hot tip. Not a chart pattern. Real analysis. Real reasoning. Real clarity on why we think this stock matters. You understand the business. You understand the valuation. You understand what could go wrong.",
-		image: "/images/how-magnus-hathaway-changes-this/1.png",
-		imageDirection: "right",
+		image: "/assets/section/howMagnusHathawayChangesThis/1.png",
+		imageDirection: "left",
 	},
 	{
 		id: "item-2",
@@ -16,8 +16,8 @@ const howMagnusHathawayChangesThisData = [
 		title: "You get what HNI investors have always had.",
 		description:
 			"Just like discount brokers democratized trading, Magnus Hathaway democratizes quality investment advice.  Stock recommendations you can act on. Clear reasoning behind every pick. No conflicts. No pressure to buy. You stay in control. You make the final call.",
-		image: "/images/how-magnus-hathaway-changes-this/2.png",
-		imageDirection: "left",
+		image: "/assets/section/howMagnusHathawayChangesThis/2.png",
+		imageDirection: "right",
 	},
 	{
 		id: "item-3",
@@ -25,23 +25,23 @@ const howMagnusHathawayChangesThisData = [
 		title: "You get regular updates. Not daily noise.",
 		description:
 			"Quarterly updates on each holding. We explain what changed. We tell you when to hold and when to exit. You're not left wondering if this is still a good idea. Over time, you learn to spot opportunities yourself. You learn to think like an investor. Eventually, you won't need to rely on us. You'll have the confidence to invest on your own.",
-		image: "/images/how-magnus-hathaway-changes-this/3.png",
-		imageDirection: "right",
+		image: "/assets/section/howMagnusHathawayChangesThis/3.png",
+		imageDirection: "left",
 	},
 ];
 
 export default function HowMagnusHathawayChangesThis() {
 	return (
-		<section className="w-full py-[120px] px-[80px] bg-[#000728]">
+		<section className="w-full py-[120px] px-[80px]">
 			<div className="max-w-7xl mx-auto flex flex-col gap-[80px]">
-				<h2 className="text-[48px] leading-[64px] text-white text-center max-w-xl mx-auto">
+				<h2 className="text-[48px] leading-[64px] text-[#040D26] text-center max-w-xl mx-auto">
 					How Magnus Hathaway Changes This
 				</h2>
 
 				{howMagnusHathawayChangesThisData.map((item) => (
-					<div className="flex rounded-[12px] overflow-hidden bg-white">
+					<div className="flex rounded-[12px] overflow-hidden bg-[#F4F6F8] border border-[#37416C1A]">
 						<div
-							className={`p-[48px] flex flex-col justify-center items-start w-[50%] ${
+							className={`p-[48px] flex flex-col justify-center items-start h-[640px] w-[640px] ${
 								item.imageDirection === "right"
 									? "order-2"
 									: "order-1"
@@ -58,7 +58,7 @@ export default function HowMagnusHathawayChangesThis() {
 							</p>
 						</div>
 						<div
-							className={`h-full w-[50%] ${
+							className={`h-[640px] w-[640px] ${
 								item.imageDirection === "right"
 									? "order-1"
 									: "order-2"

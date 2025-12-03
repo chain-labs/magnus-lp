@@ -24,9 +24,8 @@ export default function Home() {
 			>
 				<Hero />
 			</BackgroundBlobsAdder>
-			<Pricing />
-			<HowMagnusHathawayChangesThis />
 			<YoureStuckInAsystemDesignedToWorkAgainstYou />
+			<HowMagnusHathawayChangesThis />
 			<BackgroundBlobsAdder
 				blobs={[
 					"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
@@ -37,8 +36,17 @@ export default function Home() {
 				<InvestmentPhilosophy />
 			</BackgroundBlobsAdder>
 			<HighestQualityResearchReadyBeforeTheMarketOpens />
-			<OurTrackRecord />
-			<WhatOurClientsSay />
+			<Pricing />
+			<BackgroundBlobsAdder
+				blobs={[
+					"absolute bottom-[10%] left-[80%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.29]",
+					"absolute bottom-[10%] right-[85%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px] opacity-[0.29]",
+				]}
+				parentClassName="bg-[#000728]"
+			>
+				<OurTrackRecord />
+				<WhatOurClientsSay />
+			</BackgroundBlobsAdder>
 			<FAQ />
 			<BackgroundBlobsAdder
 				blobs={[
