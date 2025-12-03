@@ -67,8 +67,8 @@ export default function HowMagnusHathawayChangesThis() {
 							<Image
 								src={item.image}
 								alt={item.title}
-								width={500}
-								height={500}
+								width={640}
+								height={640}
                                 className="w-full h-full object-cover"
 							/>
 						</div>
