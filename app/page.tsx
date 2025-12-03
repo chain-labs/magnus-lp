@@ -8,6 +8,7 @@ import HowMagnusHathawayChangesThis from "@/components/HowMagnusHathawayChangesT
 import InvestmentPhilosophy from "@/components/InvestmentPhilosophy";
 import MeetTheFounder from "@/components/MeetTheFounder";
 import OurTrackRecord from "@/components/OurTrackRecord";
+import Pricing from "@/components/Pricing";
 import WhatOurClientsSay from "@/components/WhatOurClientsSay";
 import YoureStuckInAsystemDesignedToWorkAgainstYou from "@/components/YoureStuckInAsystemDesignedToWorkAgainstYou";
 
@@ -23,6 +24,7 @@ export default function Home() {
 			>
 				<Hero />
 			</BackgroundBlobsAdder>
+			<Pricing />
 			<HowMagnusHathawayChangesThis />
 			<YoureStuckInAsystemDesignedToWorkAgainstYou />
 			<BackgroundBlobsAdder
