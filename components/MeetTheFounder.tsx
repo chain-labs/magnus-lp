@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const founderDetails = {
 	name: "Alireza Azar",
 	position: "Founder & SEBI Registered Research Analyst",
@@ -50,7 +52,19 @@ export default function MeetTheFounder() {
 					</p>
 				</div>
 				<div className="grid grid-cols-5 gap-[32px]">
-					<div className="w-full h-full rounded-[12px] bg-[#DBDBDB] col-span-2 row-span-[1/3]"></div>
+					<div
+						style={{
+							mixBlendMode: "luminosity",
+							backgroundImage:
+								"url(/assets/section/founder/ali.png)",
+							backgroundSize: "cover",
+							backgroundPosition: "center",
+							backgroundRepeat: "no-repeat",
+							backgroundBlendMode: "luminosity",
+						}}
+						className="w-full h-full rounded-[12px] bg-[#040D26] col-span-2 row-span-[1/3]"
+					></div>
+
 					<div className="flex flex-col gap-[32px] col-span-3">
 						<div className="flex flex-col gap-[24px]">
 							<div className="flex flex-col">

@@ -6,9 +6,9 @@ export default function Header() {
 		<header className="w-full h-fit z-50 fixed top-0 left-1/2 -translate-x-1/2 flex items-center justify-between max-w-7xl mx-auto mt-6 rounded-full bg-[#FFFFFF1A] overflow-hidden px-[16px] py-[10px]">
 			{/* Logo and Brand Name */}
 			<Link href="/" className="flex items-center gap-[12px] text-white">
-				<div className="bg-white/10 border border-white/30 rounded-full w-[40px] h-[40px] flex items-center justify-center">
+				<div className="rounded-full w-[40px] h-[40px] flex items-center justify-center">
 					<Image
-						src="/assets/logo/logo-mark.svg"
+						src="/assets/logo/logo.png"
 						alt="Magnus Hathaway Logo"
 						width={40}
 						height={40}

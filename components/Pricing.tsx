@@ -111,7 +111,7 @@ export default function Pricing() {
 							<div className="p-[32px] flex-1">
 								{/* Plan Title and Description */}
 								<div className="mb-6">
-									<h3 className="text-[20px] leading-[32px] font-bold text-[#040D26] mb-[4px]">
+									<h3 className="text-[20px] leading-[32px] font-semibold text-[#040D26] mb-[4px]">
 										{plan.title}
 									</h3>
 									<p className="text-sm text-[#040D26] mb-6 opacity-60">
@@ -144,9 +144,10 @@ export default function Pricing() {
 									<button
 										style={{
 											background: plan.primary
-												? `linear-gradient(0deg, #00177C, #00177C),
-                                                radial-gradient(97.46% 1872.79% at 2.54% 70.83%, #A12FFF 0%, rgba(0, 22, 118, 0) 100%),
-                                                radial-gradient(169.02% 444.79% at 77.54% -103.13%, #2FFCFF 0%, rgba(0, 22, 118, 0) 100%)`
+												? `radial-gradient(97.46% 172.79% at 2.54% 70.83%, #A12FFF 0%, rgba(0, 22, 118, 0.5) 100%),
+											    radial-gradient(169.02% 564.79% at 77.54% -103.13%, #2FFCFF 0%, rgba(0, 22, 118, 0.5) 100%),
+												#00177C
+											    `
 												: "#00177C",
 										}}
 										className={cn(

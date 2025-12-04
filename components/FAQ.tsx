@@ -84,7 +84,7 @@ export default function FAQ() {
 					<Accordion type="single" collapsible>
 						{faqData.map((item) => (
 							<AccordionItem key={item.id} value={item.id}>
-								<AccordionTrigger className="cursor-pointer text-base hover:no-underline text-[#030919] py-[20px]">
+								<AccordionTrigger className="cursor-pointer text-base font-bold hover:no-underline text-[#030919] py-[20px]">
 									{item.question}
 								</AccordionTrigger>
 								<AccordionContent>

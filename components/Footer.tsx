@@ -8,7 +8,7 @@ import Image from "next/image";
 const footerData = {
 	main: {
 		company: {
-			logoSrc: "/logo.png",
+			logoSrc: "/assets/logo/logo.png",
 			title: "Magnus Hathaway",
 		},
 		socialLinks: [

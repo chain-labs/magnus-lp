@@ -63,8 +63,10 @@ export default function Home() {
 			<FAQ />
 			<BackgroundBlobsAdder
 				blobs={[
-					"absolute bottom-[10%] left-[80%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.29]",
-					"absolute bottom-[10%] right-[85%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px] opacity-[0.29]",
+					"absolute top-[10%] left-[60%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
+					"absolute top-[10%] right-[65%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
+					"absolute bottom-[10%] left-[80%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-[339.1px] opacity-[0.49]",
+					"absolute bottom-[10%] right-[85%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-[339.1px] opacity-[0.49]",
 				]}
 				parentClassName="bg-[#000728]"
 			>
