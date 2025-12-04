@@ -32,14 +32,25 @@ const howMagnusHathawayChangesThisData = [
 
 export default function HowMagnusHathawayChangesThis() {
 	return (
-		<section className="w-full py-[120px] px-[80px]">
-			<div className="max-w-7xl mx-auto flex flex-col gap-[80px]">
-				<h2 className="text-[48px] leading-[64px] text-[#040D26] text-center max-w-xl mx-auto">
+		<section className="w-full py-[120px] px-[80px] z-0">
+			<div className="absolute top-0 left-0 h-[821.818359375px] w-full z-0">
+				<Image
+					src="/assets/grids/simpleGrid.svg"
+					alt="simple grid"
+					width={1000}
+					height={1000}
+				/>
+			</div>
+			<div className="max-w-7xl mx-auto flex flex-col gap-[80px] z-10">
+				<h2 className="text-[48px] leading-[64px] text-[#010943] text-center max-w-xl mx-auto">
 					How Magnus Hathaway Changes This
 				</h2>
 
 				{howMagnusHathawayChangesThisData.map((item) => (
-					<div className="flex rounded-[12px] overflow-hidden bg-[#F4F6F8] border border-[#37416C1A]">
+					<div
+						className="flex rounded-[12px] overflow-hidden bg-[#F4F6F8] border border-[#37416C1A]"
+						key={item.id}
+					>
 						<div
 							className={`p-[48px] flex flex-col justify-center items-start h-[640px] w-[640px] ${
 								item.imageDirection === "right"
@@ -69,7 +80,7 @@ export default function HowMagnusHathawayChangesThis() {
 								alt={item.title}
 								width={640}
 								height={640}
-                                className="w-full h-full object-cover"
+								className="w-full h-full object-cover"
 							/>
 						</div>
 					</div>

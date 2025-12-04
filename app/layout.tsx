@@ -14,10 +14,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head>
-				<link
-					href="https://fonts.cdnfonts.com/css/helvetica-neue-5"
-					rel="stylesheet"
-				></link>
+			<link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
+                </link>
 			</head>
 			<body className="antialiased">{children}</body>
 		</html>

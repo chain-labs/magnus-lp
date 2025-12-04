@@ -2,10 +2,12 @@ import BackgroundBlobsAdder from "@/components/BackgroundBlobsAdder";
 import BookACall from "@/components/BookACall";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import HighestQualityResearchReadyBeforeTheMarketOpens from "@/components/HighestQualityResearchReadyBeforeTheMarketOpens";
 import HowMagnusHathawayChangesThis from "@/components/HowMagnusHathawayChangesThis";
 import InvestmentPhilosophy from "@/components/InvestmentPhilosophy";
+import InvestorTrap from "@/components/InvestorTrap";
 import MeetTheFounder from "@/components/MeetTheFounder";
 import OurTrackRecord from "@/components/OurTrackRecord";
 import Pricing from "@/components/Pricing";
@@ -15,6 +17,7 @@ import YoureStuckInAsystemDesignedToWorkAgainstYou from "@/components/YoureStuck
 export default function Home() {
 	return (
 		<>
+			<Header />
 			<BackgroundBlobsAdder
 				blobs={[
 					"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
@@ -24,7 +27,17 @@ export default function Home() {
 			>
 				<Hero />
 			</BackgroundBlobsAdder>
-			<YoureStuckInAsystemDesignedToWorkAgainstYou />
+			<BackgroundBlobsAdder
+				blobs={[
+					"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
+					"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
+				]}
+				parentClassName="bg-[#000728]"
+			>
+				<YoureStuckInAsystemDesignedToWorkAgainstYou />
+				<InvestorTrap />
+			</BackgroundBlobsAdder>
+
 			<HowMagnusHathawayChangesThis />
 			<BackgroundBlobsAdder
 				blobs={[
