@@ -72,8 +72,11 @@ export default function WhatOurClientsSay() {
 			return;
 		}
 
-		setCount(api.scrollSnapList().length);
-		setCurrent(api.selectedScrollSnap() + 1);
+		const snapListLength = api.scrollSnapList().length;
+		requestAnimationFrame(() => {
+			setCount(snapListLength);
+			setCurrent(api.selectedScrollSnap() + 1);
+		});
 
 		api.on("select", () => {
 			setCurrent(api.selectedScrollSnap() + 1);

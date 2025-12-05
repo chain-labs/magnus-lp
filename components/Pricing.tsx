@@ -154,8 +154,11 @@ export default function Pricing() {
 			return;
 		}
 
-		setCount(api.scrollSnapList().length);
-		setCurrent(api.selectedScrollSnap() + 1);
+		const snapList = api.scrollSnapList();
+		setTimeout(() => {
+			setCount(snapList.length);
+			setCurrent(api.selectedScrollSnap() + 1);
+		}, 0);
 
 		api.on("select", () => {
 			setCurrent(api.selectedScrollSnap() + 1);

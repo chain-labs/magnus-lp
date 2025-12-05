@@ -22,14 +22,15 @@ export default function OurTrackRecord() {
 		<section className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="max-w-7xl mx-auto">
 				<div className="grid  grid-cols-1 md:grid-cols-2 gap-[24px] md:gap-[80px]">
-                    <div className="w-full h-full min-h-[376px] bg-[#67676733] rounded-[12px]"></div>
+					<div className="w-full h-full min-h-[376px] bg-[#67676733] rounded-[12px]"></div>
 					<div className="flex flex-col gap-[24px]">
 						<div className="flex flex-col gap-[8px]">
 							<h2 className="text-[40px] leading-[48px] text-white">
 								Our track record
 							</h2>
 							<p className="text-[16px] leading-[24px] text-white">
-								We don't promise returns. We promise clarity.
+								We don&apos;t promise returns. We promise
+								clarity.
 							</p>
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
