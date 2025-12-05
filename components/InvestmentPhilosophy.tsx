@@ -35,7 +35,6 @@ const investmentPhilosophyData = [
 				viewBox="0 0 48 48"
 				xmlns="http://www.w3.org/2000/svg"
 			>
-				<rect width="48" height="48" />
 				<path d="M25.5 30H22.5V36H25.5V30Z" fill="white" />
 				<path d="M33 27H30V36H33V27Z" fill="white" />
 				<path d="M18 21H15V36H18V21Z" fill="white" />

@@ -19,7 +19,7 @@ const trackRecordData = [
 
 export default function OurTrackRecord() {
 	return (
-		<section className="w-full bg-[#000728] py-[112px] px-[80px]">
+		<section className="w-full py-[112px] px-[80px]">
 			<div className="max-w-7xl mx-auto">
 				<div className="grid grid-cols-2 gap-[80px]">
                     <div className="w-full h-full bg-[#67676733] rounded-[12px]"></div>

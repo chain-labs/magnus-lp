@@ -81,7 +81,7 @@ export default function WhatOurClientsSay() {
 	}, [api]);
 
 	return (
-		<section className="w-full bg-[#000728] py-[112px] px-[80px]">
+		<section className="w-full py-[112px] px-[80px]">
 			<div className="flex flex-col gap-[80px] max-w-7xl mx-auto">
 				<h2 className="text-[40px] leading-[48px] text-white">
 					What Our Clients Say
