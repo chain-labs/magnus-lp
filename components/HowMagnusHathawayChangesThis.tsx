@@ -32,7 +32,7 @@ const howMagnusHathawayChangesThisData = [
 
 export default function HowMagnusHathawayChangesThis() {
 	return (
-		<section className="w-full py-[120px] px-[80px] z-0">
+		<section className="relative w-full py-[120px] px-[80px] z-0">
 			<div className="absolute top-0 left-0 h-[821.818359375px] w-full z-0">
 				<Image
 					src="/assets/grids/simpleGrid.svg"
