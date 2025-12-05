@@ -1,83 +1,208 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
+import { useRef } from "react";
 
-const investmentMistakes = [
+// Card pairs - each pair appears together (left + right)
+const cardPairs = [
 	{
-		id: "emotional-trading",
-		title: "Emotional Trading",
-		subtitle: "(Fear & Greed)",
-		position: "top-left",
-		lineStart: { x: 0, y: 0 },
-		lineEnd: { x: 50, y: 50 },
+		id: "pair-1",
+		left: {
+			title: "Emotional Trading",
+			subtitle: "(Fear & Greed)",
+		},
+		right: {
+			title: "Hero Mentality",
+			subtitle: "(Following the crowd)",
+		},
+		// Vertical position on the funnel (percentage from top)
+		topPosition: "20%",
 	},
 	{
-		id: "hero-mentality",
-		title: "Hero Mentality",
-		subtitle: "(Following the crowd)",
-		position: "top-right",
-		lineStart: { x: 100, y: 0 },
-		lineEnd: { x: 50, y: 50 },
+		id: "pair-2",
+		left: {
+			title: "Timing the Market",
+			subtitle: "(Buying high, selling low)",
+		},
+		right: {
+			title: "Lack of Diversification",
+			subtitle: "(Only investing on similar stocks)",
+		},
+		topPosition: "50%",
 	},
 	{
-		id: "timing-market",
-		title: "Timing the Market",
-		subtitle: "(Buying high, selling low)",
-		position: "middle-left",
-		lineStart: { x: 0, y: 50 },
-		lineEnd: { x: 40, y: 60 },
-	},
-	{
-		id: "lack-diversification",
-		title: "Lack of Diversification",
-		subtitle: "(Only investing on similar stocks)",
-		position: "middle-right",
-		lineStart: { x: 100, y: 50 },
-		lineEnd: { x: 60, y: 60 },
-	},
-	{
-		id: "chasing-performance",
-		title: "Chasing Past Performance",
-		subtitle: "(Assuming old ways always works)",
-		position: "bottom-left",
-		lineStart: { x: 0, y: 100 },
-		lineEnd: { x: 35, y: 75 },
-	},
-	{
-		id: "ignoring-fees",
-		title: "Ignoring Fees and Expenses",
-		subtitle: "(Buying high, selling low)",
-		position: "bottom-right",
-		lineStart: { x: 100, y: 100 },
-		lineEnd: { x: 65, y: 75 },
+		id: "pair-3",
+		left: {
+			title: "Chasing Past Performance",
+			subtitle: "(Assuming old ways always works)",
+		},
+		right: {
+			title: "Ignoring Fees and Expenses",
+			subtitle: "(Buying high, selling low)",
+		},
+		topPosition: "80%",
 	},
 ];
 
-export default function InvestorTrap() {
+// Card component with connecting line
+function TrapCard({
+	title,
+	subtitle,
+	side,
+	style,
+}: {
+	title: string;
+	subtitle: string;
+	side: "left" | "right";
+	style?: React.CSSProperties;
+}) {
 	return (
-		<section className="w-full py-[120px] px-[80px]">
-			<div className="max-w-7xl mx-auto">
-				<motion.h2
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
-					className="text-[40px] leading-[48px] text-white mb-[80px] text-center"
-				>
-					Investor Trap
-				</motion.h2>
+		<motion.div
+			className={`flex items-center gap-3 ${
+				side === "left" ? "flex-row" : "flex-row-reverse"
+			}`}
+			style={style}
+		>
+			{/* Dashed line connecting to funnel */}
+			<div className="w-[50px] lg:w-[80px] border-t-2 border-dashed border-[#4A6CF7]/60" />
+			{/* Card content */}
+			<div
+				className={`bg-[#1a1f35]/90 backdrop-blur-sm border border-[#2a3050] rounded-lg px-4 py-3 min-w-[200px] ${
+					side === "left" ? "text-left" : "text-right"
+				}`}
+			>
+				<h3 className="text-white text-base font-semibold">{title}</h3>
+				<p className="text-gray-400 text-sm mt-1">{subtitle}</p>
+			</div>
+		</motion.div>
+	);
+}
 
-				<div className="relative w-full min-h-[1000px] flex items-center justify-center">
-					{/* Central Funnel SVG */}
+export default function InvestorTrap() {
+	const sectionRef = useRef<HTMLElement>(null);
 
-					<Image
-						src="/assets/section/investorTrap/trap.svg"
-						alt="Debt Trap Funnel"
-						width={548}
-						height={906}
-						className="w-auto h-auto"
-					/>
+	// Track scroll progress within this section
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ["start start", "end end"],
+	});
+
+	// Pair 1 animations (0 - 0.33)
+	const pair1Opacity = useTransform(
+		scrollYProgress,
+		[0.05, 0.15, 0.25, 0.33],
+		[0, 1, 1, 0]
+	);
+	const pair1Y = useTransform(
+		scrollYProgress,
+		[0.05, 0.15, 0.25, 0.33],
+		[50, 0, 0, -50]
+	);
+
+	// Pair 2 animations (0.33 - 0.66)
+	const pair2Opacity = useTransform(
+		scrollYProgress,
+		[0.38, 0.48, 0.58, 0.66],
+		[0, 1, 1, 0]
+	);
+	const pair2Y = useTransform(
+		scrollYProgress,
+		[0.38, 0.48, 0.58, 0.66],
+		[50, 0, 0, -50]
+	);
+
+	// Pair 3 animations (0.66 - 1.0)
+	const pair3Opacity = useTransform(
+		scrollYProgress,
+		[0.71, 0.81, 0.91, 0.99],
+		[0, 1, 1, 0]
+	);
+	const pair3Y = useTransform(
+		scrollYProgress,
+		[0.71, 0.81, 0.91, 0.99],
+		[50, 0, 0, -50]
+	);
+
+	const pairAnimations = [
+		{ opacity: pair1Opacity, y: pair1Y },
+		{ opacity: pair2Opacity, y: pair2Y },
+		{ opacity: pair3Opacity, y: pair3Y },
+	];
+
+	return (
+		<section ref={sectionRef} className="w-full h-[400vh] relative">
+			{/* Sticky wrapper that pins everything in viewport */}
+			<div className="sticky top-0 left-0 w-full h-screen overflow-hidden">
+				{/* Background container for centering */}
+				<div className="absolute inset-0 flex flex-col items-center justify-center">
+					{/* Title at the top */}
+					<motion.h2
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.6 }}
+						className="absolute top-[5%] text-[32px] lg:text-[40px] leading-tight text-white text-center px-4 z-20"
+					>
+						The retail investor&apos;s trap.
+						<br /> And how we fix it.
+					</motion.h2>
+
+					{/* Funnel image - absolutely centered */}
+					<div className="relative z-10">
+						<Image
+							src="/assets/section/investorTrap/trap.svg"
+							alt="Debt Trap Funnel"
+							width={548}
+							height={906}
+							className="h-[70vh] w-auto max-h-[700px] object-contain"
+							priority
+						/>
+					</div>
+
+					{/* Left side cards */}
+					{cardPairs.map((pair, index) => (
+						<div
+							key={`left-${pair.id}`}
+							className="absolute z-20"
+							style={{
+								top: pair.topPosition,
+								right: "calc(50% + 140px)",
+							}}
+						>
+							<TrapCard
+								title={pair.left.title}
+								subtitle={pair.left.subtitle}
+								side="left"
+								style={{
+									opacity: pairAnimations[index].opacity as any,
+									y: pairAnimations[index].y as any,
+								}}
+							/>
+						</div>
+					))}
+
+					{/* Right side cards */}
+					{cardPairs.map((pair, index) => (
+						<div
+							key={`right-${pair.id}`}
+							className="absolute z-20"
+							style={{
+								top: pair.topPosition,
+								left: "calc(50% + 140px)",
+							}}
+						>
+							<TrapCard
+								title={pair.right.title}
+								subtitle={pair.right.subtitle}
+								side="right"
+								style={{
+									opacity: pairAnimations[index].opacity as any,
+									y: pairAnimations[index].y as any,
+								}}
+							/>
+						</div>
+					))}
 				</div>
 			</div>
 		</section>

@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
+
+const helvetica = localFont({
+	src: "../public/assets/fonts/Helvetica.ttf",
+	variable: "--font-helvetica",
+});
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -13,11 +19,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<head>
-			<link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
-                </link>
-			</head>
-			<body className="antialiased">{children}</body>
+			<body className={`${helvetica.variable} antialiased`}>{children}</body>
 		</html>
 	);
 }
