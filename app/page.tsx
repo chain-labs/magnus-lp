@@ -32,20 +32,19 @@ export default function Home() {
 					<Hero />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
-			<BackgroundBlobsAdder
+			<SectionObserver theme="light">
+				<YoureStuckInAsystemDesignedToWorkAgainstYou />
+			</SectionObserver>
+			{/* <BackgroundBlobsAdder
 				blobs={[
 					"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
 					"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
 				]}
 				parentClassName="bg-[#000728]"
-			>
-				<SectionObserver theme="light">
-					<YoureStuckInAsystemDesignedToWorkAgainstYou />
-				</SectionObserver>
-				<SectionObserver theme="dark">
-					<InvestorTrap />
-				</SectionObserver>
-			</BackgroundBlobsAdder>
+			></BackgroundBlobsAdder> */}
+			<SectionObserver theme="dark" className="bg-[#000728]">
+				<InvestorTrap />
+			</SectionObserver>
 
 			<SectionObserver theme="light">
 				<HowMagnusHathawayChangesThis />
