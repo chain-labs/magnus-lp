@@ -19,9 +19,9 @@ const trackRecordData = [
 
 export default function OurTrackRecord() {
 	return (
-		<section className="w-full py-[112px] px-[80px]">
+		<section className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="max-w-7xl mx-auto">
-				<div className="grid grid-cols-2 gap-[80px]">
+				<div className="grid  grid-cols-1 md:grid-cols-2 gap-[80px]">
                     <div className="w-full h-full bg-[#67676733] rounded-[12px]"></div>
 					<div className="flex flex-col gap-[24px]">
 						<div className="flex flex-col gap-[8px]">
@@ -32,7 +32,7 @@ export default function OurTrackRecord() {
 								We don't promise returns. We promise clarity.
 							</p>
 						</div>
-						<div className="grid grid-cols-2 gap-[24px]">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
 							{trackRecordData.map((item, index) => (
 								<div
 									key={index}

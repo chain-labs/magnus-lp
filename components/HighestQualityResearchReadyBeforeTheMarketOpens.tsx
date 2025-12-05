@@ -102,13 +102,13 @@ const blurredRows = [
 export default function HighestQualityResearchReadyBeforeTheMarketOpens() {
 	const blurred = true;
 	return (
-		<section className="w-full py-[120px] px-[80px]">
+		<section className="w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px]">
 			<div className="max-w-7xl mx-auto flex flex-col gap-[80px]">
 				<div className="flex flex-col gap-[16px] text-center justify-center items-center max-w-3xl mx-auto">
-					<h2 className="text-[40px] leading-[48px] text-[#030919]">
+					<h2 className="text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-[#030919]">
 						Highest quality research, ready before the market opens
 					</h2>
-					<p className="text-[18px] leading-[28px] text-black opacity-60">
+					<p className="text-[16px] md:text-[18px] leading-[24px] md:leading-[28px] text-black opacity-60">
 						Curated calls across overnight, intraday, and positional
 						strategies. Unlock deeper analytics, price targets, and
 						premium playbooks tailored to your desk without the

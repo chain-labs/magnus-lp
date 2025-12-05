@@ -1,7 +1,13 @@
 "use client";
 
 import { useChat, type UIMessage } from "@ai-sdk/react";
-import { Mic, MicOff, Send, CircleCheck, MessageCircle } from "lucide-react";
+import {
+	Mic,
+	MicOff,
+	Send,
+	CircleCheck,
+	SlidersHorizontal,
+} from "lucide-react";
 import { InfiniteSlider } from "./motion-primitives/infinite-slider";
 import { useSpeechInput } from "@/hooks/useSpeechInput";
 import Image from "next/image";
@@ -54,7 +60,7 @@ export default function Hero() {
 	const isLoading = status === "streaming" || status === "submitted";
 
 	return (
-		<section className="w-full min-h-screen flex items-center justify-center py-[120px] max-md:px-[24px] max-md:py-[80px]">
+		<section className="w-full min-h-screen flex items-center justify-center py-[120px] pb-[40px] md:pb-[120px]">
 			<Image
 				src="/assets/section/hero/skewedGrid.svg"
 				alt="skewed grid"
@@ -62,15 +68,15 @@ export default function Hero() {
 				height={1000}
 				className="w-full h-[50%] max-h-[500px] absolute top-0 left-0 object-cover"
 			/>
-			<div className="w-full mx-auto flex flex-col items-center z-10">
-				<div className="w-full min-h-[70vh] flex flex-col justify-center items-center gap-[60px] z-10">
+			<div className="w-full flex flex-col items-center z-10">
+				<div className="w-full min-h-[70vh] flex flex-col justify-center items-center gap-[40px] md:gap-[60px] z-10 px-[20px] md:px-0">
 					{/* Headline */}
 					<div className="flex flex-col justify-center items-center gap-[20px]">
-						<h2 className="text-[24px] leading-[32px] text-white text-center max-w-2xl font-light tracking-wide">
+						<h2 className="text-[20px] md:text-[24px] leading-[32px] md:leading-[32px] max-md:text-[18px] max-md:leading-[24px] text-white text-center max-w-2xl font-light tracking-wide">
 							Stock Picking, Simplified
 						</h2>
-						<h1 className="text-[48px] leading-[64px] text-white text-center font-light tracking-wide">
-							HNIs get analysts. You get YouTube. <br /> that gap
+						<h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-white text-center font-light tracking-wide">
+							HNIs get analysts. You get YouTube. <br /> That gap
 							costs you.
 						</h1>
 					</div>
@@ -140,7 +146,7 @@ export default function Hero() {
 												? "Listening... speak now"
 												: "Ask your stock market queries..."
 										}
-										className={`w-full min-h-[80px] resize-none text-[15px] leading-relaxed focus:outline-none bg-transparent ${
+										className={`w-full min-h-[80px] max-md:min-h-[120px] resize-none text-[15px] leading-relaxed focus:outline-none bg-transparent ${
 											interimText
 												? "text-transparent caret-gray-700"
 												: "text-gray-700 placeholder:text-gray-400"
@@ -161,20 +167,28 @@ export default function Hero() {
 								{/* Toolbar */}
 								<div className="flex items-center justify-between px-[32px] py-[24px] pt-0">
 									{/* Left Side - Toggle */}
-									<span className="text-[14px] leading-[20px] text-[#010943] select-none flex items-center gap-2 bg-[#F1F2F9] rounded-[8px] px-[12px] py-[8px]">
-										Show relevant answers
-										<CircleCheck className="w-4 h-4 text-[#010943]" />
-									</span>
+									<div className="flex items-center">
+										<span className="hidden md:flex text-[14px] leading-[20px] text-[#010943] select-none items-center gap-2 bg-[#F1F2F9] rounded-[8px] px-[12px] py-[8px]">
+											Show relevant answers
+											<CircleCheck className="w-4 h-4 text-[#010943]" />
+										</span>
+										<button
+											type="button"
+											className="md:hidden p-2 -ml-2 text-[#010943]"
+										>
+											<SlidersHorizontal className="w-6 h-6" />
+										</button>
+									</div>
 
 									{/* Right Side - Action Buttons */}
-									<div className="flex items-center gap-2">
+									<div className="flex items-center gap-3">
 										{/* Microphone Button */}
 										{speechSupported && (
 											<button
 												type="button"
 												onClick={toggleListening}
 												className={`
-												p-2.5 rounded-lg transition-all duration-200
+												p-2 rounded-full transition-all duration-200
 												${
 													isListening
 														? "bg-red-100 hover:bg-red-200 ring-2 ring-red-400"
@@ -189,9 +203,9 @@ export default function Hero() {
 												disabled={isLoading}
 											>
 												{isListening ? (
-													<MicOff className="w-5 h-5 text-red-600" />
+													<MicOff className="w-6 h-6 text-red-600" />
 												) : (
-													<Mic className="w-5 h-5 text-[#010943]" />
+													<Mic className="w-6 h-6 text-[#010943]" />
 												)}
 											</button>
 										)}
@@ -203,11 +217,11 @@ export default function Hero() {
 												!fullText.trim() || isLoading
 											}
 											className={`
-											p-2.5 rounded-[8px] transition-all duration-200
+											p-3 rounded-[12px] transition-all duration-200 flex items-center justify-center
 											${
 												fullText.trim() && !isLoading
 													? "bg-[#00177C] hover:bg-[#001060] shadow-md hover:shadow-lg"
-													: "bg-[#00177C] opacity-60 cursor-not-allowed"
+													: "bg-[#00177C] opacity-100"
 											}
 										`}
 											aria-label="Send message"
@@ -226,8 +240,8 @@ export default function Hero() {
 				</div>
 
 				<div className="h-[50%] w-full flex flex-col gap-[32px]">
-					<h2 className="text-[20px] leading-[32px] text-white text-center">
-						check these frequently asked questions
+					<h2 className=" text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white text-center">
+						Check these frequently asked questions
 					</h2>
 					{/* frequently asked questions */}
 					<InfiniteSlider speedOnHover={1} gap={24}>
@@ -235,7 +249,7 @@ export default function Hero() {
 							{frequentlyAskedQuestions.map((item) => (
 								<div
 									key={item.id}
-									className="flex flex-col gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] h-[200px] px-[24px] py-[16px]"
+									className="flex flex-col gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] max-md:w-[280px] h-[200px] px-[24px] py-[16px]"
 								>
 									<svg
 										width="24"

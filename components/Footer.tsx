@@ -130,21 +130,21 @@ const footerData = {
 
 export default function Footer() {
 	return (
-		<footer className="w-full py-[80px]">
+		<footer className="w-full py-[80px] px-[20px]">
 			{/* Top Section - Dark Blue Background */}
-			<div className="w-full bg-[#000728] max-w-7xl mx-auto py-[32px] px-[108px] rounded-[24px] text-white">
-				<div className="w-full mx-auto flex flex-col gap-[24px]">
+			<div className="w-full bg-[#000728] max-w-7xl mx-auto py-[40px] md:py-[32px] px-[20px] md:px-[108px] rounded-[24px] text-white">
+				<div className="w-full mx-auto flex flex-col gap-[20px] md:gap-[24px]">
 					{/* Header with Logo, Company Name, and Social Icons */}
-					<div className="flex justify-between items-center mb-6">
+					<div className="flex flex-col md:flex-row justify-between items-center gap-[24px] md:mb-6">
 						<div className="flex items-center gap-[18px]">
 							<Image
 								src={footerData.main.company.logoSrc}
 								alt={footerData.main.company.title}
 								width={57}
 								height={57}
-								className="rounded-full"
+								className="rounded-full w-[45.15303039550781px] md:w-[57px] h-[45.15303039550781px] md:h-[57px] object-cover"
 							/>
-							<h1 className="text-[28.62px] leading-[45.79px] font-normal text-white">
+							<h1 className="text-[22.64px] md:text-[28.62px] leading-[36.22px] md:leading-[45.79px] font-normal text-white">
 								{footerData.main.company.title}
 							</h1>
 						</div>
@@ -166,7 +166,7 @@ export default function Footer() {
 					</div>
 
 					{/* Navigation Links - Two Rows */}
-					<div className="flex flex-wrap justify-center items-center gap-[16px] mb-6 border-y border-[#FFFFFF4D] p-[32px]">
+					<div className="flex flex-wrap justify-center items-center gap-[16px] md:mb-6 border-y border-[#FFFFFF4D] py-[16px] md:p-[32px]">
 						{footerData.main.disclosuresLinks.map((link, index) => (
 							<a
 								key={index}
@@ -190,15 +190,15 @@ export default function Footer() {
 			{/* Middle Section - White Background */}
 			<div className="w-full max-w-[1059px] mx-auto">
 				<div className="w-full mx-auto">
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-[32px] mb-[64px] border-b border-[#040D2633] py-[32px]">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-y-[32px] md:gap-[32px] mb-[64px] border-b border-[#040D2633] py-[32px]">
 						{/* Left Column */}
-						<div className="flex flex-col gap-[32px] col-span-2">
+						<div className="flex flex-col gap-[32px] col-span-2 text-center md:text-left">
 							{/* Research Analyst Information */}
 							<div className="flex flex-col gap-[18px]">
 								<h2 className="font-bold text-[16px] leading-[24px] text-[#040D26] opacity-80">
 									Research Analyst Information
 								</h2>
-								<div className="text-[16px] leading-[24px] text-[#040D26] opacity-60">
+								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60">
 									<p>
 										Name:{" "}
 										{
@@ -230,7 +230,7 @@ export default function Footer() {
 								<h2 className="font-bold text-[16px] leading-[24px] text-[#040D26] opacity-80">
 									SEBI Office Details
 								</h2>
-								<div className="text-[16px] leading-[24px] text-[#040D26] opacity-60">
+								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60">
 									<p>
 										Head Office Address:{" "}
 										{
@@ -250,13 +250,13 @@ export default function Footer() {
 						</div>
 
 						{/* Right Column */}
-						<div className="flex flex-col justify-between gap-[32px] col-span-1">
+						<div className="flex flex-col justify-between gap-[32px] col-span-1 text-center md:text-left">
 							{/* Grievance Officer Details */}
 							<div className="flex flex-col gap-[18px]">
 								<h2 className="font-bold text-[16px] leading-[24px] text-[#040D26] opacity-80">
 									Grievance Officer Details
 								</h2>
-								<div className="text-[16px] leading-[24px] text-[#040D26] opacity-60">
+								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60">
 									<p>
 										Name:{" "}
 										{
@@ -297,7 +297,7 @@ export default function Footer() {
 								<h2 className="font-bold text-[16px] leading-[24px] text-[#040D26] opacity-80">
 									Principal / Compliance Officer Details
 								</h2>
-								<div className="text-[16px] leading-[24px] text-[#040D26] opacity-60">
+								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60">
 									<p>
 										Name:{" "}
 										{
@@ -340,7 +340,7 @@ export default function Footer() {
 						{footerData.disclosures.map((disclosure, index) => (
 							<p
 								key={index}
-								className="text-[16px] leading-[24px] text-[#040D26] opacity-60 text-center"
+								className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60 text-center"
 							>
 								{index + 1}. {disclosure}
 							</p>
@@ -352,8 +352,8 @@ export default function Footer() {
 			{/* Bottom Footer - White Background */}
 			<div className="w-full max-w-[1059px] mx-auto pt-[32px] border-t border-[#040D2633]">
 				<div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[#040D26] opacity-70 text-[16px] leading-[24px]">
-					<p className="text-sm">{footerData.footer.rights}</p>
-					<div className="flex justify-center items-center gap-[24px]">
+					<p className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px]">{footerData.footer.rights}</p>
+					<div className="flex justify-center items-center gap-[16px] md:gap-[24px] text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-nowrap">
 						{footerData.footer.links.map((link, index) => (
 							<a
 								key={index}

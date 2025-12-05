@@ -9,6 +9,7 @@ const investmentPhilosophyData = [
 				height="48"
 				viewBox="0 0 48 48"
 				xmlns="http://www.w3.org/2000/svg"
+				className="w-[32px] md:w-[48px] h-[32px] md:h-[48px]"
 			>
 				<path
 					d="M6 30V33H12.879L3 42.879L5.121 45L15 35.121V42H18V30H6Z"
@@ -34,6 +35,7 @@ const investmentPhilosophyData = [
 				height="48"
 				viewBox="0 0 48 48"
 				xmlns="http://www.w3.org/2000/svg"
+				className="w-[32px] md:w-[48px] h-[32px] md:h-[48px]"
 			>
 				<path d="M25.5 30H22.5V36H25.5V30Z" fill="white" />
 				<path d="M33 27H30V36H33V27Z" fill="white" />
@@ -57,6 +59,7 @@ const investmentPhilosophyData = [
 				viewBox="0 0 48 48"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
+				className="w-[32px] md:w-[48px] h-[32px] md:h-[48px]"
 			>
 				<path
 					d="M21 33V21H33V9H45V6H30V18H18V30H6V3H3V42C3.00099 42.7953 3.31738 43.5578 3.87978 44.1202C4.44217 44.6826 5.20466 44.999 6 45H45V42H6V33H21Z"
@@ -77,6 +80,7 @@ const investmentPhilosophyData = [
 				viewBox="0 0 48 48"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
+				className="w-[32px] md:w-[48px] h-[32px] md:h-[48px]"
 			>
 				<path d="M45 19.5H42V22.5H45V19.5Z" fill="white" />
 				<path
@@ -105,24 +109,24 @@ const investmentPhilosophyData = [
 
 export default function InvestmentPhilosophy() {
 	return (
-		<section className="w-full py-[120px] px-[80px]">
-			<div className="max-w-7xl mx-auto grid grid-cols-3 gap-[80px]">
-				<div className="flex flex-col gap-[16px] col-span-1">
-					<h6 className="text-[20px] leading-[32px] text-white">
+		<section className="w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px]">
+			<div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-[64px] md:gap-[80px]">
+				<div className="flex flex-col gap-[32px] md:gap-[16px] col-span-1">
+					<h6 className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white">
 						Investment Philosophy
 					</h6>
-					<h2 className="max-w-2xl text-[40px] leading-[48px] text-white">
+					<h2 className="w-full md:max-w-2xl text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
 						How We Think About Investing
 					</h2>
 				</div>
-				<div className="w-full h-full grid grid-cols-2 gap-x-[48px] gap-y-[64px] col-span-2">
+				<div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-x-[48px] gap-y-[64px] col-span-2">
 					{investmentPhilosophyData.map((item, idx) => (
 						<div
 							key={item.id}
-							className="w-full h-full gap-[24px] flex flex-col"
+							className="w-full h-full gap-[16px] md:gap-[24px] flex flex-col"
 						>
 							<div>{item.icon || item.icons || null}</div>
-							<h5 className="text-white text-[24px] leading-[32px]">
+							<h5 className="text-white text-[20px] md:text-[24px] leading-[32px]">
 								{item.title}
 							</h5>
 							<p className="text-white text-[16px] leading-[24px] opacity-70">

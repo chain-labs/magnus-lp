@@ -10,6 +10,7 @@ import {
 	CarouselPrevious,
 	type CarouselApi,
 } from "@/components/ui/carousel";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const testimonials = [
 	{
@@ -66,6 +67,7 @@ export default function WhatOurClientsSay() {
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
+	const width = useWindowSize().width
 
 	useEffect(() => {
 		if (!api) {
@@ -81,9 +83,9 @@ export default function WhatOurClientsSay() {
 	}, [api]);
 
 	return (
-		<section className="w-full py-[112px] px-[80px]">
+		<section className="w-full pb-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="flex flex-col gap-[80px] max-w-7xl mx-auto">
-				<h2 className="text-[40px] leading-[48px] text-white">
+				<h2 className="text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
 					What Our Clients Say
 				</h2>
 				<Carousel
@@ -102,11 +104,11 @@ export default function WhatOurClientsSay() {
 							>
 								<div className="rounded-lg bg-transparent">
 									<blockquote className="space-y-12">
-										<p className="text-[20px] leading-[32px] text-white">
+										<p className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white">
 											{testimonial.testimonial}
 										</p>
 
-										<div className="mt-[32px] flex items-center gap-6">
+										<div className="mt-[32px] flex flex-col md:flex-row md:items-center gap-6">
 											<Image
 												className="h-7 w-fit dark:invert"
 												src={testimonial.companyLogo}
@@ -114,11 +116,11 @@ export default function WhatOurClientsSay() {
 												height={20}
 												width={20}
 											/>
-											<div className="flex flex-col border-l pl-6">
-												<cite className="text-[16px] leading-[24px] text-white">
+											<div className="flex flex-col border-l md:pl-6">
+												<cite className=" text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-white">
 													{testimonial.name}
 												</cite>
-												<span className="text-[16px] leading-[24px] text-white">
+												<span className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-white">
 													{
 														testimonial.positionAndCompany
 													}

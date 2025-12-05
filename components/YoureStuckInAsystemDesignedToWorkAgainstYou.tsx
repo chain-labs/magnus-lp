@@ -125,19 +125,19 @@ export default function YoureStuckInAsystemDesignedToWorkAgainstYou() {
 					backgroundPosition: "center",
 					backgroundRepeat: "repeat",
 				}}
-				className="w-full max-h-[522px] py-[120px] px-[80px] bg-white z-0"
+				className="w-full md:max-h-[522px] px-[20px] md:px-[80px] py-[80px] md:py-[120px] bg-white z-0"
 			>
-				<div className="max-w-7xl mx-auto flex flex-col gap-[80px] h-full z-10">
-					<h2 className="max-w-2xl text-[40px] leading-[48px]">
-						You're stuck in a system <br /> designed to work against
-						you
+				<div className="max-w-7xl mx-auto flex flex-col gap-[40px] md:gap-[80px] h-full z-10">
+					<h2 className="max-w-2xl text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-center md:text-left">
+						You&apos;re stuck in a system <br /> designed to work
+						against you
 					</h2>
-					<div className="grid grid-cols-3 gap-[20px]">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-[32px] md:gap-[20px]">
 						{youreStuckInAsystemDesignedToWorkAgainstYouData.map(
 							(item) => (
 								<div
 									key={item.id}
-									className="w-full h-full min-h-[403px] bg-[#F4F6F8] border border-[#040D261F] rounded-[8px] p-[32px] gap-[16px] flex flex-col"
+									className="w-full h-full md:min-h-[403px] bg-[#F4F6F8] border border-[#040D261F] rounded-[8px] p-[32px] gap-[16px] flex flex-col"
 								>
 									{item.icon}
 									<h5 className="text-[#040D26] text-[24px] leading-[32px]">

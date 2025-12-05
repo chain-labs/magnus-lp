@@ -32,7 +32,7 @@ const howMagnusHathawayChangesThisData = [
 
 export default function HowMagnusHathawayChangesThis() {
 	return (
-		<section className="relative w-full py-[120px] px-[80px] z-0">
+		<section className="relative w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px] z-0">
 			<div className="absolute top-0 left-0 h-[821.818359375px] w-full z-0">
 				<Image
 					src="/assets/grids/simpleGrid.svg"
@@ -42,34 +42,34 @@ export default function HowMagnusHathawayChangesThis() {
 				/>
 			</div>
 			<div className="max-w-7xl mx-auto flex flex-col gap-[80px] z-10">
-				<h2 className="text-[48px] leading-[64px] text-[#010943] text-center max-w-xl mx-auto">
+				<h2 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-[#010943] text-center max-w-xl mx-auto">
 					How Magnus Hathaway Changes This
 				</h2>
 
 				{howMagnusHathawayChangesThisData.map((item) => (
 					<div
-						className="flex rounded-[12px] overflow-hidden bg-[#F4F6F8] border border-[#37416C1A]"
+						className="flex flex-col md:flex-row rounded-[12px] overflow-hidden bg-[#F4F6F8] border border-[#37416C1A]"
 						key={item.id}
 					>
 						<div
-							className={`p-[48px] flex flex-col justify-center items-start h-[640px] w-[640px] ${
+							className={`p-[24px] md:p-[48px] flex flex-col justify-center items-start h-fit md:h-[640px] w-full md:w-[640px] ${
 								item.imageDirection === "right"
-									? "order-2"
+									? "md:order-2 order-1"
 									: "order-1"
 							}`}
 						>
-							<span className="text-[20px] leading-[32px] text-[#030919] opacity-80 mb-[8px]">
+							<span className="text-[14px] md:text-[20px] leading-[20px] md:leading-[32px] text-[#030919] opacity-80 mb-[8px]">
 								{item.tag}
 							</span>
-							<h3 className="text-[40px] leading-[48px] text-[#030919] mb-[32px]">
+							<h3 className="text-[24px] md:text-[40px] leading-[32px] md:leading-[48px] text-[#030919] mb-[32px]">
 								{item.title}
 							</h3>
-							<p className="text-[20px] leading-[32px] text-[#030919] opacity-60">
+							<p className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-[#030919] opacity-60">
 								{item.description}
 							</p>
 						</div>
 						<div
-							className={`h-[640px] w-[640px] ${
+							className={`h-full md:h-[640px] w-full md:w-[640px] ${
 								item.imageDirection === "right"
 									? "order-1"
 									: "order-2"
@@ -80,7 +80,7 @@ export default function HowMagnusHathawayChangesThis() {
 								alt={item.title}
 								width={640}
 								height={640}
-								className="w-full h-full object-cover"
+								className="w-full h-full aspect-square object-contain md:object-cover"
 							/>
 						</div>
 					</div>

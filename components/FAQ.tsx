@@ -66,12 +66,12 @@ const faqData = [
 
 export default function FAQ() {
 	return (
-		<section className="px-[64px] py-[112px]">
-			<div className="grid gap-[80px] grid-cols-3 max-w-7xl mx-auto">
-				<div className="flex flex-col gap-[24px] col-span-1">
-					<h1 className="text-[48px] leading-[64px]">FAQs</h1>
+		<section className="px-[20px] md:px-[64px] py-[80px] md:py-[112px]">
+			<div className="grid gap-y-[48px] md:gap-[80px] grid-cols-1 md:grid-cols-3 w-full max-w-7xl mx-auto">
+				<div className="flex flex-col gap-[40px] md:gap-[24px] w-full col-span-1">
+					<h1 className="text-[40px] md:text-[48px] leading-[48px] md:leading-[64px]">FAQs</h1>
 					<p className="text-[16px] leading-[24px]">
-						Got questions about investing? We're here to help!
+						Got questions about investing? We&apos;re here to help!
 						Explore our FAQ section for answers to common queries
 						and tips to make informed decisions.
 					</p>
@@ -80,15 +80,17 @@ export default function FAQ() {
 						Contact
 					</button>
 				</div>
-                    <div className="col-span-2 border-t border-[#040D261F]">
+				<div className="col-span-2 border-t border-[#040D261F]">
 					<Accordion type="single" collapsible>
 						{faqData.map((item) => (
 							<AccordionItem key={item.id} value={item.id}>
-								<AccordionTrigger className="cursor-pointer text-base font-bold hover:no-underline text-[#030919] py-[20px]">
+								<AccordionTrigger className="cursor-pointer text-[16px] leading-[24px] font-bold hover:no-underline text-[#030919] py-[20px] text-left">
 									{item.question}
 								</AccordionTrigger>
 								<AccordionContent>
-									<p className="text-[#030919] text-[16px] leading-[24px] opacity-60 pb-[24px]">{item.answer}</p>
+									<p className="text-[#030919] text-[16px] leading-[24px] opacity-60 pb-[24px]">
+										{item.answer}
+									</p>
 								</AccordionContent>
 							</AccordionItem>
 						))}
