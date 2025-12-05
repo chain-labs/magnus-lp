@@ -189,8 +189,8 @@ export default function Footer() {
 
 			{/* Middle Section - White Background */}
 			<div className="w-full max-w-[1059px] mx-auto">
-				<div className="w-full mx-auto">
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-y-[32px] md:gap-[32px] mb-[64px] border-b border-[#040D2633] py-[32px]">
+				<div className="w-full mx-auto flex flex-col gap-[32px]">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-y-[32px] md:gap-[32px] md:mb-[64px] border-b border-[#040D2633] py-[32px]">
 						{/* Left Column */}
 						<div className="flex flex-col gap-[32px] col-span-2 text-center md:text-left">
 							{/* Research Analyst Information */}

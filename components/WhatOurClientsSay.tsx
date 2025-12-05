@@ -10,7 +10,6 @@ import {
 	CarouselPrevious,
 	type CarouselApi,
 } from "@/components/ui/carousel";
-import { useWindowSize } from "@uidotdev/usehooks";
 
 const testimonials = [
 	{
@@ -67,7 +66,6 @@ export default function WhatOurClientsSay() {
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
-	const width = useWindowSize().width
 
 	useEffect(() => {
 		if (!api) {
@@ -80,11 +78,16 @@ export default function WhatOurClientsSay() {
 		api.on("select", () => {
 			setCurrent(api.selectedScrollSnap() + 1);
 		});
+
+		api.on("reInit", () => {
+			setCount(api.scrollSnapList().length);
+			setCurrent(api.selectedScrollSnap() + 1);
+		});
 	}, [api]);
 
 	return (
 		<section className="w-full pb-[80px] md:py-[112px] px-[20px] md:px-[80px]">
-			<div className="flex flex-col gap-[80px] max-w-7xl mx-auto">
+			<div className="flex flex-col gap-[24px] md:gap-[80px] max-w-7xl mx-auto">
 				<h2 className="text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
 					What Our Clients Say
 				</h2>
@@ -92,7 +95,12 @@ export default function WhatOurClientsSay() {
 					setApi={setApi}
 					opts={{
 						align: "start",
-						slidesToScroll: 2,
+						slidesToScroll: 1,
+						breakpoints: {
+							"(min-width: 768px)": {
+								slidesToScroll: 2,
+							},
+						},
 					}}
 					className="w-full"
 				>
@@ -116,8 +124,8 @@ export default function WhatOurClientsSay() {
 												height={20}
 												width={20}
 											/>
-											<div className="flex flex-col border-l md:pl-6">
-												<cite className=" text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-white">
+											<div className="flex flex-col md:border-l md:pl-6">
+												<cite className="normal text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-white">
 													{testimonial.name}
 												</cite>
 												<span className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-white">
@@ -150,8 +158,8 @@ export default function WhatOurClientsSay() {
 							))}
 						</div>
 						<div className="flex gap-2">
-							<CarouselPrevious className="!relative !top-0 !left-0 border-white/20 h-[48px] w-[48px] text-white bg-transparent text-[16px] [&_svg]:height-8 [&_svg]:width-8" />
-							<CarouselNext className="!relative !top-0 !right-0 border-white/20 h-[48px] w-[48px] text-white bg-transparent text-[16px] [&_svg]:height-8 [&_svg]:width-8" />
+							<CarouselPrevious className="!relative !top-0 !left-0 border-white/20 h-[48px] w-[48px] text-white bg-transparent text-[16px] [&_svg]:height-8 [&_svg]:width-8 translate-0" />
+							<CarouselNext className="!relative !top-0 !right-0 border-white/20 h-[48px] w-[48px] text-white bg-transparent text-[16px] [&_svg]:height-8 [&_svg]:width-8 translate-0" />
 						</div>
 					</div>
 				</Carousel>

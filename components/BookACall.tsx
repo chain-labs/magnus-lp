@@ -9,8 +9,8 @@ const bookACallData = {
 
 export default function BookACall() {
 	return (
-		<section className="w-full min-h-screen md:min-h-fit py-[112px] px-[20px] md:px-[80px]">
-			<hr className="h-[1px] bg-[#FFFFFF33] w-full" />
+		<section className="relative w-full h-screen md:h-fit py-[112px] px-[20px] md:px-[80px]">
+			<hr className="hidden md:absolute top-0 left-[20px] h-[1px] w-[calc(100%-40px)] bg-[#FFFFFF33] opacity-20" />
 			<div className="w-full h-full md:max-w-2xl mx-auto flex flex-col justify-center items-center gap-[32px]">
 				<div className="flex flex-col justify-center items-center text-center gap-[24px]">
 					<h2 className="text-[24px] md:text-[40px] leading-[32px] md:leading-[48px] text-white">

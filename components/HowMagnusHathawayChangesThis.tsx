@@ -61,7 +61,7 @@ export default function HowMagnusHathawayChangesThis() {
 							<span className="text-[14px] md:text-[20px] leading-[20px] md:leading-[32px] text-[#030919] opacity-80 mb-[8px]">
 								{item.tag}
 							</span>
-							<h3 className="text-[24px] md:text-[40px] leading-[32px] md:leading-[48px] text-[#030919] mb-[32px]">
+							<h3 className="text-[24px] md:text-[40px] leading-[32px] md:leading-[48px] text-[#030919] mb-[16px] md:mb-[32px]">
 								{item.title}
 							</h3>
 							<p className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-[#030919] opacity-60">

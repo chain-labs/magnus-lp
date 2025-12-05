@@ -73,25 +73,24 @@ function PricingCard({
 				"bg-white"
 			)}
 		>
-			<div className="p-[32px] flex-1 flex flex-col">
+			<div className="p-[32px] flex-1 flex flex-col gap-[32px]">
 				{/* Plan Title and Description */}
-				<div className="mb-6">
+				<div>
 					<h3 className="text-[20px] leading-[32px] font-semibold text-[#040D26] mb-[4px]">
 						{plan.title}
 					</h3>
-					<p className="text-sm text-[#040D26] mb-6 opacity-60">
+					<p className="text-sm text-[#040D26] opacity-60">
 						{plan.description}
 					</p>
 				</div>
 
-				<hr className="my-[32px] border-[#040D261F]" />
+				<hr className="border-[#040D261F]" />
 
 				{/* Price */}
-				<div className="mb-8">
+				<div>
 					<div className="flex items-baseline gap-1 mb-2">
 						<span className="text-[40px] leading-[48px] text-[#040D26]">
-							$
-							{isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+							${isYearly ? plan.yearlyPrice : plan.monthlyPrice}
 						</span>
 						<span className="text-[16px] leading-[24px] text-[#040D26]">
 							/{isYearly ? "year" : "mo"}
@@ -103,7 +102,7 @@ function PricingCard({
 				</div>
 
 				{/* CTA Button */}
-				<div className="mt-[32px]">
+				<div className="">
 					<button
 						style={{
 							background: plan.primary
@@ -124,7 +123,7 @@ function PricingCard({
 					</button>
 				</div>
 
-				<hr className="my-[32px] border-[#040D261F]" />
+				<hr className="border-[#040D261F]" />
 
 				{/* Features */}
 				<div className="space-y-4 mt-auto">
@@ -237,7 +236,7 @@ export default function Pricing() {
 									className={cn(
 										"h-2 w-2 rounded-full transition-all duration-300",
 										index + 1 === current
-											? "bg-[#00177C] w-6"
+											? "bg-[#00177C]"
 											: "bg-[#040D2633]"
 									)}
 									onClick={() => api?.scrollTo(index)}

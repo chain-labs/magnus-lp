@@ -284,8 +284,6 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens() {
 								</p>
 							</div>
 						)}
-
-						{/* Blurred section with overlay */}
 					</div>
 				</div>
 			</div>
