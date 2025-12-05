@@ -115,126 +115,77 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens() {
 						noise.
 					</p>
 				</div>
-				<div className="bg-[#FDFDFD] border border-[#E0E0E0] outline outline-offset-4 outline-[#E0E0E0] rounded-[16px] shadow-sm overflow-hidden">
-					<table className="w-full">
-						<thead>
-							<tr className="border-b border-gray-100">
-								{tableHeader.map((header, index) => (
-									<th
-										key={index}
-										className="text-left py-6 px-4 text-[14px] leading-[24px] text-[#9E9E9E] font-normal uppercase"
-									>
-										{header.label}
-									</th>
-								))}
-							</tr>
-						</thead>
-						<tbody className="relative">
-							{stockData.map((stock, index) => (
-								<tr
-									key={index}
-									className="border-b border-gray-50"
-								>
-									<td className="py-5 px-6">
-										<div className="flex items-center gap-3">
-											<div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
-												<Image
-													src={stock.logo}
-													alt={stock.ticker}
-													width={48}
-													height={48}
-													className="object-contain"
-												/>
-											</div>
-											<span className="uppercase text-[16px] leading-[24px]">
-												{stock.ticker}
-											</span>
-										</div>
-									</td>
-									<td className="py-5 px-4 text-[#212121] opacity-60">
-										{stock.priceZone}
-									</td>
-									<td className="py-5 px-4">
-										<span
-											className={`inline-flex items-center px-[12px] py-[5px] rounded-[8px] text-[14px] leading-[24px] font-bold uppercase ${
-												stock.action === "BUY"
-													? "bg-[#D7FFE5] text-[#0FAB49] border border-[#16A34A]"
-													: "bg-[#FCFFD7] text-[#A39016] border border-[#A39016]"
-											}`}
+				<div className="relative bg-[#FDFDFD] border border-[#E0E0E0] outline outline-offset-4 outline-[#E0E0E0] rounded-[16px] shadow-sm overflow-hidden">
+					<div className="overflow-x-auto">
+						<table className="w-full min-w-[1000px]">
+							<thead>
+								<tr className="border-b border-gray-100">
+									{tableHeader.map((header, index) => (
+										<th
+											key={index}
+											className="text-left py-6 px-4 text-[14px] leading-[24px] text-[#9E9E9E] font-normal uppercase"
 										>
-											{stock.action}
-										</span>
-									</td>
-									<td className="py-5 px-4 text-black opacity-60 uppercase">
-										{stock.target}
-									</td>
-									<td className="py-5 px-4 text-black opacity-50 uppercase">
-										{stock.stopLoss}
-									</td>
-									<td className="py-5 px-4 text-[#16A34A] uppercase">
-										{stock.potential}
-									</td>
-									<td className="py-5 px-4 text-black opacity-60 uppercase">
-										{stock.duration}
-									</td>
-									<td className="py-5 px-4 text-black opacity-60 uppercase">
-										{stock.published}
-									</td>
+											{header.label}
+										</th>
+									))}
 								</tr>
-							))}
-							{blurred && (
-								<div
-									style={{
-										height: `${
-											(stockData.length - 2) * 81
-										}px`,
-									}}
-									className="absolute backdrop-blur-sm bottom-0 left-0 w-full flex flex-col items-center justify-center"
-								>
-									<button
-										style={{
-											background: `radial-gradient(97.46% 172.79% at 2.54% 70.83%, #A12FFF 0%, rgba(0, 22, 118, 0.5) 100%),
-											    radial-gradient(169.02% 564.79% at 77.54% -103.13%, #2FFCFF 0%, rgba(0, 22, 118, 0.5) 100%),
-												#00177C`,
-										}}
-										className="text-[16px] leading-[24px] text-white px-[21px] py-[16px] rounded-[8px] font-bold flex items-center gap-2"
+							</thead>
+							<tbody className="relative">
+								{stockData.map((stock, index) => (
+									<tr
+										key={index}
+										className="border-b border-gray-50"
 									>
-										Unlock More Stocks Data
-										<svg
-											width="24"
-											height="24"
-											viewBox="0 0 24 24"
-											fill="none"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												d="M8 10V7C8 5.93913 8.42143 4.92172 9.17157 4.17157C9.92172 3.42143 10.9391 3 12 3C13.0609 3 14.0783 3.42143 14.8284 4.17157C15.5786 4.92172 16 5.93913 16 7V10"
-												stroke="white"
-												stroke-width="2"
-												stroke-linecap="round"
-											/>
-											<path
-												d="M5 10H19V19C19 19.5304 18.7893 20.0391 18.4142 20.4142C18.0391 20.7893 17.5304 21 17 21H7C6.46957 21 5.96086 20.7893 5.58579 20.4142C5.21071 20.0391 5 19.5304 5 19V10Z"
-												stroke="white"
-												stroke-width="2"
-												stroke-linejoin="round"
-											/>
-											<path
-												d="M14.5 15.5H14.5083V15.5083H14.5V15.5Z"
-												stroke="white"
-												stroke-width="2"
-												stroke-linejoin="round"
-											/>
-										</svg>
-									</button>
-									<p className="mt-4 text-black opacity-70">
-										You need a plan to unlock premium
-										research insights
-									</p>
-								</div>
-							)}
-						</tbody>
-					</table>
+										<td className="py-5 px-6">
+											<div className="flex items-center gap-3">
+												<div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
+													<Image
+														src={stock.logo}
+														alt={stock.ticker}
+														width={48}
+														height={48}
+														className="object-contain"
+													/>
+												</div>
+												<span className="uppercase text-[16px] leading-[24px]">
+													{stock.ticker}
+												</span>
+											</div>
+										</td>
+										<td className="py-5 px-4 text-[#212121] opacity-60">
+											{stock.priceZone}
+										</td>
+										<td className="py-5 px-4">
+											<span
+												className={`inline-flex items-center px-[12px] py-[5px] rounded-[8px] text-[14px] leading-[24px] font-bold uppercase ${
+													stock.action === "BUY"
+														? "bg-[#D7FFE5] text-[#0FAB49] border border-[#16A34A]"
+														: "bg-[#FCFFD7] text-[#A39016] border border-[#A39016]"
+												}`}
+											>
+												{stock.action}
+											</span>
+										</td>
+										<td className="py-5 px-4 text-black opacity-60 uppercase">
+											{stock.target}
+										</td>
+										<td className="py-5 px-4 text-black opacity-50 uppercase">
+											{stock.stopLoss}
+										</td>
+										<td className="py-5 px-4 text-[#16A34A] uppercase">
+											{stock.potential}
+										</td>
+										<td className="py-5 px-4 text-black opacity-60 uppercase">
+											{stock.duration}
+										</td>
+										<td className="py-5 px-4 text-black opacity-60 uppercase">
+											{stock.published}
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 
 					{/* Blurred section with overlay */}
 					<div className="relative">
@@ -284,8 +235,57 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens() {
 								</tbody>
 							</table> */}
 						</div>
+						{blurred && (
+							<div
+								style={{
+									height: `${(stockData.length - 2) * 81}px`,
+								}}
+								className="absolute backdrop-blur-sm bottom-0 left-0 w-full flex flex-col items-center justify-center"
+							>
+								<button
+									style={{
+										background: `radial-gradient(97.46% 172.79% at 2.54% 70.83%, #A12FFF 0%, rgba(0, 22, 118, 0.5) 100%),
+										radial-gradient(169.02% 564.79% at 77.54% -103.13%, #2FFCFF 0%, rgba(0, 22, 118, 0.5) 100%),
+										#00177C`,
+									}}
+									className="text-[16px] leading-[24px] text-white px-[21px] py-[16px] rounded-[8px] font-bold flex items-center gap-2"
+								>
+									Unlock More Stocks Data
+									<svg
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M8 10V7C8 5.93913 8.42143 4.92172 9.17157 4.17157C9.92172 3.42143 10.9391 3 12 3C13.0609 3 14.0783 3.42143 14.8284 4.17157C15.5786 4.92172 16 5.93913 16 7V10"
+											stroke="white"
+											stroke-width="2"
+											stroke-linecap="round"
+										/>
+										<path
+											d="M5 10H19V19C19 19.5304 18.7893 20.0391 18.4142 20.4142C18.0391 20.7893 17.5304 21 17 21H7C6.46957 21 5.96086 20.7893 5.58579 20.4142C5.21071 20.0391 5 19.5304 5 19V10Z"
+											stroke="white"
+											stroke-width="2"
+											stroke-linejoin="round"
+										/>
+										<path
+											d="M14.5 15.5H14.5083V15.5083H14.5V15.5Z"
+											stroke="white"
+											stroke-width="2"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</button>
+								<p className="mt-4 text-black opacity-70 text-center">
+									You need a plan to unlock premium research
+									insights
+								</p>
+							</div>
+						)}
 
-						{/* Overlay with CTA */}
+						{/* Blurred section with overlay */}
 					</div>
 				</div>
 			</div>
