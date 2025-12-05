@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -6,13 +6,6 @@ const helvetica = localFont({
 	src: "../public/assets/fonts/Helvetica.ttf",
 	variable: "--font-helvetica",
 });
-
-export const viewport: Viewport = {
-	themeColor: "#000728",
-	width: "device-width",
-	initialScale: 1,
-	maximumScale: 1,
-};
 
 export const metadata: Metadata = {
 	title: {
@@ -80,7 +73,6 @@ export const metadata: Metadata = {
 	},
 };
 
-
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -88,7 +80,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${helvetica.variable} antialiased`}>{children}</body>
+			<body className={`${helvetica.variable} antialiased`}>
+				{children}
+			</body>
 		</html>
 	);
 }
