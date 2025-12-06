@@ -10,59 +10,77 @@ import {
 	CarouselPrevious,
 	type CarouselApi,
 } from "@/components/ui/carousel";
+import type { TestimonialsData } from "@/sanity/lib/types";
 
-const testimonials = [
-	{
-		id: 1,
-		name: "Name Surname",
-		imageUrl: "/images/testimonials/1.jpg",
-		positionAndCompany: "Position, Company name",
-		companyLogo: "/images/testimonials/1.jpg",
-		testimonial: `"Magnus Hathaway was there during the crash when others disappeared. The research reports helped me understand fundamentals, not just follow tips."`,
-	},
-	{
-		id: 2,
-		name: "Name Surname",
-		imageUrl: "/images/testimonials/2.jpg",
-		positionAndCompany: "Position, Company name",
-		companyLogo: "/images/testimonials/2.jpg",
-		testimonial: `"I had money stuck in laggard stocks. The team helped me reallocate based on research. Now I invest with confidence, not fear."`,
-	},
-	{
-		id: 3,
-		name: "Name Surname",
-		imageUrl: "/images/testimonials/1.jpg",
-		positionAndCompany: "Position, Company name",
-		companyLogo: "/images/testimonials/1.jpg",
-		testimonial: `"Magnus Hathaway was there during the crash when others disappeared. The research reports helped me understand fundamentals, not just follow tips."`,
-	},
-	{
-		id: 4,
-		name: "Name Surname",
-		imageUrl: "/images/testimonials/2.jpg",
-		positionAndCompany: "Position, Company name",
-		companyLogo: "/images/testimonials/2.jpg",
-		testimonial: `"I had money stuck in laggard stocks. The team helped me reallocate based on research. Now I invest with confidence, not fear."`,
-	},
-	{
-		id: 5,
-		name: "Name Surname",
-		imageUrl: "/images/testimonials/1.jpg",
-		positionAndCompany: "Position, Company name",
-		companyLogo: "/images/testimonials/1.jpg",
-		testimonial: `"Magnus Hathaway was there during the crash when others disappeared. The research reports helped me understand fundamentals, not just follow tips."`,
-	},
-	{
-		id: 6,
-		name: "Name Surname",
-		imageUrl: "/images/testimonials/2.jpg",
-		positionAndCompany: "Position, Company name",
-		companyLogo: "/images/testimonials/2.jpg",
-		testimonial: `"I had money stuck in laggard stocks. The team helped me reallocate based on research. Now I invest with confidence, not fear."`,
-	},
-];
+// Static data - commented out in favor of Sanity CMS
+// const testimonials = [
+// 	{
+// 		id: 1,
+// 		name: "Name Surname",
+// 		imageUrl: "/images/testimonials/1.jpg",
+// 		positionAndCompany: "Position, Company name",
+// 		companyLogo: "/images/testimonials/1.jpg",
+// 		testimonial: `"Magnus Hathaway was there during the crash when others disappeared. The research reports helped me understand fundamentals, not just follow tips."`,
+// 	},
+// 	... more testimonials
+// ];
 
-export default function WhatOurClientsSay() {
+// Default fallback data
+const defaultTestimonialsData: TestimonialsData = {
+	title: "What Our Clients Say",
+	items: [
+		{
+			name: "Name Surname",
+			imageUrl: "/images/testimonials/1.jpg",
+			positionAndCompany: "Position, Company name",
+			companyLogo: "/images/testimonials/1.jpg",
+			testimonial: `"Magnus Hathaway was there during the crash when others disappeared. The research reports helped me understand fundamentals, not just follow tips."`,
+		},
+		{
+			name: "Name Surname",
+			imageUrl: "/images/testimonials/2.jpg",
+			positionAndCompany: "Position, Company name",
+			companyLogo: "/images/testimonials/2.jpg",
+			testimonial: `"I had money stuck in laggard stocks. The team helped me reallocate based on research. Now I invest with confidence, not fear."`,
+		},
+		{
+			name: "Name Surname",
+			imageUrl: "/images/testimonials/1.jpg",
+			positionAndCompany: "Position, Company name",
+			companyLogo: "/images/testimonials/1.jpg",
+			testimonial: `"Magnus Hathaway was there during the crash when others disappeared. The research reports helped me understand fundamentals, not just follow tips."`,
+		},
+		{
+			name: "Name Surname",
+			imageUrl: "/images/testimonials/2.jpg",
+			positionAndCompany: "Position, Company name",
+			companyLogo: "/images/testimonials/2.jpg",
+			testimonial: `"I had money stuck in laggard stocks. The team helped me reallocate based on research. Now I invest with confidence, not fear."`,
+		},
+		{
+			name: "Name Surname",
+			imageUrl: "/images/testimonials/1.jpg",
+			positionAndCompany: "Position, Company name",
+			companyLogo: "/images/testimonials/1.jpg",
+			testimonial: `"Magnus Hathaway was there during the crash when others disappeared. The research reports helped me understand fundamentals, not just follow tips."`,
+		},
+		{
+			name: "Name Surname",
+			imageUrl: "/images/testimonials/2.jpg",
+			positionAndCompany: "Position, Company name",
+			companyLogo: "/images/testimonials/2.jpg",
+			testimonial: `"I had money stuck in laggard stocks. The team helped me reallocate based on research. Now I invest with confidence, not fear."`,
+		},
+	],
+};
+
+interface WhatOurClientsSayProps {
+	data?: {data: TestimonialsData | null;}
+}
+
+export default function WhatOurClientsSay({ data }: WhatOurClientsSayProps) {
+	const testimonialsData = data?.data || defaultTestimonialsData;
+	const testimonials = testimonialsData.items;
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
@@ -92,7 +110,7 @@ export default function WhatOurClientsSay() {
 		<section className="w-full pb-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="flex flex-col gap-[24px] md:gap-[80px] max-w-7xl mx-auto">
 				<h2 className="text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
-					What Our Clients Say
+					{testimonialsData.title}
 				</h2>
 				<Carousel
 					setApi={setApi}
@@ -110,7 +128,7 @@ export default function WhatOurClientsSay() {
 					<CarouselContent className="-ml-2 md:-ml-4">
 						{testimonials.map((testimonial) => (
 							<CarouselItem
-								key={testimonial.id}
+								key={testimonial.name}
 								className="pl-2 md:pl-4 basis-full md:basis-1/2"
 							>
 								<div className="rounded-lg bg-transparent">
@@ -122,7 +140,7 @@ export default function WhatOurClientsSay() {
 										<div className="mt-[32px] flex flex-col md:flex-row md:items-center gap-6">
 											<Image
 												className="h-7 w-fit dark:invert"
-												src={testimonial.companyLogo}
+												src={testimonial.companyLogo || "/images/testimonials/default-logo.png"}
 												alt="Nvidia Logo"
 												height={20}
 												width={20}

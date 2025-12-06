@@ -6,8 +6,27 @@ import { useState } from "react";
 import { useHeaderTheme } from "./HeaderThemeContext";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import type { HeaderData } from "@/sanity/lib/types";
 
-export default function Header() {
+// Default fallback data
+const defaultHeaderData: HeaderData = {
+	logoImage: "/assets/logo/logo.png",
+	brandName: "Magnus Hathaway",
+	navLinks: [
+		{ label: "About", href: "#about" },
+		{ label: "Offerings", href: "#offerings" },
+	],
+	ctaButtonText: "Get Started",
+	ctaButtonLink: "https://cal.com/magnushathaway/30min",
+};
+
+interface HeaderProps {
+	data?: { data: HeaderData | null };
+}
+
+export default function Header({ data }: HeaderProps) {
+	const headerData = data?.data || defaultHeaderData;
+	console.log("headerdata", headerData);
 	const { theme } = useHeaderTheme();
 	const isDark = theme === "dark";
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -36,40 +55,36 @@ export default function Header() {
 				>
 					<div className="rounded-full w-[40px] h-[40px] flex items-center justify-center">
 						<Image
-							src="/assets/logo/logo.png"
-							alt="Magnus Hathaway Logo"
+							src={
+								headerData.logoImage || "/assets/logo/logo.png"
+							}
+							alt={`${headerData.brandName} Logo`}
 							width={40}
 							height={40}
 							className="w-full h-full"
 						/>
 					</div>
 					<span className="text-[20px] leading-[32px]">
-						Magnus Hathaway
+						{headerData.brandName}
 					</span>
 				</Link>
 
 				{/* Navigation Links */}
 				<nav className="hidden md:flex items-center gap-[32px]">
+					{headerData.navLinks.map((link, index) => (
+						<Link
+							key={`nav-${index}`}
+							href={link.href}
+							className={cn(
+								"text-[16px] leading-[24px] hover:opacity-80 transition-colors duration-300",
+								isDark ? "text-white" : "text-[#000728]"
+							)}
+						>
+							{link.label}
+						</Link>
+					))}
 					<Link
-						href="#about"
-						className={cn(
-							"text-[16px] leading-[24px] hover:opacity-80 transition-colors duration-300",
-							isDark ? "text-white" : "text-[#000728]"
-						)}
-					>
-						About
-					</Link>
-					<Link
-						href="#offerings"
-						className={cn(
-							"text-[16px] leading-[24px] hover:opacity-80 transition-colors duration-300",
-							isDark ? "text-white" : "text-[#000728]"
-						)}
-					>
-						Offerings
-					</Link>
-					<Link
-						href="https://cal.com/magnushathaway/30min"
+						href={headerData.ctaButtonLink}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -81,7 +96,7 @@ export default function Header() {
 									: "bg-[#000728] text-white border-[#000728]"
 							)}
 						>
-							Get Started
+							{headerData.ctaButtonText}
 						</button>
 					</Link>
 				</nav>
@@ -110,23 +125,19 @@ export default function Header() {
 					)}
 				>
 					<nav className="flex flex-col gap-4">
-						<Link
-							href="#about"
-							className="text-[18px] font-medium hover:opacity-70 transition-opacity"
-							onClick={() => setIsMobileMenuOpen(false)}
-						>
-							About
-						</Link>
-						<Link
-							href="#offerings"
-							className="text-[18px] font-medium hover:opacity-70 transition-opacity"
-							onClick={() => setIsMobileMenuOpen(false)}
-						>
-							Offerings
-						</Link>
+						{headerData.navLinks.map((link, index) => (
+							<Link
+								key={`mobile-nav-${index}`}
+								href={link.href}
+								className="text-[18px] font-medium hover:opacity-70 transition-opacity"
+								onClick={() => setIsMobileMenuOpen(false)}
+							>
+								{link.label}
+							</Link>
+						))}
 					</nav>
 					<Link
-						href="https://cal.com/magnushathaway/30min"
+						href={headerData.ctaButtonLink}
 						target="_blank"
 						rel="noopener noreferrer"
 						onClick={() => setIsMobileMenuOpen(false)}
@@ -139,7 +150,7 @@ export default function Header() {
 									: "bg-[#000728] text-white"
 							)}
 						>
-							Get Started
+							{headerData.ctaButtonText}
 						</button>
 					</Link>
 				</div>

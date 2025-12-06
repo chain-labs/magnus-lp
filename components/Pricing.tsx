@@ -9,60 +9,79 @@ import {
 	CarouselItem,
 	type CarouselApi,
 } from "@/components/ui/carousel";
+import type { PricingData } from "@/sanity/lib/types";
 
-const pricingData = {
-	basic: {
-		title: "Basic plan",
-		description: "Lorem ipsum dolor sit amet",
-		monthlyPrice: 19,
-		yearlyPrice: 199,
-		link: "https://cal.com/magnushathaway/30min",
-		features: [
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-		],
-		primary: false,
-	},
-	business: {
-		title: "Business plan",
-		description: "Lorem ipsum dolor sit amet",
-		monthlyPrice: 29,
-		yearlyPrice: 299,
-		link: "https://cal.com/magnushathaway/30min",
-		features: [
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-		],
-		primary: true,
-	},
-	enterprise: {
-		title: "Enterprise plan",
-		description: "Lorem ipsum dolor sit amet",
-		monthlyPrice: 49,
-		yearlyPrice: 499,
-		link: "https://cal.com/magnushathaway/30min",
-		features: [
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-			"Feature text goes here",
-		],
-		primary: false,
-	},
+// Static data - commented out in favor of Sanity CMS
+// const pricingData = {
+// 	basic: { title: "Basic plan", ... },
+// 	business: { title: "Business plan", ... },
+// 	enterprise: { title: "Enterprise plan", ... },
+// };
+
+// Default fallback data
+const defaultPricingData: PricingData = {
+	sectionLabel: "Pricing",
+	title: "Pricing plan",
+	description:
+		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
+	plans: [
+		{
+			title: "Basic plan",
+			description: "Lorem ipsum dolor sit amet",
+			monthlyPrice: 19,
+			yearlyPrice: 199,
+			link: "https://cal.com/magnushathaway/30min",
+			features: [
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+			],
+			primary: false,
+		},
+		{
+			title: "Business plan",
+			description: "Lorem ipsum dolor sit amet",
+			monthlyPrice: 29,
+			yearlyPrice: 299,
+			link: "https://cal.com/magnushathaway/30min",
+			features: [
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+			],
+			primary: true,
+		},
+		{
+			title: "Enterprise plan",
+			description: "Lorem ipsum dolor sit amet",
+			monthlyPrice: 49,
+			yearlyPrice: 499,
+			link: "https://cal.com/magnushathaway/30min",
+			features: [
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+				"Feature text goes here",
+			],
+			primary: false,
+		},
+	],
 };
+
+interface PricingProps {
+	data?: { data: PricingData | null };
+}
 
 function PricingCard({
 	plan,
 	isYearly,
 }: {
-	plan: typeof pricingData.basic;
+	plan: PricingData["plans"][0];
 	isYearly: boolean;
 }) {
 	return (
@@ -143,7 +162,8 @@ function PricingCard({
 	);
 }
 
-export default function Pricing() {
+export default function Pricing({ data }: PricingProps) {
+	const pricingData = data?.data || defaultPricingData;
 	const [isYearly, setIsYearly] = useState(false);
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
@@ -165,11 +185,7 @@ export default function Pricing() {
 		});
 	}, [api]);
 
-	const plans = [
-		pricingData.basic,
-		pricingData.business,
-		pricingData.enterprise,
-	];
+	const plans = pricingData.plans;
 
 	return (
 		<section className="relative text-foreground py-[80px] md:py-[120px] px-[20px] md:px-[64px]">
@@ -178,15 +194,13 @@ export default function Pricing() {
 				<div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-12">
 					<div className="flex-1 max-w-[786px]">
 						<p className="text-sm text-[#040D26] mb-[16px]">
-							Prizing
+							{pricingData.sectionLabel}
 						</p>
 						<h2 className="text-[40px] leading-[48px] text-[#040D26] mb-[24px]">
-							Pricing plan
+							{pricingData.title}
 						</h2>
 						<p className="text-[16px] leading-[24px] text-[#040D26]">
-							Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Suspendisse varius enim in eros elementum
-							tristique.
+							{pricingData.description}
 						</p>
 					</div>
 					{/* Monthly/Yearly Toggle */}

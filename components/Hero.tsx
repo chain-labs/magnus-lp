@@ -11,36 +11,71 @@ import {
 import { InfiniteSlider } from "./motion-primitives/infinite-slider";
 import { useSpeechInput } from "@/hooks/useSpeechInput";
 import Image from "next/image";
+import type { HeroData } from "@/sanity/lib/types";
 
-const frequentlyAskedQuestions = [
-	{
-		id: "item-1",
-		question: "What is the difference between a stock and a bond?",
-		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-	},
-	{
-		id: "item-2",
-		question: "What is the difference between a stock and a bond?",
-		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-	},
-	{
-		id: "item-3",
-		question: "What is the difference between a stock and a bond?",
-		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-	},
-	{
-		id: "item-4",
-		question: "What is the difference between a stock and a bond?",
-		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-	},
-	{
-		id: "item-5",
-		question: "What is the difference between a stock and a bond?",
-		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-	},
-];
+// Static data - commented out in favor of Sanity CMS
+// const frequentlyAskedQuestions = [
+// 	{
+// 		id: "item-1",
+// 		question: "What is the difference between a stock and a bond?",
+// 		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+// 	},
+// 	{
+// 		id: "item-2",
+// 		question: "What is the difference between a stock and a bond?",
+// 		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+// 	},
+// 	{
+// 		id: "item-3",
+// 		question: "What is the difference between a stock and a bond?",
+// 		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+// 	},
+// 	{
+// 		id: "item-4",
+// 		question: "What is the difference between a stock and a bond?",
+// 		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+// 	},
+// 	{
+// 		id: "item-5",
+// 		question: "What is the difference between a stock and a bond?",
+// 		answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+// 	},
+// ];
 
-export default function Hero() {
+// Default fallback data
+const defaultHeroData: HeroData = {
+	subtitle: "Stock Picking, Simplified",
+	headline: "HNIs get analysts. You get YouTube. That gap costs you.",
+	frequentlyAskedQuestions: [
+		{
+			question: "What is the difference between a stock and a bond?",
+			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+		},
+		{
+			question: "What is the difference between a stock and a bond?",
+			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+		},
+		{
+			question: "What is the difference between a stock and a bond?",
+			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+		},
+		{
+			question: "What is the difference between a stock and a bond?",
+			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+		},
+		{
+			question: "What is the difference between a stock and a bond?",
+			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
+		},
+	],
+};
+
+interface HeroProps {
+	data?: { data: HeroData | null };
+}
+
+export default function Hero({ data }: HeroProps) {
+	const heroData = data?.data || defaultHeroData;
 	const { messages, sendMessage, status } = useChat();
 
 	const {
@@ -62,7 +97,7 @@ export default function Hero() {
 	return (
 		<section className="w-full min-h-screen flex items-center justify-center py-[120px] pb-[40px] md:pb-[120px]">
 			<Image
-				src="/assets/section/hero/skewedGrid.svg"
+				src={heroData.skewedGridImage || "/assets/section/hero/skewedGrid.svg"}
 				alt="skewed grid"
 				width={1000}
 				height={1000}
@@ -73,11 +108,15 @@ export default function Hero() {
 					{/* Headline */}
 					<div className="flex flex-col justify-center items-center gap-[20px]">
 						<h2 className="text-[20px] md:text-[24px] leading-[32px] md:leading-[32px] max-md:text-[18px] max-md:leading-[24px] text-white text-center max-w-2xl font-light tracking-wide">
-							Stock Picking, Simplified
+							{heroData.subtitle}
 						</h2>
-						<h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-white text-center font-light tracking-wide">
-							HNIs get analysts. You get YouTube. <br /> That gap
-							costs you.
+						<h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-white text-center font-light tracking-wide max-w-[846px]">
+							{heroData.headline?.split("\n").map((line, idx, arr) => (
+								<span key={idx}>
+									{line}
+									{idx < arr.length - 1 && <br />}
+								</span>
+							)) || heroData.headline}
 						</h1>
 					</div>
 
@@ -246,9 +285,9 @@ export default function Hero() {
 					{/* frequently asked questions */}
 					<InfiniteSlider speedOnHover={1} gap={24}>
 						<div className="flex items-center justify-center gap-[24px]">
-							{frequentlyAskedQuestions.map((item) => (
+							{heroData.frequentlyAskedQuestions.map((item, index) => (
 								<div
-									key={item.id}
+									key={`faq-${index}`}
 									className="flex flex-col gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] max-md:w-[280px] h-[200px] px-[24px] py-[16px]"
 								>
 									<svg

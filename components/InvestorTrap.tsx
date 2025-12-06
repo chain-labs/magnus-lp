@@ -1,49 +1,94 @@
 "use client";
 
+import { InvestorTrapData } from "@/sanity/lib/types";
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
 
-// Card pairs - each pair appears together (left + right)
-const cardPairs = [
-	{
-		id: "pair-1",
-		left: {
-			title: "Emotional Trading",
-			subtitle: "(Fear & Greed)",
+// Static data - commented out in favor of Sanity CMS
+// const cardPairs = [
+// 	{
+// 		id: "pair-1",
+// 		left: {
+// 			title: "Emotional Trading",
+// 			subtitle: "(Fear & Greed)",
+// 		},
+// 		right: {
+// 			title: "Hero Mentality",
+// 			subtitle: "(Following the crowd)",
+// 		},
+// 		topPosition: "20%",
+// 	},
+// 	{
+// 		id: "pair-2",
+// 		left: {
+// 			title: "Timing the Market",
+// 			subtitle: "(Buying high, selling low)",
+// 		},
+// 		right: {
+// 			title: "Lack of Diversification",
+// 			subtitle: "(Only investing on similar stocks)",
+// 		},
+// 		topPosition: "50%",
+// 	},
+// 	{
+// 		id: "pair-3",
+// 		left: {
+// 			title: "Chasing Past Performance",
+// 			subtitle: "(Assuming old ways always works)",
+// 		},
+// 		right: {
+// 			title: "Ignoring Fees and Expenses",
+// 			subtitle: "(Buying high, selling low)",
+// 		},
+// 		topPosition: "80%",
+// 	},
+// ];
+
+// Default fallback data
+const defaultInvestorTrapData: InvestorTrapData = {
+	title: "The retail investor's trap.",
+	subtitle: "And how we fix it.",
+	cardPairs: [
+		{
+			left: {
+				title: "Emotional Trading",
+				subtitle: "(Fear & Greed)",
+			},
+			right: {
+				title: "Hero Mentality",
+				subtitle: "(Following the crowd)",
+			},
+			topPosition: "20%",
 		},
-		right: {
-			title: "Hero Mentality",
-			subtitle: "(Following the crowd)",
+		{
+			left: {
+				title: "Timing the Market",
+				subtitle: "(Buying high, selling low)",
+			},
+			right: {
+				title: "Lack of Diversification",
+				subtitle: "(Only investing on similar stocks)",
+			},
+			topPosition: "50%",
 		},
-		// Vertical position on the funnel (percentage from top)
-		topPosition: "20%",
-	},
-	{
-		id: "pair-2",
-		left: {
-			title: "Timing the Market",
-			subtitle: "(Buying high, selling low)",
+		{
+			left: {
+				title: "Chasing Past Performance",
+				subtitle: "(Assuming old ways always works)",
+			},
+			right: {
+				title: "Ignoring Fees and Expenses",
+				subtitle: "(Buying high, selling low)",
+			},
+			topPosition: "80%",
 		},
-		right: {
-			title: "Lack of Diversification",
-			subtitle: "(Only investing on similar stocks)",
-		},
-		topPosition: "50%",
-	},
-	{
-		id: "pair-3",
-		left: {
-			title: "Chasing Past Performance",
-			subtitle: "(Assuming old ways always works)",
-		},
-		right: {
-			title: "Ignoring Fees and Expenses",
-			subtitle: "(Buying high, selling low)",
-		},
-		topPosition: "80%",
-	},
-];
+	],
+};
+
+interface InvestorTrapProps {
+	data?: { data: InvestorTrapData | null };
+}
 
 // Card component with connecting line
 function TrapCard({
@@ -83,7 +128,10 @@ function TrapCard({
 	);
 }
 
-export default function InvestorTrap() {
+export default function InvestorTrap({ data }: InvestorTrapProps) {
+	const investorTrapData = data?.data || defaultInvestorTrapData;
+	const cardPairs = investorTrapData.cardPairs;
+
 	return (
 		<section className="relative w-full md:h-[250vh] z-10 py-20 md:py-[120px] px-5 md:px-20">
 			<Image
@@ -96,15 +144,15 @@ export default function InvestorTrap() {
 
 			{/* Sticky wrapper that pins everything in viewport */}
 			<h1 className="text-[24px] md:text-[40px] leading-8 md:leading-12 text-center text-white md:pt-[250px]">
-				The retail investor&apos;s trap.
+				{investorTrapData.title}
 				<br />
-				And how we fix it.
+				{investorTrapData.subtitle}
 			</h1>
 
 			{/* mobile */}
 			<div className="md:hidden mt-10">
 				{cardPairs.map((pair, index) => (
-					<div key={pair.id} className="">
+					<div key={index} className="">
 						<div
 							style={{
 								opacity:

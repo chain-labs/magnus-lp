@@ -1,62 +1,98 @@
 import Image from "next/image";
+import type { MeetTheFounderData } from "@/sanity/lib/types";
 
-const founderDetails = {
-	name: "Alireza Azar",
-	position: "Founder & SEBI Registered Research Analyst",
-	bio: "Ali started Magnus Hathaway after seeing too many retail investors lose money to bad advice half-baked Telegram tips, influencer-led chart patterns, random YouTube calls with no accountability. He believed retail investors deserved better. Not tips. Not hype. Just honest, research-backed guidance that explains why, not just what.",
-	credentials: [
-		"SEBI Registered Research Analyst (INH000016588)",
-		"Chartered Accountant (CA)",
-		"15+ years in equity research and analysis",
+// Static data - commented out in favor of Sanity CMS
+// const founderDetails = {
+// 	name: "Alireza Azar",
+// 	position: "Founder & SEBI Registered Research Analyst",
+// 	bio: "Ali started Magnus Hathaway after seeing too many retail investors lose money to bad advice half-baked Telegram tips, influencer-led chart patterns, random YouTube calls with no accountability. He believed retail investors deserved better. Not tips. Not hype. Just honest, research-backed guidance that explains why, not just what.",
+// 	credentials: [
+// 		"SEBI Registered Research Analyst (INH000016588)",
+// 		"Chartered Accountant (CA)",
+// 		"15+ years in equity research and analysis",
+// 	],
+// };
+
+// Default fallback data
+const defaultMeetTheFounderData: MeetTheFounderData = {
+	sectionTitle: "Meet the founder",
+	sectionSubtitle: "The team behind the research. The people you can trust.",
+	storyParagraphs: [
+		{
+			highlightedText: "Magnus Hathaway exists",
+			regularText:
+				" because of a simple observation: retail investors aren't losing money because they lack intelligence. They're losing money because they lack time. HNI investors have dedicated teams tracking stocks full-time. Retail investors are juggling day jobs and responsibilities. By the time they research a stock, the opportunity has passed. Or they chase tips from YouTube and Telegram, hoping they picked right.",
+		},
+		{
+			regularText:
+				"So Ali Azar built Magnus Hathaway to fill that gap. To do the full-time work of stock research and tracking that retail investors can't do themselves. Not to make them analysts. But to give them what HNI investors have always had: quality stock recommendations, explained clearly, with ongoing support.",
+		},
+		{
+			regularText:
+				"Just like discount brokers freed people from expensive middlemen, Magnus Hathaway frees people from having to be full-time analysts.",
+		},
 	],
+	founderDetails: {
+		name: "Alireza Azar",
+		position: "Founder & SEBI Registered Research Analyst",
+		bio: "Ali started Magnus Hathaway after seeing too many retail investors lose money to bad advice half-baked Telegram tips, influencer-led chart patterns, random YouTube calls with no accountability. He believed retail investors deserved better. Not tips. Not hype. Just honest, research-backed guidance that explains why, not just what.",
+		credentials: [
+			"SEBI Registered Research Analyst (INH000016588)",
+			"Chartered Accountant (CA)",
+			"15+ years in equity research and analysis",
+		],
+	},
 };
-export default function MeetTheFounder() {
+
+interface MeetTheFounderProps {
+	data?: { data: MeetTheFounderData | null };
+}
+
+export default function MeetTheFounder({ data }: MeetTheFounderProps) {
+	const meetTheFounderData = data?.data || defaultMeetTheFounderData;
+	const founderDetails = meetTheFounderData.founderDetails;
 	return (
 		<section className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="max-w-[848px] mx-auto flex flex-col gap-[80px]">
 				<div className="flex flex-col gap-[16px]">
 					<h2 className=" text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
-						Meet the founder
+						{meetTheFounderData.sectionTitle}
 					</h2>
 					<p className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white opacity-60">
-						The team behind the research. The people you can trust.
+						{meetTheFounderData.sectionSubtitle}
 					</p>
 				</div>
-				<div className="w-full h-[526px] bg-[#DBDBDB] rounded-[12px]"></div>
+				<div
+					className="w-full h-[526px] bg-[#DBDBDB] rounded-[12px]"
+					style={{
+						backgroundImage: meetTheFounderData.heroImage
+							? `url(${meetTheFounderData.heroImage})`
+							: undefined,
+						backgroundSize: "cover",
+						backgroundPosition: "center",
+					}}
+				></div>
 				<div className="text-[#686e7d] flex flex-col gap-[24px] text-[20px] md:text-[24px] leading-[32px]">
-					<p>
-						<span className="text-white">
-							Magnus Hathaway exists
-						</span>{" "}
-						because of a simple observation: retail investors aren't
-						losing money because they lack intelligence. They're
-						losing money because they lack time. HNI investors have
-						dedicated teams tracking stocks full-time. Retail
-						investors are juggling day jobs and responsibilities. By
-						the time they research a stock, the opportunity has
-						passed. Or they chase tips from YouTube and Telegram,
-						hoping they picked right.
-					</p>
-					<p>
-						So Ali Azar built Magnus Hathaway to fill that gap. To
-						do the full-time work of stock research and tracking
-						that retail investors can't do themselves. Not to make
-						them analysts. But to give them what HNI investors have
-						always had: quality stock recommendations, explained
-						clearly, with ongoing support.
-					</p>
-					<p>
-						Just like discount brokers freed people from expensive
-						middlemen, Magnus Hathaway frees people from having to
-						be full-time analysts.
-					</p>
+					{meetTheFounderData.storyParagraphs.map(
+						(paragraph, index) => (
+							<p key={`story-${index}`}>
+								{paragraph.highlightedText && (
+									<span className="text-white">
+										{paragraph.highlightedText}
+									</span>
+								)}
+								{paragraph.regularText}
+							</p>
+						)
+					)}
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-5 w-full gap-y-[32px] md:gap-[32px]">
 					<div
 						style={{
 							mixBlendMode: "luminosity",
-							backgroundImage:
-								"url(/assets/section/founder/ali.png)",
+							backgroundImage: meetTheFounderData.founderImage
+								? `url(${meetTheFounderData.founderImage})`
+								: "url(/assets/section/founder/ali.png)",
 							backgroundSize: "cover",
 							backgroundPosition: "center",
 							backgroundRepeat: "no-repeat",

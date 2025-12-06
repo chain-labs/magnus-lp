@@ -15,11 +15,42 @@ import WhatOurClientsSay from "@/components/WhatOurClientsSay";
 import YoureStuckInAsystemDesignedToWorkAgainstYou from "@/components/YoureStuckInAsystemDesignedToWorkAgainstYou";
 import { HeaderThemeProvider } from "@/components/HeaderThemeContext";
 import SectionObserver from "@/components/SectionObserver";
+import {
+	HERO_QUERY,
+	HEADER_QUERY,
+	FAQ_QUERY,
+	FOOTER_QUERY,
+	PRICING_QUERY,
+	MEET_THE_FOUNDER_QUERY,
+	INVESTOR_TRAP_QUERY,
+	HOW_MAGNUS_CHANGES_THIS_QUERY,
+	INVESTMENT_PHILOSOPHY_QUERY,
+	OUR_TRACK_RECORD_QUERY,
+	TESTIMONIALS_QUERY,
+	BOOK_A_CALL_QUERY,
+} from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/live";
 
-export default function Home() {
+export default async function Home() {
+	// Fetch all Sanity data in parallel
+	const [heroData, headerData, faqData, footerData, pricingData, meetTheFounderData, investorTrapData, howMagnusChangesThisData, investmentPhilosophyData, ourTrackRecordData, testimonialsData, bookACallData] = await Promise.all([
+		sanityFetch({ query: HERO_QUERY }),
+		sanityFetch({ query: HEADER_QUERY }),
+		sanityFetch({ query: FAQ_QUERY }),
+		sanityFetch({ query: FOOTER_QUERY }),
+		sanityFetch({ query: PRICING_QUERY }),
+		sanityFetch({ query: MEET_THE_FOUNDER_QUERY }),
+		sanityFetch({ query: INVESTOR_TRAP_QUERY }),
+		sanityFetch({ query: HOW_MAGNUS_CHANGES_THIS_QUERY }),
+		sanityFetch({ query: INVESTMENT_PHILOSOPHY_QUERY }),
+		sanityFetch({ query: OUR_TRACK_RECORD_QUERY }),
+		sanityFetch({ query: TESTIMONIALS_QUERY }),
+		sanityFetch({ query: BOOK_A_CALL_QUERY }),
+	]);
+
 	return (
 		<HeaderThemeProvider>
-			<Header />
+			<Header data={headerData} />
 			<SectionObserver theme="dark">
 				<BackgroundBlobsAdder
 					blobs={[
@@ -29,11 +60,11 @@ export default function Home() {
 					]}
 					parentClassName="bg-[#000728]"
 				>
-					<Hero />
+					<Hero data={heroData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
 			<SectionObserver theme="light">
-				<YoureStuckInAsystemDesignedToWorkAgainstYou />
+				<YoureStuckInAsystemDesignedToWorkAgainstYou data={undefined} />
 			</SectionObserver>
 			{/* <BackgroundBlobsAdder
 				blobs={[
@@ -43,11 +74,11 @@ export default function Home() {
 				parentClassName="bg-[#000728]"
 			></BackgroundBlobsAdder> */}
 			<SectionObserver theme="dark" className="bg-[#000728]">
-				<InvestorTrap />
+				<InvestorTrap data={investorTrapData} />
 			</SectionObserver>
 
 			<SectionObserver theme="light">
-				<HowMagnusHathawayChangesThis />
+				<HowMagnusHathawayChangesThis data={howMagnusChangesThisData} />
 			</SectionObserver>
 			<SectionObserver theme="dark">
 				<BackgroundBlobsAdder
@@ -58,14 +89,14 @@ export default function Home() {
 					]}
 					parentClassName="bg-[#000728]"
 				>
-					<InvestmentPhilosophy />
+					<InvestmentPhilosophy data={investmentPhilosophyData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
 			<SectionObserver theme="light">
 				<HighestQualityResearchReadyBeforeTheMarketOpens />
 			</SectionObserver>
 			<SectionObserver theme="light">
-				<Pricing />
+				<Pricing data={pricingData} />
 			</SectionObserver>
 			<SectionObserver theme="dark">
 				<BackgroundBlobsAdder
@@ -75,12 +106,12 @@ export default function Home() {
 					]}
 					parentClassName="bg-[#000728]"
 				>
-					<OurTrackRecord />
-					<WhatOurClientsSay />
+				<OurTrackRecord data={ourTrackRecordData} />
+				<WhatOurClientsSay data={testimonialsData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
 			<SectionObserver theme="light">
-				<FAQ />
+				<FAQ data={faqData} />
 			</SectionObserver>
 			<SectionObserver theme="dark">
 				<BackgroundBlobsAdder
@@ -92,12 +123,12 @@ export default function Home() {
 					]}
 					parentClassName="bg-[#000728]"
 				>
-					<MeetTheFounder />
-					<BookACall />
+				<MeetTheFounder data={meetTheFounderData} />
+				<BookACall data={bookACallData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
 			<SectionObserver theme="light">
-				<Footer />
+				<Footer data={footerData} />
 			</SectionObserver>
 		</HeaderThemeProvider>
 	);

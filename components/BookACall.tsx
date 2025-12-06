@@ -1,13 +1,30 @@
 import Link from "next/link";
+import type { BookACallData } from "@/sanity/lib/types";
 
-const bookACallData = {
+// Static data - commented out in favor of Sanity CMS
+// const bookACallData = {
+// 	title: "Want research-backed clarity for your portfolio?",
+// 	subtitle: "No hype. No pressure. Just research.",
+// 	contactUsLink: "https://cal.com/magnushathaway/30min",
+// 	bookACallLink: "https://cal.com/magnushathaway/30min",
+// };
+
+// Default fallback data
+const defaultBookACallData: BookACallData = {
 	title: "Want research-backed clarity for your portfolio?",
 	subtitle: "No hype. No pressure. Just research.",
 	contactUsLink: "https://cal.com/magnushathaway/30min",
 	bookACallLink: "https://cal.com/magnushathaway/30min",
+	contactUsButtonText: "Contact Us",
+	bookACallButtonText: "Book a Call",
 };
 
-export default function BookACall() {
+interface BookACallProps {
+	data?: { data: BookACallData | null };
+}
+
+export default function BookACall({ data }: BookACallProps) {
+	const bookACallData = data?.data || defaultBookACallData;
 	return (
 		<section className="relative w-full h-screen md:h-fit py-[112px] px-[20px] md:px-[80px]">
 			<hr className="hidden md:absolute top-0 left-[20px] h-[1px] w-[calc(100%-40px)] bg-[#FFFFFF33] opacity-20" />
@@ -26,7 +43,7 @@ export default function BookACall() {
 						className="cursor-pointer"
 					>
 						<button className="px-[24px] py-[12px] bg-white border border-white rounded-[8px] text-[16px] leading-[24px] text-nowrap">
-							Contact Us
+							{bookACallData.contactUsButtonText || "Contact Us"}
 						</button>
 					</Link>
 					<Link
@@ -34,7 +51,7 @@ export default function BookACall() {
 						className="cursor-pointer"
 					>
 						<button className="px-[24px] py-[12px] border border-white rounded-[8px] text-[16px] leading-[24px] text-white text-nowrap">
-							Book a Call
+							{bookACallData.bookACallButtonText || "Book a Call"}
 						</button>
 					</Link>
 				</div>
