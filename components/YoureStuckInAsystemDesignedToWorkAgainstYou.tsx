@@ -157,7 +157,7 @@ export default function YoureStuckInAsystemDesignedToWorkAgainstYou({
 						{youreStuckData.items.map((item, index) => (
 							<div
 								key={index}
-								className="w-full h-full md:min-h-[403px] bg-[#F4F6F8] border border-[#040D261F] rounded-[8px] p-[32px] gap-[16px] flex flex-col"
+								className="w-full h-full md:min-h-[403px] bg-[#f4f6f8] border border-[#040D261F] rounded-[8px] p-[32px] gap-[16px] flex flex-col"
 							>
 								{iconMap[item.iconType] ||
 									iconMap["no-guidance"]}

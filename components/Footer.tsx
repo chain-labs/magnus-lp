@@ -161,35 +161,39 @@ const defaultFooterData: FooterData = {
 	disclosuresLinks: [
 		{
 			label: "Investor Charter (Annexure A)",
-			link: "https://www.magnushathaway.com/investor-charter",
+			link: "https://magnushathaway.b-cdn.net/1.%20Annexure%20A-%20Investor%20Charter.docx.pdf",
 		},
 		{
 			label: "Investor Complaints (Annexure B)",
-			link: "https://www.magnushathaway.com/investor-complaints",
+			link: "https://magnushathaway.b-cdn.net/2.%20Annexure%20B%20-%20Complaint%20Data.xlsx%20-%20Annexure-%20B.pdf",
 		},
 		{
 			label: "Grievance Redressal Process",
-			link: "https://www.magnushathaway.com/grievance-redressal-process",
+			link: "https://magnushathaway.b-cdn.net/3.%20Redressal%20Grievance.docx.pdf",
 		},
 		{
-			label: "Disclaimer",
-			link: "https://www.magnushathaway.com/disclaimer",
+			label: "Disclaimers",
+			link: "https://magnushathaway.b-cdn.net/4.%20Disclaimer.docx.pdf",
 		},
 		{
 			label: "Disclosures",
-			link: "https://www.magnushathaway.com/disclosures",
+			link: "https://magnushathaway.b-cdn.net/5.%20Disclosures.docx.pdf",
 		},
 		{
 			label: "Escalation Matrix",
-			link: "https://www.magnushathaway.com/escalation-matrix",
+			link: "https://magnushathaway.b-cdn.net/6.%20Escalation%20Matrix.docx.pdf",
 		},
 		{
 			label: "Audit Report",
-			link: "https://www.magnushathaway.com/audit-report",
+			link: "https://magnushathaway.b-cdn.net/8.%20Audit%20Status.docx.pdf",
+		},
+		{
+			label: "Code of Conduct",
+			link: "https://magnushathaway.b-cdn.net/10.%20Code%20of%20Conduct.docx.pdf",
 		},
 		{
 			label: "PMLA Policy",
-			link: "https://www.magnushathaway.com/pmla-policy",
+			link: "https://magnushathaway.b-cdn.net/11.%20PMLA%20Policy.docx.pdf",
 		},
 	],
 	disclosureStatement:

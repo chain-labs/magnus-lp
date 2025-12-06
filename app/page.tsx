@@ -63,7 +63,7 @@ export default async function Home() {
 					<Hero data={heroData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
-			<SectionObserver theme="light">
+			<SectionObserver theme="light" className="z-10">
 				<YoureStuckInAsystemDesignedToWorkAgainstYou data={undefined} />
 			</SectionObserver>
 			{/* <BackgroundBlobsAdder
@@ -73,7 +73,7 @@ export default async function Home() {
 				]}
 				parentClassName="bg-[#000728]"
 			></BackgroundBlobsAdder> */}
-			<SectionObserver theme="dark" className="bg-[#000728]">
+			<SectionObserver theme="dark" className="z-[-1]">
 				<InvestorTrap data={investorTrapData} />
 			</SectionObserver>
 
