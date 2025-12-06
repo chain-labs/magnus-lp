@@ -1,9 +1,14 @@
 "use client";
 
 import { InvestorTrapData } from "@/sanity/lib/types";
-import { motion, useScroll, useTransform } from "motion/react";
+import {
+	motion,
+	useMotionValueEvent,
+	useScroll,
+	useTransform,
+} from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { use, useEffect, useRef, useState } from "react";
 
 // Static data - commented out in favor of Sanity CMS
 // const cardPairs = [
@@ -59,7 +64,7 @@ const defaultInvestorTrapData: InvestorTrapData = {
 				title: "Hero Mentality",
 				subtitle: "(Following the crowd)",
 			},
-			topPosition: "20%",
+			topPosition: "22%",
 		},
 		{
 			left: {
@@ -90,50 +95,80 @@ interface InvestorTrapProps {
 	data?: { data: InvestorTrapData | null };
 }
 
+function useMidlineTrigger() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (!ref.current) return;
+
+      const rect = ref.current.getBoundingClientRect();
+      const viewportMid = window.innerHeight * 0.3;
+
+      // If the TOP of the card has reached or passed the middle of the screen
+      if (rect.top <= viewportMid) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    }
+
+    // Run once on mount
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  return { ref, isActive };
+}
+
 // Card component with connecting line
 function TrapCard({
-	title,
-	subtitle,
-	side,
-	style,
+  title,
+  subtitle,
+  side,
+  style,
 }: {
-	title: string;
-	subtitle: string;
-	side: "left" | "right";
-	style?: React.CSSProperties;
+  title: string;
+  subtitle: string;
+  side: "left" | "right";
+  style?: React.CSSProperties;
 }) {
-	const ref = useRef(null);
-	const { scrollYProgress } = useScroll({
-		offset: ["start start", "end end"],
-	});
+  const { ref, isActive } = useMidlineTrigger();
 
-	const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-	return (
-		<motion.div
-			ref={ref}
-			className={`flex items-center gap-3 ${
-				side === "left" ? "flex-row" : "flex-row-reverse"
-			}`}
-			style={{ ...style, opacity }}
-		>
-			{/* Card content */}
-			<div
-				className={`bg-[#1a1f35]/90 backdrop-blur-sm border border-[#2a3050] rounded-lg px-4 py-3 min-w-[200px]`}
-			>
-				<h3 className="text-white text-base font-semibold">{title}</h3>
-				<p className="text-gray-400 text-sm mt-1">{subtitle}</p>
-			</div>
-		</motion.div>
-	);
+  return (
+    <motion.div
+      ref={ref}
+      className={`flex items-center gap-3 ${
+        side === "left" ? "flex-row" : "flex-row-reverse"
+      }`}
+      style={style}
+      initial={{ opacity: 0.3 }}
+      animate={{ opacity: isActive ? 1 : 0.3 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+    >
+      <div className="bg-[#1a1f35]/90 backdrop-blur-sm border border-[#2a3050] rounded-lg px-4 py-3 min-w-[200px]">
+        <h3 className="text-white text-base font-semibold">{title}</h3>
+        <p className="text-gray-400 text-sm mt-1">{subtitle}</p>
+      </div>
+    </motion.div>
+  );
 }
+
 
 export default function InvestorTrap({ data }: InvestorTrapProps) {
 	const investorTrapData = data?.data || defaultInvestorTrapData;
 	const cardPairs = investorTrapData.cardPairs;
 
 	return (
-		<section className="relative w-full md:h-[250vh] z-10 py-20 md:py-[120px] px-5 md:px-20">
+		<section className="relative w-full md:h-[2200px] z-10 py-20 md:py-[120px] px-5 md:px-20">
 			<Image
 				src="/assets/section/hero/skewedGrid.svg"
 				alt="skewed grid"
@@ -237,11 +272,11 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 				alt="Investor Trap Funnel"
 				width={600}
 				height={800}
-				className="hidden md:block md:sticky top-[250px] max-w-full w-[510px] h-[704.5px] mx-auto mt-[100px] mb-10"
+				className="hidden md:block md:sticky top-[30vh] max-w-full w-[510px] h-[704.5px] mx-auto mt-[100px] mb-10"
 			/>
 			{/* Cards */}
 
-			<div className="hidden md:block relative h-screen transform -translate-y-[80%]">
+			<div className="hidden md:block relative h-[1325.454545484px] transform -translate-y-[80%] max-w-7xl mx-auto">
 				{cardPairs.map((pair) => (
 					<>
 						<TrapCard
@@ -252,7 +287,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 								position: "absolute",
 								top: pair.topPosition,
 								left: "15%",
-								transform: "translateY(-100%)",
+								transform: "translateY(-30%)",
 							}}
 						/>
 						<TrapCard
