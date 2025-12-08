@@ -41,7 +41,7 @@ const defaultHowMagnusChangesThisData: HowMagnusChangesThisData = {
 			title: "You get expert research. Clearly explained.",
 			description:
 				"Every stock recommendation comes with a detailed research report. Not a hot tip. Not a chart pattern. Real analysis. Real reasoning. Real clarity on why we think this stock matters. You understand the business. You understand the valuation. You understand what could go wrong.",
-			image: "/assets/section/howMagnusHathawayChangesThis/1.png",
+			image: "/assets/section/howMagnusHathawayChangesThis/1.svg",
 			imageDirection: "left",
 		},
 		{
@@ -49,7 +49,7 @@ const defaultHowMagnusChangesThisData: HowMagnusChangesThisData = {
 			title: "You get what HNI investors have always had.",
 			description:
 				"Just like discount brokers democratized trading, Magnus Hathaway democratizes quality investment advice.  Stock recommendations you can act on. Clear reasoning behind every pick. No conflicts. No pressure to buy. You stay in control. You make the final call.",
-			image: "/assets/section/howMagnusHathawayChangesThis/2.png",
+			image: "/assets/section/howMagnusHathawayChangesThis/2.svg",
 			imageDirection: "right",
 		},
 		{
@@ -57,7 +57,7 @@ const defaultHowMagnusChangesThisData: HowMagnusChangesThisData = {
 			title: "You get regular updates. Not daily noise.",
 			description:
 				"Quarterly updates on each holding. We explain what changed. We tell you when to hold and when to exit. You're not left wondering if this is still a good idea. Over time, you learn to spot opportunities yourself. You learn to think like an investor. Eventually, you won't need to rely on us. You'll have the confidence to invest on your own.",
-			image: "/assets/section/howMagnusHathawayChangesThis/3.png",
+			image: "/assets/section/howMagnusHathawayChangesThis/3.svg",
 			imageDirection: "left",
 		},
 	],
