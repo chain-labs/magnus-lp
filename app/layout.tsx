@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Clarity from "@/components/Clarity";
 
 const helvetica = localFont({
 	src: "../public/assets/fonts/Helvetica.ttf",
@@ -81,6 +82,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${helvetica.variable} antialiased`}>
+				<Clarity />
 				{children}
 			</body>
 		</html>

@@ -3,14 +3,22 @@
 import { useEffect, useRef } from "react";
 import { useHeaderTheme } from "./HeaderThemeContext";
 
+declare global {
+	interface Window {
+		clarity: (event: string, action: string, params?: Record<string, unknown>) => void;
+	}
+}
+
 export default function SectionObserver({
 	children,
 	theme,
 	className,
+	sectionName,
 }: {
 	children: React.ReactNode;
 	theme: "light" | "dark";
 	className?: string;
+	sectionName?: string;
 }) {
 	const { setTheme } = useHeaderTheme();
 	const ref = useRef<HTMLDivElement>(null);
@@ -46,6 +54,44 @@ export default function SectionObserver({
 			}
 		};
 	}, [theme, setTheme]);
+
+	useEffect(() => {
+		if (!sectionName) return;
+
+		let startTime: number | null = null;
+
+		const timeObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						startTime = Date.now();
+					} else {
+						if (startTime) {
+							const duration = Date.now() - startTime;
+							if (window.clarity) {
+								window.clarity("event", "section_view", {
+									section: sectionName,
+									duration: duration,
+								});
+							}
+							startTime = null;
+						}
+					}
+				});
+			},
+			{ threshold: 0.5 }
+		);
+
+		if (ref.current) {
+			timeObserver.observe(ref.current);
+		}
+
+		return () => {
+			if (ref.current) {
+				timeObserver.unobserve(ref.current);
+			}
+		};
+	}, [sectionName]);
 
 	return (
 		<div ref={ref} className={className}>

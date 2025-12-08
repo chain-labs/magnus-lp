@@ -51,7 +51,7 @@ export default async function Home() {
 	return (
 		<HeaderThemeProvider>
 			<Header data={headerData} />
-			<SectionObserver theme="dark">
+			<SectionObserver theme="dark" sectionName="Hero">
 				<BackgroundBlobsAdder
 					blobs={[
 						"absolute top-[15%] left-[85%] translate-y-[-10%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.78]",
@@ -63,7 +63,7 @@ export default async function Home() {
 					<Hero data={heroData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
-			<SectionObserver theme="light" className="z-10">
+			<SectionObserver theme="light" className="z-10" sectionName="YoureStuck">
 				<YoureStuckInAsystemDesignedToWorkAgainstYou data={undefined} />
 			</SectionObserver>
 			{/* <BackgroundBlobsAdder
@@ -73,14 +73,14 @@ export default async function Home() {
 				]}
 				parentClassName="bg-[#000728]"
 			></BackgroundBlobsAdder> */}
-			<SectionObserver theme="dark" className="z-[-1]">
+			<SectionObserver theme="dark" className="z-[-1]" sectionName="InvestorTrap">
 				<InvestorTrap data={investorTrapData} />
 			</SectionObserver>
 
-			<SectionObserver theme="light">
+			<SectionObserver theme="light" sectionName="HowMagnusChangesThis">
 				<HowMagnusHathawayChangesThis data={howMagnusChangesThisData} />
 			</SectionObserver>
-			<SectionObserver theme="dark">
+			<SectionObserver theme="dark" sectionName="InvestmentPhilosophy">
 				<BackgroundBlobsAdder
 					blobs={[
 						"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
@@ -92,13 +92,13 @@ export default async function Home() {
 					<InvestmentPhilosophy data={investmentPhilosophyData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
-			<SectionObserver theme="light">
+			<SectionObserver theme="light" sectionName="HighestQualityResearch">
 				<HighestQualityResearchReadyBeforeTheMarketOpens />
 			</SectionObserver>
-			<SectionObserver theme="light">
+			<SectionObserver theme="light" sectionName="Pricing">
 				<Pricing data={pricingData} />
 			</SectionObserver>
-			<SectionObserver theme="dark">
+			<SectionObserver theme="dark" sectionName="TrackRecordAndTestimonials">
 				<BackgroundBlobsAdder
 					blobs={[
 						"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
@@ -110,10 +110,10 @@ export default async function Home() {
 				<WhatOurClientsSay data={testimonialsData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
-			<SectionObserver theme="light">
+			<SectionObserver theme="light" sectionName="FAQ">
 				<FAQ data={faqData} />
 			</SectionObserver>
-			<SectionObserver theme="dark">
+			<SectionObserver theme="dark" sectionName="FounderAndCall">
 				<BackgroundBlobsAdder
 					blobs={[
 						"absolute top-[10%] left-[60%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
@@ -127,7 +127,7 @@ export default async function Home() {
 				<BookACall data={bookACallData} />
 				</BackgroundBlobsAdder>
 			</SectionObserver>
-			<SectionObserver theme="light">
+			<SectionObserver theme="light" sectionName="Footer">
 				<Footer data={footerData} />
 			</SectionObserver>
 		</HeaderThemeProvider>
