@@ -100,7 +100,7 @@ const blurredRows = [
 ];
 
 export default function HighestQualityResearchReadyBeforeTheMarketOpens() {
-	const blurred = true;
+	const blurred = false;
 	return (
 		<section className="w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px]">
 			<div className="max-w-7xl mx-auto flex flex-col gap-[80px]">

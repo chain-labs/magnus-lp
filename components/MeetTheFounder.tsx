@@ -17,6 +17,7 @@ import type { MeetTheFounderData } from "@/sanity/lib/types";
 const defaultMeetTheFounderData: MeetTheFounderData = {
 	sectionTitle: "Meet the founder",
 	sectionSubtitle: "The team behind the research. The people you can trust.",
+	heroImage: "/assets/section/founder/heroImage.png",
 	storyParagraphs: [
 		{
 			highlightedText: "Magnus Hathaway exists",
@@ -62,16 +63,18 @@ export default function MeetTheFounder({ data }: MeetTheFounderProps) {
 						{meetTheFounderData.sectionSubtitle}
 					</p>
 				</div>
-				<div
-					className="w-full h-[526px] bg-[#DBDBDB] rounded-[12px]"
-					style={{
-						backgroundImage: meetTheFounderData.heroImage
-							? `url(${meetTheFounderData.heroImage})`
-							: undefined,
-						backgroundSize: "cover",
-						backgroundPosition: "center",
-					}}
-				></div>
+				{meetTheFounderData.heroImage && (
+					<div
+						className="w-full h-[526px] bg-[#DBDBDB] rounded-[12px]"
+						style={{
+							backgroundImage: meetTheFounderData.heroImage
+								? `url(${meetTheFounderData.heroImage})`
+								: undefined,
+							backgroundSize: "cover",
+							backgroundPosition: "center",
+						}}
+					></div>
+				)}
 				<div className="text-[#686e7d] flex flex-col gap-[24px] text-[20px] md:text-[24px] leading-[32px]">
 					{meetTheFounderData.storyParagraphs.map(
 						(paragraph, index) => (
