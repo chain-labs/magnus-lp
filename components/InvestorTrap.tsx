@@ -104,7 +104,7 @@ function useMidlineTrigger() {
 			if (!ref.current) return;
 
 			const rect = ref.current.getBoundingClientRect();
-			const viewportMid = window.innerHeight * 0.3;
+			const viewportMid = window.innerHeight * 0.5;
 
 			// If the TOP of the card has reached or passed the middle of the screen
 			if (rect.top <= viewportMid) {
@@ -174,7 +174,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 				<div className="absolute top-[15%] left-[100%] translate-x-[50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px]"></div>
 				<div className="absolute top-[15%] left-[0%] translate-x-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-20"></div>
 			</div>
-			<div className="w-full md:h-[2200px] py-20 md:py-[120px] px-5 z-10">
+			<div className="w-full md:h-[2200px] py-20 md:py-[120px] px-5 z-10 md:pt-[370px]">
 				<Image
 					src="/assets/section/hero/skewedGrid.svg"
 					alt="skewed grid"
@@ -184,10 +184,17 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 				/>
 
 				{/* Sticky wrapper that pins everything in viewport */}
-				<h1 className="text-[24px] md:text-[40px] leading-8 md:leading-12 text-center text-white md:pt-[250px]">
+				<h1 className="block md:sticky top-[10vh] text-[24px] md:text-[40px] leading-8 md:leading-12 text-center text-white">
 					{investorTrapData.title}
 					<br />
 					{investorTrapData.subtitle}
+					<Image
+						src="/assets/section/investorTrap/trap-desktop.svg"
+						alt="Investor Trap Funnel"
+						width={600}
+						height={800}
+						className="hidden md:block md:sticky max-w-full w-[510px] h-[704.5px] mx-auto mt-[100px] mb-10"
+					/>
 				</h1>
 
 				{/* mobile */}
@@ -281,13 +288,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 					height={800}
 					className="block md:hidden max-w-full w-[510px] h-[704.5px] mx-auto mt-[-100px] mb-10"
 				/>
-				<Image
-					src="/assets/section/investorTrap/trap-desktop.svg"
-					alt="Investor Trap Funnel"
-					width={600}
-					height={800}
-					className="hidden md:block md:sticky top-[30vh] max-w-full w-[510px] h-[704.5px] mx-auto mt-[100px] mb-10"
-				/>
+
 				{/* Cards */}
 
 				<div className="hidden md:block relative h-[1325.454545484px] transform -translate-y-[80%] max-w-7xl mx-auto">
@@ -301,7 +302,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 									position: "absolute",
 									top: pair.topPosition,
 									left: "15%",
-									transform: "translateY(-30%)",
+									transform: "translateY(-20%)",
 								}}
 							/>
 							<TrapCard
