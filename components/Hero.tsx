@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
 	Mic,
 	MicOff,
@@ -46,28 +46,6 @@ import type { HeroData } from "@/sanity/lib/types";
 const defaultHeroData: HeroData = {
 	subtitle: "Stock Picking, Simplified",
 	headline: "HNIs get analysts. You get YouTube. That gap costs you.",
-	frequentlyAskedQuestions: [
-		{
-			question: "What is the difference between a stock and a bond?",
-			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-		},
-		{
-			question: "What is the difference between a stock and a bond?",
-			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-		},
-		{
-			question: "What is the difference between a stock and a bond?",
-			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-		},
-		{
-			question: "What is the difference between a stock and a bond?",
-			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-		},
-		{
-			question: "What is the difference between a stock and a bond?",
-			answer: "A stock is a security that represents ownership in a company. A bond is a security that represents a loan to a company or government.",
-		},
-	],
 };
 
 interface HeroProps {
@@ -78,6 +56,29 @@ export default function Hero({ data }: HeroProps) {
 	const heroData = data?.data || defaultHeroData;
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
+	const [answeredQuestions, setAnsweredQuestions] = useState<
+		{
+			questionText: string;
+			answerText: string;
+			id: string;
+		}[]
+	>([]);
+
+	useEffect(() => {
+		const fetchQuestions = async () => {
+			try {
+				const response = await fetch("/api/questions/answered");
+				if (response.ok) {
+					const data = await response.json();
+					setAnsweredQuestions(data.questions);
+				}
+			} catch (error) {
+				console.error("Error fetching questions:", error);
+			}
+		};
+
+		fetchQuestions();
+	}, []);
 
 	const {
 		input,
@@ -121,7 +122,10 @@ export default function Hero({ data }: HeroProps) {
 	return (
 		<section className="w-full min-h-screen flex items-center justify-center py-[120px] pb-[40px] md:pb-[120px]">
 			<Image
-				src={heroData.skewedGridImage || "/assets/section/hero/skewedGrid.svg"}
+				src={
+					heroData.skewedGridImage ||
+					"/assets/section/hero/skewedGrid.svg"
+				}
 				alt="skewed grid"
 				width={1000}
 				height={1000}
@@ -135,12 +139,14 @@ export default function Hero({ data }: HeroProps) {
 							{heroData.subtitle}
 						</h2>
 						<h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-white text-center font-light tracking-wide max-w-[846px]">
-							{heroData.headline?.split("\n").map((line, idx, arr) => (
-								<span key={idx}>
-									{line}
-									{idx < arr.length - 1 && <br />}
-								</span>
-							)) || heroData.headline}
+							{heroData.headline
+								?.split("\n")
+								.map((line, idx, arr) => (
+									<span key={idx}>
+										{line}
+										{idx < arr.length - 1 && <br />}
+									</span>
+								)) || heroData.headline}
 						</h1>
 					</div>
 
@@ -153,7 +159,8 @@ export default function Hero({ data }: HeroProps) {
 									Question Submitted!
 								</h3>
 								<p className="text-gray-500">
-									We&apos;ve received your query and will get back to you shortly.
+									We&apos;ve received your query and will get
+									back to you shortly.
 								</p>
 							</div>
 						) : (
@@ -251,7 +258,8 @@ export default function Hero({ data }: HeroProps) {
 											<button
 												type="submit"
 												disabled={
-													!fullText.trim() || isLoading
+													!fullText.trim() ||
+													isLoading
 												}
 												className={`
 											p-3 rounded-[12px] transition-all duration-200 flex items-center justify-center
@@ -284,7 +292,7 @@ export default function Hero({ data }: HeroProps) {
 					{/* frequently asked questions */}
 					<InfiniteSlider speedOnHover={1} gap={24}>
 						<div className="flex items-center justify-center gap-[24px]">
-							{heroData.frequentlyAskedQuestions.map((item, index) => (
+							{answeredQuestions.map((item, index) => (
 								<div
 									key={`faq-${index}`}
 									className="flex flex-col gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] max-md:w-[280px] h-[200px] px-[24px] py-[16px]"
@@ -312,8 +320,8 @@ export default function Hero({ data }: HeroProps) {
 									{/* <h3 className="text-[24px] leading-[32px] text-white font-light tracking-wide">
 									{item.question}
 								</h3> */}
-									<p className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide">
-										{item.answer}
+									<p className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-5">
+										{item.answerText}
 									</p>
 								</div>
 							))}

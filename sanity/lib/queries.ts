@@ -4,10 +4,6 @@ import { defineQuery } from "next-sanity";
 export const HERO_QUERY = defineQuery(`*[_type == "hero"][0]{
   subtitle,
   headline,
-  frequentlyAskedQuestions[]{
-    question,
-    answer
-  },
   "skewedGridImage": skewedGridImage.asset->url
 }`);
 

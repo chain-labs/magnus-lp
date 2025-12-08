@@ -2,10 +2,6 @@
 export interface HeroData {
 	subtitle: string;
 	headline: string;
-	frequentlyAskedQuestions: {
-		question: string;
-		answer: string;
-	}[];
 	skewedGridImage?: string;
 }
 
