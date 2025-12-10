@@ -211,7 +211,7 @@ export default function Hero({ data }: HeroProps) {
 									{/* Toolbar */}
 									<div className="flex items-center justify-between px-[32px] py-[24px] pt-0">
 										{/* Left Side - Toggle */}
-										<div className="flex items-center">
+										{/* <div className="flex items-center">
 											<span className="hidden md:flex text-[14px] leading-[20px] text-[#010943] select-none items-center gap-2 bg-[#F1F2F9] rounded-[8px] px-[12px] py-[8px]">
 												Show relevant answers
 												<CircleCheck className="w-4 h-4 text-[#010943]" />
@@ -222,7 +222,8 @@ export default function Hero({ data }: HeroProps) {
 											>
 												<SlidersHorizontal className="w-6 h-6" />
 											</button>
-										</div>
+										</div> */}
+										<div></div>
 
 										{/* Right Side - Action Buttons */}
 										<div className="flex items-center gap-3">
