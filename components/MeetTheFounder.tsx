@@ -17,7 +17,7 @@ import type { MeetTheFounderData } from "@/sanity/lib/types";
 const defaultMeetTheFounderData: MeetTheFounderData = {
 	sectionTitle: "Meet the founder",
 	sectionSubtitle: "The team behind the research. The people you can trust.",
-	heroImage: "/assets/section/founder/heroImage.png",
+	heroImage: undefined,
 	storyParagraphs: [
 		{
 			highlightedText: "Magnus Hathaway exists",
@@ -52,6 +52,7 @@ interface MeetTheFounderProps {
 export default function MeetTheFounder({ data }: MeetTheFounderProps) {
 	const meetTheFounderData = data?.data || defaultMeetTheFounderData;
 	const founderDetails = meetTheFounderData.founderDetails;
+	console.log('founder', meetTheFounderData);
 	return (
 		<section className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="max-w-[848px] mx-auto flex flex-col gap-[80px]">
@@ -101,7 +102,7 @@ export default function MeetTheFounder({ data }: MeetTheFounderProps) {
 							backgroundRepeat: "no-repeat",
 							backgroundBlendMode: "luminosity",
 						}}
-						className="w-full h-full min-h-[386.6190490722656px] rounded-[12px] bg-[#040D26] col-span-2 row-span-[1/3]"
+						className="w-full h-full min-h-[386.6190490722656px] rounded-[12px] bg-[#040D26] col-span-2 row-span-[1/3] aspect-3/4"
 					></div>
 
 					<div className="flex flex-col gap-[32px] col-span-3">
