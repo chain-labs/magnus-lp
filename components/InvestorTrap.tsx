@@ -129,6 +129,59 @@ function useMidlineTrigger() {
 	return { ref, isActive };
 }
 
+function MobileTrapCard({
+	pair,
+	index,
+}: {
+	pair: {
+		left: {
+			title: string;
+			subtitle: string;
+		};
+		right: {
+			title: string;
+			subtitle: string;
+		};
+		topPosition: string;
+	};
+	index: number;
+}) {
+	const { ref: leftRef, isActive: leftActive } = useMidlineTrigger();
+	const { ref: rightRef, isActive: rightActive } = useMidlineTrigger();
+	return (
+		<div key={index} className="">
+			<motion.div
+				ref={leftRef}
+				initial={{ opacity: 0.3 }}
+				animate={{ opacity: leftActive ? 1 : 0.3 }}
+				transition={{ duration: 0.25, ease: "easeOut" }}
+				className={`bg-[#1a1f35]/90 backdrop-blur-sm border border-[#2a3050] rounded-lg px-4 py-3 min-w-[200px] w-[261px] mb-4 mx-auto`}
+			>
+				<h3 className="text-white text-base font-semibold">
+					{pair.left.title}
+				</h3>
+				<p className="text-gray-400 text-sm mt-1">
+					{pair.left.subtitle}
+				</p>
+			</motion.div>
+			<motion.div
+				ref={rightRef}
+				initial={{ opacity: 0.3 }}
+				animate={{ opacity: rightActive ? 1 : 0.3 }}
+				transition={{ duration: 0.25, ease: "easeOut" }}
+				className={`bg-[#1a1f35]/90 backdrop-blur-sm border border-[#2a3050] rounded-lg px-4 py-3 min-w-[200px] w-[261px] mb-4 mx-auto`}
+			>
+				<h3 className="text-white text-base font-semibold">
+					{pair.right.title}
+				</h3>
+				<p className="text-gray-400 text-sm mt-1">
+					{pair.right.subtitle}
+				</p>
+			</motion.div>
+		</div>
+	);
+}
+
 // Card component with connecting line
 function TrapCard({
 	title,
@@ -200,44 +253,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 				{/* mobile */}
 				<div className="md:hidden mt-10">
 					{cardPairs.map((pair, index) => (
-						<div key={index} className="">
-							<div
-								style={{
-									opacity:
-										index === 0
-											? 1
-											: index === 1
-											? 0.5
-											: 0.3,
-								}}
-								className={`bg-[#1a1f35]/90 backdrop-blur-sm border border-[#2a3050] rounded-lg px-4 py-3 min-w-[200px] w-[261px] mb-4 mx-auto`}
-							>
-								<h3 className="text-white text-base font-semibold">
-									{pair.left.title}
-								</h3>
-								<p className="text-gray-400 text-sm mt-1">
-									{pair.left.subtitle}
-								</p>
-							</div>
-							<div
-								style={{
-									opacity:
-										index === 0
-											? 1
-											: index === 1
-											? 0.5
-											: 0.3,
-								}}
-								className={`bg-[#1a1f35]/90 backdrop-blur-sm border border-[#2a3050] rounded-lg px-4 py-3 min-w-[200px] w-[261px] mb-4 mx-auto`}
-							>
-								<h3 className="text-white text-base font-semibold">
-									{pair.right.title}
-								</h3>
-								<p className="text-gray-400 text-sm mt-1">
-									{pair.right.subtitle}
-								</p>
-							</div>
-						</div>
+						<MobileTrapCard pair={pair} index={index} key={index} />
 					))}
 					<svg
 						width="44"
