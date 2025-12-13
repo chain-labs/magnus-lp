@@ -234,6 +234,7 @@ const initialData = [
     _type: 'highestQualityResearch',
     title: 'Highest quality research, ready before the market opens',
     description: "Curated calls across overnight, intraday, and positional strategies. Unlock deeper analytics, price targets, and premium playbooks tailored to your desk without the noise.",
+    displayLimit: 5,
     tableHeaders: [
       { _key: 'th1', label: 'Ticker', align: 'left' },
       { _key: 'th2', label: 'Price Zone', align: 'left' },
@@ -301,6 +302,10 @@ const initialData = [
         published: 'FEB 20, 2026',
       },
     ],
+    ctaTitle: 'Get access to premium research',
+    ctaDescription: 'Join thousands of investors who trust Magnus Hathaway for research-backed stock recommendations.',
+    ctaButtonText: 'Get Started',
+    ctaButtonLink: 'https://cal.com/magnushathaway/30min',
   },
 
   // -------------------------------------------------------------------------
