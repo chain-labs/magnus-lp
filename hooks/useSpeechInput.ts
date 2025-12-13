@@ -183,9 +183,8 @@ export function useSpeechInput(
 			}
 
 			onSubmit?.(fullText);
-			resetInput();
 		},
-		[input, interimText, isListening, onSubmit, resetInput]
+		[input, interimText, isListening, onSubmit]
 	);
 
 	return {
