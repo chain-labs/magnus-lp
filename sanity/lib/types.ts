@@ -76,13 +76,31 @@ export interface FooterData {
 }
 
 // Pricing Types
+export interface BillingPeriod {
+	key: string;
+	label: string;
+	suffix: string;
+}
+
+export interface PriceItem {
+	periodKey: string;
+	amount: number;
+	originalAmount?: number;
+}
+
+export interface PlanFeature {
+	text: string;
+	included: boolean;
+}
+
 export interface PricingPlan {
 	title: string;
-	description: string;
-	monthlyPrice: number;
-	yearlyPrice: number;
-	link: string;
-	features: string[];
+	description?: string;
+	badge?: string;
+	prices: PriceItem[];
+	ctaText: string;
+	ctaLink: string;
+	features: PlanFeature[];
 	primary: boolean;
 }
 
@@ -90,6 +108,7 @@ export interface PricingData {
 	sectionLabel: string;
 	title: string;
 	description: string;
+	billingPeriods: BillingPeriod[];
 	plans: PricingPlan[];
 }
 
