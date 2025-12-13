@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { YoureStuckData } from "@/sanity/lib/types";
 
 const iconMap: Record<string, React.ReactNode> = {

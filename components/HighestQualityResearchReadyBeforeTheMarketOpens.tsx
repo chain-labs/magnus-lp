@@ -126,19 +126,17 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 														{stock.logo ? (
 															<img
 																src={stock.logo}
-																alt={
-																	stock.ticker
-																}
+																alt={stock.ticker}
 																width={48}
 																height={48}
-																className="object-contain w-[48px] h-[48px]"
+																className="object-contain w-12 h-12"
+																onError={(e) => {
+																	(e.currentTarget as HTMLImageElement).src = "/assets/default/logo.png";
+																}}
 															/>
 														) : (
 															<span className="text-[16px] leading-[24px] text-gray-500">
-																{stock.ticker?.slice(
-																	0,
-																	2
-																)}
+																{stock.ticker?.slice(0, 2)}
 															</span>
 														)}
 													</div>

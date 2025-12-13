@@ -234,6 +234,9 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 					width={1000}
 					height={1000}
 					className="w-full h-[50%] max-h-[500px] absolute bottom-0 left-0 object-cover rotate-180 -z-10 opacity-30"
+					onError={(e) => {
+						e.currentTarget.src = "/assets/default/logo.png";
+					}}
 				/>
 
 				{/* Sticky wrapper that pins everything in viewport */}
@@ -247,6 +250,9 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 						width={600}
 						height={800}
 						className="hidden md:block md:sticky max-w-full w-[510px] h-[704.5px] mx-auto mt-[100px] mb-10"
+						onError={(e) => {
+							e.currentTarget.src = "/assets/default/logo.png";
+						}}
 					/>
 				</h1>
 
@@ -303,6 +309,9 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 					width={600}
 					height={800}
 					className="block md:hidden max-w-full w-[510px] h-[704.5px] mx-auto mt-[-100px] mb-10"
+					onError={(e) => {
+						e.currentTarget.src = DEFAULT_IMAGE;
+					}}
 				/>
 
 				{/* Cards */}

@@ -143,7 +143,7 @@ function PricingCard({
 					</div>
 					{alternativePrice && alternativePeriod && (
 						<p className="text-sm text-[#040D26]">
-							or ${alternativePrice.amount} {alternativePeriod.label.toLowerCase()}
+							or ₹{alternativePrice.amount} {alternativePeriod.label.toLowerCase()}
 						</p>
 					)}
 				</div>
@@ -254,7 +254,7 @@ export default function Pricing({ data }: PricingProps) {
 						<h2 className="text-[40px] leading-[48px] text-[#040D26] mb-[24px]">
 							{pricingData.title}
 						</h2>
-						<p className="text-[16px] leading-[24px] text-[#040D26]">
+						<p className="text-[16px] leading-[24px] text-[#040D26] max-w-[768px]">
 							{pricingData.description}
 						</p>
 					</div>

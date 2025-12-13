@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 import type { HowMagnusChangesThisData } from "@/sanity/lib/types";
 
 // Static data - commented out in favor of Sanity CMS
@@ -63,12 +65,42 @@ const defaultHowMagnusChangesThisData: HowMagnusChangesThisData = {
 	],
 };
 
-interface HowMagnusHathawayChangesThisProps {
-	data?:{ data: HowMagnusChangesThisData | null };
+function ImageWithFallback({
+	src,
+	alt,
+	width,
+	height,
+	className,
+}: {
+	src?: string | null;
+	alt: string;
+	width: number;
+	height: number;
+	className?: string;
+}) {
+	const [imgSrc, setImgSrc] = useState(src || "/images/placeholder-image.png");
+	const [imgClassName, setImgClassName] = useState(className || "");
+	return (
+		<Image
+			src={imgSrc}
+			alt={alt}
+			width={width}
+			height={height}
+			className={imgClassName}
+			onError={() => {setImgSrc("/assets/default/logo.png") ; setImgClassName("justify-center items-center w-[300px] h-[300px] m-auto mix-blend-multiply");}}
+		/>
+	);
 }
 
-export default function HowMagnusHathawayChangesThis({ data }: HowMagnusHathawayChangesThisProps) {
-	const howMagnusHathawayChangesThisData = data?.data || defaultHowMagnusChangesThisData;
+interface HowMagnusHathawayChangesThisProps {
+	data?: { data: HowMagnusChangesThisData | null };
+}
+
+export default function HowMagnusHathawayChangesThis({
+	data,
+}: HowMagnusHathawayChangesThisProps) {
+	const howMagnusHathawayChangesThisData =
+		data?.data || defaultHowMagnusChangesThisData;
 	return (
 		<section className="relative w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px] z-0">
 			<div className="absolute top-0 left-0 h-[821.818359375px] w-full z-0">
@@ -107,14 +139,14 @@ export default function HowMagnusHathawayChangesThis({ data }: HowMagnusHathaway
 							</p>
 						</div>
 						<div
-							className={`h-full md:h-[640px] w-full md:w-[640px] ${
+							className={`h-full md:h-[640px] w-full md:w-[640px] flex justify-center items-center ${
 								item.imageDirection === "right"
 									? "order-1"
 									: "order-2"
 							}`}
 						>
-							<Image
-								src={item.image || "/images/placeholder-image.png"}
+							<ImageWithFallback
+								src={item.image}
 								alt={item.title}
 								width={640}
 								height={640}

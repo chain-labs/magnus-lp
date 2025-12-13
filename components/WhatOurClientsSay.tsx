@@ -11,6 +11,7 @@ import {
 	type CarouselApi,
 } from "@/components/ui/carousel";
 import type { TestimonialsData } from "@/sanity/lib/types";
+import { User } from "lucide-react";
 
 // Static data - commented out in favor of Sanity CMS
 // const testimonials = [
@@ -75,7 +76,7 @@ const defaultTestimonialsData: TestimonialsData = {
 };
 
 interface WhatOurClientsSayProps {
-	data?: {data: TestimonialsData | null;}
+	data?: { data: TestimonialsData | null };
 }
 
 export default function WhatOurClientsSay({ data }: WhatOurClientsSayProps) {
@@ -138,13 +139,19 @@ export default function WhatOurClientsSay({ data }: WhatOurClientsSayProps) {
 										</p>
 
 										<div className="mt-[32px] flex flex-col md:flex-row md:items-center gap-6">
-											<Image
-												className="h-7 w-fit dark:invert"
-												src={testimonial.companyLogo || "/images/testimonials/default-logo.png"}
-												alt="Nvidia Logo"
-												height={20}
-												width={20}
-											/>
+											{testimonial.companyLogo ? (
+												<Image
+													className="h-7 w-fit dark:invert"
+													src={
+														testimonial.companyLogo
+													}
+													alt={`${testimonial.name} company logo`}
+													height={20}
+													width={20}
+												/>
+											) : (
+												<User className="h-7 w-7 text-white" />
+											)}
 											<div className="flex flex-col md:border-l md:pl-6">
 												<cite className="normal text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-white">
 													{testimonial.name}
