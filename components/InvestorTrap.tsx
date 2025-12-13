@@ -95,7 +95,7 @@ interface InvestorTrapProps {
 	data?: { data: InvestorTrapData | null };
 }
 
-function useMidlineTrigger() {
+function useMidlineTrigger(triggerPercentage: number = 0.1) {
 	const ref = useRef<HTMLDivElement | null>(null);
 	const [isActive, setIsActive] = useState(false);
 
@@ -104,7 +104,7 @@ function useMidlineTrigger() {
 			if (!ref.current) return;
 
 			const rect = ref.current.getBoundingClientRect();
-			const viewportMid = window.innerHeight * 0.5;
+			const viewportMid = (window.innerHeight * triggerPercentage) + 231;
 
 			// If the TOP of the card has reached or passed the middle of the screen
 			if (rect.top <= viewportMid) {
@@ -146,8 +146,8 @@ function MobileTrapCard({
 	};
 	index: number;
 }) {
-	const { ref: leftRef, isActive: leftActive } = useMidlineTrigger();
-	const { ref: rightRef, isActive: rightActive } = useMidlineTrigger();
+	const { ref: leftRef, isActive: leftActive } = useMidlineTrigger(0.5);
+	const { ref: rightRef, isActive: rightActive } = useMidlineTrigger(0.5);
 	return (
 		<div key={index} className="">
 			<motion.div
@@ -318,7 +318,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 									position: "absolute",
 									top: pair.topPosition,
 									left: "15%",
-									transform: "translateY(-20%)",
+									transform: "translateY(0%)",
 								}}
 							/>
 							<TrapCard
@@ -329,7 +329,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 									position: "absolute",
 									top: pair.topPosition,
 									right: "15%",
-									transform: "translateY(50%) ",
+									transform: "translateY(40%)",
 								}}
 							/>
 						</>
