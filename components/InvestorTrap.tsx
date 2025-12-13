@@ -280,8 +280,8 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 								y2="129"
 								gradientUnits="userSpaceOnUse"
 							>
-								<stop stop-color="#040D26" />
-								<stop offset="1" stop-color="#7FA1FF" />
+								<stop stopColor="#040D26" />
+								<stop offset="1" stopColor="#7FA1FF" />
 							</linearGradient>
 							<linearGradient
 								id="paint1_linear_585_4037"
@@ -291,7 +291,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 								y2="129"
 								gradientUnits="userSpaceOnUse"
 							>
-								<stop stop-color="#040D26" />
+								<stop stopColor="#040D26" />
 								<stop offset="1" stop-color="#7FA1FF" />
 							</linearGradient>
 						</defs>

@@ -16,6 +16,14 @@ export const highestQualityResearchSchema = defineType({
 			type: "text",
 		}),
 		defineField({
+			name: "displayLimit",
+			title: "Number of Stocks to Display",
+			type: "number",
+			description: "How many stock entries to fetch and display from Airtable (e.g., 5 or 10)",
+			initialValue: 5,
+			validation: (Rule) => Rule.min(1).max(50),
+		}),
+		defineField({
 			name: "tableHeaders",
 			title: "Table Headers",
 			type: "array",

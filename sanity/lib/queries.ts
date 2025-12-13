@@ -177,20 +177,10 @@ export const TESTIMONIALS_QUERY = defineQuery(`*[_type == "testimonials"][0]{
 export const HIGHEST_QUALITY_RESEARCH_QUERY = defineQuery(`*[_type == "highestQualityResearch"][0]{
   title,
   description,
+  displayLimit,
   tableHeaders[]{
     label,
     align
-  },
-  stockData[]{
-    ticker,
-    "logo": logo.asset->url,
-    priceZone,
-    action,
-    target,
-    stopLoss,
-    potential,
-    duration,
-    published
   },
   ctaTitle,
   ctaDescription,

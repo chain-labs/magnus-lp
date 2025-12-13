@@ -28,13 +28,14 @@ import {
 	OUR_TRACK_RECORD_QUERY,
 	TESTIMONIALS_QUERY,
 	BOOK_A_CALL_QUERY,
+	HIGHEST_QUALITY_RESEARCH_QUERY,
 } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
 import { SECTION_VISIBILITY } from "@/lib/section-visibility";
 
 export default async function Home() {
 	// Fetch all Sanity data in parallel
-	const [heroData, headerData, faqData, footerData, pricingData, meetTheFounderData, investorTrapData, howMagnusChangesThisData, investmentPhilosophyData, ourTrackRecordData, testimonialsData, bookACallData] = await Promise.all([
+	const [heroData, headerData, faqData, footerData, pricingData, meetTheFounderData, investorTrapData, howMagnusChangesThisData, investmentPhilosophyData, ourTrackRecordData, testimonialsData, bookACallData, highestQualityResearchData] = await Promise.all([
 		sanityFetch({ query: HERO_QUERY }),
 		sanityFetch({ query: HEADER_QUERY }),
 		sanityFetch({ query: FAQ_QUERY }),
@@ -47,6 +48,7 @@ export default async function Home() {
 		sanityFetch({ query: OUR_TRACK_RECORD_QUERY }),
 		sanityFetch({ query: TESTIMONIALS_QUERY }),
 		sanityFetch({ query: BOOK_A_CALL_QUERY }),
+		sanityFetch({ query: HIGHEST_QUALITY_RESEARCH_QUERY }),
 	]);
 
 	return (
@@ -105,7 +107,7 @@ export default async function Home() {
 			)}
 			{SECTION_VISIBILITY.highestQualityResearch && (
 				<SectionObserver theme="light" sectionName="HighestQualityResearch">
-					<HighestQualityResearchReadyBeforeTheMarketOpens />
+					<HighestQualityResearchReadyBeforeTheMarketOpens data={highestQualityResearchData} />
 				</SectionObserver>
 			)}
 			{SECTION_VISIBILITY.pricing && (
