@@ -310,7 +310,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 					height={800}
 					className="block md:hidden max-w-full w-[510px] h-[704.5px] mx-auto mt-[-100px] mb-10"
 					onError={(e) => {
-						e.currentTarget.src = DEFAULT_IMAGE;
+						e.currentTarget.src = "/assets/default/logo.png";
 					}}
 				/>
 
