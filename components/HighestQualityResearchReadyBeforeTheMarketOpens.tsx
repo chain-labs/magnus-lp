@@ -90,14 +90,14 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 					</p>
 				</div>
 				<div className="relative bg-[#FDFDFD] border border-[#E0E0E0] outline outline-offset-4 outline-[#E0E0E0] rounded-2xl shadow-sm overflow-hidden">
-					<div className="overflow-x-auto px-6 py-4">
+					<div className="overflow-x-auto pl-12 py-4">
 						<table className="w-full min-w-[1000px] p-10">
 							<thead className="">
 								<tr>
 									{tableHeaders.map((header, index) => (
 										<th
 											key={index}
-											className="text-left py-6 px-4 text-[14px] leading-6 text-[#9E9E9E] font-normal"
+											className="py-[4px] pt-[16px] text-left text-[14px] leading-6 text-[#9E9E9E] font-normal"
 										>
 											{header.label}
 										</th>
@@ -120,7 +120,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 								) : stockData.length > 0 ? (
 									stockData.map((stock, index) => (
 										<tr key={stock.id || index}>
-											<td className="py-5 px-6 text-[16px] leading-[24px]">
+											<td className="py-[20px] text-[16px] leading-[24px]">
 												<div className="flex items-center gap-3">
 													<div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
 														{stock.logo ? (
@@ -131,7 +131,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																}
 																width={48}
 																height={48}
-																className="object-contain"
+																className="object-contain w-[48px] h-[48px]"
 															/>
 														) : (
 															<span className="text-[16px] leading-[24px] text-gray-500">
@@ -142,15 +142,15 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 															</span>
 														)}
 													</div>
-													<span className="uppercase text-[16px] leading-6">
+													<span className="uppercase text-[16px] leading-6 text-black">
 														{stock.ticker}
 													</span>
 												</div>
 											</td>
-											<td className="py-5 px-4 text-[#212121] opacity-60">
+											<td className="py-[4px] pt-[32px] text-[#212121] opacity-60">
 												{stock.priceZone}
 											</td>
-											<td className="py-5 px-4">
+											<td className="py-[4px] pt-[32px]">
 												<span
 													className={`inline-flex items-center px-3 py-[5px] rounded-lg text-[16px] leading-[24px] uppercase ${
 														stock.action === "BUY"
@@ -164,19 +164,19 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 													{stock.action}
 												</span>
 											</td>
-											<td className="py-5 px-4 text-black opacity-60 text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#212121] opacity-60 text-[16px] leading-[24px]">
 												₹{stock.target}
 											</td>
-											<td className="py-5 px-4 text-black opacity-50 text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#212121] opacity-50 text-[16px] leading-[24px]">
 												₹{stock.stopLoss}
 											</td>
-											<td className="py-5 px-4 text-[#16A34A] text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#16A34A] text-[16px] leading-[24px]">
 												{stock.potential}
 											</td>
-											<td className="py-5 px-4 text-black opacity-60 text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#212121] opacity-60 text-[16px] leading-[24px]">
 												{stock.duration}
 											</td>
-											<td className="py-5 px-4 text-black opacity-60 text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#212121] opacity-60 text-[16px] leading-[24px]">
 												{new Date(
 													stock.published
 												).toLocaleDateString("en-US", {
