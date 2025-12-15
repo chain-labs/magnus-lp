@@ -205,10 +205,6 @@ export interface HighestQualityResearchData {
 		label: string;
 		align: string;
 	}[];
-	ctaTitle?: string;
-	ctaDescription?: string;
-	ctaButtonText?: string;
-	ctaButtonLink?: string;
 }
 
 // You're Stuck Types

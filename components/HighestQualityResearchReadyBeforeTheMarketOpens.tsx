@@ -203,61 +203,6 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 							</tbody>
 						</table>
 					</div>
-
-					{/* Blurred section with overlay */}
-					{/* {blurred && (
-						<div className="relative">
-							<div className="blur-sm pointer-events-none select-none"></div>
-							<div
-								style={{
-									height: `${(stockData.length - 2) * 81}px`,
-								}}
-								className="absolute backdrop-blur-sm bottom-0 left-0 w-full flex flex-col items-center justify-center"
-							>
-								<button
-									style={{
-										background: `radial-gradient(97.46% 172.79% at 2.54% 70.83%, #A12FFF 0%, rgba(0, 22, 118, 0.5) 100%),
-										radial-gradient(169.02% 564.79% at 77.54% -103.13%, #2FFCFF 0%, rgba(0, 22, 118, 0.5) 100%),
-										#00177C`,
-									}}
-									className="text-[16px] leading-6 text-white px-[21px] py-4 rounded-lg font-bold flex items-center gap-2"
-								>
-									{sanityData?.ctaButtonText ||
-										"Unlock More Stocks Data"}
-									<svg
-										width="24"
-										height="24"
-										viewBox="0 0 24 24"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M8 10V7C8 5.93913 8.42143 4.92172 9.17157 4.17157C9.92172 3.42143 10.9391 3 12 3C13.0609 3 14.0783 3.42143 14.8284 4.17157C15.5786 4.92172 16 5.93913 16 7V10"
-											stroke="white"
-											strokeWidth="2"
-											strokeLinecap="round"
-										/>
-										<path
-											d="M5 10H19V19C19 19.5304 18.7893 20.0391 18.4142 20.4142C18.0391 20.7893 17.5304 21 17 21H7C6.46957 21 5.96086 20.7893 5.58579 20.4142C5.21071 20.0391 5 19.5304 5 19V10Z"
-											stroke="white"
-											strokeWidth="2"
-											strokeLinejoin="round"
-										/>
-										<path
-											d="M14.5 15.5H14.5083V15.5083H14.5V15.5Z"
-											stroke="white"
-											strokeWidth="2"
-											strokeLinejoin="round"
-										/>
-									</svg>
-								</button>
-								<p className="mt-4 text-black opacity-70 text-center">
-									{sanityData?.ctaDescription ||
-										"You need a plan to unlock premium research insights"}
-								</p>
-							</div>
-						</div>
-					)} */}
 				</div>
 			</div>
 		</section>
