@@ -233,7 +233,7 @@ export default function Hero({ data }: HeroProps) {
 													type="button"
 													onClick={toggleListening}
 													className={`
-												p-2 rounded-full transition-all duration-200
+												p-2 rounded-full transition-all duration-200 cursor-pointer
 												${
 													isListening
 														? "bg-red-100 hover:bg-red-200 ring-2 ring-red-400"
@@ -263,7 +263,7 @@ export default function Hero({ data }: HeroProps) {
 													isLoading
 												}
 												className={`
-											p-3 rounded-[12px] transition-all duration-200 flex items-center justify-center
+											p-3 rounded-[12px] transition-all duration-200 flex items-center justify-center cursor-pointer
 											${
 												fullText.trim() && !isLoading
 													? "bg-[#00177C] hover:bg-[#001060] shadow-md hover:shadow-lg"
