@@ -9,7 +9,7 @@ import {
 	CarouselItem,
 	type CarouselApi,
 } from "@/components/ui/carousel";
-import type { PricingData, PricingPlan, BillingPeriod } from "@/sanity/lib/types";
+import type { PricingData, PricingPlan, BillingOption } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultPricingData: PricingData = {
@@ -18,64 +18,113 @@ const defaultPricingData: PricingData = {
 	title: "Pricing plan",
 	description:
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
-	billingPeriods: [
-		{ key: "monthly", label: "Monthly", suffix: "/mo" },
-		{ key: "yearly", label: "Yearly", suffix: "/year" },
-	],
-	plans: [
+	billingOptions: [
 		{
-			title: "Basic plan",
-			description: "Lorem ipsum dolor sit amet",
-			prices: [
-				{ periodKey: "monthly", amount: 19 },
-				{ periodKey: "yearly", amount: 199 },
+			periodKey: "monthly",
+			periodLabel: "Monthly",
+			priceSuffix: "/mo",
+			plans: [
+				{
+					title: "Basic plan",
+					description: "Lorem ipsum dolor sit amet",
+					price: 19,
+					ctaText: "Get Started",
+					ctaLink: "https://cal.com/magnushathaway/30min",
+					features: [
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: false },
+						{ text: "Feature text goes here", included: false },
+					],
+					primary: false,
+				},
+				{
+					title: "Business plan",
+					description: "Lorem ipsum dolor sit amet",
+					price: 29,
+					ctaText: "Get Started",
+					ctaLink: "https://cal.com/magnushathaway/30min",
+					features: [
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+					],
+					primary: true,
+				},
+				{
+					title: "Enterprise plan",
+					description: "Lorem ipsum dolor sit amet",
+					price: 49,
+					ctaText: "Get Started",
+					ctaLink: "https://cal.com/magnushathaway/30min",
+					features: [
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+					],
+					primary: false,
+				},
 			],
-			ctaText: "Get Started",
-			ctaLink: "https://cal.com/magnushathaway/30min",
-			features: [
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: false },
-				{ text: "Feature text goes here", included: false },
-			],
-			primary: false,
 		},
 		{
-			title: "Business plan",
-			description: "Lorem ipsum dolor sit amet",
-			prices: [
-				{ periodKey: "monthly", amount: 29 },
-				{ periodKey: "yearly", amount: 299 },
+			periodKey: "yearly",
+			periodLabel: "Yearly",
+			priceSuffix: "/year",
+			plans: [
+				{
+					title: "Basic plan",
+					description: "Lorem ipsum dolor sit amet",
+					price: 199,
+					originalPrice: 228,
+					ctaText: "Get Started",
+					ctaLink: "https://cal.com/magnushathaway/30min",
+					features: [
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: false },
+						{ text: "Feature text goes here", included: false },
+					],
+					primary: false,
+				},
+				{
+					title: "Business plan",
+					description: "Lorem ipsum dolor sit amet",
+					price: 299,
+					originalPrice: 348,
+					ctaText: "Get Started",
+					ctaLink: "https://cal.com/magnushathaway/30min",
+					features: [
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+					],
+					primary: true,
+				},
+				{
+					title: "Enterprise plan",
+					description: "Lorem ipsum dolor sit amet",
+					price: 499,
+					originalPrice: 588,
+					ctaText: "Get Started",
+					ctaLink: "https://cal.com/magnushathaway/30min",
+					features: [
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+						{ text: "Feature text goes here", included: true },
+					],
+					primary: false,
+				},
 			],
-			ctaText: "Get Started",
-			ctaLink: "https://cal.com/magnushathaway/30min",
-			features: [
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-			],
-			primary: true,
-		},
-		{
-			title: "Enterprise plan",
-			description: "Lorem ipsum dolor sit amet",
-			prices: [
-				{ periodKey: "monthly", amount: 49 },
-				{ periodKey: "yearly", amount: 499 },
-			],
-			ctaText: "Get Started",
-			ctaLink: "https://cal.com/magnushathaway/30min",
-			features: [
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-				{ text: "Feature text goes here", included: true },
-			],
-			primary: false,
 		},
 	],
 };
@@ -86,24 +135,11 @@ interface PricingProps {
 
 function PricingCard({
 	plan,
-	selectedPeriod,
-	allPeriods,
+	billingOption,
 }: {
 	plan: PricingPlan;
-	selectedPeriod: BillingPeriod;
-	allPeriods: BillingPeriod[];
+	billingOption: BillingOption;
 }) {
-	// Find the price for the selected billing period
-	const currentPrice = plan.prices?.find(
-		(p) => p.periodKey === selectedPeriod.key
-	);
-	
-	// Find another period to show as alternative (prefer yearly for savings display)
-	const alternativePeriod = allPeriods.find((p) => p.key !== selectedPeriod.key);
-	const alternativePrice = alternativePeriod
-		? plan.prices?.find((p) => p.periodKey === alternativePeriod.key)
-		: null;
-
 	return (
 		<div
 			className={cn(
@@ -130,23 +166,18 @@ function PricingCard({
 				{/* Price */}
 				<div>
 					<div className="flex items-baseline gap-1 mb-2">
-						{currentPrice?.originalAmount && (
+						{plan.originalPrice && (
 							<span className="text-[24px] leading-[32px] text-[#040D26] opacity-40 line-through mr-2">
-								₹{currentPrice.originalAmount}
+								₹{plan.originalPrice}
 							</span>
 						)}
 						<span className="text-[40px] leading-[48px] text-[#040D26]">
-							₹{currentPrice?.amount ?? 0}
+							₹{plan.price}
 						</span>
 						<span className="text-[16px] leading-[24px] text-[#040D26]">
-							{selectedPeriod.suffix}
+							{billingOption.priceSuffix}
 						</span>
 					</div>
-					{alternativePrice && alternativePeriod && (
-						<p className="text-sm text-[#040D26]">
-							or ₹{alternativePrice.amount} {alternativePeriod.label.toLowerCase()}
-						</p>
-					)}
 				</div>
 
 				{/* CTA Button */}
@@ -209,13 +240,16 @@ function PricingCard({
 
 export default function Pricing({ data }: PricingProps) {
 	const pricingData = data?.data || defaultPricingData;
-	const billingPeriods = pricingData.billingPeriods || defaultPricingData.billingPeriods;
-	const [selectedPeriodKey, setSelectedPeriodKey] = useState(billingPeriods[0]?.key || "monthly");
+	console.log('pricing', pricingData);
+	const billingOptions = pricingData.billingOptions || defaultPricingData.billingOptions;
+	const [selectedPeriodKey, setSelectedPeriodKey] = useState(billingOptions[0]?.periodKey || "monthly");
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
 
-	const selectedPeriod = billingPeriods.find((p) => p.key === selectedPeriodKey) || billingPeriods[0];
+	// Find the selected billing option
+	const selectedBillingOption = billingOptions.find((opt) => opt.periodKey === selectedPeriodKey) || billingOptions[0];
+	const plans = selectedBillingOption?.plans || [];
 
 	useEffect(() => {
 		if (!api) {
@@ -232,8 +266,6 @@ export default function Pricing({ data }: PricingProps) {
 			setCurrent(api.selectedScrollSnap() + 1);
 		});
 	}, [api]);
-
-	const plans = pricingData.plans || [];
 
 	// Determine grid columns based on number of plans
 	const getGridCols = () => {
@@ -261,20 +293,20 @@ export default function Pricing({ data }: PricingProps) {
 					</div>
 					
 					{/* Dynamic Billing Period Toggle */}
-					{billingPeriods.length > 1 && (
+					{billingOptions.length > 1 && (
 						<div className="inline-flex items-center p-[4px] rounded-[8px] border border-[#040D26] w-fit flex-wrap">
-							{billingPeriods.map((period) => (
+							{billingOptions.map((option) => (
 								<button
-									key={period.key}
-									onClick={() => setSelectedPeriodKey(period.key)}
+									key={option.periodKey}
+									onClick={() => setSelectedPeriodKey(option.periodKey)}
 									className={cn(
 										"px-[24px] py-[8px] text-[16px] leading-[24px] rounded-[8px] transition-all duration-300",
-										period.key === selectedPeriodKey
+										option.periodKey === selectedPeriodKey
 											? "bg-[#00177C] text-white shadow-lg"
 											: "text-[#040D26] hover:text-[#040D26] cursor-pointer"
 									)}
 								>
-									{period.label}
+									{option.periodLabel}
 								</button>
 							))}
 						</div>
@@ -287,8 +319,7 @@ export default function Pricing({ data }: PricingProps) {
 						<PricingCard
 							key={plan.title}
 							plan={plan}
-							selectedPeriod={selectedPeriod}
-							allPeriods={billingPeriods}
+							billingOption={selectedBillingOption}
 						/>
 					))}
 				</div>
@@ -301,8 +332,7 @@ export default function Pricing({ data }: PricingProps) {
 								<CarouselItem key={plan.title}>
 									<PricingCard
 										plan={plan}
-										selectedPeriod={selectedPeriod}
-										allPeriods={billingPeriods}
+										billingOption={selectedBillingOption}
 									/>
 								</CarouselItem>
 							))}

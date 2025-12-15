@@ -66,9 +66,6 @@ export default async function Home() {
 		sanityFetch({ query: HIGHEST_QUALITY_RESEARCH_QUERY }),
 		sanityFetch({ query: YOURE_STUCK_QUERY }),
 	]);
-
-	console.log("Fetched data from Sanity", footerData);
-
 	const SECTION_VISIBILITY = {
 		header: headerData.data.visible,
 		hero: heroData.data.visible,

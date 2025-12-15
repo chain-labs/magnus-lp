@@ -79,18 +79,6 @@ export interface FooterData {
 }
 
 // Pricing Types
-export interface BillingPeriod {
-	key: string;
-	label: string;
-	suffix: string;
-}
-
-export interface PriceItem {
-	periodKey: string;
-	amount: number;
-	originalAmount?: number;
-}
-
 export interface PlanFeature {
 	text: string;
 	included: boolean;
@@ -100,11 +88,19 @@ export interface PricingPlan {
 	title: string;
 	description?: string;
 	badge?: string;
-	prices: PriceItem[];
+	price: number;
+	originalPrice?: number;
 	ctaText: string;
 	ctaLink: string;
 	features: PlanFeature[];
 	primary: boolean;
+}
+
+export interface BillingOption {
+	periodKey: string;
+	periodLabel: string;
+	priceSuffix: string;
+	plans: PricingPlan[];
 }
 
 export interface PricingData {
@@ -112,8 +108,7 @@ export interface PricingData {
 	sectionLabel: string;
 	title: string;
 	description: string;
-	billingPeriods: BillingPeriod[];
-	plans: PricingPlan[];
+	billingOptions: BillingOption[];
 }
 
 // Meet The Founder Types

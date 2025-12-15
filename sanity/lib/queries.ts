@@ -86,27 +86,24 @@ export const PRICING_QUERY = defineQuery(`*[_type == "pricing"][0]{
   sectionLabel,
   title,
   description,
-  billingPeriods[]{
-    key,
-    label,
-    suffix
-  },
-  plans[]{
-    title,
-    description,
-    badge,
-    prices[]{
-      periodKey,
-      amount,
-      originalAmount
-    },
-    ctaText,
-    ctaLink,
-    features[]{
-      text,
-      included
-    },
-    primary
+  billingOptions[]{
+    periodKey,
+    periodLabel,
+    priceSuffix,
+    plans[]{
+      title,
+      description,
+      badge,
+      price,
+      originalPrice,
+      ctaText,
+      ctaLink,
+      features[]{
+        text,
+        included
+      },
+      primary
+    }
   }
 }`);
 

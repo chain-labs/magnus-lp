@@ -10,6 +10,7 @@ export const bookACallSchema = defineType({
 			title: "Visible",
 			type: "boolean",
 			initialValue: true,
+			description: "Toggle to show or hide this section on the homepage.",
 			options: {
 				layout: "checkbox",
 			},
