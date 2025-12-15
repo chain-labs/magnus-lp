@@ -149,7 +149,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 													</span>
 												</div>
 											</td>
-											<td className="py-[4px] pt-[32px] text-[#212121] opacity-60">
+											<td className="py-[4px] pt-[32px] text-[#000] opacity-60">
 												{stock.priceZone}
 											</td>
 											<td className="py-[4px] pt-[32px]">
@@ -166,19 +166,19 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 													{stock.action}
 												</span>
 											</td>
-											<td className="py-[4px] pt-[32px] text-[#212121] opacity-60 text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
 												₹{stock.target}
 											</td>
-											<td className="py-[4px] pt-[32px] text-[#212121] opacity-50 text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
 												₹{stock.stopLoss}
 											</td>
 											<td className="py-[4px] pt-[32px] text-[#16A34A] text-[16px] leading-[24px]">
 												{stock.potential}
 											</td>
-											<td className="py-[4px] pt-[32px] text-[#212121] opacity-60 text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
 												{stock.duration}
 											</td>
-											<td className="py-[4px] pt-[32px] text-[#212121] opacity-60 text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
 												{new Date(
 													stock.published
 												).toLocaleDateString("en-US", {

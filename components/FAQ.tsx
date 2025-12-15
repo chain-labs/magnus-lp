@@ -136,7 +136,7 @@ export default function FAQ({ data }: FAQProps) {
 						{faqData.description}
 					</p>
 					<Link href="#book-a-call">
-						<button className="px-[24px] py-[12px] bg-[#00177C] text-white rounded-[8px] w-fit font-bold text-[16px] leading-[24px] min-w-[160px]">
+						<button className="px-[24px] py-[12px] bg-[#00177C] text-white rounded-[8px] w-fit font-bold text-[16px] leading-[24px] min-w-[160px] cursor-pointer">
 							{" "}
 							{faqData.contactButtonText}
 						</button>
