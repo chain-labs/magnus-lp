@@ -159,8 +159,7 @@ export default function Hero({ data }: HeroProps) {
 									Question Submitted!
 								</h3>
 								<p className="text-gray-500">
-									We&apos;ve received your query and will get
-									back to you shortly.
+									We&apos;ve received your query and once answered it will be displayed below.
 								</p>
 							</div>
 						) : (
