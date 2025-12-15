@@ -28,6 +28,7 @@ import { User } from "lucide-react";
 
 // Default fallback data
 const defaultTestimonialsData: TestimonialsData = {
+	visible: true,
 	title: "What Our Clients Say",
 	items: [
 		{

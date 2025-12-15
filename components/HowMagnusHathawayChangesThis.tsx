@@ -36,6 +36,7 @@ import type { HowMagnusChangesThisData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultHowMagnusChangesThisData: HowMagnusChangesThisData = {
+	visible: true,
 	title: "How Magnus Hathaway Changes This",
 	items: [
 		{

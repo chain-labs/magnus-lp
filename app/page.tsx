@@ -29,9 +29,9 @@ import {
 	TESTIMONIALS_QUERY,
 	BOOK_A_CALL_QUERY,
 	HIGHEST_QUALITY_RESEARCH_QUERY,
+	YOURE_STUCK_QUERY,
 } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
-import { SECTION_VISIBILITY } from "@/lib/section-visibility";
 
 export default async function Home() {
 	// Fetch all Sanity data in parallel
@@ -49,6 +49,7 @@ export default async function Home() {
 		testimonialsData,
 		bookACallData,
 		highestQualityResearchData,
+		youreStuckData,
 	] = await Promise.all([
 		sanityFetch({ query: HERO_QUERY }),
 		sanityFetch({ query: HEADER_QUERY }),
@@ -63,7 +64,25 @@ export default async function Home() {
 		sanityFetch({ query: TESTIMONIALS_QUERY }),
 		sanityFetch({ query: BOOK_A_CALL_QUERY }),
 		sanityFetch({ query: HIGHEST_QUALITY_RESEARCH_QUERY }),
+		sanityFetch({ query: YOURE_STUCK_QUERY }),
 	]);
+
+	console.log("Fetched data from Sanity", footerData);
+
+	const SECTION_VISIBILITY = {
+		header: headerData.data.visible,
+		hero: heroData.data.visible,
+		youreStuck: youreStuckData.data.visible,
+		investorTrap: investorTrapData.data.visible,
+		howMagnusChangesThis: howMagnusChangesThisData.data.visible,
+		investmentPhilosophy: investmentPhilosophyData.data.visible,
+		highestQualityResearch: highestQualityResearchData.data.visible,
+		pricing: pricingData.data.visible,
+		trackRecordAndTestimonials: ourTrackRecordData.data.visible,
+		faq: faqData.data.visible,
+		founderAndCall: meetTheFounderData.data.visible,
+		footer: footerData.data.visible,
+	};
 
 	return (
 		<HeaderThemeProvider>
@@ -89,17 +108,10 @@ export default async function Home() {
 					sectionName="YoureStuck"
 				>
 					<YoureStuckInAsystemDesignedToWorkAgainstYou
-						data={undefined}
+						data={youreStuckData}
 					/>
 				</SectionObserver>
 			)}
-			{/* <BackgroundBlobsAdder
-				blobs={[
-					"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
-					"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
-				]}
-				parentClassName="bg-[#000728]"
-			></BackgroundBlobsAdder> */}
 			{SECTION_VISIBILITY.investorTrap && (
 				<SectionObserver
 					theme="dark"

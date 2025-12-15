@@ -13,6 +13,7 @@ import type { PricingData, PricingPlan, BillingPeriod } from "@/sanity/lib/types
 
 // Default fallback data
 const defaultPricingData: PricingData = {
+	visible: true,
 	sectionLabel: "Pricing",
 	title: "Pricing plan",
 	description:

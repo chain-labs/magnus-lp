@@ -6,6 +6,15 @@ export const howMagnusChangesThisSchema = defineType({
 	type: "document",
 	fields: [
 		defineField({
+			name: "visible",
+			title: "Visible",
+			type: "boolean",
+			initialValue: true,
+			options: {
+				layout: "checkbox",
+			},
+		}),
+		defineField({
 			name: "title",
 			title: "Title",
 			type: "string",

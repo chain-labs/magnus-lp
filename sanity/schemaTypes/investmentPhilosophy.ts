@@ -6,6 +6,15 @@ export const investmentPhilosophySchema = defineType({
 	type: "document",
 	fields: [
 		defineField({
+			name: "visible",
+			title: "Visible",
+			type: "boolean",
+			initialValue: true,
+			options: {
+				layout: "checkbox",
+			},
+		}),
+		defineField({
 			name: "sectionLabel",
 			title: "Section Label",
 			type: "string",
@@ -28,7 +37,7 @@ export const investmentPhilosophySchema = defineType({
 							title: "Icon Type",
 							type: "string",
 							description:
-								"Icon identifier (e.g., 'chart', 'clipboard', 'trending', 'lightbulb')",
+								"DO NOT CHANGE VALUES. Used to determine which icon to show.",
 						}),
 						defineField({
 							name: "title",

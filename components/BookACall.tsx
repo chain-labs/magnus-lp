@@ -11,6 +11,7 @@ import type { BookACallData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultBookACallData: BookACallData = {
+	visible: true,
 	title: "Want research-backed clarity for your portfolio?",
 	subtitle: "No hype. No pressure. Just research.",
 	contactUsLink: "https://cal.com/magnushathaway/30min",

@@ -15,6 +15,7 @@ import type { MeetTheFounderData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultMeetTheFounderData: MeetTheFounderData = {
+	visible: true,
 	sectionTitle: "Meet the founder",
 	sectionSubtitle: "The team behind the research. The people you can trust.",
 	heroImage: undefined,

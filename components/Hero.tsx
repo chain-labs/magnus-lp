@@ -44,6 +44,7 @@ import type { HeroData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultHeroData: HeroData = {
+	visible: true,
 	subtitle: "Stock Picking, Simplified",
 	headline: "HNIs get analysts. You get YouTube. That gap costs you.",
 };
@@ -120,12 +121,12 @@ export default function Hero({ data }: HeroProps) {
 	const isLoading = isSubmitting;
 
 	return (
-		<section id="hero" className="w-full min-h-screen flex items-center justify-center py-[120px] pb-[40px] md:pb-[120px]">
+		<section
+			id="hero"
+			className="w-full min-h-screen flex items-center justify-center py-[120px] pb-[40px] md:pb-[120px]"
+		>
 			<Image
-				src={
-					heroData.skewedGridImage ||
-					"/assets/section/hero/skewedGrid.svg"
-				}
+				src={"/assets/section/hero/skewedGrid.svg"}
 				alt="skewed grid"
 				width={1000}
 				height={1000}
@@ -159,7 +160,8 @@ export default function Hero({ data }: HeroProps) {
 									Question Submitted!
 								</h3>
 								<p className="text-gray-500">
-									We&apos;ve received your query and once answered it will be displayed below.
+									We&apos;ve received your query and once
+									answered it will be displayed below.
 								</p>
 							</div>
 						) : (

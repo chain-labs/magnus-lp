@@ -132,6 +132,7 @@ import type { FooterData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultFooterData: FooterData = {
+	visible: true,
 	company: {
 		logoSrc: "/assets/logo/logo.png",
 		title: "Magnus Hathaway",
@@ -252,7 +253,6 @@ interface FooterProps {
 
 export default function Footer({ data }: FooterProps) {
 	const footerData = data?.data || defaultFooterData;
-	console.log('footer', footerData);
 	return (
 		<footer id="footer" className="w-full py-[80px] px-[20px]">
 			{/* Top Section - Dark Blue Background */}

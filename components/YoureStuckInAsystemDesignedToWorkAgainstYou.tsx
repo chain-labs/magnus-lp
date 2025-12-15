@@ -98,6 +98,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 // Default fallback data
 const defaultYoureStuckData: YoureStuckData = {
+	visible: true,
 	title: "You're stuck in a system designed to work against you",
 	items: [
 		{

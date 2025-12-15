@@ -110,6 +110,7 @@ import type { InvestmentPhilosophyData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultInvestmentPhilosophyData: InvestmentPhilosophyData = {
+	visible: true,
 	sectionLabel: "Investment Philosophy",
 	title: "How We Think About Investing",
 	items: [

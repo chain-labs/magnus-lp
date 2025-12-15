@@ -22,6 +22,7 @@ import type { OurTrackRecordData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultTrackRecordData: OurTrackRecordData = {
+	visible: true,
 	title: "Our track record",
 	subtitle: "We don't promise returns. We promise clarity.",
 	stats: [

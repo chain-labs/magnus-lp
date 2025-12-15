@@ -10,6 +10,7 @@ import type { HeaderData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultHeaderData: HeaderData = {
+	visible: true,
 	logoImage: "/assets/logo/logo.png",
 	brandName: "Magnus Hathaway",
 	navLinks: [
@@ -26,7 +27,6 @@ interface HeaderProps {
 
 export default function Header({ data }: HeaderProps) {
 	const headerData = data?.data || defaultHeaderData;
-	console.log("headerdata", headerData);
 	const { theme } = useHeaderTheme();
 	const isDark = theme === "dark";
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

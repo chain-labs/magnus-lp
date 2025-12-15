@@ -6,6 +6,15 @@ export const investorTrapSchema = defineType({
 	type: "document",
 	fields: [
 		defineField({
+			name: "visible",
+			title: "Visible",
+			type: "boolean",
+			initialValue: true,
+			options: {
+				layout: "checkbox", // or omit to use the default switch
+			},
+		}),
+		defineField({
 			name: "title",
 			title: "Title",
 			type: "text",
@@ -56,6 +65,8 @@ export const investorTrapSchema = defineType({
 							name: "topPosition",
 							title: "Top Position (%)",
 							type: "string",
+							description:
+								"DO NOT CHANGE VALUES. Used for positioning the card pair on the page.",
 						}),
 					],
 				},

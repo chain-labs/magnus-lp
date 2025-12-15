@@ -52,6 +52,7 @@ import { use, useEffect, useRef, useState } from "react";
 
 // Default fallback data
 const defaultInvestorTrapData: InvestorTrapData = {
+	visible: true,
 	title: "The retail investor's trap.",
 	subtitle: "And how we fix it.",
 	cardPairs: [

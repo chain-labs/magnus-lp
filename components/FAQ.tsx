@@ -68,6 +68,7 @@ import type { FAQData } from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultFaqData: FAQData = {
+	visible: true,
 	title: "FAQs",
 	description:
 		"Got questions about investing? We're here to help! Explore our FAQ section for answers to common queries and tips to make informed decisions.",

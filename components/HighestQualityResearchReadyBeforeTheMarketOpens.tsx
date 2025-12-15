@@ -29,6 +29,7 @@ const defaultTableHeaders: HighestQualityResearchData["tableHeaders"] = [
 ];
 
 const defaultData: HighestQualityResearchData = {
+	visible: true,
 	title: "Highest quality research, ready before the market opens",
 	description:
 		"Curated calls across overnight, intraday, and positional strategies. Unlock deeper analytics, price targets, and premium playbooks tailored to your desk without the noise.",

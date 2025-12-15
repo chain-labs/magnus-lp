@@ -6,6 +6,15 @@ export const youreStuckSchema = defineType({
 	type: "document",
 	fields: [
 		defineField({
+			name: "visible",
+			title: "Visible",
+			type: "boolean",
+			initialValue: true,
+			options: {
+				layout: "checkbox",
+			},
+		}),
+		defineField({
 			name: "title",
 			title: "Title",
 			type: "text",
@@ -23,7 +32,7 @@ export const youreStuckSchema = defineType({
 							title: "Icon Type",
 							type: "string",
 							description:
-								"Icon identifier (e.g., 'sad', 'chart', 'people')",
+								"DO NOT CHANGE VALUES. Used to determine which icon to show.",
 						}),
 						defineField({
 							name: "title",

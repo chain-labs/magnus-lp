@@ -1,12 +1,13 @@
 // Hero Types
 export interface HeroData {
+	visible: boolean;
 	subtitle: string;
 	headline: string;
-	skewedGridImage?: string;
 }
 
 // Header Types
 export interface HeaderData {
+	visible: boolean;
 	logoImage?: string;
 	brandName: string;
 	navLinks: {
@@ -19,6 +20,7 @@ export interface HeaderData {
 
 // FAQ Types
 export interface FAQData {
+	visible: boolean;
 	title: string;
 	description: string;
 	contactButtonText: string;
@@ -30,6 +32,7 @@ export interface FAQData {
 
 // Footer Types
 export interface FooterData {
+	visible: boolean;
 	company: {
 		logoSrc?: string;
 		title: string;
@@ -105,6 +108,7 @@ export interface PricingPlan {
 }
 
 export interface PricingData {
+	visible: boolean;
 	sectionLabel: string;
 	title: string;
 	description: string;
@@ -114,6 +118,7 @@ export interface PricingData {
 
 // Meet The Founder Types
 export interface MeetTheFounderData {
+	visible: boolean;
 	sectionTitle: string;
 	sectionSubtitle: string;
 	heroImage?: string;
@@ -132,6 +137,7 @@ export interface MeetTheFounderData {
 
 // Investor Trap Types
 export interface InvestorTrapData {
+	visible: boolean;
 	title: string;
 	subtitle: string;
 	cardPairs: {
@@ -149,6 +155,7 @@ export interface InvestorTrapData {
 
 // How Magnus Changes This Types
 export interface HowMagnusChangesThisData {
+	visible: boolean;
 	title: string;
 	items: {
 		tag: string;
@@ -161,6 +168,7 @@ export interface HowMagnusChangesThisData {
 
 // Investment Philosophy Types
 export interface InvestmentPhilosophyData {
+	visible: boolean;
 	sectionLabel: string;
 	title: string;
 	items: {
@@ -172,6 +180,7 @@ export interface InvestmentPhilosophyData {
 
 // Our Track Record Types
 export interface OurTrackRecordData {
+	visible: boolean;
 	title: string;
 	subtitle: string;
 	heroImage?: string;
@@ -183,6 +192,7 @@ export interface OurTrackRecordData {
 
 // Testimonials Types
 export interface TestimonialsData {
+	visible: boolean;
 	title: string;
 	items: {
 		name: string;
@@ -195,6 +205,7 @@ export interface TestimonialsData {
 
 // Highest Quality Research Types
 export interface HighestQualityResearchData {
+	visible: boolean;
 	title: string;
 	description: string;
 	displayLimit: number;
@@ -210,6 +221,7 @@ export interface HighestQualityResearchData {
 
 // You're Stuck Types
 export interface YoureStuckData {
+	visible: boolean;
 	title: string;
 	items: {
 		iconType: string;
@@ -220,6 +232,7 @@ export interface YoureStuckData {
 
 // Book A Call Types
 export interface BookACallData {
+	visible: boolean;
 	title: string;
 	subtitle: string;
 	contactUsLink: string;

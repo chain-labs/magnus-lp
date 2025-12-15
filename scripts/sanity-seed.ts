@@ -63,6 +63,7 @@ const initialData = [
   {
     _id: 'header',
     _type: 'header',
+    visible: true,
     brandName: 'Magnus Hathaway',
     navLinks: [
       { _key: 'nav1', label: 'About', href: '#meet-the-founder' },
@@ -78,6 +79,7 @@ const initialData = [
   {
     _id: 'hero',
     _type: 'hero',
+    visible: true,
     subtitle: 'Stock Picking, Simplified',
     headline: 'HNIs get analysts. You get YouTube. That gap costs you.',
   },
@@ -88,6 +90,7 @@ const initialData = [
   {
     _id: 'youreStuck',
     _type: 'youreStuck',
+    visible: true,
     title: "You're stuck in a system designed to work against you",
     items: [
       {
@@ -117,6 +120,7 @@ const initialData = [
   {
     _id: 'investorTrap',
     _type: 'investorTrap',
+    visible: true,
     title: "The retail investor's trap.",
     cardPairs: [
       {
@@ -164,6 +168,7 @@ const initialData = [
   {
     _id: 'howMagnusChangesThis',
     _type: 'howMagnusChangesThis',
+    visible: true,
     title: 'How Magnus Hathaway Changes This',
     items: [
       {
@@ -196,6 +201,7 @@ const initialData = [
   {
     _id: 'investmentPhilosophy',
     _type: 'investmentPhilosophy',
+    visible: true,
     sectionLabel: 'Investment Philosophy',
     title: 'How We Think About Investing',
     items: [
@@ -232,6 +238,7 @@ const initialData = [
   {
     _id: 'highestQualityResearch',
     _type: 'highestQualityResearch',
+    visible: true,
     title: 'Highest quality research, ready before the market opens',
     description: "Curated calls across overnight, intraday, and positional strategies. Unlock deeper analytics, price targets, and premium playbooks tailored to your desk without the noise.",
     displayLimit: 5,
@@ -314,6 +321,7 @@ const initialData = [
   {
     _id: 'pricing',
     _type: 'pricing',
+    visible: true,
     sectionLabel: 'Pricing',
     title: 'Pricing plan',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.',
@@ -410,6 +418,7 @@ const initialData = [
   {
     _id: 'ourTrackRecord',
     _type: 'ourTrackRecord',
+    visible: true,
     title: 'Our track record',
     subtitle: "We don't promise returns. We promise clarity.",
     stats: [
@@ -442,6 +451,7 @@ const initialData = [
   {
     _id: 'testimonials',
     _type: 'testimonials',
+    visible: true,
     title: 'What Our Clients Say',
     items: [
       {
@@ -489,6 +499,7 @@ const initialData = [
   {
     _id: 'faq',
     _type: 'faq',
+    visible: true,
     title: 'FAQs',
     description: "Got questions about investing? We're here to help! Explore our FAQ section for answers to common queries and tips to make informed decisions.",
     contactButtonText: 'Contact',
@@ -552,6 +563,7 @@ const initialData = [
   {
     _id: 'meetTheFounder',
     _type: 'meetTheFounder',
+    visible: true,
     sectionTitle: 'Meet the founder',
     sectionSubtitle: 'The team behind the research. The people you can trust.',
     storyParagraphs: [
@@ -587,6 +599,7 @@ const initialData = [
   {
     _id: 'bookACall',
     _type: 'bookACall',
+    visible: true,
     title: 'Want research-backed clarity for your portfolio?',
     subtitle: 'No hype. No pressure. Just research.',
     contactUsLink: 'https://cal.com/magnushathaway/30min',
@@ -601,6 +614,7 @@ const initialData = [
   {
     _id: 'footer',
     _type: 'footer',
+    visible: true,
     company: {
       title: 'Magnus Hathaway',
     },

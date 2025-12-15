@@ -6,6 +6,15 @@ export const footerSchema = defineType({
 	type: "document",
 	fields: [
 		defineField({
+			name: "visible",
+			title: "Visible",
+			type: "boolean",
+			initialValue: true,
+			options: {
+				layout: "checkbox",
+			},
+		}),
+		defineField({
 			name: "company",
 			title: "Company Info",
 			type: "object",
