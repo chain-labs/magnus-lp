@@ -220,7 +220,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 	const cardPairs = investorTrapData.cardPairs;
 
 	return (
-		<section className="relative w-full min-h-fit z-[-1] bg-[#000728]">
+		<section id="investor-trap" className="relative w-full min-h-fit z-[-1] bg-[#000728]">
 			{/* Background Skewed Grid */}
 			<div className="absolute w-full h-full overflow-hidden z-[-1]">
 				<div className="absolute top-[0%] left-[50%] translate-x-[-50%] translate-y-[0%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-80"></div>

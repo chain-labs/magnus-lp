@@ -1,5 +1,6 @@
 "use client";
 
+import { HighestQualityResearchData } from "@/sanity/lib/types";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
@@ -16,25 +17,7 @@ interface StockData {
 	published: string;
 }
 
-interface TableHeader {
-	label: string;
-	align: string;
-}
-
-interface HighestQualityResearchData {
-	data: {
-		title: string;
-		description: string;
-		displayLimit: number;
-		tableHeaders: TableHeader[];
-		ctaTitle?: string;
-		ctaDescription?: string;
-		ctaButtonText?: string;
-		ctaButtonLink?: string;
-	} | null;
-}
-
-const defaultTableHeaders: TableHeader[] = [
+const defaultTableHeaders: HighestQualityResearchData["tableHeaders"] = [
 	{ label: "Ticker", align: "left" },
 	{ label: "Price Zone", align: "left" },
 	{ label: "Action", align: "left" },
@@ -45,13 +28,24 @@ const defaultTableHeaders: TableHeader[] = [
 	{ label: "Published", align: "left" },
 ];
 
+const defaultData: HighestQualityResearchData = {
+	title: "Highest quality research, ready before the market opens",
+	description:
+		"Curated calls across overnight, intraday, and positional strategies. Unlock deeper analytics, price targets, and premium playbooks tailored to your desk without the noise.",
+	displayLimit: 5,
+	tableHeaders: defaultTableHeaders,
+};
+
+interface HighestQualityResearchDataProps {
+	data?: { data: HighestQualityResearchData | null };
+}
+
 export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 	data,
-}: HighestQualityResearchData) {
-	const sanityData = data;
+}: HighestQualityResearchDataProps) {
+	const sanityData = data?.data || defaultData;
 	const displayLimit = sanityData?.displayLimit || 5;
 	const tableHeaders = sanityData?.tableHeaders || defaultTableHeaders;
-	const blurred = false;
 
 	const [stockData, setStockData] = useState<StockData[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -77,7 +71,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 	}, [displayLimit]);
 
 	return (
-		<section className="w-full py-20 md:py-[120px] px-5 md:px-20">
+		<section id="highest-quality-research" className="w-full py-20 md:py-[120px] px-5 md:px-20">
 			<div className="max-w-7xl mx-auto flex flex-col gap-20">
 				<div className="flex flex-col gap-4 text-center justify-center items-center max-w-3xl mx-auto">
 					<h2 className="text-[32px] md:text-[40px] leading-10 md:leading-12 text-[#030919]">
@@ -120,23 +114,33 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 								) : stockData.length > 0 ? (
 									stockData.map((stock, index) => (
 										<tr key={stock.id || index}>
-											<td className="py-[20px] text-[16px] leading-[24px]">
+											<td className="py-[4px] pt-[32px] text-[16px] leading-[24px]">
 												<div className="flex items-center gap-3">
 													<div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
 														{stock.logo ? (
 															<img
 																src={stock.logo}
-																alt={stock.ticker}
+																alt={
+																	stock.ticker
+																}
 																width={48}
 																height={48}
 																className="object-contain w-12 h-12"
-																onError={(e) => {
-																	(e.currentTarget as HTMLImageElement).src = "/assets/default/logo.png";
+																onError={(
+																	e
+																) => {
+																	(
+																		e.currentTarget as HTMLImageElement
+																	).src =
+																		"/assets/default/logo.png";
 																}}
 															/>
 														) : (
 															<span className="text-[16px] leading-[24px] text-gray-500">
-																{stock.ticker?.slice(0, 2)}
+																{stock.ticker?.slice(
+																	0,
+																	2
+																)}
 															</span>
 														)}
 													</div>
@@ -200,7 +204,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 					</div>
 
 					{/* Blurred section with overlay */}
-					{blurred && (
+					{/* {blurred && (
 						<div className="relative">
 							<div className="blur-sm pointer-events-none select-none"></div>
 							<div
@@ -252,7 +256,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 								</p>
 							</div>
 						</div>
-					)}
+					)} */}
 				</div>
 			</div>
 		</section>

@@ -65,8 +65,8 @@ const initialData = [
     _type: 'header',
     brandName: 'Magnus Hathaway',
     navLinks: [
-      { _key: 'nav1', label: 'About', href: '#about' },
-      { _key: 'nav2', label: 'Offerings', href: '#offerings' },
+      { _key: 'nav1', label: 'About', href: '#meet-the-founder' },
+      { _key: 'nav2', label: 'Offerings', href: '#pricing' },
     ],
     ctaButtonText: 'Get Started',
     ctaButtonLink: 'https://cal.com/magnushathaway/30min',

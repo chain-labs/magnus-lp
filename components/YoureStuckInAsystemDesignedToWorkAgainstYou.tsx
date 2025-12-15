@@ -131,7 +131,7 @@ export default function YoureStuckInAsystemDesignedToWorkAgainstYou({
 	const youreStuckData = data?.data || defaultYoureStuckData;
 	console.log("youreStuckData:", youreStuckData);
 	return (
-		<section className="w-full">
+		<section id="youre-stuck" className="w-full">
 			<div
 				style={{
 					backgroundImage: "url('/assets/grids/simpleGrid.svg')",

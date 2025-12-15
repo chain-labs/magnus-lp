@@ -26,7 +26,7 @@ interface BookACallProps {
 export default function BookACall({ data }: BookACallProps) {
 	const bookACallData = data?.data || defaultBookACallData;
 	return (
-		<section className="relative w-full h-screen md:h-fit py-[112px] px-[20px] md:px-[80px]">
+		<section id="book-a-call" className="relative w-full h-screen md:h-fit py-[112px] px-[20px] md:px-[80px]">
 			<hr className="hidden md:absolute top-0 left-[20px] h-[1px] w-[calc(100%-40px)] bg-[#FFFFFF33] opacity-20" />
 			<div className="w-full h-full md:max-w-2xl mx-auto flex flex-col justify-center items-center gap-[32px]">
 				<div className="flex flex-col justify-center items-center text-center gap-[24px]">
@@ -42,7 +42,7 @@ export default function BookACall({ data }: BookACallProps) {
 						href={bookACallData.contactUsLink}
 						className="cursor-pointer"
 					>
-						<button className="px-[24px] py-[12px] bg-white border border-white rounded-[8px] text-[16px] leading-[24px] text-nowrap">
+						<button className="px-[24px] py-[12px] bg-white border border-white rounded-[8px] text-[16px] leading-[24px] text-nowrap cursor-pointer">
 							{bookACallData.contactUsButtonText || "Contact Us"}
 						</button>
 					</Link>
@@ -50,7 +50,7 @@ export default function BookACall({ data }: BookACallProps) {
 						href={bookACallData.bookACallLink}
 						className="cursor-pointer"
 					>
-						<button className="px-[24px] py-[12px] border border-white rounded-[8px] text-[16px] leading-[24px] text-white text-nowrap">
+						<button className="px-[24px] py-[12px] border border-white rounded-[8px] text-[16px] leading-[24px] text-white text-nowrap cursor-pointer">
 							{bookACallData.bookACallButtonText || "Book a Call"}
 						</button>
 					</Link>

@@ -252,8 +252,9 @@ interface FooterProps {
 
 export default function Footer({ data }: FooterProps) {
 	const footerData = data?.data || defaultFooterData;
+	console.log('footer', footerData);
 	return (
-		<footer className="w-full py-[80px] px-[20px]">
+		<footer id="footer" className="w-full py-[80px] px-[20px]">
 			{/* Top Section - Dark Blue Background */}
 			<div className="w-full bg-[#000728] max-w-7xl mx-auto py-[40px] md:py-[32px] px-[20px] md:px-[108px] rounded-[24px] text-white">
 				<div className="w-full mx-auto flex flex-col gap-[20px] md:gap-[24px]">
@@ -261,7 +262,7 @@ export default function Footer({ data }: FooterProps) {
 					<div className="flex flex-col md:flex-row justify-between items-center gap-[24px] md:mb-6">
 						<div className="flex items-center gap-[18px]">
 							<Image
-								src={footerData.company.logoSrc || ""}
+								src={footerData.company.logoSrc || "/assets/logo/logo.png"}
 								alt={footerData.company.title}
 								width={57}
 								height={57}
@@ -271,7 +272,7 @@ export default function Footer({ data }: FooterProps) {
 								{footerData.company.title}
 							</h1>
 						</div>
-						<div className="flex gap-4">
+						<div className="flex gap-4 opacity-60">
 							{footerData.socialLinks.map((social, index) => (
 								<a
 									key={index}
@@ -280,16 +281,16 @@ export default function Footer({ data }: FooterProps) {
 									rel="noopener noreferrer"
 									className="text-white text-xl hover:opacity-80 transition-opacity"
 								>
-									{social.platform === "Facebook" && (
+									{social.platform.toLowerCase() === "facebook" && (
 										<FaFacebook />
 									)}
-									{social.platform === "Instagram" && (
+									{social.platform.toLowerCase() === "instagram" && (
 										<FaInstagram />
 									)}
-									{social.platform === "Twitter" && (
+									{social.platform.toLowerCase() === "twitter" && (
 										<FaXTwitter />
 									)}
-									{social.platform === "LinkedIn" && (
+									{social.platform.toLowerCase() === "linkedin" && (
 										<FaLinkedin />
 									)}
 								</a>

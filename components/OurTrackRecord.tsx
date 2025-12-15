@@ -51,7 +51,7 @@ interface OurTrackRecordProps {
 export default function OurTrackRecord({ data }: OurTrackRecordProps) {
 	const trackRecordData = data?.data || defaultTrackRecordData;
 	return (
-		<section className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
+		<section id="our-track-record" className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="max-w-7xl mx-auto">
 				<div className="grid  grid-cols-1 md:grid-cols-2 gap-[24px] md:gap-[80px]">
 					<div 

@@ -102,7 +102,7 @@ export default function HowMagnusHathawayChangesThis({
 	const howMagnusHathawayChangesThisData =
 		data?.data || defaultHowMagnusChangesThisData;
 	return (
-		<section className="relative w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px] z-0">
+		<section id="how-magnus-hathaway-changes-this" className="relative w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px] z-0">
 			<div className="absolute top-0 left-0 h-[821.818359375px] w-full z-0">
 				<Image
 					src="/assets/grids/simpleGrid.svg"

@@ -54,7 +54,7 @@ export default function MeetTheFounder({ data }: MeetTheFounderProps) {
 	const founderDetails = meetTheFounderData.founderDetails;
 	console.log('founder', meetTheFounderData);
 	return (
-		<section className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
+		<section id="meet-the-founder" className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="max-w-[848px] mx-auto flex flex-col gap-[80px]">
 				<div className="flex flex-col gap-[16px]">
 					<h2 className=" text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">

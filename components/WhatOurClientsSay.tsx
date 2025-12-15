@@ -108,7 +108,7 @@ export default function WhatOurClientsSay({ data }: WhatOurClientsSayProps) {
 	}, [api]);
 
 	return (
-		<section className="w-full pb-[80px] md:py-[112px] px-[20px] md:px-[80px]">
+		<section id="what-our-clients-say" className="w-full pb-[80px] md:py-[112px] px-[20px] md:px-[80px]">
 			<div className="flex flex-col gap-[24px] md:gap-[80px] max-w-7xl mx-auto">
 				<h2 className="text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
 					{testimonialsData.title}

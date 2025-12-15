@@ -197,25 +197,15 @@ export interface TestimonialsData {
 export interface HighestQualityResearchData {
 	title: string;
 	description: string;
+	displayLimit: number;
 	tableHeaders: {
 		label: string;
 		align: string;
 	}[];
-	stockData: {
-		ticker: string;
-		logo?: string;
-		priceZone: string;
-		action: string;
-		target: string;
-		stopLoss: string;
-		potential: string;
-		duration: string;
-		published: string;
-	}[];
-	ctaTitle: string;
-	ctaDescription: string;
-	ctaButtonText: string;
-	ctaButtonLink: string;
+	ctaTitle?: string;
+	ctaDescription?: string;
+	ctaButtonText?: string;
+	ctaButtonLink?: string;
 }
 
 // You're Stuck Types

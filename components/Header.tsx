@@ -13,8 +13,8 @@ const defaultHeaderData: HeaderData = {
 	logoImage: "/assets/logo/logo.png",
 	brandName: "Magnus Hathaway",
 	navLinks: [
-		{ label: "About", href: "#about" },
-		{ label: "Offerings", href: "#offerings" },
+		{ label: "About", href: "#meet-the-founder" },
+		{ label: "Offerings", href: "#pricing" },
 	],
 	ctaButtonText: "Get Started",
 	ctaButtonLink: "https://cal.com/magnushathaway/30min",
@@ -90,7 +90,7 @@ export default function Header({ data }: HeaderProps) {
 					>
 						<button
 							className={cn(
-								"ml-[-16px] px-[24px] py-[10px] rounded-full text-[16px] leading-[24px] shadow-md transition-all duration-300 hover:opacity-90 focus:outline-none border",
+								"ml-[-16px] px-[24px] py-[10px] rounded-full text-[16px] leading-[24px] shadow-md transition-all duration-300 hover:opacity-90 focus:outline-none border cursor-pointer",
 								isDark
 									? "bg-white text-[#000] border-white"
 									: "bg-[#000728] text-white border-[#000728]"
@@ -144,7 +144,7 @@ export default function Header({ data }: HeaderProps) {
 					>
 						<button
 							className={cn(
-								"w-full py-[14px] rounded-full text-[16px] font-semibold shadow-md transition-all duration-300 hover:opacity-90 active:scale-[0.98]",
+								"w-full py-[14px] rounded-full text-[16px] font-semibold shadow-md transition-all duration-300 hover:opacity-90 active:scale-[0.98] cursor-pointer",
 								isDark
 									? "bg-white text-black"
 									: "bg-[#000728] text-white"

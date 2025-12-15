@@ -120,7 +120,7 @@ export default function Hero({ data }: HeroProps) {
 	const isLoading = isSubmitting;
 
 	return (
-		<section className="w-full min-h-screen flex items-center justify-center py-[120px] pb-[40px] md:pb-[120px]">
+		<section id="hero" className="w-full min-h-screen flex items-center justify-center py-[120px] pb-[40px] md:pb-[120px]">
 			<Image
 				src={
 					heroData.skewedGridImage ||

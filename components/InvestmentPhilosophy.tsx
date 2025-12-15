@@ -226,7 +226,7 @@ interface InvestmentPhilosophyProps {
 export default function InvestmentPhilosophy({ data }: InvestmentPhilosophyProps) {
 	const investmentPhilosophyData = data?.data || defaultInvestmentPhilosophyData;
 	return (
-		<section className="w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px]">
+		<section id="investment-philosophy" className="w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px]">
 			<div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-[64px] md:gap-[80px]">
 				<div className="flex flex-col gap-[32px] md:gap-[16px] col-span-1">
 					<h6 className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white">

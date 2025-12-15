@@ -35,7 +35,21 @@ import { SECTION_VISIBILITY } from "@/lib/section-visibility";
 
 export default async function Home() {
 	// Fetch all Sanity data in parallel
-	const [heroData, headerData, faqData, footerData, pricingData, meetTheFounderData, investorTrapData, howMagnusChangesThisData, investmentPhilosophyData, ourTrackRecordData, testimonialsData, bookACallData, highestQualityResearchData] = await Promise.all([
+	const [
+		heroData,
+		headerData,
+		faqData,
+		footerData,
+		pricingData,
+		meetTheFounderData,
+		investorTrapData,
+		howMagnusChangesThisData,
+		investmentPhilosophyData,
+		ourTrackRecordData,
+		testimonialsData,
+		bookACallData,
+		highestQualityResearchData,
+	] = await Promise.all([
 		sanityFetch({ query: HERO_QUERY }),
 		sanityFetch({ query: HEADER_QUERY }),
 		sanityFetch({ query: FAQ_QUERY }),
@@ -69,8 +83,14 @@ export default async function Home() {
 				</SectionObserver>
 			)}
 			{SECTION_VISIBILITY.youreStuck && (
-				<SectionObserver theme="light" className="z-10" sectionName="YoureStuck">
-					<YoureStuckInAsystemDesignedToWorkAgainstYou data={undefined} />
+				<SectionObserver
+					theme="light"
+					className="z-10"
+					sectionName="YoureStuck"
+				>
+					<YoureStuckInAsystemDesignedToWorkAgainstYou
+						data={undefined}
+					/>
 				</SectionObserver>
 			)}
 			{/* <BackgroundBlobsAdder
@@ -81,18 +101,30 @@ export default async function Home() {
 				parentClassName="bg-[#000728]"
 			></BackgroundBlobsAdder> */}
 			{SECTION_VISIBILITY.investorTrap && (
-				<SectionObserver theme="dark" className="z-[-1]" sectionName="InvestorTrap">
+				<SectionObserver
+					theme="dark"
+					className="z-[-1]"
+					sectionName="InvestorTrap"
+				>
 					<InvestorTrap data={investorTrapData} />
 				</SectionObserver>
 			)}
 
 			{SECTION_VISIBILITY.howMagnusChangesThis && (
-				<SectionObserver theme="light" sectionName="HowMagnusChangesThis">
-					<HowMagnusHathawayChangesThis data={howMagnusChangesThisData} />
+				<SectionObserver
+					theme="light"
+					sectionName="HowMagnusChangesThis"
+				>
+					<HowMagnusHathawayChangesThis
+						data={howMagnusChangesThisData}
+					/>
 				</SectionObserver>
 			)}
 			{SECTION_VISIBILITY.investmentPhilosophy && (
-				<SectionObserver theme="dark" sectionName="InvestmentPhilosophy">
+				<SectionObserver
+					theme="dark"
+					sectionName="InvestmentPhilosophy"
+				>
 					<BackgroundBlobsAdder
 						blobs={[
 							"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
@@ -106,8 +138,13 @@ export default async function Home() {
 				</SectionObserver>
 			)}
 			{SECTION_VISIBILITY.highestQualityResearch && (
-				<SectionObserver theme="light" sectionName="HighestQualityResearch">
-					<HighestQualityResearchReadyBeforeTheMarketOpens data={highestQualityResearchData} />
+				<SectionObserver
+					theme="light"
+					sectionName="HighestQualityResearch"
+				>
+					<HighestQualityResearchReadyBeforeTheMarketOpens
+						data={highestQualityResearchData}
+					/>
 				</SectionObserver>
 			)}
 			{SECTION_VISIBILITY.pricing && (
@@ -116,7 +153,10 @@ export default async function Home() {
 				</SectionObserver>
 			)}
 			{SECTION_VISIBILITY.trackRecordAndTestimonials && (
-				<SectionObserver theme="dark" sectionName="TrackRecordAndTestimonials">
+				<SectionObserver
+					theme="dark"
+					sectionName="TrackRecordAndTestimonials"
+				>
 					<BackgroundBlobsAdder
 						blobs={[
 							"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
@@ -124,8 +164,8 @@ export default async function Home() {
 						]}
 						parentClassName="bg-[#000728]"
 					>
-					<OurTrackRecord data={ourTrackRecordData} />
-					<WhatOurClientsSay data={testimonialsData} />
+						<OurTrackRecord data={ourTrackRecordData} />
+						<WhatOurClientsSay data={testimonialsData} />
 					</BackgroundBlobsAdder>
 				</SectionObserver>
 			)}
@@ -145,8 +185,8 @@ export default async function Home() {
 						]}
 						parentClassName="bg-[#000728]"
 					>
-					<MeetTheFounder data={meetTheFounderData} />
-					<BookACall data={bookACallData} />
+						<MeetTheFounder data={meetTheFounderData} />
+						<BookACall data={bookACallData} />
 					</BackgroundBlobsAdder>
 				</SectionObserver>
 			)}

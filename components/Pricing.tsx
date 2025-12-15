@@ -243,7 +243,7 @@ export default function Pricing({ data }: PricingProps) {
 	};
 
 	return (
-		<section className="relative text-foreground py-[80px] md:py-[120px] px-[20px] md:px-[64px]">
+		<section id="pricing" className="relative text-foreground py-[80px] md:py-[120px] px-[20px] md:px-[64px]">
 			<div className="w-full max-w-7xl mx-auto">
 				{/* Header Section */}
 				<div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-12">
