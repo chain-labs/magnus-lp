@@ -39,19 +39,7 @@ export const meetTheFounderSchema = defineType({
 			type: "array",
 			of: [
 				{
-					type: "object",
-					fields: [
-						defineField({
-							name: "highlightedText",
-							title: "Highlighted Text (White)",
-							type: "string",
-						}),
-						defineField({
-							name: "regularText",
-							title: "Regular Text (Gray)",
-							type: "text",
-						}),
-					],
+					type: "string",
 				},
 			],
 		}),

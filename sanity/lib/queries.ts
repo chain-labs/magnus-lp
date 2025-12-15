@@ -113,10 +113,7 @@ export const MEET_THE_FOUNDER_QUERY = defineQuery(`*[_type == "meetTheFounder"][
   sectionTitle,
   sectionSubtitle,
   "heroImage": heroImage.asset->url,
-  storyParagraphs[]{
-    highlightedText,
-    regularText
-  },
+  storyParagraphs[],
   "founderImage": founderImage.asset->url,
   founderDetails{
     name,

@@ -667,19 +667,9 @@ const initialData = [
     sectionTitle: 'Meet the founder',
     sectionSubtitle: 'The team behind the research. The people you can trust.',
     storyParagraphs: [
-      {
-        _key: 'story1',
-        highlightedText: 'Magnus Hathaway exists',
-        regularText: " because of a simple observation: retail investors aren't losing money because they lack intelligence. They're losing money because they lack time. HNI investors have dedicated teams tracking stocks full-time. Retail investors are juggling day jobs and responsibilities. By the time they research a stock, the opportunity has passed. Or they chase tips from YouTube and Telegram, hoping they picked right.",
-      },
-      {
-        _key: 'story2',
-        regularText: "So Ali Azar built Magnus Hathaway to fill that gap. To do the full-time work of stock research and tracking that retail investors can't do themselves. Not to make them analysts. But to give them what HNI investors have always had: quality stock recommendations, explained clearly, with ongoing support.",
-      },
-      {
-        _key: 'story3',
-        regularText: "Just like discount brokers freed people from expensive middlemen, Magnus Hathaway frees people from having to be full-time analysts.",
-      },
+      "Magnus Hathaway exists because of a simple observation: retail investors aren't losing money because they lack intelligence. They're losing money because they lack time. HNI investors have dedicated teams tracking stocks full-time. Retail investors are juggling day jobs and responsibilities. By the time they research a stock, the opportunity has passed. Or they chase tips from YouTube and Telegram, hoping they picked right.",
+      "So Ali Azar built Magnus Hathaway to fill that gap. To do the full-time work of stock research and tracking that retail investors can't do themselves. Not to make them analysts. But to give them what HNI investors have always had: quality stock recommendations, explained clearly, with ongoing support.",
+      "Just like discount brokers freed people from expensive middlemen, Magnus Hathaway frees people from having to be full-time analysts.",
     ],
     founderDetails: {
       name: 'Alireza Azar',

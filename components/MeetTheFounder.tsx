@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { MeetTheFounderData } from "@/sanity/lib/types";
+import { TextRevealParagraph } from "@/components/ui/text-reveal";
 
 // Static data - commented out in favor of Sanity CMS
 // const founderDetails = {
@@ -20,19 +21,9 @@ const defaultMeetTheFounderData: MeetTheFounderData = {
 	sectionSubtitle: "The team behind the research. The people you can trust.",
 	heroImage: undefined,
 	storyParagraphs: [
-		{
-			highlightedText: "Magnus Hathaway exists",
-			regularText:
-				" because of a simple observation: retail investors aren't losing money because they lack intelligence. They're losing money because they lack time. HNI investors have dedicated teams tracking stocks full-time. Retail investors are juggling day jobs and responsibilities. By the time they research a stock, the opportunity has passed. Or they chase tips from YouTube and Telegram, hoping they picked right.",
-		},
-		{
-			regularText:
-				"So Ali Azar built Magnus Hathaway to fill that gap. To do the full-time work of stock research and tracking that retail investors can't do themselves. Not to make them analysts. But to give them what HNI investors have always had: quality stock recommendations, explained clearly, with ongoing support.",
-		},
-		{
-			regularText:
-				"Just like discount brokers freed people from expensive middlemen, Magnus Hathaway frees people from having to be full-time analysts.",
-		},
+		"Magnus Hathaway exists because of a simple observation: retail investors aren't losing money because they lack intelligence. They're losing money because they lack time. HNI investors have dedicated teams tracking stocks full-time. Retail investors are juggling day jobs and responsibilities. By the time they research a stock, the opportunity has passed. Or they chase tips from YouTube and Telegram, hoping they picked right.",
+		"So Ali Azar built Magnus Hathaway to fill that gap. To do the full-time work of stock research and tracking that retail investors can't do themselves. Not to make them analysts. But to give them what HNI investors have always had: quality stock recommendations, explained clearly, with ongoing support.",
+		"Just like discount brokers freed people from expensive middlemen, Magnus Hathaway frees people from having to be full-time analysts.",
 	],
 	founderDetails: {
 		name: "Alireza Azar",
@@ -53,9 +44,12 @@ interface MeetTheFounderProps {
 export default function MeetTheFounder({ data }: MeetTheFounderProps) {
 	const meetTheFounderData = data?.data || defaultMeetTheFounderData;
 	const founderDetails = meetTheFounderData.founderDetails;
-	console.log('founder', meetTheFounderData);
+	console.log("founder", meetTheFounderData);
 	return (
-		<section id="meet-the-founder" className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
+		<section
+			id="meet-the-founder"
+			className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]"
+		>
 			<div className="max-w-[848px] mx-auto flex flex-col gap-[80px]">
 				<div className="flex flex-col gap-[16px]">
 					<h2 className=" text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
@@ -77,20 +71,10 @@ export default function MeetTheFounder({ data }: MeetTheFounderProps) {
 						}}
 					></div>
 				)}
-				<div className="text-[#686e7d] flex flex-col gap-[24px] text-[20px] md:text-[24px] leading-[32px]">
-					{meetTheFounderData.storyParagraphs.map(
-						(paragraph, index) => (
-							<p key={`story-${index}`}>
-								{paragraph.highlightedText && (
-									<span className="text-white">
-										{paragraph.highlightedText}
-									</span>
-								)}
-								{paragraph.regularText}
-							</p>
-						)
-					)}
-				</div>
+				<TextRevealParagraph 
+					paragraphs={meetTheFounderData.storyParagraphs}
+					className="flex flex-col gap-[24px]"
+				/>
 				<div className="grid grid-cols-1 md:grid-cols-5 w-full gap-y-[32px] md:gap-[32px]">
 					<div
 						style={{

@@ -117,10 +117,7 @@ export interface MeetTheFounderData {
 	sectionTitle: string;
 	sectionSubtitle: string;
 	heroImage?: string;
-	storyParagraphs: {
-		highlightedText?: string;
-		regularText?: string;
-	}[];
+	storyParagraphs: string[];
 	founderImage?: string;
 	founderDetails: {
 		name: string;
