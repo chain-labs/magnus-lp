@@ -28,30 +28,31 @@ export interface Question {
 export interface Stock {
   id?: string;
   fields: {
-    Ticker: string;
-    Logo?: string;
-    "Price Zone": string;
-    Action: "BUY" | "HOLD" | "SELL";
-    Target: string;
-    "Stop Loss": string;
-    Potential: string;
+    Name: string;
+    Status: "Current" | "Sold";
+    "Entry Price": number;
+    "Exit Price"?: number;
+    LDP?: number; // Last Dated Price
+    Gains?: string; // Calculated or manual
     Duration: string;
-    Published: string;
+    "Research Report URL"?: string;
+    // Hidden fields (not displayed in frontend)
     Display?: boolean;
+    "Internal Notes"?: string;
+    "Created By"?: string;
   };
 }
 
 export interface StockData {
   id: string;
-  ticker: string;
-  logo?: string;
-  priceZone: string;
-  action: "BUY" | "HOLD" | "SELL";
-  target: string;
-  stopLoss: string;
-  potential: string;
+  name: string;
+  status: "Current" | "Sold";
+  entryPrice: number;
+  exitPrice?: number;
+  ldp?: number;
+  gains: string;
   duration: string;
-  published: string;
+  researchReportUrl?: string;
 }
 
 export async function fetchStocksFromAirtable(limit: number = 5): Promise<StockData[]> {
@@ -59,22 +60,43 @@ export async function fetchStocksFromAirtable(limit: number = 5): Promise<StockD
     const records = await stocksTable
       .select({
         maxRecords: limit,
-        sort: [{ field: "Published", direction: "desc" }],
+        filterByFormula: "NOT({Display} = FALSE())",
+        sort: [{ field: "Name", direction: "asc" }],
       })
       .firstPage();
 
-    return records.map((record) => ({
-      id: record.id,
-      ticker: record.get("Ticker") as string,
-      logo: record.get("Logo") as string | undefined,
-      priceZone: record.get("Price Zone") as string,
-      action: record.get("Action") as "BUY" | "HOLD" | "SELL",
-      target: record.get("Target") as string,
-      stopLoss: record.get("Stop Loss") as string,
-      potential: record.get("Potential") as string,
-      duration: record.get("Duration") as string,
-      published: record.get("Published") as string,
-    }));
+    return records.map((record) => {
+      const status = record.get("Status") as "Current" | "Sold";
+      const entryPrice = record.get("Entry Price") as number;
+      const exitPrice = record.get("Exit Price") as number | undefined;
+      const ldp = record.get("LDP") as number | undefined;
+      let gains = record.get("Gains") as string | undefined;
+
+      // Auto-calculate gains if not provided
+      if (!gains) {
+        if (status === "Sold" && exitPrice) {
+          const gainsPercent = ((exitPrice - entryPrice) / entryPrice) * 100;
+          gains = `${gainsPercent > 0 ? "+" : ""}${gainsPercent.toFixed(2)}%`;
+        } else if (status === "Current" && ldp) {
+          const gainsPercent = ((ldp - entryPrice) / entryPrice) * 100;
+          gains = `${gainsPercent > 0 ? "+" : ""}${gainsPercent.toFixed(2)}%`;
+        } else {
+          gains = "-";
+        }
+      }
+
+      return {
+        id: record.id,
+        name: record.get("Name") as string,
+        status,
+        entryPrice,
+        exitPrice,
+        ldp,
+        gains,
+        duration: record.get("Duration") as string,
+        researchReportUrl: record.get("Research Report URL") as string | undefined,
+      };
+    });
   } catch (error) {
     console.error("Error fetching stocks from Airtable:", error);
     return [];

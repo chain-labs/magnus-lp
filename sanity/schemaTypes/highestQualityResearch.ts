@@ -37,6 +37,17 @@ export const highestQualityResearchSchema = defineType({
 			name: "tableHeaders",
 			title: "Table Headers",
 			type: "array",
+			description: "Configure the column headers for the stock research table",
+			initialValue: [
+				{ label: "Name", align: "left" },
+				{ label: "Status", align: "left" },
+				{ label: "Entry Price", align: "left" },
+				{ label: "Exit Price", align: "left" },
+				{ label: "LDP", align: "left" },
+				{ label: "Gains", align: "left" },
+				{ label: "Duration", align: "left" },
+				{ label: "Research Report", align: "left" },
+			],
 			of: [
 				{
 					type: "object",
@@ -57,6 +68,7 @@ export const highestQualityResearchSchema = defineType({
 									{ title: "Right", value: "right" },
 								],
 							},
+							initialValue: "left",
 						}),
 					],
 				},

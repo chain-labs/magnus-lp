@@ -214,6 +214,19 @@ export interface HighestQualityResearchData {
 	}[];
 }
 
+// Stock Data Types (from Airtable)
+export interface StockData {
+	id: string;
+	name: string;
+	status: "Current" | "Sold";
+	entryPrice: number;
+	exitPrice?: number;
+	ldp?: number;
+	gains: string;
+	duration: string;
+	researchReportUrl?: string;
+}
+
 // You're Stuck Types
 export interface YoureStuckData {
 	visible: boolean;

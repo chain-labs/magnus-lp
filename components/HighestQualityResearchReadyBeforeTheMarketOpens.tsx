@@ -1,31 +1,18 @@
 "use client";
 
-import { HighestQualityResearchData } from "@/sanity/lib/types";
-import Image from "next/image";
+import { HighestQualityResearchData, StockData } from "@/sanity/lib/types";
 import { useState, useEffect } from "react";
-
-interface StockData {
-	id: string;
-	ticker: string;
-	logo?: string;
-	priceZone: string;
-	action: "BUY" | "HOLD" | "SELL";
-	target: string;
-	stopLoss: string;
-	potential: string;
-	duration: string;
-	published: string;
-}
+import ResearchDownloadModal from "./ResearchDownloadModal";
 
 const defaultTableHeaders: HighestQualityResearchData["tableHeaders"] = [
-	{ label: "Ticker", align: "left" },
-	{ label: "Price Zone", align: "left" },
-	{ label: "Action", align: "left" },
-	{ label: "Target", align: "left" },
-	{ label: "Stop-Loss", align: "left" },
-	{ label: "Potential", align: "left" },
+	{ label: "Name", align: "left" },
+	{ label: "Status", align: "left" },
+	{ label: "Entry Price", align: "left" },
+	{ label: "Exit Price", align: "left" },
+	{ label: "LDP", align: "left" },
+	{ label: "Gains", align: "left" },
 	{ label: "Duration", align: "left" },
-	{ label: "Published", align: "left" },
+	{ label: "Research Report", align: "left" },
 ];
 
 const defaultData: HighestQualityResearchData = {
@@ -50,6 +37,11 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 
 	const [stockData, setStockData] = useState<StockData[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [modalOpen, setModalOpen] = useState(false);
+	const [selectedStock, setSelectedStock] = useState<{
+		name: string;
+		url: string;
+	} | null>(null);
 
 	useEffect(() => {
 		const fetchStocks = async () => {
@@ -70,6 +62,12 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 
 		fetchStocks();
 	}, [displayLimit]);
+
+	const handleDownloadClick = (name: string, url: string | undefined) => {
+		if (!url) return;
+		setSelectedStock({ name, url });
+		setModalOpen(true);
+	};
 
 	return (
 		<section id="highest-quality-research" className="w-full py-20 md:py-[120px] px-5 md:px-20">
@@ -113,83 +111,72 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 										</td>
 									</tr>
 								) : stockData.length > 0 ? (
-									stockData.map((stock, index) => (
-										<tr key={stock.id || index}>
-											<td className="py-[4px] pt-[32px] text-[16px] leading-[24px]">
-												<div className="flex items-center gap-3">
-													<div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
-														{stock.logo ? (
-															<img
-																src={stock.logo}
-																alt={
-																	stock.ticker
-																}
-																width={48}
-																height={48}
-																className="object-contain w-12 h-12"
-																onError={(
-																	e
-																) => {
-																	(
-																		e.currentTarget as HTMLImageElement
-																	).src =
-																		"/assets/default/logo.png";
-																}}
-															/>
-														) : (
-															<span className="text-[16px] leading-[24px] text-gray-500">
-																{stock.ticker?.slice(
-																	0,
-																	2
-																)}
-															</span>
-														)}
-													</div>
-													<span className="uppercase text-[16px] leading-6 text-black">
-														{stock.ticker}
+									stockData.map((stock, index) => {
+										const gainsValue = parseFloat(stock.gains.replace(/[+%]/g, ""));
+										const isPositiveGains = gainsValue > 0;
+										const isNegativeGains = gainsValue < 0;
+
+										return (
+											<tr key={stock.id || index}>
+												<td className="py-[4px] pt-[32px] text-[16px] leading-[24px] text-black font-medium">
+													{stock.name}
+												</td>
+												<td className="py-[4px] pt-[32px]">
+													<span
+														className={`inline-flex items-center px-3 py-[5px] rounded-lg text-[14px] leading-[20px] font-medium uppercase ${
+															stock.status === "Current"
+																? "bg-[#DBEAFE] text-[#1E40AF] border border-[#3B82F6]"
+																: "bg-[#F3F4F6] text-[#6B7280] border border-[#9CA3AF]"
+														}`}
+													>
+														{stock.status}
 													</span>
-												</div>
-											</td>
-											<td className="py-[4px] pt-[32px] text-[#000] opacity-60">
-												{stock.priceZone}
-											</td>
-											<td className="py-[4px] pt-[32px]">
-												<span
-													className={`inline-flex items-center px-3 py-[5px] rounded-lg text-[16px] leading-[24px] uppercase ${
-														stock.action === "BUY"
-															? "bg-[#D7FFE5] text-[#0FAB49] border border-[#16A34A]"
-															: stock.action ===
-															  "SELL"
-															? "bg-[#FFD7D7] text-[#DC2626] border border-[#DC2626]"
-															: "bg-[#FCFFD7] text-[#A39016] border border-[#A39016]"
-													}`}
-												>
-													{stock.action}
-												</span>
-											</td>
-											<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-												₹{stock.target}
-											</td>
-											<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-												₹{stock.stopLoss}
-											</td>
-											<td className="py-[4px] pt-[32px] text-[#16A34A] text-[16px] leading-[24px]">
-												{stock.potential}
-											</td>
-											<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-												{stock.duration}
-											</td>
-											<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-												{new Date(
-													stock.published
-												).toLocaleDateString("en-US", {
-													month: "short",
-													day: "numeric",
-													year: "numeric",
-												})}
-											</td>
-										</tr>
-									))
+												</td>
+												<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													₹{stock.entryPrice.toLocaleString()}
+												</td>
+												<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													{stock.exitPrice ? `₹${stock.exitPrice.toLocaleString()}` : "-"}
+												</td>
+												<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													{stock.ldp ? `₹${stock.ldp.toLocaleString()}` : "-"}
+												</td>
+												<td className={`py-[4px] pt-[32px] text-[16px] leading-[24px] font-semibold ${
+													isPositiveGains ? "text-[#16A34A]" : isNegativeGains ? "text-[#DC2626]" : "text-[#000] opacity-60"
+												}`}>
+													{stock.gains}
+												</td>
+												<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													{stock.duration}
+												</td>
+												<td className="py-[4px] pt-[32px]">
+													{stock.researchReportUrl ? (
+														<button
+															onClick={() => handleDownloadClick(stock.name, stock.researchReportUrl)}
+															className="inline-flex items-center gap-2 px-4 py-2 bg-[#030919] text-white rounded-lg text-[14px] leading-[20px] font-medium hover:bg-[#030919]/90 transition-all"
+														>
+															<svg
+																className="w-4 h-4"
+																fill="none"
+																strokeLinecap="round"
+																strokeLinejoin="round"
+																strokeWidth="2"
+																viewBox="0 0 24 24"
+																stroke="currentColor"
+															>
+																<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+															</svg>
+															Download
+														</button>
+													) : (
+														<span className="text-[#000] opacity-40 text-[14px] leading-[20px]">
+															Not Available
+														</span>
+													)}
+												</td>
+											</tr>
+										);
+									})
 								) : (
 									<tr>
 										<td
@@ -205,6 +192,16 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 					</div>
 				</div>
 			</div>
+
+			{/* Download Modal */}
+			{selectedStock && (
+				<ResearchDownloadModal
+					isOpen={modalOpen}
+					onClose={() => setModalOpen(false)}
+					stockName={selectedStock.name}
+					researchReportUrl={selectedStock.url}
+				/>
+			)}
 		</section>
 	);
 }
