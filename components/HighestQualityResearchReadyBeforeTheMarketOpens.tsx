@@ -4,6 +4,7 @@ import { HighestQualityResearchData, StockData } from "@/sanity/lib/types";
 import { useState, useEffect } from "react";
 import ResearchDownloadModal from "./ResearchDownloadModal";
 import Link from "next/link";
+import { Download } from "lucide-react";
 
 const defaultTableHeaders: HighestQualityResearchData["tableHeaders"] = [
 	{ label: "Ticker", align: "left" },
@@ -75,8 +76,6 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 
 		fetchStocks();
 	}, [displayLimit, blurredRowsCount]);
-
-	console.log("stockData", stockData);
 
 	// Separate sold and current stocks
 	const unlockedStocks = stockData.filter((stock) => !stock.locked);
@@ -198,6 +197,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																}
 																className="text-[#030919] text-[14px] leading-[20px] underline hover:opacity-70 transition-opacity"
 															>
+																<Download className="w-4 h-4" />
 																Download
 															</button>
 														) : (
@@ -269,6 +269,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 													</td>
 													<td className="py-[4px] pt-[32px]">
 														<span className="text-[#030919] text-[14px] leading-[20px] underline">
+															<Download className="w-4 h-4" />
 															Download
 														</span>
 													</td>

@@ -139,8 +139,6 @@ export async function fetchStocksFromAirtable(
 			})
 			.firstPage();
 
-		console.log('records', records);
-
 		const mapped: StockData[] = records.map((record) => {
 			const status = record.get("Status") as "Current" | "Sold";
 			const entryPrice = record.get("Entry Price") as number;
