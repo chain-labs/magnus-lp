@@ -7,6 +7,74 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
 
 export const questionsTable = base(process.env.AIRTABLE_TABLE_NAME!);
 export const stocksTable = base(process.env.AIRTABLE_STOCKS_TABLE_NAME || "Stocks");
+export const usersTable = base(process.env.AIRTABLE_USERS_TABLE_NAME || "Users");
+
+// User interface for the Users table
+export interface User {
+  id?: string;
+  fields: {
+    Name: string;
+    Email: string;
+    Phone?: string;
+    Source: "Question" | "Research Download";
+    "Created At": string;
+    "Last Activity": string;
+  };
+}
+
+// Helper function to save or update user in the Users table
+export async function saveUserToAirtable(userData: {
+  name: string;
+  email: string;
+  phone?: string;
+  source: "Question" | "Research Download";
+}): Promise<{ success: boolean; userId?: string; error?: string }> {
+  try {
+    // Check if user with this email already exists
+    const existingRecords = await usersTable
+      .select({
+        filterByFormula: `{Email} = "${userData.email}"`,
+        maxRecords: 1,
+      })
+      .firstPage();
+
+    if (existingRecords.length > 0) {
+      // User exists, update the last activity
+      const existingRecord = existingRecords[0];
+      await usersTable.update([
+        {
+          id: existingRecord.id,
+          fields: {
+            "Last Activity": new Date().toISOString(),
+            // Update phone if provided and different
+            ...(userData.phone && { Phone: userData.phone }),
+            // Update name if provided and different
+            ...(userData.name && { Name: userData.name }),
+          },
+        },
+      ]);
+      return { success: true, userId: existingRecord.id };
+    } else {
+      // Create new user
+      const newRecord = await usersTable.create([
+        {
+          fields: {
+            Name: userData.name,
+            Email: userData.email,
+            Phone: userData.phone || "",
+            Source: userData.source,
+            "Created At": new Date().toISOString(),
+            "Last Activity": new Date().toISOString(),
+          },
+        },
+      ]);
+      return { success: true, userId: newRecord[0].id };
+    }
+  } catch (error) {
+    console.error("Error saving user to Airtable:", error);
+    return { success: false, error: String(error) };
+  }
+}
 
 // TypeScript types (optional but recommended)
 export interface Question {

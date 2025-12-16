@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { questionsTable } from "@/lib/airtable";
+import { questionsTable, saveUserToAirtable } from "@/lib/airtable";
 
 interface SubmitQuestionBody {
   questionText: string;
@@ -19,6 +19,19 @@ export async function POST(request: NextRequest) {
         { error: "Question text is required" },
         { status: 400 }
       );
+    }
+
+    // Save user to Users table (don't block on failure)
+    try {
+      await saveUserToAirtable({
+        name: body.userName,
+        email: body.userEmail,
+        phone: body.userPhone,
+        source: "Question",
+      });
+    } catch (userError) {
+      console.error("Error saving user to Users table:", userError);
+      // Continue even if user save fails - don't block the question submission
     }
 
     // Create record in Airtable

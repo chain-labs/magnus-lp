@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Airtable from "airtable";
+import { saveUserToAirtable } from "@/lib/airtable";
 
 // Initialize a separate table for download tracking (optional but recommended)
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
@@ -18,10 +19,12 @@ const downloadsTable = base(process.env.AIRTABLE_DOWNLOADS_TABLE_NAME || "Resear
 export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json();
-		const { name, email, phone, stockName, researchReportUrl } = body;
+		// Support both 'phone' and 'phoneNumber' field names for compatibility
+		const { name, email, phone, phoneNumber, stockName, researchReportUrl } = body;
+		const userPhone = phone || phoneNumber;
 
 		// Validate required fields
-		if (!name || !email || !phone) {
+		if (!name || !email || !userPhone) {
 			return NextResponse.json(
 				{ error: "Name, email, and phone are required" },
 				{ status: 400 }
@@ -44,6 +47,19 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
+		// Save user to Users table (don't block on failure)
+		try {
+			await saveUserToAirtable({
+				name,
+				email,
+				phone: userPhone,
+				source: "Research Download",
+			});
+		} catch (userError) {
+			console.error("Error saving user to Users table:", userError);
+			// Continue even if user save fails - don't block the download
+		}
+
 		// Log the download request to Airtable
 		try {
 			await downloadsTable.create([
@@ -51,7 +67,7 @@ export async function POST(request: NextRequest) {
 					fields: {
 						Name: name,
 						Email: email,
-						Phone: phone,
+						Phone: userPhone,
 						"Stock Name": stockName,
 						"Research Report URL": researchReportUrl,
 						"Downloaded At": new Date().toISOString(),
