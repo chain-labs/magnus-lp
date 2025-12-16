@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
+import { ReactLenis } from 'lenis/react'
 
 type Theme = "light" | "dark";
 
@@ -22,6 +23,7 @@ export function HeaderThemeProvider({
 
 	return (
 		<HeaderThemeContext.Provider value={{ theme, setTheme }}>
+			<ReactLenis root />
 			{children}
 		</HeaderThemeContext.Provider>
 	);
