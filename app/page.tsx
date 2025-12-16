@@ -36,6 +36,9 @@ import {
 import { sanityFetch } from "@/sanity/lib/live";
 import { UserDataProvider } from "@/components/UserDataProvider";
 
+// Revalidate Sanity data every 10 seconds
+export const revalidate = 10;
+
 export default async function Home() {
 	// Fetch all Sanity data in parallel
 	const [
