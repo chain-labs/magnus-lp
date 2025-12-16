@@ -136,9 +136,9 @@ export default function YoureStuckInAsystemDesignedToWorkAgainstYou({
 			<div
 				style={{
 					backgroundImage: "url('/assets/grids/simpleGrid.svg')",
-					backgroundSize: "contain",
+					backgroundSize: "cover",
 					backgroundPosition: "center",
-					backgroundRepeat: "repeat",
+					backgroundRepeat: "no-repeat",
 				}}
 				className="w-full md:max-h-[522px] px-[20px] md:px-[80px] py-[80px] md:py-[120px] bg-white z-0"
 			>
