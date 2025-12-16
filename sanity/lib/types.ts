@@ -232,6 +232,7 @@ export interface StockData {
 	gains: string;
 	duration: string;
 	researchReportUrl?: string;
+	locked: boolean;
 }
 
 // You're Stuck Types

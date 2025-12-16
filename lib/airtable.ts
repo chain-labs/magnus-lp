@@ -125,6 +125,7 @@ export interface StockData {
 	gains: string;
 	duration: string;
 	researchReportUrl?: string;
+	locked: boolean;
 }
 
 export async function fetchStocksFromAirtable(
@@ -133,16 +134,14 @@ export async function fetchStocksFromAirtable(
 	try {
 		const records = await stocksTable
 			.select({
-				maxRecords: limit,
+				maxRecords: limit * 3,
 				filterByFormula: "NOT({Display} = FALSE())",
-				sort: [
-					{ field: "Status", direction: "desc" }, // "Sold" comes before "Current" alphabetically in desc
-					{ field: "Name", direction: "asc" },
-				],
 			})
 			.firstPage();
 
-		return records.map((record) => {
+		console.log('records', records);
+
+		const mapped: StockData[] = records.map((record) => {
 			const status = record.get("Status") as "Current" | "Sold";
 			const entryPrice = record.get("Entry Price") as number;
 			const exitPrice = record.get("Exit Price") as number | undefined;
@@ -180,8 +179,22 @@ export async function fetchStocksFromAirtable(
 				researchReportUrl: record.get("Research Report URL") as
 					| string
 					| undefined,
+				locked: record.get("Locked") === true, // expects a boolean 'Locked' field in Airtable
 			};
 		});
+
+		// Sort stocks into locked and unlocked
+		const unlocked = mapped.filter((s) => !s.locked);
+		const locked = mapped.filter((s) => s.locked);
+
+		// Concatenate, then sort all by reverse id (descending lexicographically)
+		const allStocks = [...unlocked, ...locked].sort((a, b) => {
+			if (a.id < b.id) return 1;
+			if (a.id > b.id) return -1;
+			return 0;
+		});
+
+		return allStocks;
 	} catch (error) {
 		console.error("Error fetching stocks from Airtable:", error);
 		return [];

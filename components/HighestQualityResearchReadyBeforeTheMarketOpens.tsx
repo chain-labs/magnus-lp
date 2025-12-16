@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const defaultTableHeaders: HighestQualityResearchData["tableHeaders"] = [
 	{ label: "Ticker", align: "left" },
-	{ label: "Price Zone", align: "left" },
 	{ label: "Action", align: "left" },
 	{ label: "Target", align: "left" },
 	{ label: "Stop-loss", align: "left" },
@@ -39,9 +38,12 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 	const sanityData = data?.data || defaultData;
 	const displayLimit = sanityData?.displayLimit || 5;
 	const tableHeaders = sanityData?.tableHeaders || defaultTableHeaders;
-	const blurredRowsCount = sanityData?.blurredRowsCount ?? 3;
-	const unlockTitle = sanityData?.unlockTitle || "You need a plan to unlock premium research insights";
-	const unlockButtonText = sanityData?.unlockButtonText || "Unlock More Stocks Data";
+	const blurredRowsCount = sanityData?.blurredRowsCount;
+	const unlockTitle =
+		sanityData?.unlockTitle ||
+		"You need a plan to unlock premium research insights";
+	const unlockButtonText =
+		sanityData?.unlockButtonText || "Unlock More Stocks Data";
 	const unlockButtonLink = sanityData?.unlockButtonLink || "#pricing";
 
 	const [stockData, setStockData] = useState<StockData[]>([]);
@@ -56,7 +58,9 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 		const fetchStocks = async () => {
 			try {
 				const response = await fetch(
-					`/api/stocks?limit=${displayLimit + blurredRowsCount}`
+					`/api/stocks?limit=${
+						displayLimit + (blurredRowsCount ?? 0)
+					}`
 				);
 				if (response.ok) {
 					const result = await response.json();
@@ -72,9 +76,11 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 		fetchStocks();
 	}, [displayLimit, blurredRowsCount]);
 
+	console.log("stockData", stockData);
+
 	// Separate sold and current stocks
-	const soldStocks = stockData.filter(stock => stock.status === "Sold").slice(0, displayLimit);
-	const currentStocks = stockData.filter(stock => stock.status === "Current").slice(0, blurredRowsCount);
+	const unlockedStocks = stockData.filter((stock) => !stock.locked);
+	const lockedStocks = stockData.filter((stock) => stock.locked);
 
 	const handleDownloadClick = (name: string, url: string | undefined) => {
 		if (!url) return;
@@ -83,7 +89,10 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 	};
 
 	return (
-		<section id="highest-quality-research" className="w-full py-20 md:py-[120px] px-5 md:px-20">
+		<section
+			id="highest-quality-research"
+			className="w-full py-20 md:py-[120px] px-5 md:px-20"
+		>
 			<div className="max-w-7xl mx-auto flex flex-col gap-20">
 				<div className="flex flex-col gap-4 text-center justify-center items-center max-w-3xl mx-auto">
 					<h2 className="text-[32px] md:text-[40px] leading-10 md:leading-12 text-[#030919]">
@@ -123,36 +132,56 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 											</div>
 										</td>
 									</tr>
-								) : soldStocks.length > 0 || currentStocks.length > 0 ? (
+								) : unlockedStocks.length > 0 ||
+								  lockedStocks.length > 0 ? (
 									<>
 										{/* Sold stocks - fully visible */}
-										{soldStocks.map((stock, index) => {
-											const gainsValue = parseFloat(stock.gains.replace(/[+%]/g, ""));
-											const isPositiveGains = gainsValue > 0;
-											const isNegativeGains = gainsValue < 0;
+										{unlockedStocks.map((stock, index) => {
+											const gainsValue = parseFloat(
+												stock.gains.replace(/[+%]/g, "")
+											);
+											const isPositiveGains =
+												gainsValue > 0;
+											const isNegativeGains =
+												gainsValue < 0;
 
 											return (
 												<tr key={stock.id || index}>
 													<td className="py-[4px] pt-[32px] text-[16px] leading-[24px] text-black font-medium">
 														{stock.name}
 													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-														₹{stock.entryPrice.toLocaleString()}{stock.exitPrice ? ` - ₹${stock.exitPrice.toLocaleString()}` : ""}
-													</td>
 													<td className="py-[4px] pt-[32px]">
-														<span className="inline-flex items-center px-3 py-[5px] rounded-lg text-[14px] leading-[20px] font-medium uppercase bg-[#F3F4F6] text-[#6B7280] border border-[#9CA3AF]">
-															SOLD
-														</span>
+														{stock.status ===
+															"Sold" && (
+															<span className="inline-flex items-center px-3 py-[5px] rounded-lg text-[14px] leading-[20px] font-medium uppercase bg-[#F3F4F6] text-[#6B7280] border border-[#9CA3AF]">
+																SOLD
+															</span>
+														)}
+														{stock.status ===
+															"Current" && (
+															<span className="inline-flex items-center px-3 py-[5px] rounded-lg text-[14px] leading-[20px] font-medium uppercase bg-[#DBEAFE] text-[#1E40AF] border border-[#3B82F6]">
+																CURRENT
+															</span>
+														)}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-														{stock.exitPrice ? `₹${stock.exitPrice.toLocaleString()}` : "-"}
+														{stock.exitPrice
+															? `₹${stock.exitPrice.toLocaleString()}`
+															: "-"}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-														₹{stock.entryPrice.toLocaleString()}
+														₹
+														{stock.entryPrice.toLocaleString()}
 													</td>
-													<td className={`py-[4px] pt-[32px] text-[16px] leading-[24px] font-semibold ${
-														isPositiveGains ? "text-[#16A34A]" : isNegativeGains ? "text-[#DC2626]" : "text-[#000] opacity-60"
-													}`}>
+													<td
+														className={`py-[4px] pt-[32px] text-[16px] leading-[24px] font-semibold ${
+															isPositiveGains
+																? "text-[#16A34A]"
+																: isNegativeGains
+																? "text-[#DC2626]"
+																: "text-[#000] opacity-60"
+														}`}
+													>
 														{stock.gains}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
@@ -161,7 +190,12 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 													<td className="py-[4px] pt-[32px]">
 														{stock.researchReportUrl ? (
 															<button
-																onClick={() => handleDownloadClick(stock.name, stock.researchReportUrl)}
+																onClick={() =>
+																	handleDownloadClick(
+																		stock.name,
+																		stock.researchReportUrl
+																	)
+																}
 																className="text-[#030919] text-[14px] leading-[20px] underline hover:opacity-70 transition-opacity"
 															>
 																Download
@@ -176,33 +210,58 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 											);
 										})}
 										{/* Current stocks - blurred */}
-										{currentStocks.map((stock, index) => {
-											const gainsValue = parseFloat(stock.gains.replace(/[+%]/g, ""));
-											const isPositiveGains = gainsValue > 0;
-											const isNegativeGains = gainsValue < 0;
+										{lockedStocks.map((stock, index) => {
+											const gainsValue = parseFloat(
+												stock.gains.replace(/[+%]/g, "")
+											);
+											const isPositiveGains =
+												gainsValue > 0;
+											const isNegativeGains =
+												gainsValue < 0;
 
 											return (
-												<tr key={stock.id || `current-${index}`} className="blur-[6px] select-none pointer-events-none">
+												<tr
+													key={
+														stock.id ||
+														`current-${index}`
+													}
+													className="blur-[6px] select-none pointer-events-none"
+												>
 													<td className="py-[4px] pt-[32px] text-[16px] leading-[24px] text-black font-medium">
 														{stock.name}
 													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-														₹{stock.entryPrice.toLocaleString()}{stock.ldp ? ` - ₹${stock.ldp.toLocaleString()}` : ""}
-													</td>
 													<td className="py-[4px] pt-[32px]">
-														<span className="inline-flex items-center px-3 py-[5px] rounded-lg text-[14px] leading-[20px] font-medium uppercase bg-[#DBEAFE] text-[#1E40AF] border border-[#3B82F6]">
-															BUY
-														</span>
+														{stock.status ===
+															"Current" && (
+															<span className="inline-flex items-center px-3 py-[5px] rounded-lg text-[14px] leading-[20px] font-medium uppercase bg-[#DBEAFE] text-[#1E40AF] border border-[#3B82F6]">
+																CURRENT
+															</span>
+														)}
+														{stock.status ===
+															"Sold" && (
+															<span className="inline-flex items-center px-3 py-[5px] rounded-lg text-[14px] leading-[20px] font-medium uppercase bg-[#F3F4F6] text-[#6B7280] border border-[#9CA3AF]">
+																SOLD
+															</span>
+														)}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-														{stock.ldp ? `₹${stock.ldp.toLocaleString()}` : "-"}
+														{stock.ldp
+															? `₹${stock.ldp.toLocaleString()}`
+															: "-"}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-														₹{stock.entryPrice.toLocaleString()}
+														₹
+														{stock.entryPrice.toLocaleString()}
 													</td>
-													<td className={`py-[4px] pt-[32px] text-[16px] leading-[24px] font-semibold ${
-														isPositiveGains ? "text-[#16A34A]" : isNegativeGains ? "text-[#DC2626]" : "text-[#000] opacity-60"
-													}`}>
+													<td
+														className={`py-[4px] pt-[32px] text-[16px] leading-[24px] font-semibold ${
+															isPositiveGains
+																? "text-[#16A34A]"
+																: isNegativeGains
+																? "text-[#DC2626]"
+																: "text-[#000] opacity-60"
+														}`}
+													>
 														{stock.gains}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
@@ -230,16 +289,16 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 							</tbody>
 						</table>
 					</div>
-					
+
 					{/* Unlock overlay section */}
-					{currentStocks.length > 0 && (
+					{lockedStocks.length > 0 && (
 						<div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/95 to-transparent flex flex-col items-center justify-end pb-8 pointer-events-auto">
 							<Link
 								href={unlockButtonLink}
 								style={{
 									background: `radial-gradient(97.46% 172.79% at 2.54% 70.83%, #A12FFF 0%, rgba(0, 22, 118, 0.5) 100%),
 								   radial-gradient(169.02% 564.79% at 77.54% -103.13%, #2FFCFF 0%, rgba(0, 22, 118, 0.5) 100%),
-								   #00177C`
+								   #00177C`,
 								}}
 								className="inline-flex items-center gap-2 px-6 py-3 bg-[#030919] text-white rounded-lg text-[14px] leading-[20px] font-medium hover:bg-[#030919]/90 transition-all shadow-lg"
 							>
