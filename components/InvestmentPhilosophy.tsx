@@ -236,6 +236,9 @@ export default function InvestmentPhilosophy({ data }: InvestmentPhilosophyProps
 					<h2 className="w-full md:max-w-2xl text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
 						{investmentPhilosophyData.title}
 					</h2>
+					<h6 className="text-[16px] md:text-[16px] leading-[24px] md:leading-[24px] text-white opacity-60">
+						We buy fair Valuation, in the right Opportunity setup, with Longevity to compound—only when a real Trigger is in sight
+					</h6>
 				</div>
 				<div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-x-[48px] gap-y-[64px] col-span-2">
 					{investmentPhilosophyData.items.map((item, idx) => (

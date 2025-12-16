@@ -75,7 +75,8 @@ export default async function Home() {
 		investmentPhilosophy: investmentPhilosophyData.data.visible,
 		highestQualityResearch: highestQualityResearchData.data.visible,
 		pricing: pricingData.data.visible,
-		trackRecordAndTestimonials: ourTrackRecordData.data.visible,
+		trackRecord: ourTrackRecordData.data.visible,
+		testimonials: testimonialsData.data.visible,
 		faq: faqData.data.visible,
 		founderAndCall: meetTheFounderData.data.visible,
 		footer: footerData.data.visible,
@@ -156,12 +157,7 @@ export default async function Home() {
 					/>
 				</SectionObserver>
 			)}
-			{SECTION_VISIBILITY.pricing && (
-				<SectionObserver theme="light" sectionName="Pricing">
-					<Pricing data={pricingData} />
-				</SectionObserver>
-			)}
-			{SECTION_VISIBILITY.trackRecordAndTestimonials && (
+			{SECTION_VISIBILITY.trackRecord && (
 				<SectionObserver
 					theme="dark"
 					sectionName="TrackRecordAndTestimonials"
@@ -174,10 +170,19 @@ export default async function Home() {
 						parentClassName="bg-[#000728]"
 					>
 						<OurTrackRecord data={ourTrackRecordData} />
-						<WhatOurClientsSay data={testimonialsData} />
+						{SECTION_VISIBILITY.testimonials && (
+							<WhatOurClientsSay data={testimonialsData} />
+						)}
 					</BackgroundBlobsAdder>
 				</SectionObserver>
 			)}
+
+			{SECTION_VISIBILITY.pricing && (
+				<SectionObserver theme="light" sectionName="Pricing">
+					<Pricing data={pricingData} />
+				</SectionObserver>
+			)}
+
 			{SECTION_VISIBILITY.faq && (
 				<SectionObserver theme="light" sectionName="FAQ">
 					<FAQ data={faqData} />

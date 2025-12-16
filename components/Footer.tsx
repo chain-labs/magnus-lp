@@ -5,6 +5,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import Image from "next/image";
 import type { FooterData } from "@/sanity/lib/types";
+import BackgroundBlobsAdder from "./BackgroundBlobsAdder";
 
 // Static data - commented out in favor of Sanity CMS
 // const footerData = { ... };
@@ -256,13 +257,22 @@ export default function Footer({ data }: FooterProps) {
 	return (
 		<footer id="footer" className="w-full py-[80px] px-[20px]">
 			{/* Top Section - Dark Blue Background */}
-			<div className="w-full bg-[#000728] max-w-7xl mx-auto py-[40px] md:py-[32px] px-[20px] md:px-[108px] rounded-[24px] text-white">
+			<BackgroundBlobsAdder
+				blobs={[
+					"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
+					"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
+				]}
+				parentClassName="w-full max-w-7xl mx-auto py-[40px] md:py-[32px] px-[20px] md:px-[108px] rounded-[24px] bg-[#000728] text-white"
+			>
 				<div className="w-full mx-auto flex flex-col gap-[20px] md:gap-[24px]">
 					{/* Header with Logo, Company Name, and Social Icons */}
 					<div className="flex flex-col md:flex-row justify-between items-center gap-[24px] md:mb-6">
 						<div className="flex items-center gap-[18px]">
 							<Image
-								src={footerData.company.logoSrc || "/assets/logo/logo.png"}
+								src={
+									footerData.company.logoSrc ||
+									"/assets/logo/logo.png"
+								}
 								alt={footerData.company.title}
 								width={57}
 								height={57}
@@ -281,18 +291,14 @@ export default function Footer({ data }: FooterProps) {
 									rel="noopener noreferrer"
 									className="text-white text-xl hover:opacity-80 transition-opacity"
 								>
-									{social.platform.toLowerCase() === "facebook" && (
-										<FaFacebook />
-									)}
-									{social.platform.toLowerCase() === "instagram" && (
-										<FaInstagram />
-									)}
-									{social.platform.toLowerCase() === "twitter" && (
-										<FaXTwitter />
-									)}
-									{social.platform.toLowerCase() === "linkedin" && (
-										<FaLinkedin />
-									)}
+									{social.platform.toLowerCase() ===
+										"facebook" && <FaFacebook />}
+									{social.platform.toLowerCase() ===
+										"instagram" && <FaInstagram />}
+									{social.platform.toLowerCase() ===
+										"twitter" && <FaXTwitter />}
+									{social.platform.toLowerCase() ===
+										"linkedin" && <FaLinkedin />}
 								</a>
 							))}
 						</div>
@@ -318,7 +324,7 @@ export default function Footer({ data }: FooterProps) {
 						{footerData.SEBIRegistrationNumber}
 					</div>
 				</div>
-			</div>
+			</BackgroundBlobsAdder>
 
 			{/* Middle Section - White Background */}
 			<div className="w-full max-w-[1059px] mx-auto">
