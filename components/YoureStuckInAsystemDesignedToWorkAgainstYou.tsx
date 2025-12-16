@@ -130,7 +130,6 @@ export default function YoureStuckInAsystemDesignedToWorkAgainstYou({
 	data,
 }: YoureStuckInAsystemDesignedToWorkAgainstYouProps) {
 	const youreStuckData = data?.data || defaultYoureStuckData;
-	console.log("youreStuckData:", youreStuckData);
 	return (
 		<section id="youre-stuck" className="w-full">
 			<div
