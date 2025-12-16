@@ -12,6 +12,7 @@ import { testimonialsSchema } from "./testimonials";
 import { highestQualityResearchSchema } from "./highestQualityResearch";
 import { youreStuckSchema } from "./youreStuck";
 import { bookACallSchema } from "./bookACall";
+import { whatsappSchema } from "./whatsapp";
 
 export const schemaTypes = [
 	headerSchema,
@@ -28,4 +29,5 @@ export const schemaTypes = [
 	meetTheFounderSchema,
 	bookACallSchema,
 	footerSchema,
+	whatsappSchema
 ];

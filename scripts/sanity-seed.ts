@@ -856,10 +856,7 @@ const initialData = [
 		visible: true,
 		title: "Want research-backed clarity for your portfolio?",
 		subtitle: "No hype. No pressure. Just research.",
-		contactUsLink: "https://cal.com/magnushathaway/30min",
-		bookACallLink: "https://cal.com/magnushathaway/30min",
 		contactUsButtonText: "Contact Us",
-		bookACallButtonText: "Book a Call",
 	},
 
 	// -------------------------------------------------------------------------

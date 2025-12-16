@@ -15,6 +15,7 @@ import WhatOurClientsSay from "@/components/WhatOurClientsSay";
 import YoureStuckInAsystemDesignedToWorkAgainstYou from "@/components/YoureStuckInAsystemDesignedToWorkAgainstYou";
 import { HeaderThemeProvider } from "@/components/HeaderThemeContext";
 import SectionObserver from "@/components/SectionObserver";
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 import {
 	HERO_QUERY,
 	HEADER_QUERY,
@@ -30,6 +31,7 @@ import {
 	BOOK_A_CALL_QUERY,
 	HIGHEST_QUALITY_RESEARCH_QUERY,
 	YOURE_STUCK_QUERY,
+	WHATSAPP_LINK_QUERY,
 } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
 import { UserDataProvider } from "@/components/UserDataProvider";
@@ -51,6 +53,7 @@ export default async function Home() {
 		bookACallData,
 		highestQualityResearchData,
 		youreStuckData,
+		whatsappData,
 	] = await Promise.all([
 		sanityFetch({ query: HERO_QUERY }),
 		sanityFetch({ query: HEADER_QUERY }),
@@ -66,6 +69,7 @@ export default async function Home() {
 		sanityFetch({ query: BOOK_A_CALL_QUERY }),
 		sanityFetch({ query: HIGHEST_QUALITY_RESEARCH_QUERY }),
 		sanityFetch({ query: YOURE_STUCK_QUERY }),
+		sanityFetch({ query: WHATSAPP_LINK_QUERY }),
 	]);
 	const SECTION_VISIBILITY = {
 		header: headerData.data.visible,
@@ -83,9 +87,14 @@ export default async function Home() {
 		footer: footerData.data.visible,
 	};
 
+	const whatsappLink = `https://wa.me/${
+		whatsappData.data.whatsappNumber
+	}?text=${encodeURIComponent(whatsappData.data.predefinedMessage)}`;
+
 	return (
 		<UserDataProvider>
 			<HeaderThemeProvider>
+				<FloatingWhatsAppButton whatsappLink={whatsappLink} />
 				{SECTION_VISIBILITY.header && <Header data={headerData} />}
 				{SECTION_VISIBILITY.hero && (
 					<SectionObserver theme="dark" sectionName="Hero">
@@ -189,7 +198,7 @@ export default async function Home() {
 
 				{SECTION_VISIBILITY.faq && (
 					<SectionObserver theme="light" sectionName="FAQ">
-						<FAQ data={faqData} />
+						<FAQ data={faqData} whatsappLink={whatsappLink} />
 					</SectionObserver>
 				)}
 				{SECTION_VISIBILITY.founderAndCall && (
@@ -204,7 +213,7 @@ export default async function Home() {
 							parentClassName="bg-[#000728]"
 						>
 							<MeetTheFounder data={meetTheFounderData} />
-							<BookACall data={bookACallData} />
+							<BookACall data={bookACallData} whatsappLink={whatsappLink} />
 						</BackgroundBlobsAdder>
 					</SectionObserver>
 				)}

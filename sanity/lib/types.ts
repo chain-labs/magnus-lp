@@ -246,6 +246,11 @@ export interface BookACallData {
 	visible: boolean;
 	title: string;
 	subtitle: string;
-	contactUsLink: string;
 	contactUsButtonText: string;
+}
+
+export interface WhatsAppLinkData {
+	visible: boolean;
+	whatsappNumber: string;
+	predefinedMessage: string;
 }

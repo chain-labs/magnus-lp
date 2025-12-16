@@ -27,14 +27,5 @@ export const heroSchema = defineType({
 			type: "text",
 			description: "Main headline text",
 		}),
-
-		defineField({
-			name: "skewedGridImage",
-			title: "Skewed Grid Image",
-			type: "image",
-			options: {
-				hotspot: true,
-			},
-		}),
 	],
 });

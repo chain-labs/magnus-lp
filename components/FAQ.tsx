@@ -122,9 +122,10 @@ const defaultFaqData: FAQData = {
 
 interface FAQProps {
 	data?: { data: FAQData | null };
+	whatsappLink?: string;
 }
 
-export default function FAQ({ data }: FAQProps) {
+export default function FAQ({ data, whatsappLink }: FAQProps) {
 	const faqData = data?.data || defaultFaqData;
 	return (
 		<section id="faq" className="px-[20px] md:px-[64px] py-[80px] md:py-[112px]">
@@ -136,7 +137,7 @@ export default function FAQ({ data }: FAQProps) {
 					<p className="text-[16px] leading-[24px]">
 						{faqData.description}
 					</p>
-					<Link href="#book-a-call">
+					<Link href={whatsappLink || "#"} target="_blank" rel="noopener noreferrer">
 						<button className="px-[24px] py-[12px] bg-[#00177C] text-white rounded-[8px] w-fit font-bold text-[16px] leading-[24px] min-w-[160px] cursor-pointer">
 							{" "}
 							{faqData.contactButtonText}

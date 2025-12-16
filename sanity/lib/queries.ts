@@ -229,6 +229,12 @@ export const BOOK_A_CALL_QUERY = defineQuery(`*[_type == "bookACall"][0]{
   visible,
   title,
   subtitle,
-  contactUsLink,
   contactUsButtonText,
+}`);
+
+// Whatsapp Link Query
+export const WHATSAPP_LINK_QUERY = defineQuery(`*[_type == "whatsappLink"][0]{
+  visible,
+  whatsappNumber,
+  predefinedMessage
 }`);

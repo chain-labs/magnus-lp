@@ -14,15 +14,15 @@ const defaultBookACallData: BookACallData = {
 	visible: true,
 	title: "Want research-backed clarity for your portfolio?",
 	subtitle: "No hype. No pressure. Just research.",
-	contactUsLink: "https://cal.com/magnushathaway/30min",
 	contactUsButtonText: "Contact Us",
 };
 
 interface BookACallProps {
 	data?: { data: BookACallData | null };
+	whatsappLink?: string;
 }
 
-export default function BookACall({ data }: BookACallProps) {
+export default function BookACall({ data, whatsappLink }: BookACallProps) {
 	const bookACallData = data?.data || defaultBookACallData;
 	return (
 		<section id="book-a-call" className="relative w-full h-screen md:h-fit py-[112px] px-[20px] md:px-[80px]">
@@ -38,8 +38,10 @@ export default function BookACall({ data }: BookACallProps) {
 				</div>
 				<div className="flex justify-center gap-[16px] mx-auto w-full">
 					<Link
-						href={bookACallData.contactUsLink}
+						href={whatsappLink || "#"}
 						className="cursor-pointer"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						<button className="px-[24px] py-[12px] bg-white border border-white rounded-[8px] text-[16px] leading-[24px] text-nowrap cursor-pointer">
 							{bookACallData.contactUsButtonText || "Contact Us"}
