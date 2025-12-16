@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Clarity from "@/components/Clarity";
-
 const helvetica = localFont({
 	src: "../public/assets/fonts/Helvetica.ttf",
 	variable: "--font-helvetica",

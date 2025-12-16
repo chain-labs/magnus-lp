@@ -13,8 +13,9 @@ export interface Question {
   id?: string;
   fields: {
     "Question Text": string;
-    "User Name"?: string;
-    "User Email"?: string;
+    "User Name": string;
+    "User Email": string;
+    "User Phone"?: string;
     "Submission Date": string;
     "Question Status": "Pending" | "Approved" | "Answered" | "Rejected";
     "Answer Text"?: string;

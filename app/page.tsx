@@ -32,6 +32,7 @@ import {
 	YOURE_STUCK_QUERY,
 } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
+import { UserDataProvider } from "@/components/UserDataProvider";
 
 export default async function Home() {
 	// Fetch all Sanity data in parallel
@@ -83,132 +84,136 @@ export default async function Home() {
 	};
 
 	return (
-		<HeaderThemeProvider>
-			{SECTION_VISIBILITY.header && <Header data={headerData} />}
-			{SECTION_VISIBILITY.hero && (
-				<SectionObserver theme="dark" sectionName="Hero">
-					<BackgroundBlobsAdder
-						blobs={[
-							"absolute top-[15%] left-[85%] translate-y-[-10%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.78]",
-							"absolute top-[45%] left-[5%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
-							"absolute top-[80%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px]",
-						]}
-						parentClassName="bg-[#000728]"
+		<UserDataProvider>
+			<HeaderThemeProvider>
+				{SECTION_VISIBILITY.header && <Header data={headerData} />}
+				{SECTION_VISIBILITY.hero && (
+					<SectionObserver theme="dark" sectionName="Hero">
+						<BackgroundBlobsAdder
+							blobs={[
+								"absolute top-[15%] left-[85%] translate-y-[-10%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.78]",
+								"absolute top-[45%] left-[5%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
+								"absolute top-[80%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px]",
+							]}
+							parentClassName="bg-[#000728]"
+						>
+							<Hero data={heroData} />
+						</BackgroundBlobsAdder>
+					</SectionObserver>
+				)}
+				{SECTION_VISIBILITY.youreStuck && (
+					<SectionObserver
+						theme="light"
+						className="z-10"
+						sectionName="YoureStuck"
 					>
-						<Hero data={heroData} />
-					</BackgroundBlobsAdder>
-				</SectionObserver>
-			)}
-			{SECTION_VISIBILITY.youreStuck && (
-				<SectionObserver
-					theme="light"
-					className="z-10"
-					sectionName="YoureStuck"
-				>
-					<YoureStuckInAsystemDesignedToWorkAgainstYou
-						data={youreStuckData}
-					/>
-				</SectionObserver>
-			)}
-			{SECTION_VISIBILITY.investorTrap && (
-				<SectionObserver
-					theme="dark"
-					className="z-[-1]"
-					sectionName="InvestorTrap"
-				>
-					<InvestorTrap data={investorTrapData} />
-				</SectionObserver>
-			)}
+						<YoureStuckInAsystemDesignedToWorkAgainstYou
+							data={youreStuckData}
+						/>
+					</SectionObserver>
+				)}
+				{SECTION_VISIBILITY.investorTrap && (
+					<SectionObserver
+						theme="dark"
+						className="z-[-1]"
+						sectionName="InvestorTrap"
+					>
+						<InvestorTrap data={investorTrapData} />
+					</SectionObserver>
+				)}
 
-			{SECTION_VISIBILITY.howMagnusChangesThis && (
-				<SectionObserver
-					theme="light"
-					sectionName="HowMagnusChangesThis"
-				>
-					<HowMagnusHathawayChangesThis
-						data={howMagnusChangesThisData}
-					/>
-				</SectionObserver>
-			)}
-			{SECTION_VISIBILITY.investmentPhilosophy && (
-				<SectionObserver
-					theme="dark"
-					sectionName="InvestmentPhilosophy"
-				>
-					<BackgroundBlobsAdder
-						blobs={[
-							"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
-							"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
-							"absolute top-[100%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px]",
-						]}
-						parentClassName="bg-[#000728]"
+				{SECTION_VISIBILITY.howMagnusChangesThis && (
+					<SectionObserver
+						theme="light"
+						sectionName="HowMagnusChangesThis"
 					>
-						<InvestmentPhilosophy data={investmentPhilosophyData} />
-					</BackgroundBlobsAdder>
-				</SectionObserver>
-			)}
-			{SECTION_VISIBILITY.highestQualityResearch && (
-				<SectionObserver
-					theme="light"
-					sectionName="HighestQualityResearch"
-				>
-					<HighestQualityResearchReadyBeforeTheMarketOpens
-						data={highestQualityResearchData}
-					/>
-				</SectionObserver>
-			)}
-			{SECTION_VISIBILITY.trackRecord && (
-				<SectionObserver
-					theme="dark"
-					sectionName="TrackRecordAndTestimonials"
-				>
-					<BackgroundBlobsAdder
-						blobs={[
-							"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
-							"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
-						]}
-						parentClassName="bg-[#000728]"
+						<HowMagnusHathawayChangesThis
+							data={howMagnusChangesThisData}
+						/>
+					</SectionObserver>
+				)}
+				{SECTION_VISIBILITY.investmentPhilosophy && (
+					<SectionObserver
+						theme="dark"
+						sectionName="InvestmentPhilosophy"
 					>
-						<OurTrackRecord data={ourTrackRecordData} />
-						{SECTION_VISIBILITY.testimonials && (
-							<WhatOurClientsSay data={testimonialsData} />
-						)}
-					</BackgroundBlobsAdder>
-				</SectionObserver>
-			)}
+						<BackgroundBlobsAdder
+							blobs={[
+								"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
+								"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
+								"absolute top-[100%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px]",
+							]}
+							parentClassName="bg-[#000728]"
+						>
+							<InvestmentPhilosophy
+								data={investmentPhilosophyData}
+							/>
+						</BackgroundBlobsAdder>
+					</SectionObserver>
+				)}
+				{SECTION_VISIBILITY.highestQualityResearch && (
+					<SectionObserver
+						theme="light"
+						sectionName="HighestQualityResearch"
+					>
+						<HighestQualityResearchReadyBeforeTheMarketOpens
+							data={highestQualityResearchData}
+						/>
+					</SectionObserver>
+				)}
+				{SECTION_VISIBILITY.trackRecord && (
+					<SectionObserver
+						theme="dark"
+						sectionName="TrackRecordAndTestimonials"
+					>
+						<BackgroundBlobsAdder
+							blobs={[
+								"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
+								"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
+							]}
+							parentClassName="bg-[#000728]"
+						>
+							<OurTrackRecord data={ourTrackRecordData} />
+							{SECTION_VISIBILITY.testimonials && (
+								<WhatOurClientsSay data={testimonialsData} />
+							)}
+						</BackgroundBlobsAdder>
+					</SectionObserver>
+				)}
 
-			{SECTION_VISIBILITY.pricing && (
-				<SectionObserver theme="light" sectionName="Pricing">
-					<Pricing data={pricingData} />
-				</SectionObserver>
-			)}
+				{SECTION_VISIBILITY.pricing && (
+					<SectionObserver theme="light" sectionName="Pricing">
+						<Pricing data={pricingData} />
+					</SectionObserver>
+				)}
 
-			{SECTION_VISIBILITY.faq && (
-				<SectionObserver theme="light" sectionName="FAQ">
-					<FAQ data={faqData} />
-				</SectionObserver>
-			)}
-			{SECTION_VISIBILITY.founderAndCall && (
-				<SectionObserver theme="dark" sectionName="FounderAndCall">
-					<BackgroundBlobsAdder
-						blobs={[
-							"absolute top-[10%] left-[60%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
-							"absolute top-[10%] right-[65%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
-							"absolute bottom-[10%] left-[80%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-[339.1px] opacity-[0.49]",
-							"absolute bottom-[10%] right-[85%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-[339.1px] opacity-[0.49]",
-						]}
-						parentClassName="bg-[#000728]"
-					>
-						<MeetTheFounder data={meetTheFounderData} />
-						<BookACall data={bookACallData} />
-					</BackgroundBlobsAdder>
-				</SectionObserver>
-			)}
-			{SECTION_VISIBILITY.footer && (
-				<SectionObserver theme="light" sectionName="Footer">
-					<Footer data={footerData} />
-				</SectionObserver>
-			)}
-		</HeaderThemeProvider>
+				{SECTION_VISIBILITY.faq && (
+					<SectionObserver theme="light" sectionName="FAQ">
+						<FAQ data={faqData} />
+					</SectionObserver>
+				)}
+				{SECTION_VISIBILITY.founderAndCall && (
+					<SectionObserver theme="dark" sectionName="FounderAndCall">
+						<BackgroundBlobsAdder
+							blobs={[
+								"absolute top-[10%] left-[60%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
+								"absolute top-[10%] right-[65%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
+								"absolute bottom-[10%] left-[80%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-[339.1px] opacity-[0.49]",
+								"absolute bottom-[10%] right-[85%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-[339.1px] opacity-[0.49]",
+							]}
+							parentClassName="bg-[#000728]"
+						>
+							<MeetTheFounder data={meetTheFounderData} />
+							<BookACall data={bookACallData} />
+						</BackgroundBlobsAdder>
+					</SectionObserver>
+				)}
+				{SECTION_VISIBILITY.footer && (
+					<SectionObserver theme="light" sectionName="Footer">
+						<Footer data={footerData} />
+					</SectionObserver>
+				)}
+			</HeaderThemeProvider>
+		</UserDataProvider>
 	);
 }

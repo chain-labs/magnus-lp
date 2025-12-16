@@ -3,6 +3,9 @@ import { questionsTable } from "@/lib/airtable";
 
 interface SubmitQuestionBody {
   questionText: string;
+  userName: string;
+  userEmail: string;
+  userPhone?: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -23,8 +26,9 @@ export async function POST(request: NextRequest) {
       {
         fields: {
           "Question Text": body.questionText,
-          "User Name": "",
-          "User Email": "",
+          "User Name":  body.userName,
+          "User Email": body.userEmail,
+          "User Phone": body.userPhone ?? "",
           "Submission Date": new Date().toISOString(),
           "Question Status": "Pending",
         },
