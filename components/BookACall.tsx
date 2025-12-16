@@ -15,9 +15,7 @@ const defaultBookACallData: BookACallData = {
 	title: "Want research-backed clarity for your portfolio?",
 	subtitle: "No hype. No pressure. Just research.",
 	contactUsLink: "https://cal.com/magnushathaway/30min",
-	bookACallLink: "https://cal.com/magnushathaway/30min",
 	contactUsButtonText: "Contact Us",
-	bookACallButtonText: "Book a Call",
 };
 
 interface BookACallProps {
@@ -45,14 +43,6 @@ export default function BookACall({ data }: BookACallProps) {
 					>
 						<button className="px-[24px] py-[12px] bg-white border border-white rounded-[8px] text-[16px] leading-[24px] text-nowrap cursor-pointer">
 							{bookACallData.contactUsButtonText || "Contact Us"}
-						</button>
-					</Link>
-					<Link
-						href={bookACallData.bookACallLink}
-						className="cursor-pointer"
-					>
-						<button className="px-[24px] py-[12px] border border-white rounded-[8px] text-[16px] leading-[24px] text-white text-nowrap cursor-pointer">
-							{bookACallData.bookACallButtonText || "Book a Call"}
 						</button>
 					</Link>
 				</div>

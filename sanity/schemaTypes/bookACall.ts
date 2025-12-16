@@ -31,18 +31,8 @@ export const bookACallSchema = defineType({
 			type: "url",
 		}),
 		defineField({
-			name: "bookACallLink",
-			title: "Book A Call Link",
-			type: "url",
-		}),
-		defineField({
 			name: "contactUsButtonText",
 			title: "Contact Us Button Text",
-			type: "string",
-		}),
-		defineField({
-			name: "bookACallButtonText",
-			title: "Book A Call Button Text",
 			type: "string",
 		}),
 	],

@@ -108,7 +108,8 @@ export const PRICING_QUERY = defineQuery(`*[_type == "pricing"][0]{
 }`);
 
 // Meet The Founder Query
-export const MEET_THE_FOUNDER_QUERY = defineQuery(`*[_type == "meetTheFounder"][0]{
+export const MEET_THE_FOUNDER_QUERY =
+	defineQuery(`*[_type == "meetTheFounder"][0]{
   visible,
   sectionTitle,
   sectionSubtitle,
@@ -141,7 +142,8 @@ export const INVESTOR_TRAP_QUERY = defineQuery(`*[_type == "investorTrap"][0]{
 }`);
 
 // How Magnus Changes This Query
-export const HOW_MAGNUS_CHANGES_THIS_QUERY = defineQuery(`*[_type == "howMagnusChangesThis"][0]{
+export const HOW_MAGNUS_CHANGES_THIS_QUERY =
+	defineQuery(`*[_type == "howMagnusChangesThis"][0]{
   visible,
   title,
   items[]{
@@ -154,7 +156,8 @@ export const HOW_MAGNUS_CHANGES_THIS_QUERY = defineQuery(`*[_type == "howMagnusC
 }`);
 
 // Investment Philosophy Query
-export const INVESTMENT_PHILOSOPHY_QUERY = defineQuery(`*[_type == "investmentPhilosophy"][0]{
+export const INVESTMENT_PHILOSOPHY_QUERY =
+	defineQuery(`*[_type == "investmentPhilosophy"][0]{
   visible,
   sectionLabel,
   title,
@@ -167,7 +170,8 @@ export const INVESTMENT_PHILOSOPHY_QUERY = defineQuery(`*[_type == "investmentPh
 }`);
 
 // Our Track Record Query
-export const OUR_TRACK_RECORD_QUERY = defineQuery(`*[_type == "ourTrackRecord"][0]{
+export const OUR_TRACK_RECORD_QUERY =
+	defineQuery(`*[_type == "ourTrackRecord"][0]{
   visible,
   title,
   subtitle,
@@ -192,7 +196,8 @@ export const TESTIMONIALS_QUERY = defineQuery(`*[_type == "testimonials"][0]{
 }`);
 
 // Highest Quality Research Query
-export const HIGHEST_QUALITY_RESEARCH_QUERY = defineQuery(`*[_type == "highestQualityResearch"][0]{
+export const HIGHEST_QUALITY_RESEARCH_QUERY =
+	defineQuery(`*[_type == "highestQualityResearch"][0]{
   visible,
   title,
   description,
@@ -224,7 +229,5 @@ export const BOOK_A_CALL_QUERY = defineQuery(`*[_type == "bookACall"][0]{
   title,
   subtitle,
   contactUsLink,
-  bookACallLink,
   contactUsButtonText,
-  bookACallButtonText
 }`);

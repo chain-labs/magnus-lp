@@ -244,7 +244,5 @@ export interface BookACallData {
 	title: string;
 	subtitle: string;
 	contactUsLink: string;
-	bookACallLink: string;
 	contactUsButtonText: string;
-	bookACallButtonText: string;
 }
