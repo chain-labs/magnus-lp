@@ -26,12 +26,59 @@ export const ourTrackRecordSchema = defineType({
 			type: "string",
 		}),
 		defineField({
-			name: "heroImage",
-			title: "Hero Image",
-			type: "image",
-			options: {
-				hotspot: true,
-			},
+			name: "chartTitle",
+			title: "Chart Title",
+			type: "string",
+			initialValue: "Performance Comparison",
+		}),
+		defineField({
+			name: "chartSubtitle",
+			title: "Chart Subtitle",
+			type: "string",
+			initialValue: "Since Inception Returns",
+		}),
+		defineField({
+			name: "companyPerformanceData",
+			title: "Company Performance Data",
+			type: "array",
+			description: "Add Magnus first, then competitor companies",
+			of: [
+				{
+					type: "object",
+					fields: [
+						defineField({
+							name: "company",
+							title: "Company Name",
+							type: "string",
+							validation: (Rule) => Rule.required(),
+						}),
+						defineField({
+							name: "returnPercentage",
+							title: "Return (%)",
+							type: "number",
+							validation: (Rule) => Rule.required(),
+						}),
+						defineField({
+							name: "color",
+							title: "Bar Color (hex)",
+							type: "string",
+							description: "Optional custom color for the bar (e.g., #3b82f6)",
+						}),
+					],
+					preview: {
+						select: {
+							company: "company",
+							returnPercentage: "returnPercentage",
+						},
+						prepare({ company, returnPercentage }) {
+							return {
+								title: company,
+								subtitle: `${returnPercentage > 0 ? '+' : ''}${returnPercentage}%`,
+							};
+						},
+					},
+				},
+			],
 		}),
 		defineField({
 			name: "stats",

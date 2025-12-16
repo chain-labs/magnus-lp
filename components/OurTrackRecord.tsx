@@ -1,4 +1,25 @@
+"use client";
+
 import type { OurTrackRecordData } from "@/sanity/lib/types";
+import {
+	BarChart,
+	Bar,
+	XAxis,
+	YAxis,
+	CartesianGrid,
+	Tooltip,
+	ResponsiveContainer,
+	Cell,
+} from "recharts";
+
+// Default company performance comparison data
+const defaultCompanyPerformanceData = [
+	{ company: "Magnus", returnPercentage: 24.5, color: "#3b82f6" },
+	{ company: "Motilal Oswal", returnPercentage: 18.2, color: "#6b7280" },
+	{ company: "Zerodha", returnPercentage: 16.8, color: "#6b7280" },
+	{ company: "Groww", returnPercentage: 15.3, color: "#6b7280" },
+	{ company: "Angel One", returnPercentage: 14.7, color: "#6b7280" },
+];
 
 // Static data - commented out in favor of Sanity CMS
 // const trackRecordData = [
@@ -49,20 +70,109 @@ interface OurTrackRecordProps {
 	data?: { data: OurTrackRecordData | null };
 }
 
+// Custom Tooltip Component
+const CustomTooltip = ({
+	active,
+	payload,
+	label,
+}: {
+	active: boolean;
+	payload: { value: number }[];
+	label: string;
+}) => {
+	if (active && payload && payload.length) {
+		const value = payload[0].value;
+		return (
+			<div className="bg-[#1a1a1a] border border-white/20 rounded-lg p-3 shadow-lg">
+				<p className="text-white font-medium mb-1">{label}</p>
+				<p
+					className={`font-semibold ${
+						value >= 0 ? "text-green-400" : "text-red-400"
+					}`}
+				>
+					{value > 0 ? "+" : ""}
+					{value}%
+				</p>
+			</div>
+		);
+	}
+	return null;
+};
+
+// Bar Chart Component
+function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
+	const companyData =
+		data.companyPerformanceData || defaultCompanyPerformanceData;
+	const chartTitle = data.chartTitle || "Performance Comparison";
+	const chartSubtitle = data.chartSubtitle || "Since Inception Returns";
+
+	return (
+		<div className="w-full h-full min-h-[376px] bg-[#67676733] rounded-[12px] p-6 flex flex-col">
+			<div className="mb-4">
+				<h3 className="text-white text-lg font-semibold mb-1">
+					{chartTitle}
+				</h3>
+				<p className="text-white/60 text-sm">{chartSubtitle}</p>
+			</div>
+
+			<ResponsiveContainer width="100%" height={300}>
+				<BarChart
+					data={companyData}
+					margin={{ top: 10, right: 10, left: 10, bottom: 5 }}
+				>
+					<CartesianGrid
+						strokeDasharray="3 3"
+						stroke="rgba(255,255,255,0.1)"
+					/>
+					<XAxis
+						dataKey="company"
+						stroke="rgba(255,255,255,0.6)"
+						tick={{ fill: "rgba(255,255,255,0.8)", fontSize: 11 }}
+						angle={-15}
+						textAnchor="end"
+						height={60}
+					/>
+					<YAxis
+						stroke="rgba(255,255,255,0.6)"
+						tick={{ fill: "rgba(255,255,255,0.8)", fontSize: 12 }}
+						label={{
+							value: "Return (%)",
+							angle: -90,
+							position: "insideLeft",
+							fill: "rgba(255,255,255,0.6)",
+						}}
+					/>
+					<Tooltip
+						content={<CustomTooltip active={false} payload={[]} label={""} />}
+						cursor={{ fill: "rgba(255,255,255,0.05)" }}
+					/>
+					<Bar dataKey="returnPercentage" radius={[8, 8, 0, 0]}>
+						{companyData.map((entry, index) => (
+							<Cell
+								key={`cell-${index}`}
+								fill={
+									entry.color ||
+									(index === 0 ? "#3b82f6" : "#6b7280")
+								}
+							/>
+						))}
+					</Bar>
+				</BarChart>
+			</ResponsiveContainer>
+		</div>
+	);
+}
+
 export default function OurTrackRecord({ data }: OurTrackRecordProps) {
 	const trackRecordData = data?.data || defaultTrackRecordData;
 	return (
-		<section id="our-track-record" className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]">
+		<section
+			id="our-track-record"
+			className="w-full py-[80px] md:py-[112px] px-[20px] md:px-[80px]"
+		>
 			<div className="max-w-7xl mx-auto">
 				<div className="grid  grid-cols-1 md:grid-cols-2 gap-[24px] md:gap-[80px]">
-					<div 
-						className="w-full h-full min-h-[376px] bg-[#67676733] rounded-[12px]"
-						style={{
-							backgroundImage: trackRecordData.heroImage ? `url(${trackRecordData.heroImage})` : undefined,
-							backgroundSize: "cover",
-							backgroundPosition: "center",
-						}}
-					></div>
+					<PerformanceComparisonChart data={trackRecordData} />
 					<div className="flex flex-col gap-[24px]">
 						<div className="flex flex-col gap-[8px]">
 							<h2 className="text-[40px] leading-[48px] text-white">

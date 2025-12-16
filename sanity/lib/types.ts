@@ -176,7 +176,13 @@ export interface OurTrackRecordData {
 	visible: boolean;
 	title: string;
 	subtitle: string;
-	heroImage?: string;
+	chartTitle?: string;
+	chartSubtitle?: string;
+	companyPerformanceData?: {
+		company: string;
+		returnPercentage: number;
+		color?: string;
+	}[];
 	stats: {
 		value: string;
 		description: string;
