@@ -183,7 +183,7 @@ export default function HowMagnusHathawayChangesThis({
 							}`}
 						>
 							<ImageWithFallback
-								src={item.image}
+								src={item.image || `/assets/section/howMagnusHathawayChangesThis/${idx + 1}.svg`}
 								alt={item.title}
 								width={640}
 								height={640}
