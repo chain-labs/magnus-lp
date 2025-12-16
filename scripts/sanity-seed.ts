@@ -269,6 +269,10 @@ const initialData = [
 			{ _key: "th7", label: "Duration", align: "left" },
 			{ _key: "th8", label: "Published", align: "left" },
 		],
+		blurredRowsCount: 3,
+		unlockTitle: "You need a plan to unlock premium research insights",
+		unlockButtonText: "Unlock More Stocks Data",
+		unlockButtonLink: "#pricing",
 	},
 
 	// -------------------------------------------------------------------------
@@ -658,6 +662,28 @@ const initialData = [
 		visible: true,
 		title: "Our track record",
 		subtitle: "We don't promise returns. We promise clarity.",
+		chartTitle: "Performance Comparison",
+		chartSubtitle: "Since Inception Returns",
+		companyPerformanceData: [
+			{
+				_key: "perf1",
+				name: "Magnus Hathaway",
+				returnPercentage: 45,
+				color: "#10B981",
+			},
+			{
+				_key: "perf2",
+				name: "Nifty 50",
+				returnPercentage: 12,
+				color: "#6B7280",
+			},
+			{
+				_key: "perf3",
+				name: "Sensex",
+				returnPercentage: 10,
+				color: "#9CA3AF",
+			},
+		],
 		stats: [
 			{
 				_key: "stat1",
@@ -994,6 +1020,18 @@ const initialData = [
 				},
 			],
 		},
+	},
+
+	// -------------------------------------------------------------------------
+	// WHATSAPP LINK
+	// -------------------------------------------------------------------------
+	{
+		_id: "whatsappLink",
+		_type: "whatsappLink",
+		visible: true,
+		whatsappNumber: "+919983451155",
+		predefinedMessage:
+			"Hi, I'm interested in learning more about Magnus Hathaway's research services.",
 	},
 ];
 
