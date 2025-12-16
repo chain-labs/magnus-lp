@@ -26,6 +26,11 @@ export const investmentPhilosophySchema = defineType({
 			type: "string",
 		}),
 		defineField({
+			name: "description",
+			title: "Description",
+			type: "text",
+		}),
+		defineField({
 			name: "items",
 			title: "Philosophy Items",
 			type: "array",
@@ -34,11 +39,9 @@ export const investmentPhilosophySchema = defineType({
 					type: "object",
 					fields: [
 						defineField({
-							name: "iconType",
-							title: "Icon Type",
+							name: "letter",
+							title: "Letter",
 							type: "string",
-							description:
-								"DO NOT CHANGE VALUES. Used to determine which icon to show.",
 						}),
 						defineField({
 							name: "title",

@@ -158,8 +158,9 @@ export const INVESTMENT_PHILOSOPHY_QUERY = defineQuery(`*[_type == "investmentPh
   visible,
   sectionLabel,
   title,
+  description,
   items[]{
-    iconType,
+    letter,
     title,
     description
   }

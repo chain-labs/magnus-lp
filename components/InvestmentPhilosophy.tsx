@@ -113,26 +113,32 @@ const defaultInvestmentPhilosophyData: InvestmentPhilosophyData = {
 	visible: true,
 	sectionLabel: "Investment Philosophy",
 	title: "How We Think About Investing",
+	description:
+		"We buy fair Valuation, in the right Opportunity setup, with Longevity to compound—only when a real Trigger is in sight",
 	items: [
 		{
-			iconType: "chart",
-			title: "Markets Keep Changing",
-			description: "The market doesn't care about your old playbook. What worked in 2019 might not work today. We adapt. We stay flexible. And we never fall in love with a single approach.",
+			letter: "V",
+			title: "Valuation",
+			description:
+				"Are we paying a fair price for the next 2 – 3 years of earnings power? We compare today’s price with the company’s growth, cash flows, and sector history to avoid overpaying",
 		},
 		{
-			iconType: "search",
-			title: "Rigorous, Not Random",
-			description: "We don't pick stocks based on gut feelings or hot tips. Every recommendation is backed by research. Every call is thought through. If we can't explain it clearly, we don't recommend it.",
+			letter: "O",
+			title: "Opportunity",
+			description:
+				"Is the environment favourable now? We look for clear tailwinds or inflection points in themes / sectors — policy support, capex or commodity upcycles, sector rotation etc. In short: is this the right theme to deploy capital at this point in the cycle?",
 		},
 		{
-			iconType: "lightning",
-			title: "Moving at Market Speed",
-			description: "Markets don't wait for quarterly reports. When something changes, you need to know. We send updates when they matter—not on a schedule, but when the situation demands it.",
+			letter: "L",
+			title: "Longevity",
+			description:
+				"Can this business compound through cycles? We prefer companies with clean balance sheets, strong unit economics, high ROCE, visible runways (order books, product pipelines), and consistent reinvestment back into the business with minimal dilution",
 		},
 		{
-			iconType: "book",
-			title: "Market as Teacher",
-			description: "We don't claim to know everything. The market humbles everyone eventually. But we've been at this long enough to know what works, what doesn't, and when to pivot.",
+			letter: "T",
+			title: "Trigger",
+			description:
+				"What can unlock the next upmove? A concrete near-term catalyst: management change, margin improvement, large order win, product launch, regulatory clearance etc.",
 		},
 	],
 };
@@ -221,13 +227,19 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 interface InvestmentPhilosophyProps {
-	data?: {data: InvestmentPhilosophyData | null;}
+	data?: { data: InvestmentPhilosophyData | null };
 }
 
-export default function InvestmentPhilosophy({ data }: InvestmentPhilosophyProps) {
-	const investmentPhilosophyData = data?.data || defaultInvestmentPhilosophyData;
+export default function InvestmentPhilosophy({
+	data,
+}: InvestmentPhilosophyProps) {
+	const investmentPhilosophyData =
+		data?.data || defaultInvestmentPhilosophyData;
 	return (
-		<section id="investment-philosophy" className="w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px]">
+		<section
+			id="investment-philosophy"
+			className="w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px]"
+		>
 			<div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-[64px] md:gap-[80px]">
 				<div className="flex flex-col gap-[32px] md:gap-[16px] col-span-1">
 					<h6 className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white">
@@ -237,7 +249,7 @@ export default function InvestmentPhilosophy({ data }: InvestmentPhilosophyProps
 						{investmentPhilosophyData.title}
 					</h2>
 					<h6 className="text-[16px] md:text-[16px] leading-[24px] md:leading-[24px] text-white opacity-60">
-						We buy fair Valuation, in the right Opportunity setup, with Longevity to compound—only when a real Trigger is in sight
+						{investmentPhilosophyData.description}
 					</h6>
 				</div>
 				<div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-x-[48px] gap-y-[64px] col-span-2">
@@ -246,7 +258,9 @@ export default function InvestmentPhilosophy({ data }: InvestmentPhilosophyProps
 							key={idx}
 							className="w-full h-full gap-[16px] md:gap-[24px] flex flex-col"
 						>
-							<div>{iconMap[item.iconType] || null}</div>
+							<h1 className="text-[24px] font-bold text-white md:text-[48px] md:leading-[64px]">
+								{item.letter}
+							</h1>
 							<h5 className="text-white text-[20px] md:text-[24px] leading-[32px]">
 								{item.title}
 							</h5>

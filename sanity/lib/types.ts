@@ -163,8 +163,9 @@ export interface InvestmentPhilosophyData {
 	visible: boolean;
 	sectionLabel: string;
 	title: string;
+	description: string;
 	items: {
-		iconType: string;
+		letter: string;
 		title: string;
 		description: string;
 	}[];
