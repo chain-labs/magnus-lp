@@ -138,8 +138,6 @@ export default function Header({ data }: HeaderProps) {
 					</nav>
 					<Link
 						href={headerData.ctaButtonLink}
-						target="_blank"
-						rel="noopener noreferrer"
 						onClick={() => setIsMobileMenuOpen(false)}
 					>
 						<button
