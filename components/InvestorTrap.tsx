@@ -234,7 +234,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 					alt="skewed grid"
 					width={1000}
 					height={1000}
-					className="w-full h-[50%] max-h-[500px] absolute bottom-0 left-0 object-cover rotate-180 -z-10 opacity-30"
+					className="w-full h-[50%] max-h-[500px] absolute bottom-0 left-0 object-cover rotate-180 -z-10"
 					onError={(e) => {
 						e.currentTarget.src = "/assets/default/logo.png";
 					}}
