@@ -112,19 +112,22 @@ export interface PricingData {
 }
 
 // Meet The Founder Types
+export interface Founder {
+	image?: string;
+	imagePosition: "left" | "right";
+	name: string;
+	position: string;
+	bio: string;
+	credentials: string[];
+}
+
 export interface MeetTheFounderData {
 	visible: boolean;
 	sectionTitle: string;
 	sectionSubtitle: string;
 	heroImage?: string;
 	storyParagraphs: string[];
-	founderImage?: string;
-	founderDetails: {
-		name: string;
-		position: string;
-		bio: string;
-		credentials: string[];
-	};
+	founders: Founder[];
 }
 
 // Investor Trap Types

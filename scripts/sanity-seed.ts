@@ -811,7 +811,7 @@ const initialData = [
 		_id: "meetTheFounder",
 		_type: "meetTheFounder",
 		visible: true,
-		sectionTitle: "Meet the founder",
+		sectionTitle: "Meet the founders",
 		sectionSubtitle:
 			"The team behind the research. The people you can trust.",
 		storyParagraphs: [
@@ -819,16 +819,32 @@ const initialData = [
 			"So Ali Azar built Magnus Hathaway to fill that gap. To do the full-time work of stock research and tracking that retail investors can't do themselves. Not to make them analysts. But to give them what HNI investors have always had: quality stock recommendations, explained clearly, with ongoing support.",
 			"Just like discount brokers freed people from expensive middlemen, Magnus Hathaway frees people from having to be full-time analysts.",
 		],
-		founderDetails: {
-			name: "Alireza Azar",
-			position: "Founder & SEBI Registered Research Analyst",
-			bio: "Ali started Magnus Hathaway after seeing too many retail investors lose money to bad advice half-baked Telegram tips, influencer-led chart patterns, random YouTube calls with no accountability. He believed retail investors deserved better. Not tips. Not hype. Just honest, research-backed guidance that explains why, not just what.",
-			credentials: [
-				"SEBI Registered Research Analyst (INH000016588)",
-				"Chartered Accountant (CA)",
-				"15+ years in equity research and analysis",
-			],
-		},
+		founders: [
+			{
+				_key: "founder1",
+				imagePosition: "left",
+				name: "Alireza Azar",
+				position: "Founder & SEBI Registered Research Analyst",
+				bio: "Ali started Magnus Hathaway after seeing too many retail investors lose money to bad advice half-baked Telegram tips, influencer-led chart patterns, random YouTube calls with no accountability. He believed retail investors deserved better. Not tips. Not hype. Just honest, research-backed guidance that explains why, not just what.",
+				credentials: [
+					"SEBI Registered Research Analyst (INH000016588)",
+					"Chartered Accountant (CA)",
+					"15+ years in equity research and analysis",
+				],
+			},
+			{
+				_key: "founder2",
+				imagePosition: "right",
+				name: "Co-Founder Name",
+				position: "Co-Founder & Research Head",
+				bio: "A brief bio about the co-founder and their experience in equity research and investment analysis.",
+				credentials: [
+					"CFA Charterholder",
+					"MBA in Finance",
+					"10+ years in portfolio management",
+				],
+			},
+		],
 	},
 
 	// -------------------------------------------------------------------------

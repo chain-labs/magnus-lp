@@ -44,39 +44,66 @@ export const meetTheFounderSchema = defineType({
 			],
 		}),
 		defineField({
-			name: "founderImage",
-			title: "Founder Image",
-			type: "image",
-			options: {
-				hotspot: true,
-			},
-		}),
-		defineField({
-			name: "founderDetails",
-			title: "Founder Details",
-			type: "object",
-			fields: [
-				defineField({
-					name: "name",
-					title: "Name",
-					type: "string",
-				}),
-				defineField({
-					name: "position",
-					title: "Position",
-					type: "string",
-				}),
-				defineField({
-					name: "bio",
-					title: "Bio",
-					type: "text",
-				}),
-				defineField({
-					name: "credentials",
-					title: "Credentials",
-					type: "array",
-					of: [{ type: "string" }],
-				}),
+			name: "founders",
+			title: "Founders",
+			type: "array",
+			of: [
+				{
+					type: "object",
+					name: "founder",
+					title: "Founder",
+					fields: [
+						defineField({
+							name: "image",
+							title: "Image",
+							type: "image",
+							options: {
+								hotspot: true,
+							},
+						}),
+						defineField({
+							name: "imagePosition",
+							title: "Image Position",
+							type: "string",
+							initialValue: "left",
+							options: {
+								list: [
+									{ title: "Left", value: "left" },
+									{ title: "Right", value: "right" },
+								],
+								layout: "radio",
+							},
+						}),
+						defineField({
+							name: "name",
+							title: "Name",
+							type: "string",
+						}),
+						defineField({
+							name: "position",
+							title: "Position",
+							type: "string",
+						}),
+						defineField({
+							name: "bio",
+							title: "Bio",
+							type: "text",
+						}),
+						defineField({
+							name: "credentials",
+							title: "Credentials",
+							type: "array",
+							of: [{ type: "string" }],
+						}),
+					],
+					preview: {
+						select: {
+							title: "name",
+							subtitle: "position",
+							media: "image",
+						},
+					},
+				},
 			],
 		}),
 	],

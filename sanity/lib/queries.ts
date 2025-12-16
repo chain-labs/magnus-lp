@@ -115,8 +115,9 @@ export const MEET_THE_FOUNDER_QUERY =
   sectionSubtitle,
   "heroImage": heroImage.asset->url,
   storyParagraphs[],
-  "founderImage": founderImage.asset->url,
-  founderDetails{
+  founders[]{
+    "image": image.asset->url,
+    imagePosition,
     name,
     position,
     bio,
