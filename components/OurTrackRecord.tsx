@@ -120,31 +120,53 @@ function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
 					data={companyData}
 					margin={{ top: 10, right: 10, left: 10, bottom: 5 }}
 				>
-					<CartesianGrid
-						strokeDasharray="3 3"
-						stroke="rgba(255,255,255,0.1)"
-					/>
 					<XAxis
 						dataKey="company"
-						stroke="rgba(255,255,255,0.6)"
-						tick={{ fill: "rgba(255,255,255,0.8)", fontSize: 11 }}
-						angle={-15}
-						textAnchor="end"
-						height={60}
-					/>
-					<YAxis
-						stroke="rgba(255,255,255,0.6)"
-						tick={{ fill: "rgba(255,255,255,0.8)", fontSize: 12 }}
-						label={{
-							value: "Return (%)",
-							angle: -90,
-							position: "insideLeft",
-							fill: "rgba(255,255,255,0.6)",
+						stroke="transparent"
+						tick={{
+							fill: "rgba(255,255,255,0.85)",
+							fontSize: 12,
+							fontWeight: 500,
 						}}
+						axisLine={false}
+						tickLine={false}
+						dy={10}
 					/>
 					<Tooltip
-						content={<CustomTooltip active={false} payload={[]} label={""} />}
-						cursor={{ fill: "rgba(255,255,255,0.05)" }}
+						content={({ active, payload, label }) => {
+							if (active && payload && payload.length) {
+								const value = payload[0].value as number;
+								return (
+									<div className="bg-[#1a1a1a85] backdrop-blur-2xl border border-white/20 rounded-lg p-4 shadow-xl backdrop-blur-sm">
+										<p className="text-white font-semibold text-base mb-2">
+											{label}
+										</p>
+										<div className="flex items-center gap-2">
+											<div
+												className="w-3 h-3 rounded-full"
+												style={{
+													backgroundColor:
+														payload[0].payload
+															.color,
+												}}
+											/>
+											<p
+												className={`font-bold text-lg ${
+													value >= 0
+														? "text-green-400"
+														: "text-red-400"
+												}`}
+											>
+												{value > 0 ? "+" : ""}
+												{value}% Returns
+											</p>
+										</div>
+									</div>
+								);
+							}
+							return null;
+						}}
+						cursor={{ fill: "rgba(255,255,255,0.08)", radius: 8 }}
 					/>
 					<Bar dataKey="returnPercentage" radius={[8, 8, 0, 0]}>
 						{companyData.map((entry, index) => (
