@@ -41,7 +41,7 @@ export default function Header({ data }: HeaderProps) {
 				className={cn(
 					"w-full flex items-center justify-between rounded-full overflow-hidden px-[16px] py-[10px] transition-colors duration-300 relative z-50",
 					isDark
-						? "text-white bg-[#FFFFFF1A]"
+						? "text-white bg-[#FFFFFF1A] backdrop-blur-md"
 						: "text-[#000728] bg-[#FFFFFFCC] backdrop-blur-md"
 				)}
 			>
