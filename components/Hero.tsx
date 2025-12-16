@@ -85,64 +85,63 @@ export default function Hero({ data }: HeroProps) {
 	}, []);
 
 	const {
-        input,
-        interimText,
-        isListening,
-        speechSupported,
-        textareaRef,
-        toggleListening,
-        handleInputChange,
-        handleSubmit,
-        fullText,
-        setInput,
-    } = useSpeechInput({
-        onSubmit: async (text) => {
-            if (!text.trim()) return;
-            
-            // First step: show user form
-            if (!showUserForm) {
-                setShowUserForm(true);
-                return;
-            }
-            
-            // Second step: validate and submit
-            if (!userData.name.trim() || !userData.email.trim()) {
-                return;
-            }
-            
-            setIsSubmitting(true);
-            try {
-                const response = await fetch("/api/questions/submit", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        questionText: text,
-                        userName: userData.name,
-                        userEmail: userData.email,
-                        userPhone: userData.phoneNumber,
-                    }),
-                });
+		input,
+		interimText,
+		isListening,
+		speechSupported,
+		textareaRef,
+		toggleListening,
+		handleInputChange,
+		handleSubmit,
+		fullText,
+		setInput,
+	} = useSpeechInput({
+		onSubmit: async (text) => {
+			if (!text.trim()) return;
 
-                if (response.ok) {
-                    setIsSuccess(true);
-                    setShowUserForm(false);
-                    setUserData({ name: "", email: "", phoneNumber: "" });
-                } else {
-                    console.error("Failed to submit question");
-                }
-            } catch (error) {
-                console.error("Error submitting question:", error);
-            } finally {
-                setIsSubmitting(false);
-            }
-        },
-    });
+			// First step: show user form
+			if (!showUserForm) {
+				setShowUserForm(true);
+				return;
+			}
+
+			// Second step: validate and submit
+			if (!userData.name.trim() || !userData.email.trim()) {
+				return;
+			}
+
+			setIsSubmitting(true);
+			try {
+				const response = await fetch("/api/questions/submit", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						questionText: text,
+						userName: userData.name,
+						userEmail: userData.email,
+						userPhone: userData.phoneNumber,
+					}),
+				});
+
+				if (response.ok) {
+					setIsSuccess(true);
+					setShowUserForm(false);
+				} else {
+					console.error("Failed to submit question");
+				}
+			} catch (error) {
+				console.error("Error submitting question:", error);
+			} finally {
+				setIsSubmitting(false);
+			}
+		},
+	});
 
 	const handleBackToQuestion = () => {
-        setShowUserForm(false);
-    };
+		setShowUserForm(false);
+	};
 
 	const isLoading = isSubmitting;
 
@@ -191,177 +190,219 @@ export default function Hero({ data }: HeroProps) {
 								</p>
 							</div>
 						) : (
-                            <form onSubmit={handleSubmit}>
-                                <div className="bg-white rounded-[24px] shadow-2xl shadow-black/20 overflow-hidden">
-                                    {/* Text Input Area */}
-                                    <div className="px-[32px] py-[24px] pb-0 relative">
-                                        {!showUserForm ? (
-                                            <>
-                                                {/* Display layer for showing interim text with different styling */}
-                                                <div className="absolute inset-0 px-[32px] py-[24px] pb-0 pointer-events-none">
-                                                    <div className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">
-                                                        <span className="text-gray-700">
-                                                            {input}
-                                                        </span>
-                                                        {interimText && (
-                                                            <span className="text-gray-400 italic">
-                                                                {interimText}
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <textarea
-                                                    ref={textareaRef}
-                                                    value={input}
-                                                    onChange={handleInputChange}
-                                                    placeholder={
-                                                        isListening
-                                                            ? "Listening... speak now"
-                                                            : "Ask your stock market queries..."
-                                                    }
-                                                    className={`w-full min-h-[80px] max-md:min-h-[120px] resize-none text-[15px] leading-relaxed focus:outline-none bg-transparent ${
-                                                        interimText
-                                                            ? "text-transparent caret-gray-700"
-                                                            : "text-gray-700 placeholder:text-gray-400"
-                                                    }`}
-                                                    onKeyDown={(e) => {
-                                                        if (
-                                                            e.key === "Enter" && 
-                                                            !e.shiftKey
-                                                        ) {
-                                                            e.preventDefault();
-                                                            handleSubmit(e);
-                                                        }
-                                                    }}
-                                                    disabled={isLoading}
-                                                />
-                                            </>
-                                        ) : (
-                                            <>
-                                                {/* Show question preview */}
-                                                <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-                                                    <p className="text-sm text-gray-600 mb-1">Your question:</p>
-                                                    <p className="text-gray-800">{input}</p>
-                                                </div>
-                                                
-                                                {/* User details form */}
-                                                <div className="space-y-3 mb-4">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Your Name *"
-                                                        value={userData.name}
+							<form onSubmit={handleSubmit}>
+								<div className="bg-white rounded-[24px] shadow-2xl shadow-black/20 overflow-hidden">
+									{/* Text Input Area */}
+									<div className="px-[32px] py-[24px] pb-0 relative">
+										{!showUserForm ? (
+											<>
+												{/* Display layer for showing interim text with different styling */}
+												<div className="absolute inset-0 px-[32px] py-[24px] pb-0 pointer-events-none">
+													<div className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">
+														<span className="text-gray-700">
+															{input}
+														</span>
+														{interimText && (
+															<span className="text-gray-400 italic">
+																{interimText}
+															</span>
+														)}
+													</div>
+												</div>
+												<textarea
+													ref={textareaRef}
+													value={input}
+													onChange={handleInputChange}
+													placeholder={
+														isListening
+															? "Listening... speak now"
+															: "Ask your stock market queries..."
+													}
+													className={`w-full min-h-[80px] max-md:min-h-[120px] resize-none text-[15px] leading-relaxed focus:outline-none bg-transparent ${
+														interimText
+															? "text-transparent caret-gray-700"
+															: "text-gray-700 placeholder:text-gray-400"
+													}`}
+													onKeyDown={(e) => {
+														if (
+															e.key === "Enter" &&
+															!e.shiftKey
+														) {
+															e.preventDefault();
+															handleSubmit(e);
+														}
+													}}
+													disabled={isLoading}
+												/>
+											</>
+										) : (
+											<>
+												{/* Show question preview */}
+												<div className="mb-4 p-3 bg-gray-50 rounded-lg">
+													<p className="text-sm text-gray-600 mb-1">
+														Your question:
+													</p>
+													<p className="text-gray-800">
+														{input}
+													</p>
+												</div>
+
+												{/* User details form */}
+												<div className="space-y-3 mb-4">
+													<input
+														type="text"
+														placeholder="Your Name *"
+														value={userData.name}
 														name="name"
-                                                        onChange={(e) =>
-                                                            setUserData(prev => ({ ...prev, name: e.target.value }))
-                                                        }
-                                                        className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
-                                                        required
-                                                        disabled={isLoading}
-                                                    />
-                                                    <input
-                                                        type="email"
-                                                        placeholder="Your Email *"
-                                                        value={userData.email}
+														onChange={(e) =>
+															setUserData(
+																(prev) => ({
+																	...prev,
+																	name: e
+																		.target
+																		.value,
+																})
+															)
+														}
+														className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
+														required
+														disabled={isLoading}
+													/>
+													<input
+														type="email"
+														placeholder="Your Email *"
+														value={userData.email}
 														name="email"
-                                                        onChange={(e) =>
-                                                            setUserData(prev => ({ ...prev, email: e.target.value }))
-                                                        }
-                                                        className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
-                                                        required
-                                                        disabled={isLoading}
-                                                    />
-                                                    <input
-                                                        type="tel"
-                                                        placeholder="Your Phone (optional)"
+														onChange={(e) =>
+															setUserData(
+																(prev) => ({
+																	...prev,
+																	email: e
+																		.target
+																		.value,
+																})
+															)
+														}
+														className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
+														required
+														disabled={isLoading}
+													/>
+													<input
+														type="tel"
+														placeholder="Your Phone (optional)"
 														name="phoneNumber"
-                                                        value={userData.phoneNumber}
-                                                        onChange={(e) =>
-                                                            setUserData(prev => ({ ...prev, phoneNumber: e.target.value }))
-                                                        }
-                                                        className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
-                                                        disabled={isLoading}
-                                                    />
-                                                </div>
-                                            </>
-                                        )}
-                                    </div>
+														value={
+															userData.phoneNumber
+														}
+														onChange={(e) =>
+															setUserData(
+																(prev) => ({
+																	...prev,
+																	phoneNumber:
+																		e.target
+																			.value,
+																})
+															)
+														}
+														className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
+														disabled={isLoading}
+													/>
+												</div>
+											</>
+										)}
+									</div>
 
-                                    {/* Toolbar */}
-                                    <div className="flex items-center justify-between px-[32px] py-[24px] pt-0">
-                                        <div>
-                                            {showUserForm && (
-                                                <button
-                                                    type="button"
-                                                    onClick={handleBackToQuestion}
-                                                    className="text-sm text-[#00177C] hover:underline"
-                                                    disabled={isLoading}
-                                                >
-                                                    ← Edit question
-                                                </button>
-                                            )}
-                                        </div>
+									{/* Toolbar */}
+									<div className="flex items-center justify-between px-[32px] py-[24px] pt-0">
+										<div>
+											{showUserForm && (
+												<button
+													type="button"
+													onClick={
+														handleBackToQuestion
+													}
+													className="text-sm text-[#00177C] hover:underline"
+													disabled={isLoading}
+												>
+													← Edit question
+												</button>
+											)}
+										</div>
 
-                                        {/* Right Side - Action Buttons */}
-                                        <div className="flex items-center gap-3">
-                                            {/* Microphone Button - only show on question step */}
-                                            {!showUserForm && speechSupported && (
-                                                <button
-                                                    type="button"
-                                                    onClick={toggleListening}
-                                                    className={`
+										{/* Right Side - Action Buttons */}
+										<div className="flex items-center gap-3">
+											{/* Microphone Button - only show on question step */}
+											{!showUserForm &&
+												speechSupported && (
+													<button
+														type="button"
+														onClick={
+															toggleListening
+														}
+														className={`
                                                         p-2 rounded-full transition-all duration-200 cursor-pointer
                                                         ${
-                                                            isListening
-                                                                ? "bg-red-100 hover:bg-red-200 ring-2 ring-red-400"
-                                                                : "hover:bg-gray-100"
-                                                        }
+															isListening
+																? "bg-red-100 hover:bg-red-200 ring-2 ring-red-400"
+																: "hover:bg-gray-100"
+														}
                                                     `}
-                                                    aria-label={
-                                                        isListening
-                                                            ? "Stop listening"
-                                                            : "Voice input"
-                                                    }
-                                                    disabled={isLoading}
-                                                >
-                                                    {isListening ? (
-                                                        <MicOff className="w-6 h-6 text-red-600" />
-                                                    ) : (
-                                                        <Mic className="w-6 h-6 text-[#010943]" />
-                                                    )}
-                                                </button>
-                                            )}
+														aria-label={
+															isListening
+																? "Stop listening"
+																: "Voice input"
+														}
+														disabled={isLoading}
+													>
+														{isListening ? (
+															<MicOff className="w-6 h-6 text-red-600" />
+														) : (
+															<Mic className="w-6 h-6 text-[#010943]" />
+														)}
+													</button>
+												)}
 
-                                            {/* Submit Button */}
-                                            <button
-                                                type="submit"
-                                                disabled={
-                                                    (!showUserForm && !fullText.trim()) ||
-                                                    (showUserForm && (!userData.name.trim() || !userData.email.trim())) ||
-                                                    isLoading
-                                                }
-                                                className={`
+											{/* Submit Button */}
+											<button
+												type="submit"
+												disabled={
+													(!showUserForm &&
+														!fullText.trim()) ||
+													(showUserForm &&
+														(!userData.name.trim() ||
+															!userData.email.trim())) ||
+													isLoading
+												}
+												className={`
                                                     p-3 rounded-[12px] transition-all duration-200 flex items-center justify-center cursor-pointer
                                                     ${
-                                                        ((!showUserForm && fullText.trim()) || 
-                                                        (showUserForm && userData.name.trim() && userData.email.trim())) && 
-                                                        !isLoading
-                                                            ? "bg-[#00177C] hover:bg-[#001060] shadow-md hover:shadow-lg"
-                                                            : "bg-[#00177C] opacity-50"
-                                                    }
+														((!showUserForm &&
+															fullText.trim()) ||
+															(showUserForm &&
+																userData.name.trim() &&
+																userData.email.trim())) &&
+														!isLoading
+															? "bg-[#00177C] hover:bg-[#001060] shadow-md hover:shadow-lg"
+															: "bg-[#00177C] opacity-50"
+													}
                                                 `}
-                                                aria-label={showUserForm ? "Submit question" : "Next"}
-                                            >
-                                                {isLoading ? (
-                                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                                ) : (
-                                                    <Send className="w-5 h-5 text-white" />
-                                                )}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        )}
+												aria-label={
+													showUserForm
+														? "Submit question"
+														: "Next"
+												}
+											>
+												{isLoading ? (
+													<div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+												) : (
+													<Send className="w-5 h-5 text-white" />
+												)}
+											</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						)}
 					</div>
 				</div>
 

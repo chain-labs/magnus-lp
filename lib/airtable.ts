@@ -61,7 +61,10 @@ export async function fetchStocksFromAirtable(limit: number = 5): Promise<StockD
       .select({
         maxRecords: limit,
         filterByFormula: "NOT({Display} = FALSE())",
-        sort: [{ field: "Name", direction: "asc" }],
+        sort: [
+          { field: "Status", direction: "desc" }, // "Sold" comes before "Current" alphabetically in desc
+          { field: "Name", direction: "asc" }
+        ],
       })
       .firstPage();
 

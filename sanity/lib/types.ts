@@ -215,6 +215,10 @@ export interface HighestQualityResearchData {
 		label: string;
 		align: string;
 	}[];
+	blurredRowsCount?: number;
+	unlockTitle?: string;
+	unlockButtonText?: string;
+	unlockButtonLink?: string;
 }
 
 // Stock Data Types (from Airtable)
