@@ -236,6 +236,11 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 						<div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/95 to-transparent flex flex-col items-center justify-end pb-8 pointer-events-auto">
 							<Link
 								href={unlockButtonLink}
+								style={{
+									background: `radial-gradient(97.46% 172.79% at 2.54% 70.83%, #A12FFF 0%, rgba(0, 22, 118, 0.5) 100%),
+								   radial-gradient(169.02% 564.79% at 77.54% -103.13%, #2FFCFF 0%, rgba(0, 22, 118, 0.5) 100%),
+								   #00177C`
+								}}
 								className="inline-flex items-center gap-2 px-6 py-3 bg-[#030919] text-white rounded-lg text-[14px] leading-[20px] font-medium hover:bg-[#030919]/90 transition-all shadow-lg"
 							>
 								{unlockButtonText}

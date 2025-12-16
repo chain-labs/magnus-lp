@@ -7,6 +7,8 @@ import {
 	Send,
 	CircleCheck,
 	SlidersHorizontal,
+    ArrowBigLeft,
+    ArrowLeft,
 } from "lucide-react";
 import { InfiniteSlider } from "./motion-primitives/infinite-slider";
 import { useSpeechInput } from "@/hooks/useSpeechInput";
@@ -238,14 +240,14 @@ export default function Hero({ data }: HeroProps) {
 										) : (
 											<>
 												{/* Show question preview */}
-												<div className="mb-4 p-3 bg-gray-50 rounded-lg">
+												{/* <div className="mb-4 p-3 bg-gray-50 rounded-lg">
 													<p className="text-sm text-gray-600 mb-1">
 														Your question:
 													</p>
 													<p className="text-gray-800">
 														{input}
 													</p>
-												</div>
+												</div> */}
 
 												{/* User details form */}
 												<div className="space-y-3 mb-4">
@@ -264,7 +266,7 @@ export default function Hero({ data }: HeroProps) {
 																})
 															)
 														}
-														className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
+														className="w-full p-3 border-b border-[#00177C] rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
 														required
 														disabled={isLoading}
 													/>
@@ -283,7 +285,7 @@ export default function Hero({ data }: HeroProps) {
 																})
 															)
 														}
-														className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
+														className="w-full p-3 border-b border-[#00177C] rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
 														required
 														disabled={isLoading}
 													/>
@@ -304,7 +306,7 @@ export default function Hero({ data }: HeroProps) {
 																})
 															)
 														}
-														className="w-full p-3 border border-gray-300 rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
+														className="w-full p-3 border-b border-[#00177C] rounded-md text-[15px] focus:outline-none focus:ring-2 focus:ring-[#00177C]"
 														disabled={isLoading}
 													/>
 												</div>
@@ -324,7 +326,8 @@ export default function Hero({ data }: HeroProps) {
 													className="text-sm text-[#00177C] hover:underline"
 													disabled={isLoading}
 												>
-													← Edit question
+													<ArrowLeft className="inline-block w-4 h-4 mr-1" />
+                                                    Back to Question
 												</button>
 											)}
 										</div>
