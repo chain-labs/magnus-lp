@@ -70,34 +70,6 @@ interface OurTrackRecordProps {
 	data?: { data: OurTrackRecordData | null };
 }
 
-// Custom Tooltip Component
-const CustomTooltip = ({
-	active,
-	payload,
-	label,
-}: {
-	active: boolean;
-	payload: { value: number }[];
-	label: string;
-}) => {
-	if (active && payload && payload.length) {
-		const value = payload[0].value;
-		return (
-			<div className="bg-[#1a1a1a] border border-white/20 rounded-lg p-3 shadow-lg">
-				<p className="text-white font-medium mb-1">{label}</p>
-				<p
-					className={`font-semibold ${
-						value >= 0 ? "text-green-400" : "text-red-400"
-					}`}
-				>
-					{value > 0 ? "+" : ""}
-					{value}%
-				</p>
-			</div>
-		);
-	}
-	return null;
-};
 
 // Bar Chart Component
 function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
@@ -116,75 +88,129 @@ function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
 			</div>
 
 			<ResponsiveContainer width="100%" height={250} className="md:h-[300px]">
-				<BarChart
-					data={companyData}
-					margin={{ top: 10, right: 5, left: 5, bottom: 5 }}
-				>
-					<XAxis
-						dataKey="company"
-						stroke="transparent"
-						tick={{
-							fill: "rgba(255,255,255,0.85)",
-							fontSize: 10,
-							fontWeight: 500,
-						}}
-						axisLine={false}
-						tickLine={false}
-						dy={10}
-						interval={0}
-						angle={-15}
-						textAnchor="end"
-						height={50}
-					/>
-					<Tooltip
-						content={({ active, payload, label }) => {
-							if (active && payload && payload.length) {
-								const value = payload[0].value as number;
-								return (
-									<div className="bg-[#1a1a1a85] backdrop-blur-2xl border border-white/20 rounded-lg p-3 md:p-4 shadow-xl">
-										<p className="text-white font-semibold text-sm md:text-base mb-1 md:mb-2">
-											{label}
-										</p>
-										<div className="flex items-center gap-2">
-											<div
-												className="w-2 h-2 md:w-3 md:h-3 rounded-full"
-												style={{
-													backgroundColor:
-														payload[0].payload
-															.color,
-												}}
-											/>
-											<p
-												className={`font-bold text-base md:text-lg ${
-													value >= 0
-														? "text-green-400"
-														: "text-red-400"
-												}`}
-											>
-												{value > 0 ? "+" : ""}
-												{value}% Returns
-											</p>
-										</div>
-									</div>
-								);
-							}
-							return null;
-						}}
-						cursor={{ fill: "rgba(255,255,255,0.08)", radius: 8 }}
-					/>
-					<Bar dataKey="returnPercentage" radius={[6, 6, 0, 0]} style={{ outline: 'none' }}>
-						{companyData.map((entry, index) => (
-							<Cell
-								key={`cell-${index}`}
-								fill={
-									entry.color ||
-									(index === 0 ? "#3b82f6" : "#6b7280")
-								}
-								style={{ outline: 'none' }}
-							/>
-						))}
-					</Bar>
-				</BarChart>
+				<>
+					{/* Desktop Layout */}
+					<div className="hidden md:block w-full h-[300px]">
+						<ResponsiveContainer width="100%" height="100%">
+							<BarChart
+								data={companyData}
+								margin={{ top: 10, right: 20, left: 20, bottom: 5 }}
+							>
+								<XAxis
+									dataKey="company"
+									stroke="transparent"
+									tick={{
+										fill: "rgba(255,255,255,0.85)",
+										fontSize: 12,
+										fontWeight: 500,
+									}}
+									axisLine={false}
+									tickLine={false}
+									dy={10}
+									interval={0}
+								/>
+								<Tooltip
+									content={({ active, payload, label }) => {
+										if (active && payload && payload.length) {
+											const value = payload[0].value as number;
+											return (
+												<div className="bg-[#1a1a1a85] backdrop-blur-2xl border border-white/20 rounded-lg p-4 shadow-xl">
+													<p className="text-white font-semibold text-base mb-2">
+														{label}
+													</p>
+													<div className="flex items-center gap-2">
+														<div
+															className="w-3 h-3 rounded-full"
+															style={{
+																backgroundColor:
+																	payload[0].payload
+																		.color,
+															}}
+														/>
+														<p
+															className={`font-bold text-lg ${
+																value >= 0
+																	? "text-green-400"
+																	: "text-red-400"
+															}`}
+														>
+															{value > 0 ? "+" : ""}
+															{value}% Returns
+														</p>
+													</div>
+												</div>
+											);
+										}
+										return null;
+									}}
+									cursor={{ fill: "rgba(255,255,255,0.08)", radius: 8 }}
+								/>
+								<Bar dataKey="returnPercentage" radius={[6, 6, 0, 0]} style={{ outline: 'none' }}>
+									{companyData.map((entry, index) => (
+										<Cell
+											key={`cell-${index}`}
+											fill={
+												entry.color ||
+												(index === 0 ? "#3b82f6" : "#6b7280")
+											}
+											style={{ outline: 'none' }}
+										/>
+									))}
+								</Bar>
+							</BarChart>
+						</ResponsiveContainer>
+					</div>
+
+					{/* Mobile Layout */}
+					<div className="block md:hidden w-full h-[250px]">
+						<ResponsiveContainer width="100%" height="100%">
+							<BarChart
+								data={companyData}
+								margin={{ top: 25, right: 5, left: 5, bottom: 20 }}
+							>
+								<XAxis
+									dataKey="company"
+									stroke="transparent"
+									tick={{
+										fill: "rgba(255,255,255,0.85)",
+										fontSize: 9,
+										fontWeight: 500,
+									}}
+									axisLine={false}
+									tickLine={false}
+									dy={10}
+									interval={0}
+									angle={-25}
+									textAnchor="end"
+									height={60}
+								/>
+								<Bar 
+									dataKey="returnPercentage" 
+									radius={[4, 4, 0, 0]} 
+									style={{ outline: 'none' }}
+									label={{
+										position: 'top',
+										fill: 'rgba(255,255,255,0.85)',
+										fontSize: 10,
+										fontWeight: 600,
+										formatter: (value) => value != null ? `${Number(value) > 0 ? '+' : ''}${value}%` : '',
+									}}
+								>
+									{companyData.map((entry, index) => (
+										<Cell
+											key={`cell-${index}`}
+											fill={
+												entry.color ||
+												(index === 0 ? "#3b82f6" : "#6b7280")
+											}
+											style={{ outline: 'none' }}
+										/>
+									))}
+								</Bar>
+							</BarChart>
+						</ResponsiveContainer>
+					</div>
+				</>
 			</ResponsiveContainer>
 		</div>
 	);
