@@ -259,7 +259,7 @@ export default function InvestmentPhilosophy({
 							className="w-full h-full gap-[16px] md:gap-[24px] flex flex-col"
 						>
 							<h5 className="text-white text-[20px] md:text-[24px] leading-[32px]">
-								<h1 className="text-[24px] font-bold text-white md:text-[48px] md:leading-[64px] inline-block">
+								<h1 className="text-[32px] font-bold text-white md:text-[48px] md:leading-[64px] inline-block">
 									{item.letter}
 								</h1>
 								{item.title}
