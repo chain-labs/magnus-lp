@@ -168,11 +168,11 @@ function PricingCard({
 					<div className="flex items-baseline gap-1 mb-2">
 						{plan.originalPrice && (
 							<span className="text-[24px] leading-[32px] text-[#040D26] opacity-40 line-through mr-2">
-								₹{plan.originalPrice}
+								₹{plan.originalPrice?.toLocaleString("en-IN")}
 							</span>
 						)}
 						<span className="text-[40px] leading-[48px] text-[#040D26]">
-							₹{plan.price}
+							₹{plan.price?.toLocaleString("en-IN")}
 						</span>
 						<span className="text-[16px] leading-[24px] text-[#040D26]">
 							{billingOption.priceSuffix} (GST Incl)
