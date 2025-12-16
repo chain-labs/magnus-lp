@@ -143,7 +143,7 @@ export default function HowMagnusHathawayChangesThis({
 				/>
 			</div>
 			<div className="max-w-7xl mx-auto flex flex-col gap-[40px] md:gap-[80px] z-10">
-				<h2 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-[#010943] text-center max-w-xl mx-auto">
+				<h2 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-[#010943] text-center max-w-xl mx-auto font-medium">
 					{howMagnusHathawayChangesThisData.title}
 				</h2>
 

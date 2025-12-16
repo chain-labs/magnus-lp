@@ -166,7 +166,7 @@ export default function Hero({ data }: HeroProps) {
 						<h2 className="text-[20px] md:text-[24px] leading-[32px] md:leading-[32px] max-md:text-[18px] max-md:leading-[24px] text-white text-center max-w-2xl font-light tracking-wide">
 							{heroData.subtitle}
 						</h2>
-						<h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-white text-center font-light tracking-wide max-w-[846px]">
+						<h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-white text-center font-light tracking-wide max-w-[846px] font-medium">
 							{heroData.headline
 								?.split("\n")
 								.map((line, idx, arr) => (

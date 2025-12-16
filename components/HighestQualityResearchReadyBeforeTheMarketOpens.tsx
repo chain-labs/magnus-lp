@@ -94,7 +94,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 		>
 			<div className="max-w-7xl mx-auto flex flex-col gap-20">
 				<div className="flex flex-col gap-4 text-center justify-center items-center max-w-3xl mx-auto">
-					<h2 className="text-[32px] md:text-[40px] leading-10 md:leading-12 text-[#030919]">
+					<h2 className="text-[32px] md:text-[40px] leading-10 md:leading-12 text-[#030919] font-medium">
 						{sanityData?.title ||
 							"Highest quality research, ready before the market opens"}
 					</h2>

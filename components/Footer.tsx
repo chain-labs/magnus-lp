@@ -278,7 +278,7 @@ export default function Footer({ data }: FooterProps) {
 								height={57}
 								className="rounded-full w-[45.15303039550781px] md:w-[57px] h-[45.15303039550781px] md:h-[57px] object-cover"
 							/>
-							<h1 className="text-[22.64px] md:text-[28.62px] leading-[36.22px] md:leading-[45.79px] font-normal text-white">
+							<h1 className="text-[22.64px] md:text-[28.62px] leading-[36.22px] md:leading-[45.79px] font-normal text-white font-medium">
 								{footerData.company.title}
 							</h1>
 						</div>

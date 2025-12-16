@@ -62,7 +62,7 @@ function FounderCard({ founder }: { founder: Founder }) {
 			>
 				<div className="flex flex-col gap-[24px]">
 					<div className="flex flex-col">
-						<h3 className="text-[20px] md:text-[32px] leading-[32px] md:leading-[40px] text-white">
+						<h3 className="text-[20px] md:text-[32px] leading-[32px] md:leading-[40px] text-white font-medium">
 							{founder.name}
 						</h3>
 						<p className="text-[14px] md:text-[20px] leading-[20px] md:leading-[32px] text-white opacity-80">
@@ -114,7 +114,7 @@ export default function MeetTheFounder({ data }: MeetTheFounderProps) {
 		>
 			<div className="max-w-[848px] mx-auto flex flex-col gap-[80px]">
 				<div className="flex flex-col gap-[16px]">
-					<h2 className=" text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
+					<h2 className=" text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white font-medium">
 						{meetTheFounderData.sectionTitle}
 					</h2>
 					<p className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white opacity-60">

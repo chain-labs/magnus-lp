@@ -131,7 +131,7 @@ export default function FAQ({ data, whatsappLink }: FAQProps) {
 		<section id="faq" className="px-[20px] md:px-[64px] py-[80px] md:py-[112px]">
 			<div className="grid gap-y-[48px] md:gap-[80px] grid-cols-1 md:grid-cols-3 w-full max-w-7xl mx-auto">
 				<div className="flex flex-col gap-[40px] md:gap-[24px] w-full col-span-1">
-					<h1 className="text-[40px] md:text-[48px] leading-[48px] md:leading-[64px]">
+					<h1 className="text-[40px] md:text-[48px] leading-[48px] md:leading-[64px] font-medium">
 						{faqData.title}
 					</h1>
 					<p className="text-[16px] leading-[24px]">

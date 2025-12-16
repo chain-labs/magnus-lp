@@ -83,10 +83,10 @@ function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
 	return (
 		<div className="w-full h-full min-h-[376px] bg-[#67676733] rounded-[12px] p-6 flex flex-col">
 			<div className="mb-4">
-				<h3 className="text-white text-lg font-semibold mb-1">
+				<h3 className="text-white text-lg mb-1 font-medium">
 					{chartTitle}
 				</h3>
-				<p className="text-white/60 text-sm">{chartSubtitle}</p>
+				<p className="text-white/60 text-sm font-normal">{chartSubtitle}</p>
 			</div>
 
 			<ResponsiveContainer width="100%" height={250} className="md:h-[300px]">
@@ -230,7 +230,7 @@ export default function OurTrackRecord({ data }: OurTrackRecordProps) {
 					<PerformanceComparisonChart data={trackRecordData} />
 					<div className="flex flex-col gap-[24px]">
 						<div className="flex flex-col gap-[8px]">
-							<h2 className="text-[40px] leading-[48px] text-white">
+							<h2 className="text-[40px] leading-[48px] text-white font-medium">
 								{trackRecordData.title}
 							</h2>
 							<p className="text-[16px] leading-[24px] text-white">

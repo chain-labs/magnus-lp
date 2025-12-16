@@ -151,7 +151,7 @@ function PricingCard({
 			<div className="p-[32px] flex-1 flex flex-col gap-[32px]">
 				{/* Plan Title and Description */}
 				<div>
-					<h3 className="text-[20px] leading-[32px] font-semibold text-[#040D26] mb-[4px]">
+					<h3 className="text-[20px] leading-[32px] text-[#040D26] mb-[4px] font-medium">
 						{plan.title}
 					</h3>
 					{plan.description && (
@@ -283,7 +283,7 @@ export default function Pricing({ data }: PricingProps) {
 						<p className="text-sm text-[#040D26] mb-[16px]">
 							{pricingData.sectionLabel}
 						</p>
-						<h2 className="text-[40px] leading-[48px] text-[#040D26] mb-[24px]">
+						<h2 className="text-[40px] leading-[48px] text-[#040D26] mb-[24px] font-medium">
 							{pricingData.title}
 						</h2>
 						<p className="text-[16px] leading-[24px] text-[#040D26] max-w-[768px]">
