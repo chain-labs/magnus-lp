@@ -58,7 +58,7 @@ export const headerSchema = defineType({
 		defineField({
 			name: "ctaButtonLink",
 			title: "CTA Button Link",
-			type: "url",
+			type: "string",
 		}),
 	],
 });

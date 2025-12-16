@@ -115,35 +115,39 @@ function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
 				<p className="text-white/60 text-sm">{chartSubtitle}</p>
 			</div>
 
-			<ResponsiveContainer width="100%" height={300}>
+			<ResponsiveContainer width="100%" height={250} className="md:h-[300px]">
 				<BarChart
 					data={companyData}
-					margin={{ top: 10, right: 10, left: 10, bottom: 5 }}
+					margin={{ top: 10, right: 5, left: 5, bottom: 5 }}
 				>
 					<XAxis
 						dataKey="company"
 						stroke="transparent"
 						tick={{
 							fill: "rgba(255,255,255,0.85)",
-							fontSize: 12,
+							fontSize: 10,
 							fontWeight: 500,
 						}}
 						axisLine={false}
 						tickLine={false}
 						dy={10}
+						interval={0}
+						angle={-15}
+						textAnchor="end"
+						height={50}
 					/>
 					<Tooltip
 						content={({ active, payload, label }) => {
 							if (active && payload && payload.length) {
 								const value = payload[0].value as number;
 								return (
-									<div className="bg-[#1a1a1a85] backdrop-blur-2xl border border-white/20 rounded-lg p-4 shadow-xl backdrop-blur-sm">
-										<p className="text-white font-semibold text-base mb-2">
+									<div className="bg-[#1a1a1a85] backdrop-blur-2xl border border-white/20 rounded-lg p-3 md:p-4 shadow-xl">
+										<p className="text-white font-semibold text-sm md:text-base mb-1 md:mb-2">
 											{label}
 										</p>
 										<div className="flex items-center gap-2">
 											<div
-												className="w-3 h-3 rounded-full"
+												className="w-2 h-2 md:w-3 md:h-3 rounded-full"
 												style={{
 													backgroundColor:
 														payload[0].payload
@@ -151,7 +155,7 @@ function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
 												}}
 											/>
 											<p
-												className={`font-bold text-lg ${
+												className={`font-bold text-base md:text-lg ${
 													value >= 0
 														? "text-green-400"
 														: "text-red-400"
@@ -168,7 +172,7 @@ function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
 						}}
 						cursor={{ fill: "rgba(255,255,255,0.08)", radius: 8 }}
 					/>
-					<Bar dataKey="returnPercentage" radius={[8, 8, 0, 0]}>
+					<Bar dataKey="returnPercentage" radius={[6, 6, 0, 0]} style={{ outline: 'none' }}>
 						{companyData.map((entry, index) => (
 							<Cell
 								key={`cell-${index}`}
@@ -176,6 +180,7 @@ function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
 									entry.color ||
 									(index === 0 ? "#3b82f6" : "#6b7280")
 								}
+								style={{ outline: 'none' }}
 							/>
 						))}
 					</Bar>

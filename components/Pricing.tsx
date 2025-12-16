@@ -240,7 +240,6 @@ function PricingCard({
 
 export default function Pricing({ data }: PricingProps) {
 	const pricingData = data?.data || defaultPricingData;
-	console.log('pricing', pricingData);
 	const billingOptions = pricingData.billingOptions || defaultPricingData.billingOptions;
 	const [selectedPeriodKey, setSelectedPeriodKey] = useState(billingOptions[0]?.periodKey || "monthly");
 	const [api, setApi] = useState<CarouselApi>();

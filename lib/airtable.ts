@@ -5,8 +5,12 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
 	process.env.AIRTABLE_BASE_ID!
 );
 
+const stocksBase = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
+	process.env.AIRTABLE_BASE_ID_STOCKS!
+);
+
 export const questionsTable = base("Questions");
-export const stocksTable = base("Stocks");
+export const stocksTable = stocksBase("Signals");
 export const usersTable = base("Users");
 
 // User interface for the Users table
