@@ -139,8 +139,9 @@ export default function YoureStuckInAsystemDesignedToWorkAgainstYou({
 					backgroundPosition: "center",
 					backgroundRepeat: "no-repeat",
 				}}
-				className="w-full md:max-h-[522px] px-[20px] md:px-[80px] py-[80px] md:py-[120px] bg-white z-0"
+				className="relative w-full md:max-h-[522px] px-[20px] md:px-[80px] py-[80px] md:py-[120px] bg-white z-0"
 			>
+				<div className="w-full h-full bg-white opacity-60 absolute top-0 left-0 z-[-1]"></div>
 				<div className="max-w-7xl mx-auto flex flex-col gap-[40px] md:gap-[80px] h-full z-10">
 					<h2 className="max-w-2xl text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-center md:text-left">
 						{youreStuckData.title.split("\n").map((line, i) => (
