@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { HowMagnusChangesThisData } from "@/sanity/lib/types";
 
 // Static data - commented out in favor of Sanity CMS
@@ -102,24 +102,60 @@ export default function HowMagnusHathawayChangesThis({
 }: HowMagnusHathawayChangesThisProps) {
 	const howMagnusHathawayChangesThisData =
 		data?.data || defaultHowMagnusChangesThisData;
+	const [scrollProgress, setScrollProgress] = useState<number[]>([]);
+	const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const progress = cardRefs.current.map((card) => {
+				if (!card) return 0;
+				const rect = card.getBoundingClientRect();
+				const windowHeight = window.innerHeight;
+				const cardTop = rect.top;
+				const cardHeight = rect.height;
+				
+				// Calculate progress (0 to 1) as card enters viewport
+				const progress = Math.max(0, Math.min(1, (windowHeight - cardTop) / (windowHeight + cardHeight)));
+				return progress;
+			});
+			setScrollProgress(progress);
+		};
+
+		handleScroll();
+		window.addEventListener('scroll', handleScroll);
+		window.addEventListener('resize', handleScroll);
+		
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('resize', handleScroll);
+		};
+	}, [howMagnusHathawayChangesThisData.items.length]);
+
 	return (
 		<section id="how-magnus-hathaway-changes-this" className="relative w-full py-[80px] md:py-[120px] px-[20px] md:px-[80px] z-0">
-			<div className="absolute top-0 left-0 h-[821.818359375px] w-full z-0">
+			<div className="absolute top-0 left-0 h-[821.818359375px] w-full z-[-1]">
 				<Image
 					src="/assets/grids/simpleGrid.svg"
 					alt="simple grid"
 					width={1000}
 					height={1000}
+					className="z-[-1] w-full h-full object-cover opacity-10"
 				/>
 			</div>
-			<div className="max-w-7xl mx-auto flex flex-col gap-[80px] z-10">
+			<div className="max-w-7xl mx-auto flex flex-col gap-[40px] md:gap-[80px] z-10">
 				<h2 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-[#010943] text-center max-w-xl mx-auto">
 					{howMagnusHathawayChangesThisData.title}
 				</h2>
 
 				{howMagnusHathawayChangesThisData.items.map((item, idx) => (
 					<div
-						className="flex flex-col md:flex-row rounded-[12px] overflow-hidden bg-[#F4F6F8] border border-[#37416C1A]"
+						ref={(el) => { cardRefs.current[idx] = el; }}
+						className="flex flex-col md:flex-row rounded-[12px] overflow-hidden bg-[#F4F6F8] border border-[#37416C1A] sticky transition-all duration-300"
+						style={{
+							top: `${100}px`,
+							zIndex: howMagnusHathawayChangesThisData.items.length + idx,
+							transform: `scale(${1 - (scrollProgress[idx] || 0) * 0.05})`,
+						}}
 						key={idx}
 					>
 						<div
