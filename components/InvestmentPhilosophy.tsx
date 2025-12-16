@@ -258,10 +258,10 @@ export default function InvestmentPhilosophy({
 							key={idx}
 							className="w-full h-full gap-[16px] md:gap-[24px] flex flex-col"
 						>
-							<h1 className="text-[24px] font-bold text-white md:text-[48px] md:leading-[64px]">
-								{item.letter}
-							</h1>
 							<h5 className="text-white text-[20px] md:text-[24px] leading-[32px]">
+								<h1 className="text-[24px] font-bold text-white md:text-[48px] md:leading-[64px] inline-block">
+									{item.letter}
+								</h1>
 								{item.title}
 							</h5>
 							<p className="text-white text-[16px] leading-[24px] opacity-70">
