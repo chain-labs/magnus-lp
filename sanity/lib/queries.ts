@@ -180,6 +180,13 @@ export const OUR_TRACK_RECORD_QUERY =
   stats[]{
     value,
     description
+  },
+  chartTitle,
+  chartSubtitle,
+  companyPerformanceData[]{
+    company,
+    returnPercentage,
+    color
   }
 }`);
 

@@ -64,6 +64,9 @@ const defaultTrackRecordData: OurTrackRecordData = {
 			description: "Renewal Rate Through Oct 2024— Apr 2025 Crash",
 		},
 	],
+	chartTitle: "Performance Comparison",
+	chartSubtitle: "Since Inception Returns",
+	companyPerformanceData: defaultCompanyPerformanceData,
 };
 
 interface OurTrackRecordProps {
@@ -73,10 +76,9 @@ interface OurTrackRecordProps {
 
 // Bar Chart Component
 function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
-	const companyData =
-		data.companyPerformanceData || defaultCompanyPerformanceData;
-	const chartTitle = data.chartTitle || "Performance Comparison";
-	const chartSubtitle = data.chartSubtitle || "Since Inception Returns";
+	const companyData = data.companyPerformanceData || defaultCompanyPerformanceData;
+	const chartTitle = data.chartTitle;
+	const chartSubtitle = data.chartSubtitle;
 
 	return (
 		<div className="w-full h-full min-h-[376px] bg-[#67676733] rounded-[12px] p-6 flex flex-col">

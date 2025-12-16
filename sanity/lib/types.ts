@@ -179,9 +179,9 @@ export interface OurTrackRecordData {
 	visible: boolean;
 	title: string;
 	subtitle: string;
-	chartTitle?: string;
-	chartSubtitle?: string;
-	companyPerformanceData?: {
+	chartTitle: string;
+	chartSubtitle: string;
+	companyPerformanceData: {
 		company: string;
 		returnPercentage: number;
 		color?: string;
