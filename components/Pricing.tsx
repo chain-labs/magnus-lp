@@ -175,7 +175,7 @@ function PricingCard({
 							₹{plan.price}
 						</span>
 						<span className="text-[16px] leading-[24px] text-[#040D26]">
-							{billingOption.priceSuffix}
+							{billingOption.priceSuffix} (GST Incl)
 						</span>
 					</div>
 				</div>
