@@ -245,7 +245,7 @@ export default function InvestmentPhilosophy({
 					<h6 className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white">
 						{investmentPhilosophyData.sectionLabel}
 					</h6>
-					<h2 className="w-full md:max-w-2xl text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white">
+					<h2 className="w-full md:max-w-2xl text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white font-bold">
 						{investmentPhilosophyData.title}
 					</h2>
 					<h6 className="text-[16px] md:text-[16px] leading-[24px] md:leading-[24px] text-white opacity-60">
