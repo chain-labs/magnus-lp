@@ -224,9 +224,9 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 		<section id="investor-trap" className="relative w-full min-h-fit z-[-1] bg-[#000728]">
 			{/* Background Skewed Grid */}
 			<div className="absolute w-full h-full overflow-hidden z-[-1]">
-				<div className="absolute top-[0%] left-[50%] translate-x-[-50%] translate-y-[0%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-80 [transform:translate3d(0,0,0)]"></div>
-				<div className="absolute top-[15%] left-[100%] translate-x-[50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] [transform:translate3d(0,0,0)]"></div>
-				<div className="absolute top-[15%] left-[0%] translate-x-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-20 [transform:translate3d(0,0,0)]"></div>
+				<div className="absolute top-[0%] left-[50%] translate-x-[-50%] translate-y-[0%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-80"></div>
+				<div className="absolute top-[15%] left-[100%] translate-x-[50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px]"></div>
+				<div className="absolute top-[15%] left-[0%] translate-x-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-20"></div>
 			</div>
 			<div className="w-full md:h-[2200px] py-20 md:py-[120px] px-5 z-10 md:pt-[370px]">
 				<Image
