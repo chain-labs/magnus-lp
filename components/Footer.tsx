@@ -259,8 +259,8 @@ export default function Footer({ data }: FooterProps) {
 			{/* Top Section - Dark Blue Background */}
 			<BackgroundBlobsAdder
 				blobs={[
-					"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-blob opacity-[0.68]",
-					"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-blob",
+					"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] opacity-[0.68]",
+					"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A]",
 				]}
 				parentClassName="w-full max-w-7xl mx-auto py-[40px] md:py-[32px] px-[20px] md:px-[108px] rounded-[24px] bg-[#000728] text-white"
 			>

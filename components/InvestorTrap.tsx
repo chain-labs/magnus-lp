@@ -224,9 +224,12 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 		<section id="investor-trap" className="relative w-full min-h-fit z-[-1] bg-[#000728]">
 			{/* Background Skewed Grid */}
 			<div className="absolute w-full h-full overflow-hidden z-[-1]">
-				<div className="absolute top-[0%] left-[50%] translate-x-[-50%] translate-y-[0%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-blob opacity-80"></div>
-				<div className="absolute top-[15%] left-[100%] translate-x-[50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-blob"></div>
-				<div className="absolute top-[15%] left-[0%] translate-x-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-blob opacity-20"></div>
+				{/* Colored blobs without blur */}
+				<div className="absolute top-[0%] left-[50%] translate-x-[-50%] translate-y-[0%] w-[571px] h-[571px] aspect-square bg-[#5872BA] opacity-80"></div>
+				<div className="absolute top-[15%] left-[100%] translate-x-[50%] w-[571px] h-[571px] aspect-square bg-[#5872BA]"></div>
+				<div className="absolute top-[15%] left-[0%] translate-x-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] opacity-20"></div>
+				{/* Backdrop blur overlay - blurs the colored blobs beneath */}
+				<div className="absolute inset-0 backdrop-blur-[339.1px] [-webkit-backdrop-filter:blur(339.1px)]"></div>
 			</div>
 			<div className="w-full md:h-[2200px] py-20 md:py-[120px] px-5 z-10 md:pt-[370px]">
 				<Image
