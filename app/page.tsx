@@ -103,9 +103,9 @@ export default async function Home() {
 					<SectionObserver theme="dark" sectionName="Hero">
 						<BackgroundBlobsAdder
 							blobs={[
-								"absolute top-[15%] left-[85%] translate-y-[-10%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.78]",
-								"absolute top-[45%] left-[5%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
-								"absolute top-[80%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px]",
+								"absolute top-[15%] left-[85%] translate-y-[-10%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] opacity-[0.78] blur-[339.1px] -webkit-blur-[339.1px] will-change-transform",
+								"absolute top-[45%] left-[5%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] opacity-[0.88] blur-[339.1px] -webkit-blur-[339.1px] will-change-transform",
+								"absolute top-[80%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] opacity-[0.88] blur-[339.1px] -webkit-blur-[339.1px] will-change-transform",
 							]}
 							parentClassName="bg-[#000728]"
 						>
