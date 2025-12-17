@@ -7,13 +7,13 @@ import Link from "next/link";
 import { Download } from "lucide-react";
 
 const defaultTableHeaders: HighestQualityResearchData["tableHeaders"] = [
-	{ label: "Ticker", align: "left" },
-	{ label: "Action", align: "left" },
-	{ label: "Target", align: "left" },
-	{ label: "Stop-loss", align: "left" },
-	{ label: "Potential", align: "left" },
+	{ label: "Name", align: "left" },
+	{ label: "Status", align: "left" },
+	{ label: "Exit Price", align: "left" },
+	{ label: "Entry Price", align: "left" },
+	{ label: "Gains", align: "left" },
 	{ label: "Duration", align: "left" },
-	{ label: "Published", align: "left" },
+	{ label: "Research Report", align: "left" },
 ];
 
 const defaultData: HighestQualityResearchData = {
@@ -195,13 +195,13 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																		stock.researchReportUrl
 																	)
 																}
-																className="text-[#030919] text-[14px] leading-[20px] underline hover:opacity-70 transition-opacity"
+																className="text-[#030919] text-[14px] leading-[20px] underline hover:opacity-70 transition-opacity flex items-center gap-2"
 															>
 																<Download className="w-4 h-4" />
 																Download
 															</button>
 														) : (
-															<span className="text-[#000] opacity-40 text-[14px] leading-[20px]">
+															<span className="text-[#000] opacity-40 text-[14px] leading-[20px] flex items-center gap-2">
 																-
 															</span>
 														)}
@@ -268,7 +268,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 														{stock.duration}
 													</td>
 													<td className="py-[4px] pt-[32px]">
-														<span className="text-[#030919] text-[14px] leading-[20px] underline">
+														<span className="text-[#030919] text-[14px] leading-[20px] underline flex items-center gap-2">
 															<Download className="w-4 h-4" />
 															Download
 														</span>

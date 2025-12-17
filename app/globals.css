@@ -166,3 +166,9 @@
 		font-family: "Poppins", sans-serif !important;
 	}
 }
+
+/* iOS Safari blur fix - applies webkit prefix for filter property */
+.blur-blob {
+	-webkit-filter: blur(339.1px);
+	filter: blur(339.1px);
+}

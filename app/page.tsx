@@ -103,9 +103,9 @@ export default async function Home() {
 					<SectionObserver theme="dark" sectionName="Hero">
 						<BackgroundBlobsAdder
 							blobs={[
-								"absolute top-[15%] left-[85%] translate-y-[-10%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] opacity-[0.78] blur-[339.1px] -webkit-blur-[339.1px] will-change-transform",
-								"absolute top-[45%] left-[5%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] opacity-[0.88] blur-[339.1px] -webkit-blur-[339.1px] will-change-transform",
-								"absolute top-[80%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] opacity-[0.88] blur-[339.1px] -webkit-blur-[339.1px] will-change-transform",
+								"absolute top-[15%] left-[85%] translate-y-[-10%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] opacity-[0.78] blur-blob will-change-transform",
+								"absolute top-[45%] left-[5%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] opacity-[0.88] blur-blob will-change-transform",
+								"absolute top-[80%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] opacity-[0.88] blur-blob will-change-transform",
 							]}
 							parentClassName="bg-[#000728]"
 						>
@@ -151,9 +151,9 @@ export default async function Home() {
 					>
 						<BackgroundBlobsAdder
 							blobs={[
-								"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
-								"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
-								"absolute top-[100%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px]",
+								"absolute top-[100%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-blob opacity-[0.68]",
+								"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-blob",
+								"absolute top-[100%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-blob",
 							]}
 							parentClassName="bg-[#000728]"
 						>
@@ -180,8 +180,8 @@ export default async function Home() {
 					>
 						<BackgroundBlobsAdder
 							blobs={[
-								"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-[339.1px] opacity-[0.68]",
-								"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-[339.1px]",
+								"absolute top-[10%] left-[90%] translate-y-[-60%] w-[571px] h-[571px] aspect-square bg-[#A12FFF] blur-blob opacity-[0.68]",
+								"absolute top-[50%] left-[0%] translate-x-[-50%] translate-y-[-50%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF8A] blur-blob",
 							]}
 							parentClassName="bg-[#000728]"
 						>
@@ -208,10 +208,10 @@ export default async function Home() {
 					<SectionObserver theme="dark" sectionName="FounderAndCall">
 						<BackgroundBlobsAdder
 							blobs={[
-								"absolute top-[10%] left-[60%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
-								"absolute top-[10%] right-[65%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-[339.1px] opacity-[0.9]",
-								"absolute bottom-[10%] left-[80%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-[339.1px] opacity-[0.49]",
-								"absolute bottom-[10%] right-[85%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-[339.1px] opacity-[0.49]",
+								"absolute top-[10%] left-[60%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-blob opacity-[0.9]",
+								"absolute top-[10%] right-[65%] w-[571px] h-[571px] aspect-square bg-[#5872BA] blur-blob opacity-[0.9]",
+								"absolute bottom-[10%] left-[80%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-blob opacity-[0.49]",
+								"absolute bottom-[10%] right-[85%] w-[571px] h-[571px] aspect-square bg-[#2FFCFF] blur-blob opacity-[0.49]",
 							]}
 							parentClassName="bg-[#000728]"
 						>
