@@ -167,8 +167,21 @@
 	}
 }
 
-/* iOS Safari blur fix - applies webkit prefix for filter property */
-.blur-blob {
-	-webkit-filter: blur(339.1px);
-	filter: blur(339.1px);
+/* iOS Safari fix for large blur values */
+/* Force GPU acceleration and use iOS-safe blur value */
+@supports (-webkit-touch-callout: none) {
+	[class*="blur-[339"] {
+		/* Force GPU compositing layer */
+		-webkit-transform: translate3d(0, 0, 0) !important;
+		transform: translate3d(0, 0, 0) !important;
+		-webkit-backface-visibility: hidden !important;
+		backface-visibility: hidden !important;
+		-webkit-perspective: 1000px !important;
+		perspective: 1000px !important;
+		will-change: transform, filter !important;
+
+		/* iOS-safe blur value */
+		-webkit-filter: blur(100px) !important;
+		filter: blur(100px) !important;
+	}
 }
