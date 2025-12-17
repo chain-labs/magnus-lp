@@ -168,11 +168,20 @@
 }
 
 /* iOS Safari fix for large blur values */
-/* iOS has a hard limit on blur radius, so we reduce blur only for iOS */
+/* Force GPU acceleration and use iOS-safe blur value */
 @supports (-webkit-touch-callout: none) {
-	/* Target the blur class with smaller iOS-safe value */
 	[class*="blur-[339"] {
-		-webkit-filter: blur(80px) !important;
-		filter: blur(80px) !important;
+		/* Force GPU compositing layer */
+		-webkit-transform: translate3d(0, 0, 0) !important;
+		transform: translate3d(0, 0, 0) !important;
+		-webkit-backface-visibility: hidden !important;
+		backface-visibility: hidden !important;
+		-webkit-perspective: 1000px !important;
+		perspective: 1000px !important;
+		will-change: transform, filter !important;
+
+		/* iOS-safe blur value */
+		-webkit-filter: blur(100px) !important;
+		filter: blur(100px) !important;
 	}
 }
