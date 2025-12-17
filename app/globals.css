@@ -168,10 +168,11 @@
 }
 
 /* iOS Safari fix for large blur values */
-/* iOS has a hard limit on blur radius (~150px max), so we reduce blur only for iOS */
+/* iOS has a hard limit on blur radius, so we reduce blur only for iOS */
 @supports (-webkit-touch-callout: none) {
-	.blur-\[339\.1px\] {
-		-webkit-filter: blur(150px) !important;
-		filter: blur(150px) !important;
+	/* Target the blur class with smaller iOS-safe value */
+	[class*="blur-[339"] {
+		-webkit-filter: blur(80px) !important;
+		filter: blur(80px) !important;
 	}
 }
