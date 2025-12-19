@@ -161,8 +161,8 @@ export default function HowMagnusHathawayChangesThis({
 						<div
 							className={`p-[24px] md:p-[48px] flex flex-col justify-center items-start h-fit md:h-[640px] w-full md:w-[640px] ${
 								item.imageDirection === "right"
-									? "md:order-2 order-1"
-									: "order-1"
+									? "md:order-1 order-2"
+									: "order-2"
 							}`}
 						>
 							<span className="text-[14px] md:text-[20px] leading-[20px] md:leading-[32px] text-[#030919] opacity-80 mb-[8px]">
@@ -178,8 +178,8 @@ export default function HowMagnusHathawayChangesThis({
 						<div
 							className={`h-full md:h-[640px] w-full md:w-[640px] flex justify-center items-center ${
 								item.imageDirection === "right"
-									? "order-1"
-									: "order-2"
+									? "order-2"
+									: "order-1"
 							}`}
 						>
 							<ImageWithFallback
