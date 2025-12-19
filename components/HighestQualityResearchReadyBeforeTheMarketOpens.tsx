@@ -136,9 +136,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 									<>
 										{/* Sold stocks - fully visible */}
 										{unlockedStocks.map((stock, index) => {
-											const gainsValue = parseFloat(
-												stock.gains.replace(/[+%]/g, "")
-											);
+											const gainsValue = stock.gains;
 											const isPositiveGains =
 												gainsValue > 0;
 											const isNegativeGains =
@@ -211,9 +209,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 										})}
 										{/* Current stocks - blurred */}
 										{lockedStocks.map((stock, index) => {
-											const gainsValue = parseFloat(
-												stock.gains.replace(/[+%]/g, "")
-											);
+											const gainsValue = stock.gains;
 											const isPositiveGains =
 												gainsValue > 0;
 											const isNegativeGains =

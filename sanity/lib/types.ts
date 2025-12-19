@@ -229,7 +229,7 @@ export interface StockData {
 	entryPrice: number;
 	exitPrice?: number;
 	ldp?: number;
-	gains: string;
+	gains: number;
 	duration: string;
 	researchReportUrl?: string;
 	locked: boolean;
