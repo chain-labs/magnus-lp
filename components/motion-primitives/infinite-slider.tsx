@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { useMotionValue, animate, motion } from 'motion/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import useMeasure from 'react-use-measure';
 
 export type InfiniteSliderProps = {
@@ -12,6 +12,9 @@ export type InfiniteSliderProps = {
   direction?: 'horizontal' | 'vertical';
   reverse?: boolean;
   className?: string;
+  stopOnInteraction?: boolean;
+  blurEdges?: boolean;
+  blurWidth?: number;
 };
 
 export function InfiniteSlider({
@@ -22,14 +25,29 @@ export function InfiniteSlider({
   direction = 'horizontal',
   reverse = false,
   className,
+  stopOnInteraction = false,
+  blurEdges = false,
+  blurWidth = 48,
 }: InfiniteSliderProps) {
   const [currentSpeed, setCurrentSpeed] = useState(speed);
   const [ref, { width, height }] = useMeasure();
   const translation = useMotionValue(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [key, setKey] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // Detect touch device on mount
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   useEffect(() => {
+    // Don't animate when paused
+    if (isPaused) {
+      return;
+    }
+
     let controls;
     const size = direction === 'horizontal' ? width : height;
     const contentSize = size + gap;
@@ -75,23 +93,64 @@ export function InfiniteSlider({
     isTransitioning,
     direction,
     reverse,
+    isPaused,
   ]);
 
-  const hoverProps = speedOnHover
-    ? {
-        onHoverStart: () => {
+  // Handle hover for desktop (non-touch devices)
+  const handleHoverStart = useCallback(() => {
+    if (stopOnInteraction && !isTouchDevice) {
+      setIsPaused(true);
+    } else if (speedOnHover) {
+      setIsTransitioning(true);
+      setCurrentSpeed(speedOnHover);
+    }
+  }, [stopOnInteraction, isTouchDevice, speedOnHover]);
+
+  const handleHoverEnd = useCallback(() => {
+    if (stopOnInteraction && !isTouchDevice) {
+      setIsTransitioning(true);
+      setIsPaused(false);
+    } else if (speedOnHover) {
+      setIsTransitioning(true);
+      setCurrentSpeed(speed);
+    }
+  }, [stopOnInteraction, isTouchDevice, speedOnHover, speed]);
+
+  // Handle tap/click for mobile (touch devices)
+  const handleClick = useCallback(() => {
+    if (stopOnInteraction && isTouchDevice) {
+      setIsPaused((prev) => {
+        if (prev) {
+          // Resuming - enable smooth transition
           setIsTransitioning(true);
-          setCurrentSpeed(speedOnHover);
-        },
-        onHoverEnd: () => {
-          setIsTransitioning(true);
-          setCurrentSpeed(speed);
-        },
-      }
-    : {};
+        }
+        return !prev;
+      });
+    }
+  }, [stopOnInteraction, isTouchDevice]);
+
+  const isHorizontal = direction === 'horizontal';
 
   return (
-    <div className={cn('overflow-hidden', className)}>
+    <div className={cn('overflow-hidden relative', className)}>
+      {/* Left/Top blur gradient */}
+      {blurEdges && (
+        <div
+          className={cn(
+            'absolute z-10 pointer-events-none',
+            isHorizontal
+              ? 'left-0 top-0 h-full'
+              : 'top-0 left-0 w-full'
+          )}
+          style={{
+            [isHorizontal ? 'width' : 'height']: `${blurWidth}px`,
+            background: isHorizontal
+              ? 'linear-gradient(to right, var(--blur-edge-color, rgb(0 0 0 / 1)), transparent)'
+              : 'linear-gradient(to bottom, var(--blur-edge-color, rgb(0 0 0 / 1)), transparent)',
+          }}
+        />
+      )}
+
       <motion.div
         className='flex w-max'
         style={{
@@ -102,11 +161,31 @@ export function InfiniteSlider({
           flexDirection: direction === 'horizontal' ? 'row' : 'column',
         }}
         ref={ref}
-        {...hoverProps}
+        onHoverStart={handleHoverStart}
+        onHoverEnd={handleHoverEnd}
+        onClick={handleClick}
       >
         {children}
         {children}
       </motion.div>
+
+      {/* Right/Bottom blur gradient */}
+      {blurEdges && (
+        <div
+          className={cn(
+            'absolute z-10 pointer-events-none',
+            isHorizontal
+              ? 'right-0 top-0 h-full'
+              : 'bottom-0 left-0 w-full'
+          )}
+          style={{
+            [isHorizontal ? 'width' : 'height']: `${blurWidth}px`,
+            background: isHorizontal
+              ? 'linear-gradient(to left, var(--blur-edge-color, rgb(0 0 0 / 1)), transparent)'
+              : 'linear-gradient(to top, var(--blur-edge-color, rgb(0 0 0 / 1)), transparent)',
+          }}
+        />
+      )}
     </div>
   );
 }

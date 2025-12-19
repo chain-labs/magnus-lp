@@ -241,7 +241,7 @@ export default function Hero({ data }: HeroProps) {
 											<>
 												{/* Show question preview */}
 												{/* <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-													<p className="text-sm text-gray-600 mb-1">
+													<p className="text-sm text-gray-600 mb-1"></p>
 														Your question:
 													</p>
 													<p className="text-gray-800">
@@ -414,7 +414,13 @@ export default function Hero({ data }: HeroProps) {
 						Check these frequently asked questions
 					</h2>
 					{/* frequently asked questions */}
-					<InfiniteSlider speedOnHover={1} gap={24}>
+					<InfiniteSlider 
+						gap={24} 
+						stopOnInteraction 
+						blurEdges
+						blurWidth={64}
+						className="[--blur-edge-color:#000728]"
+					>
 						<div className="flex items-center justify-center gap-[24px]">
 							{answeredQuestions.map((item, index) => (
 								<div
