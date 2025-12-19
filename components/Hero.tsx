@@ -7,8 +7,8 @@ import {
 	Send,
 	CircleCheck,
 	SlidersHorizontal,
-    ArrowBigLeft,
-    ArrowLeft,
+	ArrowBigLeft,
+	ArrowLeft,
 } from "lucide-react";
 import { InfiniteSlider } from "./motion-primitives/infinite-slider";
 import { useSpeechInput } from "@/hooks/useSpeechInput";
@@ -327,7 +327,7 @@ export default function Hero({ data }: HeroProps) {
 													disabled={isLoading}
 												>
 													<ArrowLeft className="inline-block w-4 h-4 mr-1" />
-                                                    Back to Question
+													Back to Question
 												</button>
 											)}
 										</div>
@@ -414,9 +414,9 @@ export default function Hero({ data }: HeroProps) {
 						Check these frequently asked questions
 					</h2>
 					{/* frequently asked questions */}
-					<InfiniteSlider 
-						gap={24} 
-						stopOnInteraction 
+					<InfiniteSlider
+						gap={24}
+						stopOnInteraction
 						blurEdges
 						blurWidth={64}
 						className="[--blur-edge-color:#000728]"
@@ -447,9 +447,9 @@ export default function Hero({ data }: HeroProps) {
 										/>
 									</svg>
 
-									{/* <h3 className="text-[24px] leading-[32px] text-white font-light tracking-wide">
-									{item.question}
-								</h3> */}
+									<h3 className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-5">
+										{item.questionText}
+									</h3>
 									<p className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-5">
 										{item.answerText}
 									</p>
