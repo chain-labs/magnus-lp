@@ -179,7 +179,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																: "text-[#000] opacity-60"
 														}`}
 													>
-														{stock.gains}
+														{gainsValue}%
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
 														{stock.duration}
