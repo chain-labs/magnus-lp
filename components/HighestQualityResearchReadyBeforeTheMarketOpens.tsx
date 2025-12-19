@@ -195,7 +195,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																		stock.researchReportUrl
 																	)
 																}
-																className="text-[#030919] text-[14px] leading-[20px] underline hover:opacity-70 transition-opacity flex items-center gap-2"
+																className="text-[#030919] text-[14px] leading-[20px] underline hover:opacity-70 transition-opacity flex items-center gap-2 cursor-pointer"
 															>
 																<Download className="w-4 h-4" />
 																Download
@@ -262,13 +262,13 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																: "text-[#000] opacity-60"
 														}`}
 													>
-														{stock.gains}
+														{gainsValue}%
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
 														{stock.duration}
 													</td>
 													<td className="py-[4px] pt-[32px]">
-														<span className="text-[#030919] text-[14px] leading-[20px] underline flex items-center gap-2">
+														<span className="text-[#030919] text-[14px] leading-[20px] underline flex items-center gap-2 cursor-pointer">
 															<Download className="w-4 h-4" />
 															Download
 														</span>
