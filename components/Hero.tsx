@@ -447,7 +447,7 @@ export default function Hero({ data }: HeroProps) {
 										/>
 									</svg>
 
-									<h3 className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-2 mb-[-8px]">
+									<h3 className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-2 mb-[-8px] font-medium">
 										{item.questionText}
 									</h3>
 									<p className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-3">
