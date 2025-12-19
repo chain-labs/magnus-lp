@@ -245,13 +245,13 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 														)}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+														₹
+														{stock.entryPrice.toLocaleString()}
+													</td>
+													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
 														{stock.ldp
 															? `₹${stock.ldp.toLocaleString()}`
 															: "-"}
-													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
-														₹
-														{stock.entryPrice.toLocaleString()}
 													</td>
 													<td
 														className={`py-[4px] pt-[32px] text-[16px] leading-[24px] font-semibold ${
