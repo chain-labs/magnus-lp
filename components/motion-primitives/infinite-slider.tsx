@@ -133,26 +133,11 @@ export function InfiniteSlider({
 	}, [stopOnInteraction, isTouchDevice]);
 
 	const isHorizontal = direction === "horizontal";
+  console.log('blur', `w-[${blurWidth*2}px]`);
 
 	return (
 		<div className={cn("overflow-hidden relative", className)}>
 			{/* Left/Top blur gradient */}
-			{blurEdges && (
-				<div
-					className={cn(
-						"absolute z-10 pointer-events-none",
-						isHorizontal
-							? "left-0 top-0 h-full"
-							: "top-0 left-0 w-full"
-					)}
-					style={{
-						[isHorizontal ? "width" : "height"]: `${blurWidth}px`,
-						background: isHorizontal
-							? "linear-gradient(to right, #000728, #00072800, transparent)"
-							: "linear-gradient(to bottom, #000728, #00072800, transparent)",
-					}}
-				/>
-			)}
 
 			<motion.div
 				className="flex w-max"
@@ -173,32 +158,16 @@ export function InfiniteSlider({
 				{children}
 			</motion.div>
 
-			{/* Right/Bottom blur gradient */}
-			{blurEdges && (
-				<div
-					className={cn(
-						"absolute z-10 pointer-events-none",
-						isHorizontal
-							? "right-0 top-0 h-full"
-							: "bottom-0 left-0 w-full"
-					)}
-					style={{
-						[isHorizontal ? "width" : "height"]: `${blurWidth}px`,
-						background: isHorizontal
-							? "linear-gradient(to left, #000728, #00072800, transparent)"
-							: "linear-gradient(to top, #000728, #00072800, transparent)",
-					}}
-				/>
-			)}
-
 			<ProgressiveBlur
-				className={`pointer-events-none absolute top-0 left-0 h-full w-[${blurWidth}px]`}
+				className={cn(`pointer-events-none absolute top-0 left-0 h-full md:w-[120px] w-[30px]`)}
 				direction="left"
+        color="#000728"
 				blurIntensity={1}
 			/>
 			<ProgressiveBlur
-				className={`pointer-events-none absolute top-0 right-0 h-full w-[${blurWidth}px]`}
-				direction="right"
+				className={cn(`pointer-events-none absolute top-0 right-0 h-full md:w-[120px] w-[30px]`)}
+				direction="right" 
+        color="#000728"
 				blurIntensity={1}
 			/>
 		</div>
