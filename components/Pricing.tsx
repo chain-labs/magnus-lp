@@ -9,7 +9,11 @@ import {
 	CarouselItem,
 	type CarouselApi,
 } from "@/components/ui/carousel";
-import type { PricingData, PricingPlan, BillingOption } from "@/sanity/lib/types";
+import type {
+	PricingData,
+	PricingPlan,
+	BillingOption,
+} from "@/sanity/lib/types";
 
 // Default fallback data
 const defaultPricingData: PricingData = {
@@ -213,10 +217,13 @@ function PricingCard({
 							<div
 								className={cn(
 									"mt-0.5 flex-shrink-0",
-									feature.included ? "text-[#040D26]" : "text-[#040D26] opacity-40"
+									feature.included
+										? "text-[#040D26]"
+										: "text-[#040D26] opacity-40"
 								)}
 							>
-								{feature.included || feature.included === undefined ? (
+								{feature.included ||
+								feature.included === undefined ? (
 									<Check className="w-5 h-5" />
 								) : (
 									<X className="w-5 h-5" />
@@ -225,7 +232,9 @@ function PricingCard({
 							<div
 								className={cn(
 									"text-sm",
-									feature.included ? "text-[#040D26]" : "text-[#040D26] opacity-40"
+									feature.included
+										? "text-[#040D26]"
+										: "text-[#040D26] opacity-40"
 								)}
 							>
 								{feature.text}
@@ -240,14 +249,19 @@ function PricingCard({
 
 export default function Pricing({ data }: PricingProps) {
 	const pricingData = data?.data || defaultPricingData;
-	const billingOptions = pricingData.billingOptions || defaultPricingData.billingOptions;
-	const [selectedPeriodKey, setSelectedPeriodKey] = useState(billingOptions[0]?.periodKey || "monthly");
+	const billingOptions =
+		pricingData.billingOptions || defaultPricingData.billingOptions;
+	const [selectedPeriodKey, setSelectedPeriodKey] = useState(
+		billingOptions[0]?.periodKey || "monthly"
+	);
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
 
 	// Find the selected billing option
-	const selectedBillingOption = billingOptions.find((opt) => opt.periodKey === selectedPeriodKey) || billingOptions[0];
+	const selectedBillingOption =
+		billingOptions.find((opt) => opt.periodKey === selectedPeriodKey) ||
+		billingOptions[0];
 	const plans = selectedBillingOption?.plans || [];
 
 	useEffect(() => {
@@ -275,10 +289,13 @@ export default function Pricing({ data }: PricingProps) {
 	};
 
 	return (
-		<section id="pricing" className="relative text-foreground py-[80px] md:py-[120px] px-[20px] md:px-[64px]">
+		<section
+			id="pricing"
+			className="relative text-foreground py-[80px] md:py-[120px] px-[20px] md:px-[64px]"
+		>
 			<div className="w-full max-w-7xl mx-auto">
 				{/* Header Section */}
-				<div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-12">
+				<div className="grid grid-cols-1 md:grid-cols-3 md:items-start md:justify-between gap-6 mb-12">
 					<div className="flex-1 max-w-[786px]">
 						<p className="text-sm text-[#040D26] mb-[16px]">
 							{pricingData.sectionLabel}
@@ -290,14 +307,16 @@ export default function Pricing({ data }: PricingProps) {
 							{pricingData.description}
 						</p>
 					</div>
-					
+
 					{/* Dynamic Billing Period Toggle */}
 					{billingOptions.length > 1 && (
-						<div className="inline-flex items-center p-[4px] rounded-[8px] border border-[#040D26] w-fit flex-wrap">
+						<div className="inline-flex items-center p-[4px] rounded-[8px] border border-[#040D26] w-fit flex-wrap place-self-center">
 							{billingOptions.map((option) => (
 								<button
 									key={option.periodKey}
-									onClick={() => setSelectedPeriodKey(option.periodKey)}
+									onClick={() =>
+										setSelectedPeriodKey(option.periodKey)
+									}
 									className={cn(
 										"px-[24px] py-[8px] text-[16px] leading-[24px] rounded-[8px] transition-all duration-300",
 										option.periodKey === selectedPeriodKey
@@ -310,6 +329,7 @@ export default function Pricing({ data }: PricingProps) {
 							))}
 						</div>
 					)}
+					<div className=" h-[1px]" />
 				</div>
 
 				{/* Desktop Grid */}
@@ -338,19 +358,23 @@ export default function Pricing({ data }: PricingProps) {
 						</CarouselContent>
 						{plans.length > 1 && (
 							<div className="flex justify-center gap-2 mt-8">
-								{Array.from({ length: count }).map((_, index) => (
-									<button
-										key={index}
-										className={cn(
-											"h-2 w-2 rounded-full transition-all duration-300",
-											index + 1 === current
-												? "bg-[#00177C]"
-												: "bg-[#040D2633]"
-										)}
-										onClick={() => api?.scrollTo(index)}
-										aria-label={`Go to slide ${index + 1}`}
-									/>
-								))}
+								{Array.from({ length: count }).map(
+									(_, index) => (
+										<button
+											key={index}
+											className={cn(
+												"h-2 w-2 rounded-full transition-all duration-300",
+												index + 1 === current
+													? "bg-[#00177C]"
+													: "bg-[#040D2633]"
+											)}
+											onClick={() => api?.scrollTo(index)}
+											aria-label={`Go to slide ${
+												index + 1
+											}`}
+										/>
+									)
+								)}
 							</div>
 						)}
 					</Carousel>
