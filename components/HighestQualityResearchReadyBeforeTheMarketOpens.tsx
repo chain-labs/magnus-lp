@@ -78,8 +78,12 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 	}, [displayLimit, blurredRowsCount]);
 
 	// Separate sold and current stocks
-	const unlockedStocks = stockData.filter((stock) => !stock.locked);
-	const lockedStocks = stockData.filter((stock) => stock.locked);
+	const unlockedStocks = stockData
+		.filter((stock) => !stock.locked)
+		.sort((a, b) => b.gains - a.gains);
+	const lockedStocks = stockData
+		.filter((stock) => stock.locked)
+		.sort((a, b) => b.gains - a.gains);
 
 	const handleDownloadClick = (name: string, url: string | undefined) => {
 		if (!url) return;
