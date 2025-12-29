@@ -133,7 +133,6 @@ export function InfiniteSlider({
 	}, [stopOnInteraction, isTouchDevice]);
 
 	const isHorizontal = direction === "horizontal";
-  console.log('blur', `w-[${blurWidth*2}px]`);
 
 	return (
 		<div className={cn("overflow-hidden relative", className)}>
@@ -158,7 +157,7 @@ export function InfiniteSlider({
 				{children}
 			</motion.div>
 
-			<ProgressiveBlur
+			{/* <ProgressiveBlur
 				className={cn(`pointer-events-none absolute top-0 left-0 h-full md:w-[120px] w-[30px]`)}
 				direction="left"
         color="#000728"
@@ -169,7 +168,7 @@ export function InfiniteSlider({
 				direction="right" 
         color="#000728"
 				blurIntensity={1}
-			/>
+			/> */}
 		</div>
 	);
 }

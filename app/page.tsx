@@ -74,6 +74,9 @@ export default async function Home() {
 		sanityFetch({ query: YOURE_STUCK_QUERY }),
 		sanityFetch({ query: WHATSAPP_LINK_QUERY }),
 	]);
+
+	console.log("highestQualityResearchData",highestQualityResearchData);
+
 	const SECTION_VISIBILITY = {
 		header: headerData.data.visible,
 		hero: heroData.data.visible,

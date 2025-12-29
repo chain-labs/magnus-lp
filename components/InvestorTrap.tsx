@@ -8,7 +8,7 @@ import {
 	useTransform,
 } from "motion/react";
 import Image from "next/image";
-import { use, useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 
 // Static data - commented out in favor of Sanity CMS
 // const cardPairs = [
@@ -299,7 +299,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 								gradientUnits="userSpaceOnUse"
 							>
 								<stop stopColor="#040D26" />
-								<stop offset="1" stop-color="#7FA1FF" />
+								<stop offset="1" stopColor="#7FA1FF" />
 							</linearGradient>
 						</defs>
 					</svg>
@@ -319,7 +319,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 
 				<div className="hidden md:block relative h-[1325.454545484px] transform -translate-y-[80%] max-w-7xl mx-auto">
 					{cardPairs.map((pair) => (
-						<>
+						<React.Fragment key={pair.left.title}>
 							<TrapCard
 								title={pair.left.title}
 								subtitle={pair.left.subtitle}
@@ -342,7 +342,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 									transform: "translateY(40%)",
 								}}
 							/>
-						</>
+						</React.Fragment>
 					))}
 				</div>
 			</div>
