@@ -241,7 +241,7 @@ export default function InvestorTrap({ data }: InvestorTrapProps) {
 				/>
 
 				{/* Sticky wrapper that pins everything in viewport */}
-				<h1 className="block md:sticky top-[10vh] text-[24px] md:text-[40px] leading-8 md:leading-12 text-center text-white font-medium">
+				<h1 className="block md:sticky top-[max(10vh,_100px)] text-[24px] md:text-[40px] leading-8 md:leading-12 text-center text-white font-medium">
 					{investorTrapData.title}
 					<br />
 					{investorTrapData.subtitle}
