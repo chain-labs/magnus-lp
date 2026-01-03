@@ -310,7 +310,7 @@ export default function Pricing({ data }: PricingProps) {
 
 					{/* Dynamic Billing Period Toggle */}
 					{billingOptions.length > 1 && (
-						<div className="inline-flex items-center p-[4px] rounded-[8px] border border-[#040D26] w-fit flex-wrap place-self-center">
+						<div className="inline-flex items-center p-[4px] rounded-[8px] border border-[#040D26] w-fit place-self-center">
 							{billingOptions.map((option) => (
 								<button
 									key={option.periodKey}
