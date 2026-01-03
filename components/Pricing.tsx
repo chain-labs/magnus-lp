@@ -318,7 +318,7 @@ export default function Pricing({ data }: PricingProps) {
 										setSelectedPeriodKey(option.periodKey)
 									}
 									className={cn(
-										"px-[24px] py-[8px] text-[16px] leading-[24px] rounded-[8px] transition-all duration-300",
+										"px-[24px] py-[8px] text-[16px] leading-[24px] rounded-[8px] transition-all duration-300 text-nowrap whitespace-nowrap",
 										option.periodKey === selectedPeriodKey
 											? "bg-[#00177C] text-white shadow-lg"
 											: "text-[#040D26] hover:text-[#040D26] cursor-pointer"
