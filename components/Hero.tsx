@@ -15,6 +15,7 @@ import { useSpeechInput } from "@/hooks/useSpeechInput";
 import Image from "next/image";
 import type { HeroData } from "@/sanity/lib/types";
 import { useUserData } from "./UserDataProvider";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 // Static data - commented out in favor of Sanity CMS
 // const frequentlyAskedQuestions = [
@@ -69,6 +70,11 @@ export default function Hero({ data }: HeroProps) {
 			id: string;
 		}[]
 	>([]);
+	const [selectedFaq, setSelectedFaq] = useState<{
+		questionText: string;
+		answerText: string;
+		id: string;
+	} | null>(null);
 
 	useEffect(() => {
 		const fetchQuestions = async () => {
@@ -85,6 +91,27 @@ export default function Hero({ data }: HeroProps) {
 
 		fetchQuestions();
 	}, []);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (selectedFaq) {
+				const heroSection = document.getElementById("hero");
+				if (heroSection) {
+					const rect = heroSection.getBoundingClientRect();
+					const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+					const visiblePercentage = (visibleHeight / rect.height) * 100;
+					
+					// If less than 10% of hero section is visible, close the modal
+					if (visiblePercentage < 50) {
+						setSelectedFaq(null);
+					}
+				}
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [selectedFaq]);
 
 	const {
 		input,
@@ -420,12 +447,14 @@ export default function Hero({ data }: HeroProps) {
 						blurEdges
 						blurWidth={64}
 						className="[--blur-edge-color:#000728]"
+						pause={selectedFaq !== null}
 					>
 						<div className="flex items-center justify-center gap-[24px]">
 							{answeredQuestions.map((item, index) => (
 								<div
 									key={`faq-${index}`}
-									className="flex flex-col gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] max-md:w-[280px] h-[200px] px-[24px] py-[16px]"
+									onClick={() => setSelectedFaq(item)}
+									className="flex flex-col gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] max-md:w-[280px] h-[200px] px-[24px] py-[16px] cursor-pointer hover:bg-[#FBFBFD2A] transition-colors"
 								>
 									<svg
 										width="24"
@@ -459,6 +488,50 @@ export default function Hero({ data }: HeroProps) {
 					</InfiniteSlider>
 				</div>
 			</div>
+
+			{/* FAQ Modal */}
+			<Dialog open={selectedFaq !== null} onOpenChange={(open) => !open && setSelectedFaq(null)}>
+				<DialogContent className="bg-[#fff] border border-white/10 rounded-[8px] p-[24px] max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+					<DialogHeader className="sr-only">
+						<DialogTitle>FAQ Details</DialogTitle>
+						<DialogDescription>Details for the selected frequently asked question.</DialogDescription>
+					</DialogHeader>
+					{selectedFaq && (
+						<div className="flex flex-col gap-[8px] mt-2">
+							<div className="flex flex-col items-start gap-2">
+								<svg
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+									className="shrink-0 mt-1"
+								>
+									<path
+										d="M13.732 21.77L14.274 20.854L12.984 20.09L12.441 21.006L13.732 21.77ZM9.726 20.854L10.268 21.77L11.558 21.006L11.017 20.09L9.726 20.854ZM12.441 21.006C12.3943 21.0808 12.3293 21.1425 12.2521 21.1853C12.175 21.228 12.0882 21.2505 12 21.2505C11.9118 21.2505 11.825 21.228 11.7479 21.1853C11.6707 21.1425 11.6057 21.0808 11.559 21.006L10.268 21.77C11.041 23.077 12.958 23.077 13.732 21.77L12.441 21.006ZM10.5 2.75H13.5V1.25H10.5V2.75ZM21.25 10.5V11.5H22.75V10.5H21.25ZM2.75 11.5V10.5H1.25V11.5H2.75ZM1.25 11.5C1.25 12.655 1.25 13.558 1.3 14.287C1.35 15.022 1.453 15.634 1.688 16.2L3.074 15.626C2.927 15.274 2.841 14.844 2.796 14.185C2.75 13.519 2.75 12.675 2.75 11.5H1.25ZM7.803 18.242C6.547 18.22 5.889 18.14 5.373 17.926L4.8 19.312C5.605 19.646 6.521 19.721 7.777 19.743L7.803 18.242ZM1.688 16.2C1.97697 16.8977 2.40052 17.5316 2.93448 18.0655C3.46844 18.5995 4.10234 19.023 4.8 19.312L5.373 17.926C4.33168 17.4947 3.50535 16.6673 3.074 15.626L1.688 16.2ZM21.25 11.5C21.25 12.675 21.25 13.519 21.204 14.185C21.159 14.844 21.073 15.274 20.927 15.626L22.312 16.2C22.547 15.634 22.65 15.022 22.701 14.287C22.751 13.558 22.75 12.655 22.75 11.5H21.25ZM16.223 19.741C17.479 19.72 18.395 19.646 19.2 19.312L18.626 17.926C18.111 18.14 17.453 18.22 16.198 18.242L16.223 19.741ZM20.927 15.626C20.4957 16.6673 19.6683 17.4947 18.627 17.926L19.2 19.312C19.8977 19.023 20.5316 18.5995 21.0655 18.0655C21.5995 17.5316 22.023 16.8977 22.312 16.2L20.927 15.626ZM13.5 2.75C15.151 2.75 16.337 2.75 17.262 2.839C18.176 2.926 18.757 3.092 19.221 3.376L20.004 2.097C19.265 1.645 18.427 1.443 17.404 1.345C16.392 1.249 15.122 1.25 13.5 1.25V2.75ZM22.75 10.5C22.75 8.878 22.75 7.609 22.654 6.596C22.557 5.573 22.355 4.734 21.903 3.996L20.623 4.779C20.908 5.243 21.074 5.824 21.161 6.739C21.249 7.663 21.25 8.849 21.25 10.5H22.75ZM19.22 3.376C19.7922 3.7263 20.2733 4.20707 20.624 4.779L21.903 3.996C21.4288 3.22198 20.778 2.57123 20.004 2.097L19.22 3.376ZM10.5 1.25C8.878 1.25 7.609 1.25 6.596 1.345C5.573 1.443 4.734 1.645 3.996 2.097L4.779 3.377C5.243 3.092 5.824 2.926 6.739 2.839C7.663 2.751 8.849 2.75 10.5 2.75V1.25ZM2.75 10.5C2.75 8.849 2.75 7.663 2.839 6.738C2.926 5.824 3.092 5.243 3.376 4.779L2.097 3.997C1.645 4.735 1.443 5.573 1.345 6.596C1.25 7.61 1.25 8.878 1.25 10.5H2.75ZM3.996 2.097C3.22198 2.57123 2.57123 3.22298 2.097 3.997L3.377 4.779C3.72714 4.2073 4.20755 3.72655 4.779 3.376L3.996 2.097ZM11.016 20.09C10.814 19.747 10.636 19.444 10.462 19.206C10.2837 18.9444 10.0511 18.7244 9.78 18.561L9.026 19.858C9.073 19.886 9.138 19.936 9.25 20.09C9.371 20.256 9.508 20.486 9.726 20.854L11.016 20.09ZM7.777 19.741C8.217 19.749 8.494 19.755 8.706 19.778C8.904 19.8 8.981 19.832 9.026 19.858L9.78 18.561C9.50055 18.4046 9.19033 18.3111 8.871 18.287C8.573 18.254 8.215 18.249 7.803 18.242L7.777 19.741ZM14.274 20.854C14.492 20.487 14.629 20.256 14.75 20.09C14.862 19.936 14.927 19.886 14.974 19.858L14.22 18.561C13.93 18.731 13.72 18.956 13.538 19.206C13.365 19.444 13.186 19.746 12.983 20.09L14.274 20.854ZM16.198 18.242C15.786 18.249 15.427 18.254 15.129 18.287C14.818 18.322 14.513 18.391 14.22 18.561L14.974 19.858C15.019 19.832 15.096 19.8 15.294 19.778C15.506 19.755 15.784 19.748 16.224 19.741L16.198 18.242Z"
+										fill="#040D26"
+									/>
+									<path
+										d="M8 11H8.009M11.991 11H12M15.991 11H16"
+										stroke="#040D26"
+										strokeWidth="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+								</svg>
+								<h3 className="text-[20px] md:text-[24px] leading-[28px] md:leading-[32px] text-[#040D26] font-medium">
+									{selectedFaq.questionText}
+								</h3>
+							</div>
+							<div>
+								<p className="text-[14px] md:text-[16px] leading-[16px] md:leading-[28px] text-[#040D26]/60 font-light whitespace-pre-wrap">
+									{selectedFaq.answerText}
+								</p>
+							</div>
+						</div>
+					)}
+				</DialogContent>
+			</Dialog>
 		</section>
 	);
 }

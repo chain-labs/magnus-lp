@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useMotionValue, animate, motion } from "motion/react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import useMeasure from "react-use-measure";
 import { ProgressiveBlur } from "./progressive-blur";
 
@@ -16,6 +16,7 @@ export type InfiniteSliderProps = {
 	stopOnInteraction?: boolean;
 	blurEdges?: boolean;
 	blurWidth?: number;
+	pause?: boolean;
 };
 
 export function InfiniteSlider({
@@ -29,14 +30,27 @@ export function InfiniteSlider({
 	stopOnInteraction = false,
 	blurEdges = false,
 	blurWidth = 48,
+	pause = false,
 }: InfiniteSliderProps) {
 	const [currentSpeed, setCurrentSpeed] = useState(speed);
 	const [ref, { width, height }] = useMeasure();
 	const translation = useMotionValue(0);
 	const [isTransitioning, setIsTransitioning] = useState(false);
 	const [key, setKey] = useState(0);
-	const [isPaused, setIsPaused] = useState(false);
+	const [isPaused, setIsPaused] = useState(pause);
 	const [isTouchDevice, setIsTouchDevice] = useState(false);
+	const prevPauseRef = useRef(pause);
+
+	// Sync external pause prop with internal state
+	useEffect(() => {
+		if (pause !== prevPauseRef.current) {
+			setIsPaused(pause);
+			if (!pause) {
+				setIsTransitioning(true);
+			}
+			prevPauseRef.current = pause;
+		}
+	}, [pause]);
 
 	// Detect touch device on mount
 	useEffect(() => {
@@ -101,15 +115,17 @@ export function InfiniteSlider({
 
 	// Handle hover for desktop (non-touch devices)
 	const handleHoverStart = useCallback(() => {
+		if (pause) return;
 		if (stopOnInteraction && !isTouchDevice) {
 			setIsPaused(true);
 		} else if (speedOnHover) {
 			setIsTransitioning(true);
 			setCurrentSpeed(speedOnHover);
 		}
-	}, [stopOnInteraction, isTouchDevice, speedOnHover]);
+	}, [stopOnInteraction, isTouchDevice, speedOnHover, pause]);
 
 	const handleHoverEnd = useCallback(() => {
+		if (pause) return;
 		if (stopOnInteraction && !isTouchDevice) {
 			setIsTransitioning(true);
 			setIsPaused(false);
@@ -117,10 +133,11 @@ export function InfiniteSlider({
 			setIsTransitioning(true);
 			setCurrentSpeed(speed);
 		}
-	}, [stopOnInteraction, isTouchDevice, speedOnHover, speed]);
+	}, [stopOnInteraction, isTouchDevice, speedOnHover, speed, pause]);
 
 	// Handle tap/click for mobile (touch devices)
 	const handleClick = useCallback(() => {
+		if (pause) return;
 		if (stopOnInteraction && isTouchDevice) {
 			setIsPaused((prev) => {
 				if (prev) {
@@ -130,7 +147,7 @@ export function InfiniteSlider({
 				return !prev;
 			});
 		}
-	}, [stopOnInteraction, isTouchDevice]);
+	}, [stopOnInteraction, isTouchDevice, pause]);
 
 	const isHorizontal = direction === "horizontal";
 

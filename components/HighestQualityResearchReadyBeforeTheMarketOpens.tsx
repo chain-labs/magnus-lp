@@ -108,7 +108,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 					</p>
 				</div>
 				<div className="relative bg-[#FDFDFD] border border-[#E0E0E0] outline outline-offset-4 outline-[#E0E0E0] rounded-2xl shadow-sm overflow-hidden">
-					<div className="overflow-x-auto pl-12 py-4">
+					<div className="overflow-x-auto pl-12 py-4 pb-24">
 						<table className="w-full min-w-[1000px] p-10">
 							<thead className="">
 								<tr>
@@ -225,7 +225,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 														stock.id ||
 														`current-${index}`
 													}
-													className="blur-[6px] select-none pointer-events-none"
+													className="blur-[6px] select-none pointer-events-none pb-10"
 												>
 													<td className="py-[4px] pt-[32px] text-[16px] leading-[24px] text-black font-medium">
 														{stock.name}
@@ -293,7 +293,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 
 					{/* Unlock overlay section */}
 					{lockedStocks.length > 0 && (
-						<div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/95 to-transparent flex flex-col items-center justify-end pb-8 pointer-events-auto">
+						<div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/95 to-transparent flex flex-col items-center justify-end pb-8 pointer-events-none">
 							<Link
 								href={unlockButtonLink}
 								style={{
@@ -301,7 +301,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 								   radial-gradient(169.02% 564.79% at 77.54% -103.13%, #2FFCFF 0%, rgba(0, 22, 118, 0.5) 100%),
 								   #00177C`,
 								}}
-								className="inline-flex items-center gap-2 px-6 py-3 bg-[#030919] text-white rounded-lg text-[14px] leading-[20px] font-medium hover:bg-[#030919]/90 transition-all shadow-lg"
+								className="inline-flex items-center gap-2 px-6 py-3 bg-[#030919] text-white rounded-lg text-[14px] leading-[20px] font-medium hover:bg-[#030919]/90 transition-all shadow-lg pointer-events-auto"
 							>
 								{unlockButtonText}
 								<svg
@@ -316,7 +316,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 									<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
 								</svg>
 							</Link>
-							<p className="mt-3 text-[14px] leading-[20px] text-[#6B7280]">
+							<p className="mt-3 text-[14px] leading-[20px] text-[#6B7280] text-center px-4">
 								{unlockTitle}
 							</p>
 						</div>
