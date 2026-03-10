@@ -82,7 +82,10 @@ export default function Hero({ data }: HeroProps) {
 				const response = await fetch("/api/questions/answered");
 				if (response.ok) {
 					const data = await response.json();
-					setAnsweredQuestions(data.questions);
+					setAnsweredQuestions(data.questions.filter((q: {
+						display: boolean;
+					}) => q.display)); // Only show questions marked for display
+
 				}
 			} catch (error) {
 				console.error("Error fetching questions:", error);

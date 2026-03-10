@@ -19,7 +19,7 @@ export async function GET() {
       answerText: record.fields["Answer Text"],
       answeredBy: record.fields["Answered By"],
       answerDate: record.fields["Answer Timestamp"],
-      display: record.fields["Show on Website"],
+      display: record.fields["Display"],
     }));
 
     return NextResponse.json({ questions }, { status: 200 });
