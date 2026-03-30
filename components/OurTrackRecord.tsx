@@ -248,7 +248,7 @@ export default function OurTrackRecord({ data }: OurTrackRecordProps) {
 									<div className="text-[32px] leading-[40px] text-white">
 										{item.value}
 									</div>
-									<p className="text-[16px] leading-[24px] text-white opacity-60">
+									<p className="text-[16px] leading-[24px] text-[#b4b6bd]">
 										{item.description}
 									</p>
 								</div>

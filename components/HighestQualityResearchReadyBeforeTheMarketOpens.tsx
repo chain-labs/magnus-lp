@@ -102,7 +102,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 						{sanityData?.title ||
 							"Highest quality research, ready before the market opens"}
 					</h2>
-					<p className="text-[16px] md:text-[18px] leading-6 md:leading-7 text-black opacity-60">
+					<p className="text-[16px] md:text-[18px] leading-6 md:leading-7 text-[#686b75]">
 						{sanityData?.description ||
 							"Curated calls across overnight, intraday, and positional strategies. Unlock deeper analytics, price targets, and premium playbooks tailored to your desk without the noise."}
 					</p>
@@ -110,6 +110,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 				<div className="relative bg-[#FDFDFD] border border-[#E0E0E0] outline outline-offset-4 outline-[#E0E0E0] rounded-2xl shadow-sm overflow-hidden">
 					<div className="overflow-x-auto pl-12 py-4 pb-24">
 						<table className="w-full min-w-[1000px] p-10">
+							<caption className="sr-only">Stock picks research data showing status, prices, gains, and performance.</caption>
 							<thead className="">
 								<tr>
 									{tableHeaders.map((header, index) => (
@@ -165,11 +166,11 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 															</span>
 														)}
 													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
 														₹
 														{stock.entryPrice.toLocaleString()}
 													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
 														{stock.exitPrice
 															? `₹${stock.exitPrice.toLocaleString()}`
 															: "-"}
@@ -180,12 +181,12 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																? "text-[#16A34A]"
 																: isNegativeGains
 																? "text-[#DC2626]"
-																: "text-[#000] opacity-60"
+																: "text-[#656565]"
 														}`}
 													>
 														{gainsValue}%
 													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
 														{stock.duration}
 													</td>
 													<td className="py-[4px] pt-[32px]">
@@ -203,7 +204,7 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																Download
 															</button>
 														) : (
-															<span className="text-[#000] opacity-40 text-[14px] leading-[20px] flex items-center gap-2">
+															<span className="text-[#656565] text-[14px] leading-[20px] flex items-center gap-2">
 																-
 															</span>
 														)}
@@ -244,11 +245,11 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 															</span>
 														)}
 													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
 														₹
 														{stock.entryPrice.toLocaleString()}
 													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
 														{stock.ldp
 															? `₹${stock.ldp.toLocaleString()}`
 															: "-"}
@@ -259,12 +260,12 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 																? "text-[#16A34A]"
 																: isNegativeGains
 																? "text-[#DC2626]"
-																: "text-[#000] opacity-60"
+																: "text-[#656565]"
 														}`}
 													>
 														{gainsValue}%
 													</td>
-													<td className="py-[4px] pt-[32px] text-[#000] opacity-60 text-[16px] leading-[24px]">
+													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
 														{stock.duration}
 													</td>
 													<td className="py-[4px] pt-[32px]">

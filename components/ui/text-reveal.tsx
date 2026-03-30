@@ -55,7 +55,7 @@ const Word: FC<WordProps> = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1]);
   return (
     <span className="xl:lg-3 relative mx-1 lg:mx-2.5">
-      <span className={"absolute opacity-30"}>{children}</span>
+      <span className={"absolute opacity-60"}>{children}</span>
       <motion.span style={{ opacity: opacity }} className={"text-white"}>
         {children}
       </motion.span>
@@ -125,11 +125,11 @@ interface RevealWordProps {
 }
 
 const RevealWord: FC<RevealWordProps> = ({ children, progress, range }) => {
-  const opacity = useTransform(progress, range, [0.3, 1]);
+  const opacity = useTransform(progress, range, [0.8, 1]);
   const color = useTransform(
     progress,
     range,
-    ["rgb(104, 110, 125)", "rgb(255, 255, 255)"]
+    ["rgb(160, 160, 160)", "rgb(255, 255, 255)"]
   );
 
   return (

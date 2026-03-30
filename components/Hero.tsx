@@ -461,7 +461,6 @@ export default function Hero({ data }: HeroProps) {
 								<button
 									type="button"
 									aria-expanded={selectedFaq?.id === item.id}
-									aria-label={`View answer for: ${item.questionText}`}
 									key={`faq-${index}`}
 									onClick={() => setSelectedFaq(item)}
 									className="flex flex-col text-left gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] max-md:w-[280px] h-[200px] px-[24px] py-[16px] cursor-pointer hover:bg-[#FBFBFD2A] transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -486,10 +485,10 @@ export default function Hero({ data }: HeroProps) {
 										/>
 									</svg>
 
-									<h3 className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-2 mb-[-8px] font-medium">
+									<h3 className="text-[16px] leading-[24px] text-white font-light tracking-wide line-clamp-2 mb-[-8px] font-medium">
 										{item.questionText}
 									</h3>
-									<p className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-3">
+									<p className="text-[16px] leading-[24px] text-[#bbbec9] font-light tracking-wide line-clamp-3">
 										{item.answerText}
 									</p>
 								</button>

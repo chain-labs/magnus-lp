@@ -278,18 +278,18 @@ export default function Footer({ data }: FooterProps) {
 								height={57}
 								className="rounded-full w-[45.15303039550781px] md:w-[57px] h-[45.15303039550781px] md:h-[57px] object-cover"
 							/>
-							<h1 className="text-[22.64px] md:text-[28.62px] leading-[36.22px] md:leading-[45.79px] font-normal text-white font-medium">
+							<span className="text-[22.64px] md:text-[28.62px] leading-[36.22px] md:leading-[45.79px] font-normal text-white font-medium">
 								{footerData.company.title}
-							</h1>
+							</span>
 						</div>
-						<div className="flex gap-4 opacity-60">
+						<div className="flex gap-4">
 							{footerData.socialLinks.map((social, index) => (
 								<a
 									key={index}
 									href={social.href}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-white text-xl hover:opacity-80 transition-opacity"
+									className="text-[#999ca9] text-xl hover:opacity-80 transition-opacity"
 									aria-label={`Visit our ${social.platform} page`}
 								>
 									{social.platform.toLowerCase() ===
@@ -319,7 +319,7 @@ export default function Footer({ data }: FooterProps) {
 					</div>
 
 					{/* Disclaimer Statement - Centered */}
-					<div className="text-center text-white text-[16px] leading-[24px] opacity-50">
+					<div className="text-center text-[#686e7d] text-[16px] leading-[24px]">
 						{footerData.disclosureStatement} <br />
 						SEBI Registration No:{" "}
 						{footerData.SEBIRegistrationNumber}
@@ -335,10 +335,10 @@ export default function Footer({ data }: FooterProps) {
 						<div className="flex flex-col gap-[32px] col-span-2 text-center md:text-left">
 							{/* Research Analyst Information */}
 							<div className="flex flex-col gap-[18px]">
-								<h2 className="font-bold text-[16px] leading-[24px] text-[#040D26] opacity-80">
+								<h2 className="font-bold text-[16px] leading-[24px] text-[#363d51]">
 									Research Analyst Information
 								</h2>
-								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60">
+								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#686e7d]">
 									<p>
 										Name:{" "}
 										{
@@ -367,10 +367,10 @@ export default function Footer({ data }: FooterProps) {
 
 							{/* SEBI Office Details */}
 							<div className="flex flex-col gap-[18px]">
-								<h2 className="font-bold text-[16px] leading-[24px] text-[#040D26] opacity-80">
+								<h2 className="font-bold text-[16px] leading-[24px] text-[#363d51]">
 									SEBI Office Details
 								</h2>
-								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60">
+								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#686e7d]">
 									<p>
 										Head Office Address:{" "}
 										{
@@ -393,10 +393,10 @@ export default function Footer({ data }: FooterProps) {
 						<div className="flex flex-col justify-between gap-[32px] col-span-1 text-center md:text-left">
 							{/* Grievance Officer Details */}
 							<div className="flex flex-col gap-[18px]">
-								<h2 className="font-bold text-[16px] leading-[24px] text-[#040D26] opacity-80">
+								<h2 className="font-bold text-[16px] leading-[24px] text-[#363d51]">
 									Grievance Officer Details
 								</h2>
-								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60">
+								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#686e7d]">
 									<p>
 										Name:{" "}
 										{
@@ -434,10 +434,10 @@ export default function Footer({ data }: FooterProps) {
 
 							{/* Principal / Compliance Officer Details */}
 							<div className="flex flex-col gap-[18px]">
-								<h2 className="font-bold text-[16px] leading-[24px] text-[#040D26] opacity-80">
+								<h2 className="font-bold text-[16px] leading-[24px] text-[#363d51] ">
 									Principal / Compliance Officer Details
 								</h2>
-								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60">
+								<div className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#686e7d]">
 									<p>
 										Name:{" "}
 										{
@@ -480,7 +480,7 @@ export default function Footer({ data }: FooterProps) {
 						{footerData.disclosures.map((disclosure, index) => (
 							<p
 								key={index}
-								className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#040D26] opacity-60 text-center"
+								className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#686e7d] text-center"
 							>
 								{index + 1}. {disclosure}
 							</p>
@@ -491,7 +491,7 @@ export default function Footer({ data }: FooterProps) {
 
 			{/* Bottom Footer - White Background */}
 			<div className="w-full max-w-[1059px] mx-auto pt-[32px] border-t border-[#040D2633]">
-				<div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[#040D26] opacity-70 text-[16px] leading-[24px]">
+				<div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[#505668] text-[16px] leading-[24px]">
 					<p className="text-[14px] md:text-[16px] leading-[20px] md:leading-[24px]">
 						{footerData.footerBottom.rights}
 					</p>

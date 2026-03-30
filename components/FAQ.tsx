@@ -157,7 +157,7 @@ export default function FAQ({ data, whatsappLink }: FAQProps) {
 									{item.question}
 								</AccordionTrigger>
 								<AccordionContent>
-									<p className="text-[#030919] text-[16px] leading-[24px] opacity-60 pb-[24px]">
+									<p className="text-[#686b75] text-[16px] leading-[24px] pb-[24px]">
 										{item.answer}
 									</p>
 								</AccordionContent>

@@ -242,15 +242,15 @@ export default function InvestmentPhilosophy({
 		>
 			<div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-[64px] md:gap-[80px]">
 				<div className="flex flex-col gap-[32px] md:gap-[16px] col-span-1">
-					<h6 className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white">
+					<p className="text-[16px] md:text-[20px] leading-[24px] md:leading-[32px] text-white">
 						{investmentPhilosophyData.sectionLabel}
-					</h6>
+					</p>
 					<h2 className="w-full md:max-w-2xl text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-white font-bold ">
 						{investmentPhilosophyData.title}
 					</h2>
-					<h6 className="text-[16px] md:text-[16px] leading-[24px] md:leading-[24px] text-white opacity-60">
+					<p className="text-[16px] md:text-[16px] leading-[24px] md:leading-[24px] text-[#b3b6bd]">
 						{investmentPhilosophyData.description}
-					</h6>
+					</p>
 				</div>
 				<div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-x-[48px] gap-y-[64px] col-span-2">
 					{investmentPhilosophyData.items.map((item, idx) => (
@@ -258,13 +258,13 @@ export default function InvestmentPhilosophy({
 							key={idx}
 							className="w-full h-full gap-[16px] md:gap-[24px] flex flex-col"
 						>
-							<h1 className="text-white text-[20px] md:text-[24px] leading-[32px]">
+							<h3 className="text-white text-[20px] md:text-[24px] leading-[32px]">
 								<span className="text-[32px] font-bold text-white md:text-[48px] md:leading-[64px] inline-block">
 									{item.letter}
 								</span>
 								{item.title}
-							</h1>
-							<p className="text-white text-[16px] leading-[24px] opacity-70">
+							</h3>
+							<p className="text-[#b3b6bd] text-[16px] leading-[24px]">
 								{item.description}
 							</p>
 						</div>

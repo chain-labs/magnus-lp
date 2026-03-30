@@ -161,10 +161,10 @@ export default function YoureStuckInAsystemDesignedToWorkAgainstYou({
 							>
 								{iconMap[item.iconType] ||
 									iconMap["no-guidance"]}
-								<h5 className="text-[#040D26] text-[24px] leading-[32px]">
+								<h3 className="text-[#040D26] text-[24px] leading-[32px]">
 									{item.title}
-								</h5>
-								<p className="text-[#040D26] text-[16px] leading-[24px] opacity-60">
+								</h3>
+								<p className="text-[#767b89] text-[16px] leading-[24px]">
 									{item.description}
 								</p>
 							</div>
