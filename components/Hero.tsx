@@ -193,10 +193,10 @@ export default function Hero({ data }: HeroProps) {
 				<div className="w-full min-h-[70vh] flex flex-col justify-center items-center gap-[40px] md:gap-[60px] z-10 px-[20px] md:px-0">
 					{/* Headline */}
 					<div className="flex flex-col justify-center items-center gap-[20px]">
-						<h2 className="text-[20px] md:text-[24px] leading-[32px] md:leading-[32px] max-md:text-[18px] max-md:leading-[24px] text-white text-center max-w-2xl font-light tracking-wide">
+						<p className="text-[20px] md:text-[24px] leading-[32px] md:leading-[32px] max-md:text-[18px] max-md:leading-[24px] text-white text-center max-w-2xl font-light tracking-wide m-0">
 							{heroData.subtitle}
-						</h2>
-						<h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-white text-center font-light tracking-wide max-w-[846px] font-medium">
+						</p>
+						<h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-white text-center font-light tracking-wide max-w-[846px] font-medium m-0">
 							{heroData.headline
 								?.split("\n")
 								.map((line, idx, arr) => (
@@ -242,6 +242,7 @@ export default function Hero({ data }: HeroProps) {
 													</div>
 												</div>
 												<textarea
+													aria-label="Stock market query"
 													ref={textareaRef}
 													value={input}
 													onChange={handleInputChange}
@@ -283,6 +284,7 @@ export default function Hero({ data }: HeroProps) {
 												<div className="space-y-3 mb-4">
 													<input
 														type="text"
+														aria-label="Your Name"
 														placeholder="Your Name *"
 														value={userData.name}
 														name="name"
@@ -302,6 +304,7 @@ export default function Hero({ data }: HeroProps) {
 													/>
 													<input
 														type="email"
+														aria-label="Your Email"
 														placeholder="Your Email *"
 														value={userData.email}
 														name="email"
@@ -321,6 +324,7 @@ export default function Hero({ data }: HeroProps) {
 													/>
 													<input
 														type="tel"
+														aria-label="Your Phone Number"
 														placeholder="Your Phone (optional)"
 														name="phoneNumber"
 														value={
@@ -454,10 +458,13 @@ export default function Hero({ data }: HeroProps) {
 					>
 						<div className="flex items-center justify-center gap-[24px]">
 							{answeredQuestions.map((item, index) => (
-								<div
+								<button
+									type="button"
+									aria-expanded={selectedFaq?.id === item.id}
+									aria-label={`View answer for: ${item.questionText}`}
 									key={`faq-${index}`}
 									onClick={() => setSelectedFaq(item)}
-									className="flex flex-col gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] max-md:w-[280px] h-[200px] px-[24px] py-[16px] cursor-pointer hover:bg-[#FBFBFD2A] transition-colors"
+									className="flex flex-col text-left gap-[12px] rounded-[16px] bg-[#FBFBFD1A] backdrop-blur-sm w-[413px] max-md:w-[280px] h-[200px] px-[24px] py-[16px] cursor-pointer hover:bg-[#FBFBFD2A] transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
 								>
 									<svg
 										width="24"
@@ -485,7 +492,7 @@ export default function Hero({ data }: HeroProps) {
 									<p className="text-[16px] leading-[24px] text-white opacity-70 font-light tracking-wide line-clamp-3">
 										{item.answerText}
 									</p>
-								</div>
+								</button>
 							))}
 						</div>
 					</InfiniteSlider>

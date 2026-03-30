@@ -87,17 +87,14 @@ export default function Header({ data }: HeaderProps) {
 						href={headerData.ctaButtonLink}
 						target="_blank"
 						rel="noopener noreferrer"
+						className={cn(
+							"ml-[-16px] px-[24px] py-[10px] rounded-full text-[16px] leading-[24px] shadow-md transition-all duration-300 hover:opacity-90 focus:outline-none border cursor-pointer",
+							isDark
+								? "bg-white text-[#000] border-white"
+								: "bg-[#000728] text-white border-[#000728]"
+						)}
 					>
-						<button
-							className={cn(
-								"ml-[-16px] px-[24px] py-[10px] rounded-full text-[16px] leading-[24px] shadow-md transition-all duration-300 hover:opacity-90 focus:outline-none border cursor-pointer",
-								isDark
-									? "bg-white text-[#000] border-white"
-									: "bg-[#000728] text-white border-[#000728]"
-							)}
-						>
-							{headerData.ctaButtonText}
-						</button>
+						{headerData.ctaButtonText}
 					</Link>
 				</nav>
 
@@ -105,6 +102,8 @@ export default function Header({ data }: HeaderProps) {
 				<button
 					className="md:hidden w-[44px] h-[44px] bg-white rounded-full flex items-center justify-center"
 					onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+					aria-expanded={isMobileMenuOpen}
+					aria-label="Toggle navigation menu"
 				>
 					{isMobileMenuOpen ? (
 						<X className="w-5 h-5 text-black" />
@@ -139,17 +138,14 @@ export default function Header({ data }: HeaderProps) {
 					<Link
 						href={headerData.ctaButtonLink}
 						onClick={() => setIsMobileMenuOpen(false)}
+						className={cn(
+							"w-full py-[14px] rounded-full text-[16px] font-semibold flex items-center justify-center text-center shadow-md transition-all duration-300 hover:opacity-90 active:scale-[0.98] cursor-pointer",
+							isDark
+								? "bg-white text-black"
+								: "bg-[#000728] text-white"
+						)}
 					>
-						<button
-							className={cn(
-								"w-full py-[14px] rounded-full text-[16px] font-semibold shadow-md transition-all duration-300 hover:opacity-90 active:scale-[0.98] cursor-pointer",
-								isDark
-									? "bg-white text-black"
-									: "bg-[#000728] text-white"
-							)}
-						>
-							{headerData.ctaButtonText}
-						</button>
+						{headerData.ctaButtonText}
 					</Link>
 				</div>
 			)}

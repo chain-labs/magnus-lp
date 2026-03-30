@@ -81,7 +81,9 @@ function PerformanceComparisonChart({ data }: { data: OurTrackRecordData }) {
 	const chartSubtitle = data.chartSubtitle;
 
 	return (
-		<div className="w-full h-full min-h-[376px] bg-[#67676733] rounded-[12px] p-6 flex flex-col">
+		<div className="w-full h-full min-h-[376px] bg-[#67676733] rounded-[12px] p-6 flex flex-col"
+			role="img"
+			aria-label="Bar chart showing performance comparison between Magnus and other companies">
 			<div className="mb-4">
 				<h3 className="text-white text-lg mb-1 font-medium">
 					{chartTitle}

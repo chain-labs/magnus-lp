@@ -39,13 +39,11 @@ export default function BookACall({ data, whatsappLink }: BookACallProps) {
 				<div className="flex justify-center gap-[16px] mx-auto w-full">
 					<Link
 						href={whatsappLink || "#"}
-						className="cursor-pointer"
+						className="px-[24px] py-[12px] bg-white border border-white rounded-[8px] text-[16px] leading-[24px] text-nowrap cursor-pointer text-[#000]"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						<button className="px-[24px] py-[12px] bg-white border border-white rounded-[8px] text-[16px] leading-[24px] text-nowrap cursor-pointer">
-							{bookACallData.contactUsButtonText || "Contact Us"}
-						</button>
+						{bookACallData.contactUsButtonText || "Contact Us"}
 					</Link>
 				</div>
 			</div>

@@ -224,9 +224,9 @@ function PricingCard({
 							>
 								{feature.included ||
 								feature.included === undefined ? (
-									<Check className="w-5 h-5" />
+									<Check className="w-5 h-5" aria-hidden="true" />
 								) : (
-									<X className="w-5 h-5" />
+									<X className="w-5 h-5" aria-hidden="true" />
 								)}
 							</div>
 							<div
@@ -314,6 +314,8 @@ export default function Pricing({ data }: PricingProps) {
 							{billingOptions.map((option) => (
 								<button
 									key={option.periodKey}
+									aria-label={`Toggle billing period to ${option.periodLabel}`}
+									aria-pressed={option.periodKey === selectedPeriodKey}
 									onClick={() =>
 										setSelectedPeriodKey(option.periodKey)
 									}

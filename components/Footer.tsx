@@ -290,15 +290,16 @@ export default function Footer({ data }: FooterProps) {
 									target="_blank"
 									rel="noopener noreferrer"
 									className="text-white text-xl hover:opacity-80 transition-opacity"
+									aria-label={`Visit our ${social.platform} page`}
 								>
 									{social.platform.toLowerCase() ===
-										"facebook" && <FaFacebook />}
+										"facebook" && <FaFacebook aria-hidden="true" />}
 									{social.platform.toLowerCase() ===
-										"instagram" && <FaInstagram />}
+										"instagram" && <FaInstagram aria-hidden="true" />}
 									{social.platform.toLowerCase() ===
-										"twitter" && <FaXTwitter />}
+										"twitter" && <FaXTwitter aria-hidden="true" />}
 									{social.platform.toLowerCase() ===
-										"linkedin" && <FaLinkedin />}
+										"linkedin" && <FaLinkedin aria-hidden="true" />}
 								</a>
 							))}
 						</div>
