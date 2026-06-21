@@ -128,6 +128,19 @@ export interface StockData {
 	locked: boolean;
 }
 
+// Airtable returns a plain object like { error: "#ERROR!" } for formula/lookup/rollup
+// cells that fail to evaluate. Rendering such an object directly crashes React
+// ("Objects are not valid as a React child", minified error #31), which white-screens
+// the entire page from a single bad cell. Coerce any plain object to undefined so callers
+// fall back to safe defaults. Arrays (linked/lookup fields) and primitives pass through
+// unchanged — React renders those fine.
+function cell<T>(value: unknown): T | undefined {
+	if (value !== null && typeof value === "object" && !Array.isArray(value)) {
+		return undefined;
+	}
+	return value as T;
+}
+
 export async function fetchStocksFromAirtable(
 	limit: number = 5
 ): Promise<StockData[]> {
@@ -140,11 +153,14 @@ export async function fetchStocksFromAirtable(
 			.firstPage();
 
 		const mapped: StockData[] = records.map((record) => {
-			const status = record.get("Status") as "Current" | "Sold";
-			const entryPrice = record.get("Entry Price") as number;
-			const exitPrice = record.get("Exit Price") as number | undefined;
-			const ldp = record.get("LDP") as number | undefined;
-			let gains = record.get("Gains") as string | undefined;
+			const status = cell<"Current" | "Sold">(
+				record.get("Status")
+			) as "Current" | "Sold";
+			const entryPrice = cell<number>(record.get("Entry Price")) as number;
+			const exitPrice = cell<number>(record.get("Exit Price"));
+			const ldp = cell<number>(record.get("LDP"));
+			// A failed `Gains` formula becomes undefined here and is recalculated below.
+			let gains = cell<string>(record.get("Gains"));
 
 			// Auto-calculate gains if not provided
 			if (!gains) {
@@ -167,16 +183,18 @@ export async function fetchStocksFromAirtable(
 
 			return {
 				id: record.id,
-				name: record.get("Name") as string,
+				name: cell<string>(record.get("Name")) as string,
 				status,
 				entryPrice,
 				exitPrice,
 				ldp,
 				gains,
-				duration: record.get("Duration") as string,
-				researchReportUrl: record.get("Research Report URL") as
-					| string
-					| undefined,
+				// `Duration` is a formula field; fall back to "-" when it errors,
+				// matching the empty-cell convention used elsewhere in the table.
+				duration: cell<string>(record.get("Duration")) ?? "-",
+				researchReportUrl: cell<string>(
+					record.get("Research Report URL")
+				),
 				locked: record.get("Locked") === true, // expects a boolean 'Locked' field in Airtable
 			};
 		});
