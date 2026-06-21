@@ -167,8 +167,9 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 														)}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
-														₹
-														{stock.entryPrice.toLocaleString()}
+														{stock.entryPrice != null
+															? `₹${stock.entryPrice.toLocaleString()}`
+															: "-"}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
 														{stock.exitPrice
@@ -246,8 +247,9 @@ export default function HighestQualityResearchReadyBeforeTheMarketOpens({
 														)}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
-														₹
-														{stock.entryPrice.toLocaleString()}
+														{stock.entryPrice != null
+															? `₹${stock.entryPrice.toLocaleString()}`
+															: "-"}
 													</td>
 													<td className="py-[4px] pt-[32px] text-[#656565] text-[16px] leading-[24px]">
 														{stock.ldp
